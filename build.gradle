@@ -1,0 +1,191 @@
+/*
+ * Requisite - Minecraft library mod
+ * Copyright (C) 2021 MatthewTGM
+ *
+ * Requisite is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 2.1 of the License, or
+ * (at your option) any later version.
+ *
+ * Requisite is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with Requisite. If not, see <https://www.gnu.org/licenses/>.
+ */
+
+plugins {
+    id "net.minecraftforge.gradle.forge" version "8708bf3e01"
+    id "com.github.johnrengelman.shadow" version "6.1.0"
+    id "org.spongepowered.mixin" version "0.6-SNAPSHOT"
+    id "org.jetbrains.kotlin.jvm" version "1.5.21"
+    id "java"
+}
+
+archivesBaseName = mod_name
+version = mod_ver
+group = mod_group
+
+sourceCompatibility = targetCompatibility = 1.8
+
+minecraft {
+    version = forge_ver
+    runDir = "run"
+    replace('@NAME@', mod_name)
+    replace('@ID@', mod_id)
+    replace('@VER@', mod_ver)
+    replace('@DEV@', mod_dev)
+    mappings = "stable_22"
+}
+
+/* Add available repositories to areas where dependencies can be downloaded. */
+repositories {
+    mavenCentral()
+    maven {
+        name = "SpongePowered"
+        url = 'https://repo.spongepowered.org/maven/'
+    }
+    maven {
+        name = "JitPack"
+        url = 'https://jitpack.io/'
+    }
+}
+
+/* Adds a configuration for shading libraries. */
+configurations {
+    shade
+    implementation.extendsFrom(shade)
+}
+
+/* Define dependencies. */
+dependencies {
+    /* Requisite dependencies. */
+    shade('xyz.matthewtgm:JsonTGM:2.8.0')
+    shade('xyz.matthewtgm:TGMConfig:3.2.0')
+    shade('org.java-websocket:Java-WebSocket:1.5.2')
+
+    shade('org.spongepowered:mixin:0.7.11-SNAPSHOT')
+    annotationProcessor('org.spongepowered:mixin:0.7.11-SNAPSHOT')
+
+    implementation('org.projectlombok:lombok:1.18.20')
+    annotationProcessor('org.projectlombok:lombok:1.18.20')
+
+    /* Dependencies for cutting other mods' file sizes. */
+    shade('com.github.marcoacierno:pastebin-java-api:v0.2.1')
+    shade('com.squareup.okhttp3:okhttp:4.9.1') {
+        exclude module: 'kotlin-stdlib-jdk8'
+    }
+    shade('org.kohsuke:github-api:1.132')
+
+    shade('org.jetbrains.kotlin:kotlin-stdlib-jdk8')
+    shade('org.jetbrains.kotlin:kotlin-reflect')
+    shade('org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.1-native-mt')
+}
+
+/* Disable mixin refMap warnings. */
+mixin {
+    disableRefMapWarning = true
+    add sourceSets.main, 'mixins.requisite.refmap.json'
+}
+
+/* Set the duplicatesStrategy and define configs. */
+jar {
+    enabled = false
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+    manifest.attributes(
+            'TweakClass': 'org.spongepowered.asm.launch.MixinTweaker',
+            'MixinConfigs': 'mixins.requisite.json',
+            'FMLCorePluginContainsFMLMod': true,
+            'ForceLoadAsMod': true,
+            'ModSide': 'CLIENT',
+            'TweakOrder': 0
+    )
+    exclude 'META-INF/*.RSA', 'META-INF/*.SF', 'META-INF/*.DSA'
+}
+
+/* Makes the shade configuration work and re-define the duplicatesStrategy. */
+shadowJar {
+    configurations = [project.configurations.shade]
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+
+    relocate('com.besaba.revonline', mod_shaded + 'besaba.revonline')
+    relocate('okio', mod_shaded + 'okio')
+    relocate('okhttp3', mod_shaded + 'okhttp3')
+    relocate('org.java_websocket', mod_shaded + 'websocket')
+
+    exclude('LICENSE.md')
+    exclude('pack.mcmeta')
+    exclude('dummyThing')
+    exclude('**/module-info.class')
+    exclude('*.so')
+    exclude('*.dylib')
+    exclude('*.dll')
+    exclude('*.jnilib')
+    exclude('ibxm/**')
+    exclude('com/jcraft/**')
+    exclude('org/lwjgl/**')
+    exclude('net/java/**')
+
+    exclude('META-INF/proguard/**')
+    exclude('META-INF/maven/**')
+    exclude('META-INF/versions/**')
+    exclude('META-INF/com.android.tools/**')
+    
+    exclude('**/*.kotlin_metadata')
+    exclude('**/*.kotlin_module')
+    exclude('**/*.kotlin_builtins')
+
+    archiveClassifier.set('')
+}
+
+/* Force the Gradle wrapper version and distribution type. */
+wrapper {
+    gradleVersion = "6.8.1"
+    distributionType = Wrapper.DistributionType.ALL
+}
+
+/* Make shadow reobfuscate using SEARGE. */
+reobf {
+    shadowJar {
+        mappingType = 'SEARGE'
+    }
+}
+
+/* Process the mcmod.info. */
+processResources {
+    inputs.property 'version', project.version
+    inputs.property 'mcversion', project.minecraft.version
+    inputs.property 'name', mod_name
+    inputs.property 'modid', mod_id
+    from(sourceSets.main.resources.srcDirs) {
+        include 'mcmod.info'
+        expand(
+                'version': project.version,
+                'mcversion': project.minecraft.version,
+                'name': mod_name,
+                'modid': mod_id
+        )
+    }
+    from(sourceSets.main.resources.srcDirs) {
+        exclude 'mcmod.info'
+    }
+    rename('(.+_at.cfg)', 'META-INF/$1')
+}
+
+/* Move the resources to the working directory for runs. */
+task moveResources {
+    doLast {
+        try {
+            ant.move file: "${buildDir}/resources/main",
+                    todir: "${buildDir}/classes/java"
+        } catch (Exception e) {
+            e.printStackTrace()
+        }
+    }
+}
+
+moveResources.dependsOn(processResources)
+classes.dependsOn(moveResources)
+jar.finalizedBy(shadowJar)

@@ -1,0 +1,18 @@
+[
+  {
+    "modid": "requisite",
+    "name": "Requisite",
+    "description": "Modding utility library for mod developers.",
+    "version": "${version}",
+    "mcversion": "${mcversion}",
+    "url": "",
+    "updateUrl": "",
+    "authorList": [
+      "TGMDevelopment"
+    ],
+    "credits": "",
+    "logoFile": "",
+    "screenshots": [],
+    "dependencies": []
+  }
+]
