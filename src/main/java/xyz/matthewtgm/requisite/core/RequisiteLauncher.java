@@ -69,15 +69,18 @@ public class RequisiteLauncher {
         }
     }
 
-    private static void injectMixinTweaker(Logger logger) throws Exception {
+    private static void injectMixinTweaker(Logger logger) {
         String mixinTweaker = MixinTweaker.class.getName();
         List<String> tweakClasses = (List<String>) Launch.blackboard.get("TweakClasses");
         if (!tweakClasses.contains(mixinTweaker)) {
-            logger.info("Requisite was unable to find mixin, attempting to inject the MixinTweaker.");
-            Launch.classLoader.addClassLoaderExclusion(mixinTweaker.substring(0, mixinTweaker.lastIndexOf('.')));
-            List<ITweaker> tweakers = (List<ITweaker>) Launch.blackboard.get("Tweaks");
-            tweakers.add((ITweaker) Class.forName(mixinTweaker, true, Launch.classLoader).newInstance());
-            logger.info("Requisite was successfully able to inject the MixinTweaker.");
+            try {
+                logger.info("Requisite was unable to find mixin, attempting to inject the MixinTweaker.");
+                Launch.classLoader.addClassLoaderExclusion(mixinTweaker.substring(0, mixinTweaker.lastIndexOf('.')));
+                tweakClasses.add(mixinTweaker);
+                logger.info("Requisite was successfully able to inject the MixinTweaker.");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         } else {
             logger.info("Requisite has detected mixin, not injecting the MixinTweaker.");
         }
