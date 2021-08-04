@@ -102,7 +102,6 @@ public class RequisiteManager {
             (cosmeticManager = new CosmeticManager()).start();
             (indicatorManager = new IndicatorManager()).start();
 
-            ForgeHelper.registerEventListener(this);
             Runtime.getRuntime().addShutdownHook(new Thread(() -> {
                 if (dataHandler.isMayLogData())
                     webSocket.send(new GameClosePacket(GlobalMinecraft.getSession().getProfile().getId().toString()));
@@ -177,15 +176,6 @@ public class RequisiteManager {
                 e.printStackTrace();
             }
         }, "Requisite WebSocket Reconnect Thread"), 15, TimeUnit.MINUTES);
-    }
-
-    /**
-     * Permits Requisite to open it's data logging menu on initial run.
-     */
-    @SubscribeEvent(priority = EventPriority.HIGHEST)
-    public void onGuiOpen(GuiScreenEvent.InitGuiEvent event) {
-        if (event.gui instanceof GuiMainMenu && !dataHandler.isReceivedPrompt())
-            GlobalMinecraft.displayGuiScreen(new GuiRequisiteLogging(event.gui));
     }
 
 }

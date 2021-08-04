@@ -19,15 +19,19 @@
 package xyz.matthewtgm.requisite.core;
 
 import lombok.Getter;
+import net.minecraft.launchwrapper.ITweaker;
+import net.minecraft.launchwrapper.Launch;
 import net.minecraftforge.fml.relauncher.CoreModManager;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.spongepowered.asm.launch.MixinBootstrap;
+import org.spongepowered.asm.launch.MixinTweaker;
 import org.spongepowered.asm.mixin.Mixins;
 
 import java.io.File;
 import java.net.URL;
 import java.security.CodeSource;
+import java.util.List;
 
 public class RequisiteLauncher {
 
@@ -37,8 +41,15 @@ public class RequisiteLauncher {
         if (initialized)
             return;
         initialized = true;
+        Logger logger = LogManager.getLogger("Requisite (Launcher)");
         MixinBootstrap.init();
         Mixins.addConfiguration("mixins.requisite.json");
+
+        try {
+            injectMixinTweaker(logger);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         /* https://github.com/Mouse0w0/forge-mixin-example/blob/08a51985822736f51e0b77a58850ff3abc4628bd/src/main/java/com/yourname/modid/core/CoreMod.java */
         CodeSource source = RequisiteLauncher.class.getProtectionDomain().getCodeSource();
@@ -54,8 +65,21 @@ public class RequisiteLauncher {
                 e.printStackTrace();
             }
         } else {
-            Logger logger = LogManager.getLogger("Requisite (Launcher)");
             logger.warn("No CodeSource, if this isn't a development environment we may run into problems!");
+        }
+    }
+
+    private static void injectMixinTweaker(Logger logger) throws Exception {
+        String mixinTweaker = MixinTweaker.class.getName();
+        List<String> tweakClasses = (List<String>) Launch.blackboard.get("TweakClasses");
+        if (!tweakClasses.contains(mixinTweaker)) {
+            logger.info("Requisite was unable to find mixin, attempting to inject the MixinTweaker.");
+            Launch.classLoader.addClassLoaderExclusion(mixinTweaker.substring(0, mixinTweaker.lastIndexOf('.')));
+            List<ITweaker> tweakers = (List<ITweaker>) Launch.blackboard.get("Tweaks");
+            tweakers.add((ITweaker) Class.forName(mixinTweaker, true, Launch.classLoader).newInstance());
+            logger.info("Requisite was successfully able to inject the MixinTweaker.");
+        } else {
+            logger.info("Requisite has detected mixin, not injecting the MixinTweaker.");
         }
     }
 

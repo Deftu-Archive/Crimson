@@ -84,7 +84,7 @@ public class CosmeticManager extends Thread {
         cosmetics.add(new AnimatedCloakCosmetic("Vaporwave Cloak", "VAPORWAVE_CLOAK", 1, new GifResourceLocation(ResourceHelper.get("requisite", "cosmetics/cloaks/vaporwave_cloak.gif"))));
         cosmetics.add(new CloakCosmetic("Watery Meadow Cloak", "WATER_MEADOW_CLOAK", ResourceHelper.get("requisite", "cosmetics/cloaks/water_meadow_cloak.png")));
         cosmetics.add(new CloakCosmetic("Winter Cloak", "WINTER_CLOAK", ResourceHelper.get("requisite", "cosmetics/cloaks/winter_cloak.png")));
-        cosmetics.add(new CloakCosmetic("Wyvest Cloak", "WYVEST_CLOAK", ResourceHelper.get("requisite", "cosmetics/cloaks/exclusive/wyvest_cloak.png")));
+        cosmetics.add(new CloakCosmetic("Wyvest Cloak", "WYVEST_CLOAK", ResourceHelper.get("requisite", "cosmetics/cloaks/partners/wyvest_cloak.png")));
         cosmetics.add(new CloakCosmetic("YouTube Cloak", "STANDARD_YOUTUBE_CLOAK", ResourceHelper.get("requisite", "cosmetics/cloaks/content_creators/youtube_cloak.png")));
 
         cosmetics.add(new DragonWingsCosmetic("Dragon Wings", "DRAGON_WINGS", new ColourRGB(255, 255, 255), ResourceHelper.get("requisite", "cosmetics/wings/dragon_wings.png")));

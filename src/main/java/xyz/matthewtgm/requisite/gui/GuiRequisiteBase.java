@@ -23,7 +23,9 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiLabel;
 import net.minecraft.client.gui.GuiScreen;
+import org.lwjgl.input.Keyboard;
 import xyz.matthewtgm.requisite.Requisite;
+import xyz.matthewtgm.requisite.RequisiteResources;
 import xyz.matthewtgm.requisite.data.HitBox;
 import xyz.matthewtgm.requisite.util.*;
 
@@ -81,7 +83,7 @@ public abstract class GuiRequisiteBase extends GuiScreen {
         buttonList.clear();
 
         backgroundHitBox = createBackgroundHitBox();
-        buttonList.add(new GuiTransFadingImageButton(0, backgroundHitBox.getIntX() + 2, backgroundHitBox.getIntY() + 2, 30, 30, ResourceHelper.get("requisite", "gui/icons/exit_icon.png")) {
+        buttonList.add(new GuiTransFadingImageButton(0, backgroundHitBox.getIntX() + 2, backgroundHitBox.getIntY() + 2, 30, 30, RequisiteResources.getGuiResources().getExitIcon()) {
             public boolean mousePressed(Minecraft mc, int mouseX, int mouseY) {
                 if (super.mousePressed(mc, mouseX, mouseY))
                     mc.displayGuiScreen(parent);
@@ -143,6 +145,10 @@ public abstract class GuiRequisiteBase extends GuiScreen {
     protected void keyTyped(char typedChar, int keyCode) throws IOException {
         if (refreshing)
             return;
+        if (keyCode == Keyboard.KEY_ESCAPE) {
+            mc.displayGuiScreen(parent);
+            return;
+        }
         super.keyTyped(typedChar, keyCode);
     }
 

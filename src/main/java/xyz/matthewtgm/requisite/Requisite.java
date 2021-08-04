@@ -101,10 +101,17 @@ public final class Requisite {
         /* Start the manager services, so that it can initialize things in the background. */
         manager.start();
 
-        /* Modify options menu so Requisite can be easily accessed. */
+        /* Modify menus. */
+        GuiEditor.addEdit(GuiMainMenu.class, new GuiEditor.GuiEditRunnable() {
+            public void init(GuiScreen screen, List<GuiButton> buttonList) {
+                if (!manager.getDataHandler().isReceivedPrompt())
+                    GlobalMinecraft.displayGuiScreen(new GuiRequisiteLogging(screen));
+            }
+            public void draw(GuiScreen screen, int mouseX, int mouseY, float partialTicks) {}
+        });
         GuiEditor.addEdit(GuiOptions.class, new GuiEditor.GuiEditRunnable() {
             public void init(GuiScreen screen, List<GuiButton> buttonList) {
-                buttonList.add(new GuiButton(IntegerHelper.getRandomNumber(234346, 342345671), screen.width / 2 - 50, screen.height - 24, 100, 20, "TGMLib") {
+                buttonList.add(new GuiButton(IntegerHelper.getRandomNumber(234346, 342345671), screen.width / 2 - 50, screen.height - 24, 100, 20, NAME) {
                     public boolean mousePressed(Minecraft mc, int mouseX, int mouseY) {
                         if (super.mousePressed(mc, mouseX, mouseY))
                             mc.displayGuiScreen(new GuiRequisiteMain(screen));

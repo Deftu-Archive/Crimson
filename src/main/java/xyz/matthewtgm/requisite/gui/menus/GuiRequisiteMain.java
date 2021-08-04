@@ -21,6 +21,7 @@ package xyz.matthewtgm.requisite.gui.menus;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiScreen;
 import xyz.matthewtgm.requisite.Requisite;
+import xyz.matthewtgm.requisite.RequisiteResources;
 import xyz.matthewtgm.requisite.players.cosmetics.CosmeticManager;
 import xyz.matthewtgm.requisite.gui.GuiRequisiteBase;
 import xyz.matthewtgm.requisite.gui.GuiTransFadingImageButton;
@@ -39,14 +40,14 @@ public class GuiRequisiteMain extends GuiRequisiteBase {
     }
 
     public void initialize() {
-        buttonList.add(new GuiTransFadingImageButton(1, width / 2 - 52, height / 2 - 10, 50, 50, ResourceHelper.get("requisite", "gui/icons/keybinds_icon.png")) {
+        buttonList.add(new GuiTransFadingImageButton(1, width / 2 - 52, height / 2 - 10, 50, 50, RequisiteResources.getGuiResources().getKeyBindsIcon()) {
             public boolean mousePressed(Minecraft mc, int mouseX, int mouseY) {
                 if (super.mousePressed(mc, mouseX, mouseY))
                     mc.displayGuiScreen(new GuiRequisiteKeyBinds(GuiRequisiteMain.this));
                 return false;
             }
         });
-        buttonList.add(new GuiTransFadingImageButton(2, width / 2 + 2, height / 2 - 10, 50, 50, ResourceHelper.get("requisite", "gui/icons/settings_icon.png")) {
+        buttonList.add(new GuiTransFadingImageButton(2, width / 2 + 2, height / 2 - 10, 50, 50, RequisiteResources.getGuiResources().getSettingsIcon()) {
             public boolean mousePressed(Minecraft mc, int mouseX, int mouseY) {
                 if (super.mousePressed(mc, mouseX, mouseY))
                     mc.displayGuiScreen(new GuiRequisiteSettings(GuiRequisiteMain.this));
@@ -55,7 +56,7 @@ public class GuiRequisiteMain extends GuiRequisiteBase {
         });
 
         if (CosmeticManager.isLoaded() && Requisite.getManager().getWebSocket().isOpen()) {
-            buttonList.add(new GuiTransFadingImageButton(3, width / 2 - 25, height / 2 - 63, 50, 50, ResourceHelper.get("requisite", "gui/icons/cosmetics_icon.png")) {
+            buttonList.add(new GuiTransFadingImageButton(3, width / 2 - 25, height / 2 - 63, 50, 50, RequisiteResources.getGuiResources().getCosmeticsIcon()) {
                 public boolean mousePressed(Minecraft mc, int mouseX, int mouseY) {
                     if (super.mousePressed(mc, mouseX, mouseY))
                         mc.displayGuiScreen(new GuiRequisiteCosmetics(GuiRequisiteMain.this));

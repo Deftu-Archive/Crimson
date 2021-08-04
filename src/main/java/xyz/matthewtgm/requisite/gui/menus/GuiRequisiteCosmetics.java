@@ -27,6 +27,7 @@ import net.minecraft.util.EnumChatFormatting;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.GL11;
 import xyz.matthewtgm.requisite.Requisite;
+import xyz.matthewtgm.requisite.RequisiteResources;
 import xyz.matthewtgm.requisite.core.RequisiteManager;
 import xyz.matthewtgm.requisite.gui.GuiRequisiteBase;
 import xyz.matthewtgm.requisite.players.PlayerCosmeticData;
@@ -43,11 +44,12 @@ import java.awt.*;
 import java.io.IOException;
 import java.util.*;
 import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class GuiRequisiteCosmetics extends GuiRequisiteBase {
 
-    private List<GuiButton> cosmeticButtonList = new ArrayList<>();
+    private List<GuiButton> cosmeticButtonList = new CopyOnWriteArrayList<>();
     private int lastButtonId;
 
     private CosmeticType currentType = CosmeticType.CLOAK;
@@ -67,7 +69,7 @@ public class GuiRequisiteCosmetics extends GuiRequisiteBase {
         cachedEnabledCosmetics.clear();
         cosmeticButtonList.clear();
 
-        buttonList.add(new GuiTransFadingImageButton(1, backgroundHitBox.getIntWidth() - 32, backgroundHitBox.getIntY() + 2, 30, 30, ResourceHelper.get("requisite", "gui/icons/refresh_icon.png")) {
+        buttonList.add(new GuiTransFadingImageButton(1, backgroundHitBox.getIntWidth() - 32, backgroundHitBox.getIntY() + 2, 30, 30, RequisiteResources.getGuiResources().getRefreshIcon()) {
             public boolean mousePressed(Minecraft mc, int mouseX, int mouseY) {
                 if (super.mousePressed(mc, mouseX, mouseY)) {
                     Requisite.getManager().getDataManager().getDataMap().clear();
@@ -165,7 +167,7 @@ public class GuiRequisiteCosmetics extends GuiRequisiteBase {
     }
 
     private void cosmeticButtons(int mouseX, int mouseY) {
-        List<GuiButton> cosmeticButtonList = new ArrayList<>();
+        List<GuiButton> cosmeticButtonList = new CopyOnWriteArrayList<>();
         AtomicInteger buttonId = new AtomicInteger(lastButtonId);
         AtomicInteger cosmeticY = new AtomicInteger(backgroundHitBox.getIntY() + 40);
         handleScrolling(cosmeticY);
@@ -183,7 +185,7 @@ public class GuiRequisiteCosmetics extends GuiRequisiteBase {
                 });
             }
         }
-        this.cosmeticButtonList = new ArrayList<>(cosmeticButtonList);
+        this.cosmeticButtonList = new CopyOnWriteArrayList<>(cosmeticButtonList);
 
         GlStateManager.pushMatrix();
         GlStateManager.enableBlend();
