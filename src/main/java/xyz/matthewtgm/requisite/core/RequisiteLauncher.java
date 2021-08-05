@@ -70,19 +70,18 @@ public class RequisiteLauncher {
     }
 
     private static void injectMixinTweaker(Logger logger) {
-        String mixinTweaker = MixinTweaker.class.getName();
-        List<String> tweakClasses = (List<String>) Launch.blackboard.get("TweakClasses");
-        if (!tweakClasses.contains(mixinTweaker)) {
-            try {
-                logger.info("Requisite was unable to find mixin, attempting to inject the MixinTweaker.");
-                Launch.classLoader.addClassLoaderExclusion(mixinTweaker.substring(0, mixinTweaker.lastIndexOf('.')));
-                tweakClasses.add(mixinTweaker);
-                logger.info("Requisite was successfully able to inject the MixinTweaker.");
-            } catch (Exception e) {
-                e.printStackTrace();
+        try {
+            List<String> tweakClasses = (List<String>)Launch.blackboard.get("TweakClasses");
+            if (!tweakClasses.contains("org.spongepowered.asm.launch.MixinTweaker")) {
+                if (Launch.blackboard.get("mixin.initialised") == null) {
+                    logger.warn("Mixin is not initialized already, initializing in Requisite Launcher.");
+                    Launch.classLoader.addClassLoaderExclusion("org.spongepowered.asm.launch.MixinTweaker".substring(0, "org.spongepowered.asm.launch.MixinTweaker".lastIndexOf(46)));
+                    List<ITweaker> tweaks = (List<ITweaker>)Launch.blackboard.get("Tweaks");
+                    tweaks.add((ITweaker)Class.forName("org.spongepowered.asm.launch.MixinTweaker", true, Launch.classLoader).newInstance());
+                }
             }
-        } else {
-            logger.info("Requisite has detected mixin, not injecting the MixinTweaker.");
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
