@@ -19,9 +19,13 @@
 package xyz.matthewtgm.requisite.mixins.game;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiScreen;
 import net.minecraftforge.common.MinecraftForge;
+import org.apache.logging.log4j.Logger;
 import org.lwjgl.input.Keyboard;
+import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
@@ -36,9 +40,12 @@ import java.util.List;
 @Mixin({Minecraft.class})
 public class MinecraftMixin {
 
+    @Shadow @Final private static Logger logger;
+
+    @Shadow public GuiScreen currentScreen;
+
     @Inject(method = "dispatchKeypresses", at = @At("HEAD"), cancellable = true)
     private void onKeypressesDispatched(CallbackInfo ci) {
-        Minecraft mc = (Minecraft)(Object)this;
         if (MinecraftForge.EVENT_BUS.post(new BetterInputEvent.KeyboardInputEvent(
                 Keyboard.getEventKey(),
                 Keyboard.getEventCharacter(),
@@ -47,6 +54,10 @@ public class MinecraftMixin {
                 Keyboard.areRepeatEventsEnabled()
         ))) {
             ci.cancel();
+        }
+        if (Requisite.getManager() == null || Requisite.getManager().getKeyBindManager() == null || Requisite.getManager().getKeyBindManager().getKeyBinds() == null) {
+            logger.info("It appears Requisite was not loaded properly, please report this!");
+            return;
         }
         List<KeyBind> keyBinds = Requisite.getManager().getKeyBindManager().getKeyBinds();
         boolean wereRepeatEventsEnabled = Keyboard.areRepeatEventsEnabled();
@@ -57,7 +68,7 @@ public class MinecraftMixin {
         if (!keyBinds.isEmpty()) {
             Requisite requisite = Requisite.getInstance();
             for (KeyBind keyBind : keyBinds) {
-                if (!keyBind.worksInGuis() && mc.currentScreen == null || keyBind.worksInGuis()) {
+                if (!keyBind.worksInGuis() && currentScreen == null || keyBind.worksInGuis()) {
                     if (key == keyBind.getKey()) {
                         if (down && !repeated) {
                             if (MinecraftForge.EVENT_BUS.post(new RequisiteEvent.KeyEvent.KeyPressedEvent.Pre(requisite, keyBind)))

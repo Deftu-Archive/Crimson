@@ -21,16 +21,15 @@ package xyz.matthewtgm.requisite.gui.menus;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiScreen;
 import xyz.matthewtgm.requisite.Requisite;
-import xyz.matthewtgm.requisite.gui.GuiRequisiteBase;
 import xyz.matthewtgm.requisite.gui.GuiTransFadingButton;
 import xyz.matthewtgm.requisite.networking.packets.impl.other.GameOpenPacket;
 import xyz.matthewtgm.requisite.util.ChatColour;
 import xyz.matthewtgm.requisite.util.EnhancedFontRenderer;
 import xyz.matthewtgm.requisite.util.global.GlobalMinecraft;
 
-public class GuiRequisiteLogging extends GuiRequisiteBase {
+public class GuiRequisiteLogging/* extends GuiRequisiteBase*/ {
 
-    public GuiRequisiteLogging(GuiScreen parent) {
+    /*public GuiRequisiteLogging(GuiScreen parent) {
         super(Requisite.NAME + " - Logging Prompt", parent);
     }
 
@@ -67,6 +66,6 @@ public class GuiRequisiteLogging extends GuiRequisiteBase {
         if (value)
             Requisite.getManager().getWebSocket().send(new GameOpenPacket(GlobalMinecraft.getSession().getProfile().getId().toString()));
         mc.displayGuiScreen(getParent());
-    }
+    }*/
 
 }

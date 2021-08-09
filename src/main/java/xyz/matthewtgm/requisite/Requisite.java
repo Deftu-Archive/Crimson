@@ -25,16 +25,13 @@ import net.minecraft.client.gui.GuiMainMenu;
 import net.minecraft.client.gui.GuiOptions;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.launchwrapper.Launch;
-import net.minecraftforge.client.event.GuiScreenEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
-import net.minecraftforge.fml.common.eventhandler.EventPriority;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.lwjgl.input.Keyboard;
 import xyz.matthewtgm.json.JsonVersion;
-import xyz.matthewtgm.requisite.gui.menus.GuiRequisiteMain;
+import xyz.matthewtgm.requisite.gui.RequisiteMenu;
 import xyz.matthewtgm.tgmconfig.ConfigVersion;
 import xyz.matthewtgm.requisite.commands.CommandManager;
 import xyz.matthewtgm.requisite.core.RequisiteManager;
@@ -104,8 +101,8 @@ public final class Requisite {
         /* Modify menus. */
         GuiEditor.addEdit(GuiMainMenu.class, new GuiEditor.GuiEditRunnable() {
             public void init(GuiScreen screen, List<GuiButton> buttonList) {
-                if (!manager.getDataHandler().isReceivedPrompt())
-                    GlobalMinecraft.displayGuiScreen(new GuiRequisiteLogging(screen));
+                //if (!manager.getDataHandler().isReceivedPrompt())
+                    //GlobalMinecraft.displayGuiScreen(new GuiRequisiteLogging());
             }
             public void draw(GuiScreen screen, int mouseX, int mouseY, float partialTicks) {}
         });
@@ -114,7 +111,7 @@ public final class Requisite {
                 buttonList.add(new GuiButton(IntegerHelper.getRandomNumber(234346, 342345671), screen.width / 2 - 50, screen.height - 24, 100, 20, NAME) {
                     public boolean mousePressed(Minecraft mc, int mouseX, int mouseY) {
                         if (super.mousePressed(mc, mouseX, mouseY))
-                            mc.displayGuiScreen(new GuiRequisiteMain(screen));
+                            mc.displayGuiScreen(new RequisiteMenu());
                         return false;
                     }
                 });
@@ -134,7 +131,7 @@ public final class Requisite {
                 return "Requisite";
             }
             public void pressed() {
-                GuiHelper.open(new GuiRequisiteMain());
+                GuiHelper.open(new RequisiteMenu());
             }
             public void held() {}
             public void released() {}

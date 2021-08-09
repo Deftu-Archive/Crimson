@@ -47,7 +47,6 @@ public class ScreenPosition {
     }
 
     public int getX() {
-        System.out.println("X: " + x);
         return x;
     }
 
@@ -57,7 +56,6 @@ public class ScreenPosition {
     }
 
     public int getY() {
-        System.out.println("Y: " + y);
         return y;
     }
 
@@ -83,11 +81,11 @@ public class ScreenPosition {
     }
 
     private int calculateX(int x) {
-        return MathHelper.percentageOf_int(x, 0, ScreenHelper.getScaledWidth());
+        return this.x - ScreenHelper.getScaledWidth() - x;
     }
 
     private int calculateY(int y) {
-        return MathHelper.percentageOf_int(y, 0, ScreenHelper.getScaledHeight());
+        return this.y - ScreenHelper.getScaledHeight() - y;
     }
 
 }

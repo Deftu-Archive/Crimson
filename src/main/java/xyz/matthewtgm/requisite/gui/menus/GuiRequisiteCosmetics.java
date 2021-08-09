@@ -29,7 +29,6 @@ import org.lwjgl.opengl.GL11;
 import xyz.matthewtgm.requisite.Requisite;
 import xyz.matthewtgm.requisite.RequisiteResources;
 import xyz.matthewtgm.requisite.core.RequisiteManager;
-import xyz.matthewtgm.requisite.gui.GuiRequisiteBase;
 import xyz.matthewtgm.requisite.players.PlayerCosmeticData;
 import xyz.matthewtgm.requisite.players.cosmetics.BaseCosmetic;
 import xyz.matthewtgm.requisite.players.cosmetics.CosmeticManager;
@@ -47,9 +46,9 @@ import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class GuiRequisiteCosmetics extends GuiRequisiteBase {
+public class GuiRequisiteCosmetics/* extends GuiRequisiteBase*/ {
 
-    private List<GuiButton> cosmeticButtonList = new CopyOnWriteArrayList<>();
+    /*private List<GuiButton> cosmeticButtonList = new CopyOnWriteArrayList<>();
     private int lastButtonId;
 
     private CosmeticType currentType = CosmeticType.CLOAK;
@@ -206,6 +205,6 @@ public class GuiRequisiteCosmetics extends GuiRequisiteBase {
             scrollCache.remove(0);
         scrollAmount = (int) (scrollAmount + ArrayHelper.averageInts(scrollCache) / 10);
         value.set(value.get() - scrollAmount);
-    }
+    }*/
 
 }

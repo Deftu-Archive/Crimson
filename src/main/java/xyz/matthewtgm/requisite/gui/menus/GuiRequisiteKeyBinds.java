@@ -26,10 +26,8 @@ import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.GL11;
 import xyz.matthewtgm.requisite.Requisite;
-import xyz.matthewtgm.requisite.gui.GuiRequisiteBase;
 import xyz.matthewtgm.requisite.gui.GuiTransFadingButton;
 import xyz.matthewtgm.requisite.keybinds.KeyBind;
-import xyz.matthewtgm.requisite.keybinds.KeyBindManager;
 import xyz.matthewtgm.requisite.util.*;
 
 import java.io.IOException;
@@ -37,9 +35,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class GuiRequisiteKeyBinds extends GuiRequisiteBase {
+public class GuiRequisiteKeyBinds/* extends GuiRequisiteBase*/ {
 
-    private final GuiRequisiteKeyBinds $this = this;
+    /*private final GuiRequisiteKeyBinds $this = this;
 
     private List<GuiButton> keyBindButtonList = new ArrayList<>();
 
@@ -134,6 +132,6 @@ public class GuiRequisiteKeyBinds extends GuiRequisiteBase {
         private ListeningButtonHolder(int index, String displayString) {
             this.index = index;
             this.displayString = displayString;}
-    }
+    }*/
 
 }

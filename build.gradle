@@ -44,6 +44,10 @@ minecraft {
 repositories {
     mavenCentral()
     maven {
+        name = "Sk1er Public"
+        url = "https://repo.sk1er.club/repository/maven-public"
+    }
+    maven {
         name = "SpongePowered"
         url = 'https://repo.spongepowered.org/maven/'
     }
@@ -62,9 +66,11 @@ configurations {
 /* Define dependencies. */
 dependencies {
     /* Requisite dependencies. */
-    shade('xyz.matthewtgm:JsonTGM:2.8.0')
+    shade('xyz.matthewtgm:JsonTGM:2.10.0')
     shade('xyz.matthewtgm:TGMConfig:3.2.0')
     shade('org.java-websocket:Java-WebSocket:1.5.2')
+
+    shade('gg.essential:elementa-1.8.9-forge:356')
 
     shade('org.spongepowered:mixin:0.7.11-SNAPSHOT')
     annotationProcessor('org.spongepowered:mixin:0.7.11-SNAPSHOT')
@@ -74,9 +80,7 @@ dependencies {
 
     /* Dependencies for cutting other mods' file sizes. */
     shade('com.github.marcoacierno:pastebin-java-api:v0.2.1')
-    shade('com.squareup.okhttp3:okhttp:4.9.1') {
-        exclude module: 'kotlin-stdlib-jdk8'
-    }
+    shade('com.squareup.okhttp3:okhttp:4.9.1')
     shade('org.kohsuke:github-api:1.132')
 
     shade('org.jetbrains.kotlin:kotlin-stdlib-jdk8')

@@ -22,9 +22,9 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import xyz.matthewtgm.requisite.commands.advanced.Command;
 import xyz.matthewtgm.requisite.data.ColourRGB;
+import xyz.matthewtgm.requisite.gui.RequisiteMenu;
 import xyz.matthewtgm.requisite.gui.menus.GuiRequisiteCosmetics;
 import xyz.matthewtgm.requisite.gui.menus.GuiRequisiteKeyBinds;
-import xyz.matthewtgm.requisite.gui.menus.GuiRequisiteMain;
 import xyz.matthewtgm.requisite.gui.menus.GuiRequisiteSettings;
 import xyz.matthewtgm.requisite.networking.packets.impl.announcer.AnnouncementPacket;
 import xyz.matthewtgm.requisite.util.*;
@@ -52,22 +52,22 @@ public final class RequisiteCommand {
 
     @Command.Process
     private void process() {
-        GuiHelper.open(new GuiRequisiteMain(GlobalMinecraft.getCurrentScreen()));
+        GuiHelper.open(new RequisiteMenu());
     }
 
     @Command.Argument(name = "cosmetics")
     private void cosmetics() {
-        GuiHelper.open(new GuiRequisiteCosmetics(GlobalMinecraft.getCurrentScreen()));
+        //GuiHelper.open(new GuiRequisiteCosmetics(GlobalMinecraft.getCurrentScreen()));
     }
 
     @Command.Argument(name = "keybinds", aliases = "keybindings")
     private void keybinds() {
-        GuiHelper.open(new GuiRequisiteKeyBinds(GlobalMinecraft.getCurrentScreen()));
+        //GuiHelper.open(new GuiRequisiteKeyBinds(GlobalMinecraft.getCurrentScreen()));
     }
 
     @Command.Argument(name = "settings", aliases = {"config", "options"})
     private void settings() {
-        GuiHelper.open(new GuiRequisiteSettings(GlobalMinecraft.getCurrentScreen()));
+        //GuiHelper.open(new GuiRequisiteSettings(GlobalMinecraft.getCurrentScreen()));
     }
 
     @Command.Argument(name = "announce")
@@ -97,7 +97,7 @@ public final class RequisiteCommand {
         Notifications.push("Hello, World 2!", "I'm an even cooler notification with text wrappinggg YOOOOOOOOOO!", notification -> {
             notification.title = "Loading...";
             notification.description = "";
-            GuiHelper.open(new GuiRequisiteMain(null));
+            GuiHelper.open(new RequisiteMenu());
             notification.close();
         });
         Notifications.push("Hello, World 3!", "I'm a custom coloured notification!", new Notifications.Notification.NotificationColour(null, new ColourRGB(0, 0, 255)));

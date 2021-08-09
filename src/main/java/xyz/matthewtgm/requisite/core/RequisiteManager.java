@@ -31,6 +31,7 @@ import xyz.matthewtgm.json.util.JsonApiHelper;
 import xyz.matthewtgm.json.util.JsonHelper;
 import xyz.matthewtgm.requisite.Requisite;
 import xyz.matthewtgm.requisite.gui.menus.GuiRequisiteLogging;
+import xyz.matthewtgm.requisite.hud.HudManager;
 import xyz.matthewtgm.requisite.keybinds.KeyBindManager;
 import xyz.matthewtgm.requisite.players.PlayerDataManager;
 import xyz.matthewtgm.requisite.players.cosmetics.CosmeticManager;
@@ -67,6 +68,7 @@ public class RequisiteManager {
     @Getter private CosmeticManager cosmeticManager;
     @Getter private IndicatorManager indicatorManager;
     @Getter private final KeyBindManager keyBindManager = new KeyBindManager();
+    @Getter private final HudManager hudManager = new HudManager();
 
     public void initialize() {
         checkJvmProperties();
@@ -101,6 +103,10 @@ public class RequisiteManager {
             (dataManager = new PlayerDataManager()).start();
             (cosmeticManager = new CosmeticManager()).start();
             (indicatorManager = new IndicatorManager()).start();
+
+            ForgeHelper.registerEventListeners(
+                    hudManager
+            );
 
             Runtime.getRuntime().addShutdownHook(new Thread(() -> {
                 if (dataHandler.isMayLogData())

@@ -40,6 +40,7 @@ public class RequisiteLauncher {
         Logger logger = LogManager.getLogger("Requisite (Launcher)");
         MixinBootstrap.init();
         Mixins.addConfiguration("mixins.requisite.json");
+        logger.info("Successfully added Requisite mixins config.");
 
         /* https://github.com/Mouse0w0/forge-mixin-example/blob/08a51985822736f51e0b77a58850ff3abc4628bd/src/main/java/com/yourname/modid/core/CoreMod.java */
         CodeSource source = RequisiteLauncher.class.getProtectionDomain().getCodeSource();

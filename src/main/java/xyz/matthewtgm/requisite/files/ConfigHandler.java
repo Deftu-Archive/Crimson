@@ -24,7 +24,7 @@ import xyz.matthewtgm.tgmconfig.Configuration;
 
 import java.io.File;
 
-public class ConfigHandler {
+public class ConfigHandler extends Thread {
 
     @Getter private final Configuration configuration;
 
@@ -39,7 +39,7 @@ public class ConfigHandler {
         this.configuration = new Configuration(new File(directory, name));
     }
 
-    public void start() {
+    public synchronized void start() {
         if (!configuration.hasKey("light_mode"))
             configuration.add("light_mode", false).save();
         if (!configuration.hasKey("show_cosmetics"))
@@ -51,31 +51,31 @@ public class ConfigHandler {
         update();
     }
 
-    public void update() {
+    public synchronized void update() {
         setLightMode(configuration.getAsBoolean("light_mode"));
         setShowCosmetics(configuration.getAsBoolean("show_cosmetics"));
         setOverrideCapes(configuration.getAsBoolean("override_capes"));
         setShowIndicators(configuration.getAsBoolean("show_indicators"));
     }
 
-    public void setLightMode(boolean lightMode) {
+    public synchronized void setLightMode(boolean lightMode) {
         this.lightMode = lightMode;
         configuration.add("light_mode", lightMode).save();
     }
 
-    public void setShowCosmetics(boolean showCosmetics) {
+    public synchronized void setShowCosmetics(boolean showCosmetics) {
         this.showCosmetics = showCosmetics;
         configuration.add("show_cosmetics", showCosmetics).save();
         Launch.blackboard.put("tgmLib_show_cosmetics", showCosmetics);
     }
 
-    public void setOverrideCapes(boolean overrideCapes) {
+    public synchronized void setOverrideCapes(boolean overrideCapes) {
         this.overrideCapes = overrideCapes;
         configuration.add("override_capes", overrideCapes).save();
         Launch.blackboard.put("tgmLib_override_capes", overrideCapes);
     }
 
-    public void setShowIndicators(boolean showIndicators) {
+    public synchronized void setShowIndicators(boolean showIndicators) {
         this.showIndicators = showIndicators;
         configuration.add("show_indicators", showIndicators).save();
         Launch.blackboard.put("tgmLib_show_indicators", showIndicators);
