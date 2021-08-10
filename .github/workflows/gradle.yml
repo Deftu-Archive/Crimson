@@ -4,9 +4,17 @@ on:
   push:
     branches:
       - *
+    paths-ignore:
+      - 'README.md'
+      - 'LICENSE'
+      - '.gitignore'
   pull_request:
     branches:
       - *
+    paths-ignore:
+      - 'README.md'
+      - 'LICENSE'
+      - '.gitignore'
 
 jobs:
   build:
@@ -23,3 +31,6 @@ jobs:
         run: chmod +x gradlew
       - name: Build with Gradle
         run: ./gradlew build
+      - uses: actions/upload-artifact@v2
+        with:
+          path: build/libs/*.jar
