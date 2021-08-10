@@ -10,7 +10,7 @@ import net.minecraft.client.Minecraft
 import xyz.matthewtgm.requisite.Requisite
 import java.awt.Color
 
-class RequisiteMenu() : WindowScreen(
+class RequisiteMenu : WindowScreen(
     restoreCurrentGuiOnClose = true,
     drawDefaultBackground = false,
     newGuiScale = GuiScale.scaleForScreenSize().ordinal
