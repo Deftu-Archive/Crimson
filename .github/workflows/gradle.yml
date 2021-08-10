@@ -3,18 +3,19 @@ name: Java workflows using Gradle
 on:
   push:
     branches:
-      - *
+      - '*'
     paths-ignore:
       - 'README.md'
       - 'LICENSE'
       - '.gitignore'
   pull_request:
     branches:
-      - *
+      - '*'
     paths-ignore:
       - 'README.md'
       - 'LICENSE'
       - '.gitignore'
+  workflow_dispatch:
 
 jobs:
   build:
