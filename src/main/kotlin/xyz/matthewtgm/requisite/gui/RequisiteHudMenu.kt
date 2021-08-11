@@ -1,6 +1,5 @@
 package xyz.matthewtgm.requisite.gui
 
-import gg.essential.elementa.WindowScreen
 import gg.essential.universal.GuiScale
 import net.minecraft.client.Minecraft
 import net.minecraft.client.renderer.GlStateManager
@@ -8,9 +7,9 @@ import xyz.matthewtgm.requisite.Requisite
 import xyz.matthewtgm.requisite.hud.HudElementBase
 import java.util.*
 
-class RequisiteHudMenu : WindowScreen(
-    drawDefaultBackground = false,
-    newGuiScale = GuiScale.scaleForScreenSize().ordinal
+class RequisiteHudMenu : RequisiteWindowScreen(
+    restoreCurrentGuiOnClose = true,
+    showNavbar = false
 ) {
 
     private var dragging = false
@@ -27,8 +26,10 @@ class RequisiteHudMenu : WindowScreen(
                 it.isMouseInside(event.absoluteX.toInt(), event.absoluteY.toInt())
             }.findFirst()
 
-            if (selected.isPresent)
+            if (selected.isPresent) {
                 dragging = true
+                event.stopImmediatePropagation()
+            }
         }
         window.onMouseRelease {
             dragging = false
@@ -44,11 +45,6 @@ class RequisiteHudMenu : WindowScreen(
             prevX = mouseX.toInt()
             prevY = mouseY.toInt()
         }
-
-        /*val background = UIBlock().constrain {
-            width = 100.percent()
-            height = 100.percent()
-        } childOf window*/
     }
 
     override fun onDrawScreen(mouseX: Int, mouseY: Int, partialTicks: Float) {

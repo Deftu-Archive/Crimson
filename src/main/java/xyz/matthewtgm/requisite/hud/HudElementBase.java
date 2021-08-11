@@ -27,7 +27,7 @@ public abstract class HudElementBase extends Gui  {
 
         this.settings = new ArrayList<>();
         addSetting(toggle = new BooleanSetting("Toggle", false));
-        addSetting(position = new PositionSetting("Position", ScreenPosition.fromRaw(0, 0)));
+        addSetting(position = new PositionSetting("Position", ScreenPosition.fromRaw(5, 5)));
     }
 
     public HudElementBase(String name, String id) {

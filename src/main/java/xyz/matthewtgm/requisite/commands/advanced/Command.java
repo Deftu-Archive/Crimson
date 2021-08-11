@@ -18,6 +18,8 @@
 
 package xyz.matthewtgm.requisite.commands.advanced;
 
+import xyz.matthewtgm.requisite.util.ChatColour;
+
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -34,6 +36,7 @@ public @interface Command {
     String[] tabCompleteOptions() default {};
     int permissionLevel() default -1;
     boolean autoGenTabCompleteOptions() default false;
+    String unknownArgumentMessage() default "";
 
     @Target(ElementType.METHOD)
     @Retention(RetentionPolicy.RUNTIME)

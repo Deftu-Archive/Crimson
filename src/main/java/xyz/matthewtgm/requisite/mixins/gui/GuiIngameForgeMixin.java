@@ -27,7 +27,6 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import xyz.matthewtgm.requisite.events.ActionBarEvent;
-import xyz.matthewtgm.requisite.events.BossBarEvent;
 import xyz.matthewtgm.requisite.events.TitleEvent;
 
 @Mixin({GuiIngameForge.class})

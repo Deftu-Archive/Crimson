@@ -20,6 +20,8 @@ package xyz.matthewtgm.requisite.commands;
 
 import xyz.matthewtgm.requisite.commands.advanced.Command;
 import xyz.matthewtgm.requisite.util.ArrayHelper;
+import xyz.matthewtgm.requisite.util.ChatColour;
+import xyz.matthewtgm.requisite.util.ChatHelper;
 import xyz.matthewtgm.requisite.util.ExceptionHelper;
 import lombok.Getter;
 import net.minecraft.command.ICommand;
@@ -138,10 +140,17 @@ public class CommandManager {
                 } else
                     execute(process, playerSender, args, passSenderToProcess, passArgsToProcess);
                 if (!(args.length <= 0)) {
+                    boolean wasAbleToExecute = false;
                     for (ArgumentMethod argument : arguments) {
                         String arg = args[argument.argument.index()];
-                        if (arg != null && (arg.equalsIgnoreCase(argument.argument.name()) || Arrays.stream(argument.argument.aliases()).anyMatch(alias -> alias.equalsIgnoreCase(arg))))
+                        if (arg != null && (arg.equalsIgnoreCase(argument.argument.name()) || Arrays.stream(argument.argument.aliases()).anyMatch(alias -> alias.equalsIgnoreCase(arg)))) {
+                            wasAbleToExecute = true;
                             execute(argument.method, playerSender, args, ArrayHelper.contains(argument.method.getParameterTypes(), EntityPlayer.class), ArrayHelper.contains(argument.method.getParameterTypes(), String[].class));
+                        }
+                    }
+                    if (!wasAbleToExecute) {
+                        String msg = command.unknownArgumentMessage();
+                        ChatHelper.sendMessage(msg.isEmpty() ? ChatColour.RED + "Unknown argument provided." : msg);
                     }
                 }
             } catch (Exception e) {
