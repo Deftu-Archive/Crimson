@@ -21,6 +21,7 @@ package xyz.matthewtgm.requisite.mixins.game;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import org.apache.logging.log4j.Logger;
 import org.lwjgl.input.Keyboard;
 import org.spongepowered.asm.mixin.Final;
@@ -34,6 +35,7 @@ import xyz.matthewtgm.requisite.events.BetterInputEvent;
 import xyz.matthewtgm.requisite.events.RequisiteEvent;
 import xyz.matthewtgm.requisite.keybinds.KeyBind;
 import xyz.matthewtgm.requisite.keybinds.KeyBindManager;
+import xyz.matthewtgm.requisite.util.ForgeHelper;
 
 import java.util.List;
 
@@ -43,6 +45,23 @@ public class MinecraftMixin {
     @Shadow @Final private static Logger logger;
 
     @Shadow public GuiScreen currentScreen;
+
+    @Inject(method = "startGame", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/Minecraft;checkGLError(Ljava/lang/String;)V", ordinal = 0))
+    private void onForgeStarted(CallbackInfo ci) {
+        /* Attempt to force-load Requisite. */
+        Logger requisiteLogger = Requisite.getInstance().getLogger();
+        boolean requisiteLoaded = ForgeHelper.isModLoaded(Requisite.ID, Requisite.VER);
+        requisiteLogger.warn("Is requisite loaded? " + requisiteLoaded);
+        if (!requisiteLoaded) {
+            try {
+                requisiteLogger.warn("Requisite was unable to load naturally... Attempting to force-load!");
+                Requisite.getInstance().initialize(new FMLInitializationEvent());
+            } catch (Exception e) {
+                e.printStackTrace();
+                requisiteLogger.error("Failed to force-load Requisite... Things aren't going to work properly!");
+            }
+        }
+    }
 
     @Inject(method = "dispatchKeypresses", at = @At("HEAD"), cancellable = true)
     private void onKeypressesDispatched(CallbackInfo ci) {

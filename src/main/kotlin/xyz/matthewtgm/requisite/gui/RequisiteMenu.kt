@@ -1,6 +1,5 @@
 package xyz.matthewtgm.requisite.gui
 
-import gg.essential.elementa.WindowScreen
 import gg.essential.elementa.components.UIBlock
 import gg.essential.elementa.components.UIText
 import gg.essential.elementa.constraints.CenterConstraint
@@ -10,17 +9,10 @@ import net.minecraft.client.Minecraft
 import xyz.matthewtgm.requisite.Requisite
 import java.awt.Color
 
-class RequisiteMenu : WindowScreen(
-    restoreCurrentGuiOnClose = true,
-    drawDefaultBackground = false,
-    newGuiScale = GuiScale.scaleForScreenSize().ordinal
+class RequisiteMenu : RequisiteWindowScreen(
+    restoreCurrentGuiOnClose = true
 ) {
     init {
-        val background = UIBlock(Color(112, 112, 112, 165)).constrain {
-            width = 100.percent()
-            height = 100.percent()
-        } childOf window
-
         val titleBar = UIBlock(Color(0, 0, 0, 0)).constrain {
             width = 100.percent()
             height = 6.percent()
@@ -31,15 +23,10 @@ class RequisiteMenu : WindowScreen(
             y = titleBar.getHeight().pixels()
         } childOf titleBar
 
-        val titleText = UIText(Requisite.NAME).constrain {
+        val titleText = UIText(Requisite.getName()).constrain {
             x = CenterConstraint()
             y = CenterConstraint()
         } childOf titleBar
         titleText.setTextScale(2.pixels())
-    }
-
-    override fun setWorldAndResolution(mc: Minecraft?, width: Int, height: Int) {
-        newGuiScale = GuiScale.scaleForScreenSize().ordinal
-        super.setWorldAndResolution(mc, width, height)
     }
 }

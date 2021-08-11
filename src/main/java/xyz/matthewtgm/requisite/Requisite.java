@@ -147,4 +147,18 @@ public final class Requisite {
         return instance;
     }
 
+    /* Metadata, mostly used for Kotlin because it doesn't replace the strings in Kotlin. */
+
+    public static String getName() {
+        return "@NAME@";
+    }
+
+    public static String getId() {
+        return "@ID@";
+    }
+
+    public static String getVersion() {
+        return "@VER@";
+    }
+
 }

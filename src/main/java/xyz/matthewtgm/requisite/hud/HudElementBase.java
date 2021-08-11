@@ -1,6 +1,7 @@
 package xyz.matthewtgm.requisite.hud;
 
 import lombok.Getter;
+import net.minecraft.client.gui.Gui;
 import xyz.matthewtgm.requisite.configuration.settings.PositionSetting;
 import xyz.matthewtgm.requisite.data.ScreenPosition;
 import xyz.matthewtgm.tgmconfig.settings.BaseSetting;
@@ -9,7 +10,7 @@ import xyz.matthewtgm.tgmconfig.settings.impl.BooleanSetting;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class HudElementBase {
+public abstract class HudElementBase extends Gui  {
 
     @Getter private final String name, id, description;
     @Getter protected final List<BaseSetting<?>> settings;
