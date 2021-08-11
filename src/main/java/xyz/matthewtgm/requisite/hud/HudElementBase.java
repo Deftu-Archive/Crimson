@@ -16,14 +16,17 @@ public abstract class HudElementBase {
     @Getter protected final BooleanSetting toggle;
     @Getter protected final PositionSetting position;
 
+    @Getter protected int width;
+    @Getter protected int height;
+
     public HudElementBase(String name, String id, String description) {
         this.name = name;
         this.id = id;
         this.description = description;
 
         this.settings = new ArrayList<>();
-        addSetting(toggle = new BooleanSetting("Toggle", true));
-        addSetting(position = new PositionSetting("Position", new ScreenPosition(10, 10)));
+        addSetting(toggle = new BooleanSetting("Toggle", false));
+        addSetting(position = new PositionSetting("Position", ScreenPosition.fromRaw(0, 0)));
     }
 
     public HudElementBase(String name, String id) {
@@ -50,6 +53,11 @@ public abstract class HudElementBase {
         if (toggle == null)
             throw new NullPointerException("Toggle setting is null.");
         return toggle.toggle();
+    }
+
+    public final boolean isMouseInside(int mouseX, int mouseY) {
+        ScreenPosition position = this.position.get();
+        return (mouseX >= position.getX() && mouseX <= position.getX() + width) && (mouseY >= position.getY() && mouseY <= position.getY() + height);
     }
 
 }

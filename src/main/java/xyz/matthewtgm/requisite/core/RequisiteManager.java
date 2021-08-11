@@ -46,6 +46,7 @@ import xyz.matthewtgm.requisite.networking.packets.impl.other.GameClosePacket;
 import xyz.matthewtgm.requisite.networking.packets.impl.other.GameOpenPacket;
 import xyz.matthewtgm.requisite.util.*;
 import xyz.matthewtgm.requisite.util.global.GlobalMinecraft;
+import xyz.matthewtgm.tgmconfig.Configuration;
 
 import java.net.URI;
 import java.util.Base64;
@@ -68,7 +69,7 @@ public class RequisiteManager {
     @Getter private CosmeticManager cosmeticManager;
     @Getter private IndicatorManager indicatorManager;
     @Getter private final KeyBindManager keyBindManager = new KeyBindManager();
-    @Getter private final HudManager hudManager = new HudManager();
+    @Getter private HudManager hudManager;
 
     public void initialize() {
         checkJvmProperties();
@@ -103,6 +104,7 @@ public class RequisiteManager {
             (dataManager = new PlayerDataManager()).start();
             (cosmeticManager = new CosmeticManager()).start();
             (indicatorManager = new IndicatorManager()).start();
+            hudManager = new HudManager(new Configuration("hud", fileHandler.getRequisiteDir()));
 
             ForgeHelper.registerEventListeners(
                     hudManager

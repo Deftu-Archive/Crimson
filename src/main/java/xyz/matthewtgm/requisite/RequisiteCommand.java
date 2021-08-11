@@ -55,6 +55,11 @@ public final class RequisiteCommand {
         GuiHelper.open(new RequisiteMenu());
     }
 
+    @Command.Argument(name = "hud")
+    private void hud() {
+        Requisite.getManager().getHudManager().openEditor();
+    }
+
     @Command.Argument(name = "cosmetics")
     private void cosmetics() {
         //GuiHelper.open(new GuiRequisiteCosmetics(GlobalMinecraft.getCurrentScreen()));

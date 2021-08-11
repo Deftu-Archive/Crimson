@@ -18,74 +18,54 @@
 
 package xyz.matthewtgm.requisite.data;
 
-import xyz.matthewtgm.json.entities.JsonObject;
-import xyz.matthewtgm.json.parser.JsonParser;
-import xyz.matthewtgm.requisite.util.DevelopmentHelper;
 import xyz.matthewtgm.requisite.util.MathHelper;
 import xyz.matthewtgm.requisite.util.ScreenHelper;
-import java.lang.*;
 
+/**
+ * Adapted from EvergreenHUD under LGPL 3.0 license
+ * https://github.com/isXander/EvergreenHUD/blob/kotlin-rewrite/LICENSE.md
+ *
+ * @author isXander
+ */
 public class ScreenPosition {
 
-    private int x, y, rawX, rawY;
+    private float x, y;
 
-    public ScreenPosition(int x, int y) {
-        setPosition(x, y);
-        DevelopmentHelper.markUnderHeavyDevelopment(this);
+    private ScreenPosition(float x, float y) {
+        this.x = x;
+        this.y = y;
     }
 
-    public ScreenPosition(JsonObject jsonObject) {
-        this(jsonObject.get("x").getAsInt(), jsonObject.get("y").getAsInt());
+    public float getX() {
+        return ScreenHelper.getScaledWidth() * x;
     }
 
-    public ScreenPosition(String jsonString) {
-        this(JsonParser.parse(jsonString).getAsJsonObject());
+    public ScreenPosition setX(float x) {
+        this.x = MathHelper.percentageOf(x, 0, ScreenHelper.getScaledWidth());
+        return this;
     }
 
-    public ScreenPosition clone() {
+    public float getY() {
+        return ScreenHelper.getScaledHeight() * y;
+    }
+
+    public ScreenPosition setY(float y) {
+        this.y = MathHelper.percentageOf(y, 0, ScreenHelper.getScaledHeight());
+        return this;
+    }
+
+    public ScreenPosition setPosition(float x, float y) {
+        setX(x);
+        setY(y);
+        return this;
+    }
+
+    public static ScreenPosition fromRaw(float x, float y) {
+        return new ScreenPosition(MathHelper.percentageOf(x, 0, ScreenHelper.getScaledWidth()), MathHelper.percentageOf(y, 0, ScreenHelper.getScaledHeight()));
+    }
+
+    public static ScreenPosition fromScaled(float x, float y) {
         return new ScreenPosition(x, y);
-    }
-
-    public int getX() {
-        return x;
-    }
-
-    public ScreenPosition setX(int x) {
-        this.x = calculateX(x);
-        return this;
-    }
-
-    public int getY() {
-        return y;
-    }
-
-    public int getRawX() {
-        return rawX;
-    }
-
-    public int getRawY() {
-        return rawY;
-    }
-
-    public ScreenPosition setY(int y) {
-        this.y = calculateY(y);
-        return this;
-    }
-
-    public ScreenPosition setPosition(int x, int y) {
-        this.x = calculateX(x);
-        this.y = calculateY(y);
-        this.rawX = x;
-        this.rawY = y;
-        return this;
-    }
-
-    private int calculateX(int x) {
-        return this.x - ScreenHelper.getScaledWidth() - x;
-    }
-
-    private int calculateY(int y) {
-        return this.y - ScreenHelper.getScaledHeight() - y;
     }
 
 }

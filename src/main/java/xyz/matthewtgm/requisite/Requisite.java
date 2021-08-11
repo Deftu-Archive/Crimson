@@ -18,7 +18,6 @@
 
 package xyz.matthewtgm.requisite;
 
-import lombok.Getter;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiMainMenu;
@@ -35,10 +34,8 @@ import xyz.matthewtgm.requisite.gui.RequisiteMenu;
 import xyz.matthewtgm.tgmconfig.ConfigVersion;
 import xyz.matthewtgm.requisite.commands.CommandManager;
 import xyz.matthewtgm.requisite.core.RequisiteManager;
-import xyz.matthewtgm.requisite.gui.menus.GuiRequisiteLogging;
 import xyz.matthewtgm.requisite.keybinds.KeyBind;
 import xyz.matthewtgm.requisite.util.*;
-import xyz.matthewtgm.requisite.util.global.GlobalMinecraft;
 
 import java.util.List;
 
@@ -52,9 +49,9 @@ import java.util.List;
 public final class Requisite {
 
     public static final String NAME = "@NAME@", ID = "@ID@", VER = "@VER@";
-    @Getter private static RequisiteManager manager;
-    @Getter private final Logger logger = LogManager.getLogger(NAME);
-    @Getter @Mod.Instance(ID) private static Requisite instance;
+    private static RequisiteManager manager;
+    private final Logger logger = LogManager.getLogger(NAME);
+    @Mod.Instance(ID) private static Requisite instance;
 
     /**
      * Initialization method for Requisite, shouldn't be called in other mods.
@@ -136,6 +133,18 @@ public final class Requisite {
             public void held() {}
             public void released() {}
         });
+    }
+
+    public static RequisiteManager getManager() {
+        return manager;
+    }
+
+    public Logger getLogger() {
+        return logger;
+    }
+
+    public static Requisite getInstance() {
+        return instance;
     }
 
 }
