@@ -101,7 +101,7 @@ class RequisiteMenu : RequisiteWindowScreen(
             }
         }.onMouseClick {
             USound.playButtonPress()
-            displayScreen(RequisiteHudMenu())
+            displayScreen(RequisiteKeyBindsMenu())
         }
     }
 

@@ -1,14 +1,9 @@
 package xyz.matthewtgm.requisite.gui
 
-import gg.essential.elementa.constraints.ConstantColorConstraint
-import gg.essential.elementa.constraints.animation.Animations
-import gg.essential.elementa.dsl.*
-import gg.essential.universal.USound
 import net.minecraft.client.renderer.GlStateManager
 import xyz.matthewtgm.requisite.Requisite
 import xyz.matthewtgm.requisite.gui.base.RequisiteWindowScreen
 import xyz.matthewtgm.requisite.hud.HudElementBase
-import java.awt.Color
 import java.util.*
 
 class RequisiteHudMenu : RequisiteWindowScreen(
