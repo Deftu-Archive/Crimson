@@ -1,15 +1,18 @@
 package xyz.matthewtgm.requisite.gui
 
-import gg.essential.universal.GuiScale
-import net.minecraft.client.Minecraft
+import gg.essential.elementa.constraints.ConstantColorConstraint
+import gg.essential.elementa.constraints.animation.Animations
+import gg.essential.elementa.dsl.*
+import gg.essential.universal.USound
 import net.minecraft.client.renderer.GlStateManager
 import xyz.matthewtgm.requisite.Requisite
+import xyz.matthewtgm.requisite.gui.base.RequisiteWindowScreen
 import xyz.matthewtgm.requisite.hud.HudElementBase
+import java.awt.Color
 import java.util.*
 
 class RequisiteHudMenu : RequisiteWindowScreen(
-    restoreCurrentGuiOnClose = true,
-    showNavbar = false
+    restoreCurrentGuiOnClose = true
 ) {
 
     private var dragging = false
@@ -59,9 +62,4 @@ class RequisiteHudMenu : RequisiteWindowScreen(
         Requisite.getManager().hudManager.save()
     }
 
-    /* Ensure correct GUI scale. */
-    override fun setWorldAndResolution(mc: Minecraft?, width: Int, height: Int) {
-        newGuiScale = GuiScale.scaleForScreenSize().ordinal
-        super.setWorldAndResolution(mc, width, height)
-    }
 }

@@ -1,15 +1,17 @@
-package xyz.matthewtgm.requisite.gui
+package xyz.matthewtgm.requisite.gui.base
 
 import gg.essential.elementa.WindowScreen
 import gg.essential.elementa.components.*
 import gg.essential.elementa.constraints.CenterConstraint
 import gg.essential.elementa.constraints.ChildBasedSizeConstraint
+import gg.essential.elementa.constraints.ConstantColorConstraint
 import gg.essential.elementa.constraints.animation.Animations
 import gg.essential.elementa.dsl.*
 import gg.essential.universal.GuiScale
 import gg.essential.universal.USound
 import net.minecraft.client.Minecraft
 import xyz.matthewtgm.requisite.Requisite
+import xyz.matthewtgm.requisite.gui.RequisiteMenu
 import java.awt.Color
 
 open class RequisiteWindowScreen(
@@ -60,11 +62,11 @@ open class RequisiteWindowScreen(
         titleText.setTextScale(2.pixels())
         titleTextContainer.onMouseEnter {
             titleText.animate {
-                setColorAnimation(Animations.OUT_EXP, 1f, Color(255, 187, 0).toConstraint())
+                setColorAnimation(Animations.OUT_EXP, 1f, ConstantColorConstraint(Color(255, 187, 0)))
             }
         }.onMouseLeave {
             titleText.animate {
-                setColorAnimation(Animations.OUT_EXP, 1f, Color.WHITE.toConstraint())
+                setColorAnimation(Animations.OUT_EXP, 1f, ConstantColorConstraint(Color.WHITE))
             }
         }.onMouseClick {
             USound.playButtonPress()
@@ -83,17 +85,17 @@ open class RequisiteWindowScreen(
     val backIcon = UIImage.ofResource("/assets/requisite/gui/icons/exit.png").constrain {
         x = CenterConstraint()
         y = CenterConstraint()
-        width = 36.pixels()
-        height = 36.pixels()
+        width = 32.pixels()
+        height = 32.pixels()
     } childOf backContainer
     init {
         backContainer.onMouseEnter {
             backIcon.animate {
-                setColorAnimation(Animations.OUT_EXP, 1f, Color(255, 187, 0).toConstraint())
+                setColorAnimation(Animations.OUT_EXP, 1f, ConstantColorConstraint(Color(255, 187, 0)))
             }
         }.onMouseLeave {
             backIcon.animate {
-                setColorAnimation(Animations.OUT_EXP, 1f, Color.WHITE.toConstraint())
+                setColorAnimation(Animations.OUT_EXP, 1f, ConstantColorConstraint(Color.WHITE))
             }
         }.onMouseClick {
             USound.playButtonPress()

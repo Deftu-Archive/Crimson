@@ -18,34 +18,6 @@
 
 package xyz.matthewtgm.requisite.gui.menus;
 
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiButton;
-import net.minecraft.client.gui.GuiScreen;
-import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.util.EnumChatFormatting;
-import org.lwjgl.input.Mouse;
-import org.lwjgl.opengl.GL11;
-import xyz.matthewtgm.requisite.Requisite;
-import xyz.matthewtgm.requisite.RequisiteResources;
-import xyz.matthewtgm.requisite.core.RequisiteManager;
-import xyz.matthewtgm.requisite.players.PlayerCosmeticData;
-import xyz.matthewtgm.requisite.players.cosmetics.BaseCosmetic;
-import xyz.matthewtgm.requisite.players.cosmetics.CosmeticManager;
-import xyz.matthewtgm.requisite.players.cosmetics.CosmeticType;
-import xyz.matthewtgm.requisite.gui.GuiTransFadingButton;
-import xyz.matthewtgm.requisite.gui.GuiTransFadingImageButton;
-import xyz.matthewtgm.requisite.networking.packets.impl.cosmetics.CosmeticsTogglePacket;
-import xyz.matthewtgm.requisite.util.*;
-import xyz.matthewtgm.requisite.util.global.GlobalMinecraft;
-
-import java.awt.*;
-import java.io.IOException;
-import java.util.*;
-import java.util.List;
-import java.util.concurrent.CopyOnWriteArrayList;
-import java.util.concurrent.atomic.AtomicInteger;
-
 public class GuiRequisiteCosmetics/* extends GuiRequisiteBase*/ {
 
     /*private List<GuiButton> cosmeticButtonList = new CopyOnWriteArrayList<>();
