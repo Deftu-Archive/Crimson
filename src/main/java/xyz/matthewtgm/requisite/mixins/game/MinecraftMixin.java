@@ -74,6 +74,9 @@ public class MinecraftMixin {
         ))) {
             ci.cancel();
         }
+        if (true) {
+            return;
+        }
         if (Requisite.getManager() == null || Requisite.getManager().getKeyBindManager() == null || Requisite.getManager().getKeyBindManager().getKeyBinds() == null) {
             logger.info("It appears Requisite was not loaded properly, please report this!");
             return;

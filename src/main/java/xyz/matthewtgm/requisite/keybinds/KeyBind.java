@@ -19,7 +19,9 @@
 package xyz.matthewtgm.requisite.keybinds;
 
 import lombok.Getter;
+import xyz.matthewtgm.mango.annotations.Unfinished;
 
+@Unfinished
 public abstract class KeyBind {
 
     @Getter private int key;

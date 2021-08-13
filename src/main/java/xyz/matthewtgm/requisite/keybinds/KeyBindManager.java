@@ -19,25 +19,30 @@
 package xyz.matthewtgm.requisite.keybinds;
 
 import lombok.Getter;
+import xyz.matthewtgm.mango.annotations.Unfinished;
 import xyz.matthewtgm.requisite.Requisite;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Unfinished
 public class KeyBindManager {
 
     @Getter private final List<KeyBind> keyBinds = new ArrayList<>();
 
+    @Unfinished
     public void register(KeyBind keyBind) {
         keyBinds.add(keyBind);
         Requisite.getManager().getKeyBindConfigHandler().update();
     }
 
+    @Unfinished
     public void unregister(String name) {
         keyBinds.stream().filter(keyBind -> keyBind.name().equalsIgnoreCase(name)).findFirst().ifPresent(keyBinds::remove);
         Requisite.getManager().getKeyBindConfigHandler().update();
     }
 
+    @Unfinished
     public void unregister(KeyBind keyBind) {
         unregister(keyBind.name());
     }
