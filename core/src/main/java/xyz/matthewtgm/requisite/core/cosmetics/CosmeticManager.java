@@ -16,24 +16,10 @@
  * along with Requisite. If not, see <https://www.gnu.org/licenses/>.
  */
 
-plugins {
-    id "org.jetbrains.kotlin.jvm"
-    id "net.minecraftforge.gradle.forge"
-}
+package xyz.matthewtgm.requisite.core.cosmetics;
 
-minecraft {
-    version = forge_ver
-    runDir = "run"
-    replace('@NAME@', mod_name)
-    replace('@ID@', mod_id)
-    replace('@VER@', mod_ver)
-    mappings = "stable_22"
-}
+public class CosmeticManager {
 
-repositories {
-    mavenCentral()
-}
 
-dependencies {
-    implementation(project(':core'))
+
 }
