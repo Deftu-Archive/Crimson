@@ -20,38 +20,55 @@ package xyz.matthewtgm.requisite.core.cosmetics.rendering;
 
 public interface CosmeticContext {
 
-    /* Global. */
+    /* Methods. */
+    void colour(float red, float green, float blue, float alpha);
+    void bind();
+
+    void push();
+    void translate(float x, float y, float z);
+    void rotate(float angle, float x, float y, float z);
+    void pop();
+
+    /* Global data. */
     boolean isPlayerInvisible();
     boolean isPlayerWearingPart(String name);
     boolean doesPlayerHaveCape();
     boolean isPlayerSneaking();
+    boolean isPlayerOnGround();
 
-    int getPlayerPosX();
-    int getPlayerPosY();
-    int getPlayerPosZ();
+    double getPlayerMotionX();
+    double getPlayerMotionY();
+    double getPlayerMotionZ();
 
-    int getPlayerPrevPosX();
-    int getPlayerPrevPosY();
-    int getPlayerPrevPosZ();
+    double getPlayerPosX();
+    double getPlayerPosY();
+    double getPlayerPosZ();
 
-    int getPlayerRenderYawOffset();
-    int getPlayerPrevRenderYawOffset();
+    double getPlayerPrevPosX();
+    double getPlayerPrevPosY();
+    double getPlayerPrevPosZ();
 
-    int getPlayerCameraYaw();
-    int getPlayerPrevCameraYaw();
+    float getPlayerRenderYawOffset();
+    float getPlayerPrevRenderYawOffset();
+
+    float getPlayerCameraYaw();
+    float getPlayerPrevCameraYaw();
 
     float partialTicks();
     float scale();
 
-    /* 1.12 and under. */
-    int getPlayerChasingPosX();
-    int getPlayerChasingPosY();
-    int getPlayerChasingPosZ();
+    /* 1.12 and under data. */
+    double getPlayerChasingPosX();
+    double getPlayerChasingPosY();
+    double getPlayerChasingPosZ();
 
-    int getPlayerPrevChasingPosX();
-    int getPlayerPrevChasingPosY();
-    int getPlayerPrevChasingPosZ();
+    double getPlayerPrevChasingPosX();
+    double getPlayerPrevChasingPosY();
+    double getPlayerPrevChasingPosZ();
 
-    /* 1.13 and over. */
+    float getPlayerDistanceWalkedModified();
+    float getPlayerPrevDistanceWalkedModified();
+
+    /* 1.13 and over data. */
 
 }

@@ -18,6 +18,7 @@
 
 package xyz.matthewtgm.requisite;
 
+import gg.essential.universal.UMinecraft;
 import net.minecraftforge.common.MinecraftForge;
 import xyz.matthewtgm.requisite.core.IRequisite;
 import xyz.matthewtgm.requisite.core.IRequisiteManager;
@@ -29,6 +30,7 @@ import xyz.matthewtgm.requisite.core.networking.RequisiteClientSocket;
 import xyz.matthewtgm.requisite.core.notifications.INotifications;
 import xyz.matthewtgm.requisite.core.util.*;
 import xyz.matthewtgm.requisite.core.util.messages.IMessageQueue;
+import xyz.matthewtgm.requisite.cosmetics.CosmeticFinalizer;
 import xyz.matthewtgm.requisite.hypixel.HypixelManager;
 import xyz.matthewtgm.requisite.notifications.Notifications;
 import xyz.matthewtgm.requisite.rendering.EnhancedFontRenderer;
@@ -77,7 +79,7 @@ public class RequisiteManager implements IRequisiteManager {
         configurationManager = new ConfigurationManager(new Configuration(fileManager.getRequisiteDirectory(fileManager.getTgmDevelopmentDirectory(fileManager.getConfigDirectory(gameDirectory)))));
         socket = new RequisiteClientSocket(fetchSocketUri(), requisite);
 
-        cosmeticManager = new CosmeticManager();
+        (cosmeticManager = new CosmeticManager(requisite, new CosmeticFinalizer())).initialize(UMinecraft.getMinecraft().getSession().getProfile().getId().toString());
 
         keyBindRegistry = new KeyBindRegistry(requisite);
         enhancedFontRenderer = new EnhancedFontRenderer(requisite);

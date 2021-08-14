@@ -29,7 +29,6 @@ import xyz.matthewtgm.requisite.core.IRequisite;
 import xyz.matthewtgm.requisite.core.events.ChatMessageReceivedEvent;
 import xyz.matthewtgm.requisite.hypixel.HypixelManager;
 import xyz.matthewtgm.requisite.hypixel.events.LocrawReceivedEvent;
-import xyz.matthewtgm.requisite.util.ServerHelper;
 import xyz.matthewtgm.simpleeventbus.EventSubscriber;
 
 import java.util.concurrent.TimeUnit;

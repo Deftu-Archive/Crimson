@@ -17,8 +17,9 @@
  */
 
 plugins {
-    id "org.jetbrains.kotlin.jvm"
     id "net.minecraftforge.gradle.forge"
+    id "org.jetbrains.kotlin.jvm"
+    id "org.spongepowered.mixin"
 }
 
 minecraft {
@@ -36,4 +37,12 @@ repositories {
 
 dependencies {
     implementation(project(':core'))
+
+    annotationProcessor('org.spongepowered:mixin:0.7.11-SNAPSHOT')
+}
+
+/* Disable mixin refMap warnings. */
+mixin {
+    disableRefMapWarning = true
+    add sourceSets.main, 'mixins.requisite.refmap.json'
 }

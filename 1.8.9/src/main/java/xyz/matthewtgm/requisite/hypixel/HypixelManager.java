@@ -35,7 +35,7 @@ public class HypixelManager {
     private final HypixelAPI api = new HypixelAPI();
 
     public HypixelManager(IRequisite requisite) {
-        locrawManager = new HypixelLocrawManager(requisite);
+        locrawManager = new HypixelLocrawManager(requisite, this);
     }
 
     public HypixelLocrawManager getLocrawManager() {

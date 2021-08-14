@@ -186,6 +186,12 @@ task moveResources {
     }
 }
 
+
+
+
+
+
+
 allprojects {
     apply plugin: "com.github.johnrengelman.shadow"
     apply plugin: "org.jetbrains.kotlin.jvm"

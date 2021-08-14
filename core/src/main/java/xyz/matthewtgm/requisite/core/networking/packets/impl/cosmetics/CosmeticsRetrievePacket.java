@@ -45,8 +45,8 @@ public class CosmeticsRetrievePacket extends BasePacket {
 
     public void read(RequisiteClientSocket socket, JsonObject object, JsonObject data) {
         CosmeticManager cosmeticManager = socket.getRequisite().getManager().getCosmeticManager();
-        List<ICosmetic> ownedCosmetics = new ArrayList<>();
-        List<ICosmetic> enabledCosmetics = new ArrayList<>();
+        //List<ICosmetic> ownedCosmetics = new ArrayList<>();
+        //List<ICosmetic> enabledCosmetics = new ArrayList<>();
         /*for (JsonElement element : data.get("cosmetics").getAsJsonArray())
             ownedCosmetics.add(cosmeticManager.getCosmeticFromId(element.getAsString()));
         for (JsonElement element : data.get("enabled_cosmetics").getAsJsonArray())

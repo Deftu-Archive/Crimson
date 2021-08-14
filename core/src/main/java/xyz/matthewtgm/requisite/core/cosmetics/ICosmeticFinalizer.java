@@ -16,30 +16,13 @@
  * along with Requisite. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package xyz.matthewtgm.requisite.core.cosmetics.rendering;
+package xyz.matthewtgm.requisite.core.cosmetics;
 
-public abstract class CosmeticLayer {
+import xyz.matthewtgm.requisite.core.cosmetics.rendering.CosmeticLayer;
 
-    private final String name, id;
+import java.util.List;
 
-    public CosmeticLayer(String name, String id) {
-        this.name = name;
-        this.id = id;
-    }
-
-    public CosmeticLayer(String name) {
-        this(name, name.toUpperCase().replace("_", ""));
-    }
-
-    public abstract void render(CosmeticContext context);
-    public abstract void tick();
-
-    public String getName() {
-        return name;
-    }
-
-    public String getId() {
-        return id;
-    }
-
+public interface ICosmeticFinalizer {
+    void initialize(CosmeticManager cosmeticManager, List<CosmeticLayer> cosmetics);
+    void finalize(CosmeticLayer layer);
 }
