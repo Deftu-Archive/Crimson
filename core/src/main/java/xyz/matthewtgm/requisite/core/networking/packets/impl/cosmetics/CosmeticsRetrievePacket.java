@@ -19,7 +19,6 @@
 package xyz.matthewtgm.requisite.core.networking.packets.impl.cosmetics;
 
 import xyz.matthewtgm.json.entities.JsonObject;
-import xyz.matthewtgm.requisite.core.cosmetics.BaseCosmetic;
 import xyz.matthewtgm.requisite.core.cosmetics.CosmeticManager;
 import xyz.matthewtgm.requisite.core.networking.RequisiteClientSocket;
 import xyz.matthewtgm.requisite.core.networking.packets.BasePacket;
@@ -46,8 +45,8 @@ public class CosmeticsRetrievePacket extends BasePacket {
 
     public void read(RequisiteClientSocket socket, JsonObject object, JsonObject data) {
         CosmeticManager cosmeticManager = socket.getRequisite().getManager().getCosmeticManager();
-        List<BaseCosmetic> ownedCosmetics = new ArrayList<>();
-        List<BaseCosmetic> enabledCosmetics = new ArrayList<>();
+        List<ICosmetic> ownedCosmetics = new ArrayList<>();
+        List<ICosmetic> enabledCosmetics = new ArrayList<>();
         /*for (JsonElement element : data.get("cosmetics").getAsJsonArray())
             ownedCosmetics.add(cosmeticManager.getCosmeticFromId(element.getAsString()));
         for (JsonElement element : data.get("enabled_cosmetics").getAsJsonArray())

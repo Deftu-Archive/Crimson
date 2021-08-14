@@ -1,5 +1,7 @@
 package xyz.matthewtgm.requisite;
 
+import gg.essential.universal.wrappers.UPlayer;
+import net.minecraftforge.common.MinecraftForge;
 import xyz.matthewtgm.requisite.core.IRequisite;
 import xyz.matthewtgm.requisite.core.IRequisiteManager;
 import xyz.matthewtgm.requisite.core.cosmetics.CosmeticManager;
@@ -10,6 +12,8 @@ import xyz.matthewtgm.requisite.core.networking.RequisiteClientSocket;
 import xyz.matthewtgm.requisite.core.notifications.INotifications;
 import xyz.matthewtgm.requisite.core.util.*;
 import xyz.matthewtgm.requisite.core.util.messages.IMessageQueue;
+import xyz.matthewtgm.requisite.cosmetics.CosmeticInitializer;
+import xyz.matthewtgm.requisite.hypixel.HypixelManager;
 import xyz.matthewtgm.requisite.notifications.Notifications;
 import xyz.matthewtgm.requisite.rendering.EnhancedFontRenderer;
 import xyz.matthewtgm.requisite.util.*;
@@ -48,13 +52,14 @@ public class RequisiteManager implements IRequisiteManager {
 
     /* 1.8.9-specific utilities. */
     private GlHelper glHelper;
+    private HypixelManager hypixelManager;
 
     public void initialize(IRequisite requisite, File gameDirectory) {
         eventBus = new SimpleEventBus();
         fileManager = new FileManager();
         configurationManager = new ConfigurationManager(new Configuration(fileManager.getRequisiteDirectory(fileManager.getTgmDevelopmentDirectory(fileManager.getConfigDirectory(gameDirectory)))));
         socket = new RequisiteClientSocket(fetchSocketUri(), requisite);
-        cosmeticManager = new CosmeticManager(requisite);
+        cosmeticManager = new CosmeticManager(requisite, new CosmeticInitializer());
 
         keyBindRegistry = new KeyBindRegistry(requisite);
         enhancedFontRenderer = new EnhancedFontRenderer(requisite);
@@ -67,7 +72,6 @@ public class RequisiteManager implements IRequisiteManager {
         mouseHelper = new MouseHelper();
         multithreading = new Multithreading();
         notifications = new Notifications((Requisite) requisite);
-        notifications.push("Hello,", "world!");
         objectHelper = new ObjectHelper();
         reflectionHelper = new ReflectionHelper();
         romanNumerals = new RomanNumeral();
@@ -78,6 +82,9 @@ public class RequisiteManager implements IRequisiteManager {
         mojangApi = new MojangAPI();
 
         glHelper = new GlHelper();
+        hypixelManager = new HypixelManager(requisite);
+
+        MinecraftForge.EVENT_BUS.register(new RequisiteEventListener());
     }
 
     public SimpleEventBus getEventBus() {
@@ -178,6 +185,10 @@ public class RequisiteManager implements IRequisiteManager {
 
     public GlHelper getGlHelper() {
         return glHelper;
+    }
+
+    public HypixelManager getHypixelManager() {
+        return hypixelManager;
     }
 
 }
