@@ -69,6 +69,8 @@ dependencies {
     shade('xyz.matthewtgm:JsonTGM:2.10.0')
     shade('xyz.matthewtgm:TGMConfig:3.2.0')
     shade('xyz.matthewtgm:Mango:1.2.0')
+    shade('xyz.matthewtgm:SimpleEventBus:2.0')
+
     shade('org.java-websocket:Java-WebSocket:1.5.2')
 
     shade('gg.essential:elementa-1.8.9-forge:356')

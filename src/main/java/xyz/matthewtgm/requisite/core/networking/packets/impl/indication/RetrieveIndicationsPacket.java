@@ -19,7 +19,6 @@
 package xyz.matthewtgm.requisite.core.networking.packets.impl.indication;
 
 import xyz.matthewtgm.json.entities.JsonObject;
-import xyz.matthewtgm.requisite.Requisite;
 import xyz.matthewtgm.requisite.core.networking.RequisiteClientSocket;
 import xyz.matthewtgm.requisite.core.networking.packets.BasePacket;
 

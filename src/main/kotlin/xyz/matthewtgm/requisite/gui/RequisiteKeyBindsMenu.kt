@@ -9,7 +9,6 @@ import gg.essential.elementa.constraints.ChildBasedSizeConstraint
 import gg.essential.elementa.constraints.SiblingConstraint
 import gg.essential.elementa.dsl.*
 import xyz.matthewtgm.mango.annotations.Unfinished
-import xyz.matthewtgm.requisite.Requisite
 import xyz.matthewtgm.requisite.gui.base.RequisiteWindowScreen
 import java.awt.Color
 

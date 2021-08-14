@@ -19,7 +19,7 @@
 package xyz.matthewtgm.requisite.events;
 
 import net.minecraftforge.fml.common.eventhandler.Event;
-import xyz.matthewtgm.requisite.hypixel.locraw.HypixelLocraw;
+import xyz.matthewtgm.requisite.core.hypixel.locraw.HypixelLocraw;
 
 public class LocrawReceivedEvent extends Event {
     public final HypixelLocraw locraw;

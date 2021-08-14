@@ -20,7 +20,6 @@ package xyz.matthewtgm.requisite.players.cosmetics;
 
 import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.client.renderer.entity.layers.LayerRenderer;
-import xyz.matthewtgm.requisite.Requisite;
 import xyz.matthewtgm.requisite.events.RequisiteEvent;
 import xyz.matthewtgm.requisite.players.PlayerData;
 

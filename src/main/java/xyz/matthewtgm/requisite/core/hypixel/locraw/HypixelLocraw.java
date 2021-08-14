@@ -1,4 +1,4 @@
-package xyz.matthewtgm.requisite.hypixel.locraw;
+package xyz.matthewtgm.requisite.core.hypixel.locraw;
 
 import lombok.Getter;
 import xyz.matthewtgm.json.entities.JsonObject;

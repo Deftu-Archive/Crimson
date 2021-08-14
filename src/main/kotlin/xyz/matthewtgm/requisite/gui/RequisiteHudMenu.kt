@@ -1,7 +1,6 @@
 package xyz.matthewtgm.requisite.gui
 
 import net.minecraft.client.renderer.GlStateManager
-import xyz.matthewtgm.requisite.Requisite
 import xyz.matthewtgm.requisite.gui.base.RequisiteWindowScreen
 import xyz.matthewtgm.requisite.hud.HudElementBase
 import java.util.*

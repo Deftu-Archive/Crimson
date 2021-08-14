@@ -16,10 +16,11 @@
  * along with Requisite. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package xyz.matthewtgm.requisite.data;
+package xyz.matthewtgm.requisite.core.data;
 
 import xyz.matthewtgm.json.entities.JsonObject;
 import xyz.matthewtgm.json.util.JsonApiHelper;
+import xyz.matthewtgm.requisite.core.IRequisite;
 
 import java.util.concurrent.TimeUnit;
 import java.util.function.BiConsumer;
@@ -30,14 +31,17 @@ public class VersionChecker {
     private BiConsumer<VersionChecker, JsonObject> fetchListener;
     private JsonObject versionObject;
 
-    public VersionChecker(String url, boolean periodicallyFetch) {
+    private IRequisite requisite;
+
+    public VersionChecker(IRequisite requisite, String url, boolean periodicallyFetch) {
         this.url = url;
+        this.requisite = requisite;
         if (periodicallyFetch)
-            Multithreading.schedule(this::fetch, 0, 5, TimeUnit.MINUTES);
+            requisite.getManager().getMultithreading().schedule(this::fetch, 0, 5, TimeUnit.MINUTES);
     }
 
-    public VersionChecker(String url) {
-        this(url, false);
+    public VersionChecker(IRequisite requisite, String url) {
+        this(requisite, url, false);
     }
 
     public VersionChecker fetch() {

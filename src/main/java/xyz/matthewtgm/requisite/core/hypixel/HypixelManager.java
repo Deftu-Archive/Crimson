@@ -1,7 +1,7 @@
-package xyz.matthewtgm.requisite.hypixel;
+package xyz.matthewtgm.requisite.core.hypixel;
 
-import xyz.matthewtgm.requisite.hypixel.api.HypixelAPI;
-import xyz.matthewtgm.requisite.hypixel.locraw.HypixelLocrawManager;
+import xyz.matthewtgm.requisite.core.hypixel.api.HypixelAPI;
+import xyz.matthewtgm.requisite.core.hypixel.locraw.HypixelLocrawManager;
 
 public class HypixelManager {
 

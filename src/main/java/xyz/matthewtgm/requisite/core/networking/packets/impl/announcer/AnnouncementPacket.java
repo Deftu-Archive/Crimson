@@ -19,7 +19,6 @@
 package xyz.matthewtgm.requisite.core.networking.packets.impl.announcer;
 
 import xyz.matthewtgm.json.entities.JsonObject;
-import xyz.matthewtgm.requisite.Requisite;
 import xyz.matthewtgm.requisite.core.networking.RequisiteClientSocket;
 import xyz.matthewtgm.requisite.core.networking.packets.BasePacket;
 import xyz.matthewtgm.requisite.core.util.ChatColour;
@@ -48,8 +47,7 @@ public class AnnouncementPacket extends BasePacket {
     }
 
     public void read(RequisiteClientSocket socket, JsonObject object, JsonObject data) {
-        Notifications.push(data.get("title").getAsString(), data.get("description").getAsString());
-        ChatHelper.sendMessage(ChatColour.GRAY + "[" + ChatColour.RED + ChatColour.BOLD + Requisite.NAME + " Announcement" + ChatColour.RESET + ChatColour.GRAY + "] [" + data.get("title").getAsString() + "]", data.get("description").getAsString());
+        socket.getRequisite().getManager().getChatHelper().send(ChatColour.GRAY + "[" + ChatColour.RED + ChatColour.BOLD + Requisite.NAME + " Announcement" + ChatColour.RESET + ChatColour.GRAY + "] [" + data.get("title").getAsString() + "]", data.get("description").getAsString());
     }
 
     public void handle(RequisiteClientSocket socket) {}

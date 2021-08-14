@@ -10,7 +10,6 @@ import gg.essential.elementa.dsl.*
 import gg.essential.universal.GuiScale
 import gg.essential.universal.USound
 import net.minecraft.client.Minecraft
-import xyz.matthewtgm.requisite.Requisite
 import xyz.matthewtgm.requisite.gui.RequisiteMenu
 import java.awt.Color
 

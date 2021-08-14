@@ -1,6 +1,6 @@
 package xyz.matthewtgm.requisite.core.notifications;
 
-import xyz.matthewtgm.requisite.data.ColourRGB;
+import xyz.matthewtgm.requisite.core.data.ColourRGB;
 
 public class NotificationColour {
     public final ColourRGB background;

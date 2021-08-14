@@ -27,7 +27,7 @@ import net.minecraftforge.common.MinecraftForge
 import net.minecraftforge.fml.common.eventhandler.Event
 import xyz.matthewtgm.json.entities.JsonObject
 import xyz.matthewtgm.json.util.JsonHelper
-import xyz.matthewtgm.requisite.data.ColourRGB
+import xyz.matthewtgm.requisite.core.data.ColourRGB
 import xyz.matthewtgm.requisite.util.global.GlobalMinecraft
 import java.awt.Color
 import java.io.InputStream
@@ -65,7 +65,8 @@ fun DynamicTexture.convert(name: String): ResourceLocation = GlobalMinecraft.get
 fun DynamicTexture.bind(name: String) = GlobalMinecraft.getTextureManager().bindTexture(GlobalMinecraft.getTextureManager().getDynamicTextureLocation(name, this))
 
 /* java.awt.Color */
-fun Color.toColourRGB(): ColourRGB = ColourRGB(red, green, blue, alpha)
+fun Color.toColourRGB(): ColourRGB =
+    ColourRGB(red, green, blue, alpha)
 
 /* net.minecraftforge.fml.common.eventhandler.Event */
 fun Event.post() = MinecraftForge.EVENT_BUS.post(this)

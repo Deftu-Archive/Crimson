@@ -16,32 +16,17 @@
  * along with Requisite. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package xyz.matthewtgm.requisite.keybinds;
+package xyz.matthewtgm.requisite.core.function;
 
-import lombok.Getter;
-import xyz.matthewtgm.mango.annotations.Unfinished;
+import java.util.Objects;
 
-@Unfinished
-public abstract class KeyBind {
-
-    @Getter private int key;
-
-    public KeyBind(int key) {
-        this.key = key;
+public interface TriConsumer<T, U, V> {
+    void accept(T t, U u, V v);
+    default TriConsumer<T, U, V> andThen(TriConsumer<T, U, V> after) {
+        Objects.requireNonNull(after);
+        return (t, u, v) -> {
+            accept(t, u, v);
+            after.accept(t, u, v);
+        };
     }
-
-    public abstract String name();
-    public abstract String category();
-    public abstract void pressed();
-    public abstract void held();
-    public abstract void released();
-
-    public boolean worksInGuis() {
-        return false;
-    }
-
-    public void updateKey(int key) {
-        this.key = key;
-    }
-
 }

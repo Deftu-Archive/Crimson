@@ -16,17 +16,13 @@
  * along with Requisite. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package xyz.matthewtgm.requisite.data;
+package xyz.matthewtgm.requisite.core.data;
 
-import lombok.Getter;
-import lombok.Setter;
 import xyz.matthewtgm.json.entities.JsonObject;
 
 public class HitBox {
 
-    @Getter @Setter
     private float x, y, width, height;
-    @Getter @Setter
     private int intX, intY, intWidth, intHeight;
 
     public HitBox(float x, float y, float width, float height) {
@@ -50,6 +46,70 @@ public class HitBox {
 
     public boolean isInBounds(float x, float y) {
         return x >= this.x && x <= this.x + width && y >= this.y && y <= this.y + height;
+    }
+
+    public float getX() {
+        return x;
+    }
+
+    public void setX(float x) {
+        this.x = x;
+    }
+
+    public float getY() {
+        return y;
+    }
+
+    public void setY(float y) {
+        this.y = y;
+    }
+
+    public float getWidth() {
+        return width;
+    }
+
+    public void setWidth(float width) {
+        this.width = width;
+    }
+
+    public float getHeight() {
+        return height;
+    }
+
+    public void setHeight(float height) {
+        this.height = height;
+    }
+
+    public int getIntX() {
+        return intX;
+    }
+
+    public void setIntX(int intX) {
+        this.intX = intX;
+    }
+
+    public int getIntY() {
+        return intY;
+    }
+
+    public void setIntY(int intY) {
+        this.intY = intY;
+    }
+
+    public int getIntWidth() {
+        return intWidth;
+    }
+
+    public void setIntWidth(int intWidth) {
+        this.intWidth = intWidth;
+    }
+
+    public int getIntHeight() {
+        return intHeight;
+    }
+
+    public void setIntHeight(int intHeight) {
+        this.intHeight = intHeight;
     }
 
 }

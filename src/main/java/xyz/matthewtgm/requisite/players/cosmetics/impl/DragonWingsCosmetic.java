@@ -19,7 +19,7 @@
 package xyz.matthewtgm.requisite.players.cosmetics.impl;
 
 import net.minecraft.util.ResourceLocation;
-import xyz.matthewtgm.requisite.data.ColourRGB;
+import xyz.matthewtgm.requisite.core.data.ColourRGB;
 import xyz.matthewtgm.requisite.players.cosmetics.BaseWingsCosmetic;
 
 public class DragonWingsCosmetic extends BaseWingsCosmetic {

@@ -27,7 +27,6 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-import xyz.matthewtgm.requisite.Requisite;
 import xyz.matthewtgm.requisite.files.ConfigHandler;
 import xyz.matthewtgm.requisite.players.PlayerCosmeticData;
 

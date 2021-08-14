@@ -20,13 +20,11 @@ package xyz.matthewtgm.requisite.core.networking;
 
 import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
-import org.apache.logging.log4j.Logger;
 import org.java_websocket.exceptions.WebsocketNotConnectedException;
 import xyz.matthewtgm.json.entities.JsonElement;
 import xyz.matthewtgm.json.entities.JsonObject;
 import xyz.matthewtgm.json.parser.JsonParser;
 import xyz.matthewtgm.json.util.JsonHelper;
-import xyz.matthewtgm.requisite.Requisite;
 import xyz.matthewtgm.requisite.core.networking.packets.BasePacket;
 import xyz.matthewtgm.requisite.core.networking.packets.impl.announcer.AnnouncementPacket;
 import xyz.matthewtgm.requisite.core.networking.packets.impl.cosmetics.CosmeticsRetrievePacket;
@@ -37,7 +35,6 @@ import xyz.matthewtgm.requisite.core.networking.packets.impl.other.GameOpenPacke
 
 import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
-import java.util.concurrent.TimeUnit;
 
 public final class RequisitePacketHandler {
 
@@ -60,7 +57,7 @@ public final class RequisitePacketHandler {
         }
     }
 
-    public void handle(Logger logger, ByteBuffer buffer) {
+    public void handle(ByteBuffer buffer) {
         String parsed = StandardCharsets.UTF_8.decode(buffer).toString();
         if (!JsonHelper.isValidJson(parsed))
             return;
@@ -74,9 +71,7 @@ public final class RequisitePacketHandler {
             BasePacket packet = found.newInstance();
             packet.handle(client);
             packet.read(client, object, object.getAsObject("data"));
-        } catch (Exception e) {
-            logger.error("An unexpected exception occurred in the Requisite packet handler.", e);
-        }
+        } catch (Exception ignored) {}
     }
 
     public boolean exception(Throwable throwable) {
@@ -85,10 +80,8 @@ public final class RequisitePacketHandler {
             return false;
         }
 
-        if (throwable.getMessage().contains("WebSocketClient objects are not reuseable")) {
-            Multithreading.schedule(Requisite.getManager()::fixSocket, 3, TimeUnit.SECONDS);
+        if (throwable.getMessage().contains("WebSocketClient objects are not reuseable"))
             return false;
-        }
 
         return true;
     }

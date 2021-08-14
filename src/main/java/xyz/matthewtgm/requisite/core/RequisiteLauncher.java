@@ -19,15 +19,10 @@
 package xyz.matthewtgm.requisite.core;
 
 import lombok.Getter;
-import net.minecraftforge.fml.relauncher.CoreModManager;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.spongepowered.asm.launch.MixinBootstrap;
 import org.spongepowered.asm.mixin.Mixins;
-
-import java.io.File;
-import java.net.URL;
-import java.security.CodeSource;
 
 public class RequisiteLauncher {
 
@@ -41,23 +36,6 @@ public class RequisiteLauncher {
         MixinBootstrap.init();
         Mixins.addConfiguration("mixins.requisite.json");
         logger.info("Successfully added Requisite mixins config.");
-
-        /* https://github.com/Mouse0w0/forge-mixin-example/blob/08a51985822736f51e0b77a58850ff3abc4628bd/src/main/java/com/yourname/modid/core/CoreMod.java */
-        CodeSource source = RequisiteLauncher.class.getProtectionDomain().getCodeSource();
-        if (source != null) {
-            URL location = source.getLocation();
-            try {
-                File sourceFile = new File(location.toURI());
-                if (sourceFile.isFile()) {
-                    CoreModManager.getIgnoredMods().remove(sourceFile.getName());
-                    CoreModManager.getReparseableCoremods().remove(sourceFile.getName());
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        } else {
-            logger.warn("No CodeSource, if this isn't a development environment we may run into problems!");
-        }
     }
 
 }

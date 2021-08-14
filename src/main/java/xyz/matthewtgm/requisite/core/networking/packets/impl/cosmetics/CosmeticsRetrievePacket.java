@@ -20,7 +20,6 @@ package xyz.matthewtgm.requisite.core.networking.packets.impl.cosmetics;
 
 import xyz.matthewtgm.json.entities.JsonElement;
 import xyz.matthewtgm.json.entities.JsonObject;
-import xyz.matthewtgm.requisite.Requisite;
 import xyz.matthewtgm.requisite.players.PlayerCosmeticData;
 import xyz.matthewtgm.requisite.players.PlayerData;
 import xyz.matthewtgm.requisite.players.cosmetics.BaseCosmetic;

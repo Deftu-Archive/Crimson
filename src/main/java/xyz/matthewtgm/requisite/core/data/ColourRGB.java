@@ -16,7 +16,7 @@
  * along with Requisite. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package xyz.matthewtgm.requisite.data;
+package xyz.matthewtgm.requisite.core.data;
 
 import xyz.matthewtgm.json.entities.JsonObject;
 import xyz.matthewtgm.json.parser.JsonParser;

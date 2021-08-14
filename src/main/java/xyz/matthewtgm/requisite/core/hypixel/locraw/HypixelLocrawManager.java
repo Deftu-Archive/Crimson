@@ -1,4 +1,4 @@
-package xyz.matthewtgm.requisite.hypixel.locraw;
+package xyz.matthewtgm.requisite.core.hypixel.locraw;
 
 import net.minecraft.client.Minecraft;
 import net.minecraftforge.event.world.WorldEvent;

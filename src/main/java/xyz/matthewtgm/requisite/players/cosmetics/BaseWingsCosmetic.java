@@ -26,7 +26,7 @@ import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
-import xyz.matthewtgm.requisite.data.ColourRGB;
+import xyz.matthewtgm.requisite.core.data.ColourRGB;
 
 public abstract class BaseWingsCosmetic extends BaseCosmetic {
 

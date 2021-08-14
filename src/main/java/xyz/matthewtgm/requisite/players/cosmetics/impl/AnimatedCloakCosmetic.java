@@ -18,8 +18,6 @@
 
 package xyz.matthewtgm.requisite.players.cosmetics.impl;
 
-import xyz.matthewtgm.requisite.data.GifResourceLocation;
-
 public class AnimatedCloakCosmetic extends CloakCosmetic {
 
     protected GifResourceLocation cachedGif;

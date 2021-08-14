@@ -16,17 +16,17 @@
  * along with Requisite. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package xyz.matthewtgm.requisite.function;
+package xyz.matthewtgm.requisite.core.function;
 
 import java.util.Objects;
 
-public interface TriConsumer<T, U, V> {
-    void accept(T t, U u, V v);
-    default TriConsumer<T, U, V> andThen(TriConsumer<T, U, V> after) {
+public interface QuadConsumer<T, U, V, W> {
+    void accept(T t, U u, V v, W w);
+    default QuadConsumer<T, U, V, W> andThen(QuadConsumer<T, U, V, W> after) {
         Objects.requireNonNull(after);
-        return (t, u, v) -> {
-            accept(t, u, v);
-            after.accept(t, u, v);
+        return (t, u, v, w) -> {
+            accept(t, u, v, w);
+            after.accept(t, u, v, w);
         };
     }
 }

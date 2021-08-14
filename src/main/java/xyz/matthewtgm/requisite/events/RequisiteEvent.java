@@ -24,7 +24,6 @@ import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.network.NetworkManager;
 import net.minecraftforge.fml.common.eventhandler.Cancelable;
 import net.minecraftforge.fml.common.eventhandler.Event;
-import xyz.matthewtgm.requisite.Requisite;
 import xyz.matthewtgm.requisite.players.cosmetics.BaseCosmetic;
 import xyz.matthewtgm.requisite.players.cosmetics.CosmeticType;
 import xyz.matthewtgm.requisite.keybinds.KeyBind;

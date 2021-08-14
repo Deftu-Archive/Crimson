@@ -18,73 +18,61 @@
 
 package xyz.matthewtgm.requisite.core.networking;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.java_websocket.client.WebSocketClient;
 import org.java_websocket.drafts.Draft_6455;
 import org.java_websocket.handshake.ServerHandshake;
-import xyz.matthewtgm.requisite.Requisite;
+import xyz.matthewtgm.requisite.core.IRequisite;
 import xyz.matthewtgm.requisite.core.networking.packets.BasePacket;
-import xyz.matthewtgm.requisite.core.util.ChatColour;
 
 import java.net.URI;
 import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
 
-/**
- * Center of all Requisite networking.
- */
-public final class RequisiteClientSocket extends WebSocketClient {
+public class RequisiteClientSocket extends WebSocketClient {
 
-    private final Logger logger = LogManager.getLogger(Requisite.NAME + " (" + getClass().getSimpleName() + ")");
     private final RequisitePacketHandler packetHandler;
+    private final IRequisite requisite;
 
-    public RequisiteClientSocket(URI serverUri) {
+    public RequisiteClientSocket(URI serverUri, IRequisite requisite) {
         super(serverUri, new Draft_6455());
+        this.requisite = requisite;
         this.packetHandler = new RequisitePacketHandler(this);
     }
 
     public void connect() {
-        logger.info("Connecting to socket.");
         super.connect();
     }
 
     public void reconnect() {
-        logger.info("Reconnecting to socket.");
         new Thread(super::reconnect).start();
     }
 
-    public void onOpen(ServerHandshake handshake) {
-        logger.info("Connected to socket!");
-    }
+    public void onOpen(ServerHandshake handshake) {}
 
     /**
      * This is required for some reason..?
      */
     public void onMessage(String message) {
-        packetHandler.handle(logger, StandardCharsets.UTF_8.encode(message));
+        packetHandler.handle(StandardCharsets.UTF_8.encode(message));
     }
 
     /**
      * Invoked when a message from the server is sent. The parameter value is parsed using the {@link RequisitePacketHandler}
      */
     public void onMessage(ByteBuffer bytes) {
-        packetHandler.handle(logger, bytes);
+        packetHandler.handle(bytes);
     }
 
-    public void onClose(int code, String reason, boolean remote) {
-        logger.warn("Connection to socket was closed! ({} | {})", code, reason);
-    }
+    public void onClose(int code, String reason, boolean remote) {}
 
-    public void onError(Exception ex) {
-        if (packetHandler.exception(ex)) {
-            logger.error("An unexpected error occurred!", ex);
-            ChatHelper.sendMessage(ChatHelper.requisiteChatPrefix, String.format("%s%sAn exception was thrown from the Requisite WebSocket! %s()", ChatColour.RED, ChatColour.BOLD, ChatColour.DARK_RED));
-        }
-    }
+    public void onError(Exception ex) {}
 
     public void send(BasePacket packet) {
         packetHandler.send(packet);
+    }
+
+    public IRequisite getRequisite() {
+        return requisite;
     }
 
 }
