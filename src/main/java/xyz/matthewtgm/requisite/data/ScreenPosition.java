@@ -18,7 +18,6 @@
 
 package xyz.matthewtgm.requisite.data;
 
-import xyz.matthewtgm.requisite.util.MathHelper;
 import xyz.matthewtgm.requisite.util.ScreenHelper;
 
 /**

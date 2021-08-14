@@ -21,7 +21,6 @@ package xyz.matthewtgm.requisite.players;
 import lombok.Getter;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
-import xyz.matthewtgm.requisite.util.ForgeHelper;
 
 import java.util.HashMap;
 import java.util.Map;

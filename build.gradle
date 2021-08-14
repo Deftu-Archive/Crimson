@@ -18,7 +18,6 @@
 
 plugins {
     id "net.minecraftforge.gradle.forge" version "8708bf3e01"
-    id "org.jetbrains.kotlin.plugin.lombok" version "1.5.21"
     id "com.github.johnrengelman.shadow" version "6.1.0"
     id "org.spongepowered.mixin" version "0.6-SNAPSHOT"
     id "org.jetbrains.kotlin.jvm" version "1.5.21"
@@ -76,9 +75,6 @@ dependencies {
 
     shade('org.spongepowered:mixin:0.7.11-SNAPSHOT')
     annotationProcessor('org.spongepowered:mixin:0.7.11-SNAPSHOT')
-
-    implementation('org.projectlombok:lombok:1.18.20')
-    annotationProcessor('org.projectlombok:lombok:1.18.20')
 
     /* Dependencies for cutting other mods' file sizes. */
     shade('com.github.marcoacierno:pastebin-java-api:v0.2.1')

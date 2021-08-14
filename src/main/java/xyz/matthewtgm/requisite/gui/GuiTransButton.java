@@ -18,7 +18,6 @@
 
 package xyz.matthewtgm.requisite.gui;
 
-import xyz.matthewtgm.requisite.util.EnhancedFontRenderer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiButton;

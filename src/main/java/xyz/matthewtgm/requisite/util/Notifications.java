@@ -18,6 +18,7 @@
 
 package xyz.matthewtgm.requisite.util;
 
+import xyz.matthewtgm.requisite.core.util.ChatColour;
 import xyz.matthewtgm.requisite.data.ColourRGB;
 import lombok.Getter;
 import net.minecraft.client.gui.ScaledResolution;

@@ -28,7 +28,6 @@ import xyz.matthewtgm.requisite.Requisite;
 import xyz.matthewtgm.requisite.players.cosmetics.BaseCosmetic;
 import xyz.matthewtgm.requisite.players.cosmetics.CosmeticType;
 import xyz.matthewtgm.requisite.keybinds.KeyBind;
-import xyz.matthewtgm.requisite.util.GuiEditor;
 
 public class RequisiteEvent extends Event {
     public final Requisite requisite;

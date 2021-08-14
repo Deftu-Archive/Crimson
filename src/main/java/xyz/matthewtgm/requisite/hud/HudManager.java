@@ -1,6 +1,5 @@
 package xyz.matthewtgm.requisite.hud;
 
-import gg.essential.universal.UScreen;
 import lombok.Getter;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
@@ -9,7 +8,6 @@ import xyz.matthewtgm.json.entities.JsonObject;
 import xyz.matthewtgm.requisite.configuration.settings.PositionSetting;
 import xyz.matthewtgm.requisite.data.ScreenPosition;
 import xyz.matthewtgm.requisite.gui.RequisiteHudMenu;
-import xyz.matthewtgm.requisite.util.GuiHelper;
 import xyz.matthewtgm.requisite.util.global.GlobalMinecraft;
 import xyz.matthewtgm.tgmconfig.Configuration;
 import xyz.matthewtgm.tgmconfig.Subconfiguration;

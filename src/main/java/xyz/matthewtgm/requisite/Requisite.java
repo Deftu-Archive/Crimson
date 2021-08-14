@@ -33,7 +33,6 @@ import xyz.matthewtgm.json.JsonVersion;
 import xyz.matthewtgm.requisite.gui.RequisiteMenu;
 import xyz.matthewtgm.tgmconfig.ConfigVersion;
 import xyz.matthewtgm.requisite.commands.CommandManager;
-import xyz.matthewtgm.requisite.core.RequisiteManager;
 import xyz.matthewtgm.requisite.keybinds.KeyBind;
 import xyz.matthewtgm.requisite.util.*;
 

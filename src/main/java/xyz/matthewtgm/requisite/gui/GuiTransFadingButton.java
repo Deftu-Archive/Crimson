@@ -21,9 +21,6 @@ package xyz.matthewtgm.requisite.gui;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import xyz.matthewtgm.requisite.mixins.game.MinecraftAccessor;
-import xyz.matthewtgm.requisite.util.EasingHelper;
-import xyz.matthewtgm.requisite.util.EnhancedFontRenderer;
-import xyz.matthewtgm.requisite.util.MathHelper;
 import xyz.matthewtgm.requisite.util.RenderHelper;
 
 import java.awt.*;

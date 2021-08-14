@@ -27,11 +27,7 @@ import net.minecraftforge.common.MinecraftForge
 import net.minecraftforge.fml.common.eventhandler.Event
 import xyz.matthewtgm.json.entities.JsonObject
 import xyz.matthewtgm.json.util.JsonHelper
-import xyz.matthewtgm.requisite.Requisite
 import xyz.matthewtgm.requisite.data.ColourRGB
-import xyz.matthewtgm.requisite.keybinds.KeyBind
-import xyz.matthewtgm.requisite.keybinds.KeyBindManager
-import xyz.matthewtgm.requisite.util.CustomClientRegistry
 import xyz.matthewtgm.requisite.util.NpcHelper
 import xyz.matthewtgm.requisite.util.ResourceHelper
 import xyz.matthewtgm.requisite.util.StringHelper

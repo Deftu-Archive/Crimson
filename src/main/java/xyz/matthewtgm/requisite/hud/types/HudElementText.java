@@ -3,7 +3,6 @@ package xyz.matthewtgm.requisite.hud.types;
 import lombok.Getter;
 import xyz.matthewtgm.requisite.data.ScreenPosition;
 import xyz.matthewtgm.requisite.hud.HudElementBase;
-import xyz.matthewtgm.requisite.util.EnhancedFontRenderer;
 
 public class HudElementText extends HudElementBase {
 

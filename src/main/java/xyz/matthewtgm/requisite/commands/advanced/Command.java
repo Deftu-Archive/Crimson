@@ -18,8 +18,6 @@
 
 package xyz.matthewtgm.requisite.commands.advanced;
 
-import xyz.matthewtgm.requisite.util.ChatColour;
-
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;

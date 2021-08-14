@@ -34,7 +34,6 @@ import xyz.matthewtgm.requisite.networking.packets.impl.cosmetics.CosmeticsToggl
 import xyz.matthewtgm.requisite.networking.packets.impl.indication.RetrieveIndicationsPacket;
 import xyz.matthewtgm.requisite.networking.packets.impl.other.GameClosePacket;
 import xyz.matthewtgm.requisite.networking.packets.impl.other.GameOpenPacket;
-import xyz.matthewtgm.requisite.util.Multithreading;
 
 import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;

@@ -18,13 +18,6 @@
 
 package xyz.matthewtgm.requisite.gui.menus;
 
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiScreen;
-import xyz.matthewtgm.requisite.Requisite;
-import xyz.matthewtgm.requisite.core.RequisiteManager;
-import xyz.matthewtgm.requisite.gui.GuiTransFadingButton;
-import xyz.matthewtgm.requisite.util.ChatColour;
-
 public class GuiRequisiteSettings/* extends GuiRequisiteBase/*/ {
 
     /*public GuiRequisiteSettings(GuiScreen parent) {

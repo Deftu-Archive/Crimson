@@ -36,7 +36,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import xyz.matthewtgm.requisite.Requisite;
 import xyz.matthewtgm.requisite.events.PacketEvent;
 import xyz.matthewtgm.requisite.events.RequisiteEvent;
-import xyz.matthewtgm.requisite.util.ForgeHelper;
 
 import java.nio.charset.StandardCharsets;
 

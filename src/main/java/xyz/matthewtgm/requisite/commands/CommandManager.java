@@ -19,10 +19,7 @@
 package xyz.matthewtgm.requisite.commands;
 
 import xyz.matthewtgm.requisite.commands.advanced.Command;
-import xyz.matthewtgm.requisite.util.ArrayHelper;
-import xyz.matthewtgm.requisite.util.ChatColour;
-import xyz.matthewtgm.requisite.util.ChatHelper;
-import xyz.matthewtgm.requisite.util.ExceptionHelper;
+import xyz.matthewtgm.requisite.core.util.ChatColour;
 import lombok.Getter;
 import net.minecraft.command.ICommand;
 import net.minecraft.command.ICommandSender;

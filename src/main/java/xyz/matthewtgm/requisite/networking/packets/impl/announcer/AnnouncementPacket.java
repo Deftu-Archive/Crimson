@@ -22,8 +22,7 @@ import xyz.matthewtgm.json.entities.JsonObject;
 import xyz.matthewtgm.requisite.Requisite;
 import xyz.matthewtgm.requisite.networking.RequisiteClientSocket;
 import xyz.matthewtgm.requisite.networking.packets.BasePacket;
-import xyz.matthewtgm.requisite.util.ChatColour;
-import xyz.matthewtgm.requisite.util.ChatHelper;
+import xyz.matthewtgm.requisite.core.util.ChatColour;
 import xyz.matthewtgm.requisite.util.Notifications;
 
 public class AnnouncementPacket extends BasePacket {

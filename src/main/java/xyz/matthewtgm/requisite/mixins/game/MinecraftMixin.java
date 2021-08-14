@@ -34,8 +34,6 @@ import xyz.matthewtgm.requisite.Requisite;
 import xyz.matthewtgm.requisite.events.BetterInputEvent;
 import xyz.matthewtgm.requisite.events.RequisiteEvent;
 import xyz.matthewtgm.requisite.keybinds.KeyBind;
-import xyz.matthewtgm.requisite.keybinds.KeyBindManager;
-import xyz.matthewtgm.requisite.util.ForgeHelper;
 
 import java.util.List;
 

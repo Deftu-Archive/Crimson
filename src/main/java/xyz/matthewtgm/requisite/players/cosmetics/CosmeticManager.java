@@ -36,7 +36,6 @@ import xyz.matthewtgm.requisite.players.cosmetics.impl.CloakCosmetic;
 import xyz.matthewtgm.requisite.players.cosmetics.impl.DragonWingsCosmetic;
 import xyz.matthewtgm.requisite.networking.RequisiteClientSocket;
 import xyz.matthewtgm.requisite.networking.packets.impl.cosmetics.CosmeticsRetrievePacket;
-import xyz.matthewtgm.requisite.util.ColourHelper;
 import xyz.matthewtgm.requisite.util.PlayerRendererHelper;
 import xyz.matthewtgm.requisite.util.ResourceHelper;
 

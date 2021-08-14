@@ -23,7 +23,6 @@ import net.minecraft.client.renderer.entity.layers.LayerRenderer;
 import xyz.matthewtgm.requisite.Requisite;
 import xyz.matthewtgm.requisite.events.RequisiteEvent;
 import xyz.matthewtgm.requisite.players.PlayerData;
-import xyz.matthewtgm.requisite.util.ForgeHelper;
 
 import java.util.List;
 

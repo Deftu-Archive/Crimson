@@ -25,12 +25,10 @@ import org.java_websocket.drafts.Draft_6455;
 import org.java_websocket.handshake.ServerHandshake;
 import xyz.matthewtgm.requisite.Requisite;
 import xyz.matthewtgm.requisite.networking.packets.BasePacket;
-import xyz.matthewtgm.requisite.util.ChatColour;
-import xyz.matthewtgm.requisite.util.ChatHelper;
+import xyz.matthewtgm.requisite.core.util.ChatColour;
 
 import java.net.URI;
 import java.nio.ByteBuffer;
-import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 
 /**

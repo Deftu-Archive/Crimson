@@ -20,7 +20,6 @@ package xyz.matthewtgm.requisite.data;
 
 import xyz.matthewtgm.json.entities.JsonObject;
 import xyz.matthewtgm.json.util.JsonApiHelper;
-import xyz.matthewtgm.requisite.util.Multithreading;
 
 import java.util.concurrent.TimeUnit;
 import java.util.function.BiConsumer;

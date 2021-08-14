@@ -20,7 +20,6 @@ package xyz.matthewtgm.requisite.kotlin.dsl
 
 import net.minecraftforge.fml.common.eventhandler.Event
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent
-import xyz.matthewtgm.requisite.util.ForgeHelper
 
 /**
  * Heavily modified version of "kotlin-forge-api"'s event DSL
