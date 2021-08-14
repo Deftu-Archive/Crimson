@@ -2,7 +2,6 @@ package xyz.matthewtgm.requisite.core;
 
 import xyz.matthewtgm.requisite.core.files.ConfigurationManager;
 import xyz.matthewtgm.requisite.core.files.FileManager;
-import xyz.matthewtgm.requisite.core.hypixel.HypixelManager;
 import xyz.matthewtgm.requisite.core.keybinds.KeyBindRegistry;
 import xyz.matthewtgm.requisite.core.networking.RequisiteClientSocket;
 import xyz.matthewtgm.requisite.core.notifications.INotifications;
@@ -10,11 +9,12 @@ import xyz.matthewtgm.requisite.core.util.ObjectHelper;
 import xyz.matthewtgm.requisite.core.rendering.IEnhancedFontRenderer;
 import xyz.matthewtgm.requisite.core.util.*;
 import xyz.matthewtgm.requisite.core.util.messages.IMessageQueue;
+import xyz.matthewtgm.simpleeventbus.SimpleEventBus;
 
 public interface IRequisiteManager {
 
     /* Requisite services. */
-    SimpleEv
+    SimpleEventBus getEventBus();
     FileManager getFileManager();
     ConfigurationManager getConfigurationManager();
     RequisiteClientSocket getRequisiteSocket();
@@ -34,7 +34,6 @@ public interface IRequisiteManager {
     INotifications getNotifications();
     ObjectHelper getObjectHelper();
     ReflectionHelper getReflectionHelper();
-    HypixelManager getHypixelManager();
     RomanNumeral getRomanNumerals();
     IRenderHelper getRenderHelper();
     IStringHelper getStringHelper();

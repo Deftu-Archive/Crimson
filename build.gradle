@@ -66,10 +66,10 @@ configurations {
 /* Define dependencies. */
 dependencies {
     /* Requisite dependencies. */
-    shade('xyz.matthewtgm:JsonTGM:2.10.0')
+    shade('xyz.matthewtgm:SimpleEventBus:2.0.1')
     shade('xyz.matthewtgm:TGMConfig:3.2.0')
+    shade('xyz.matthewtgm:JsonTGM:2.10.0')
     shade('xyz.matthewtgm:Mango:1.2.0')
-    shade('xyz.matthewtgm:SimpleEventBus:2.0')
 
     shade('org.java-websocket:Java-WebSocket:1.5.2')
 
@@ -83,9 +83,9 @@ dependencies {
     shade('com.squareup.okhttp3:okhttp:4.9.1')
     shade('org.kohsuke:github-api:1.132')
 
+    shade('org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.1-native-mt')
     shade('org.jetbrains.kotlin:kotlin-stdlib-jdk8')
     shade('org.jetbrains.kotlin:kotlin-reflect')
-    shade('org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.1-native-mt')
 }
 
 /* Disable mixin refMap warnings. */
