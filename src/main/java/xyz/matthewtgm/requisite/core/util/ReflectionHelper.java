@@ -16,19 +16,17 @@
  * along with Requisite. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package xyz.matthewtgm.requisite.util;
+package xyz.matthewtgm.requisite.core.util;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
-public final class ReflectionHelper {
-
-    private ReflectionHelper() {}
+public class ReflectionHelper {
 
     /**
      * @param clazz The class to change the field in.
-     * @param name  The name of the field.
+     * @param name The name of the field.
      * @return The field requested from the class provided.
      * @author MatthewTGM
      */
@@ -47,10 +45,10 @@ public final class ReflectionHelper {
     /**
      * Sets the field requested in the class provided.
      *
-     * @param clazz    The class to change the field in.
+     * @param clazz The class to change the field in.
      * @param instance An instance of the class.
-     * @param name     The name of the field.
-     * @param value    The value to set it to.
+     * @param name The name of the field.
+     * @param value The value to set it to.
      * @author MatthewTGM
      */
     public static <I, V> void setField(Class<?> clazz, I instance, String name, V value) {
@@ -63,9 +61,6 @@ public final class ReflectionHelper {
     }
 
     /**
-     * @param clazz
-     * @param name
-     * @param paramTypes
      * @return The method requested in the class provided.
      * @author MatthewTGM
      */

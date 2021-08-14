@@ -16,9 +16,7 @@
  * along with Requisite. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package xyz.matthewtgm.requisite.util;
-
-import lombok.Getter;
+package xyz.matthewtgm.requisite.core.util;
 
 public enum UnicodeCharacter {
 
@@ -52,7 +50,7 @@ public enum UnicodeCharacter {
     ARABIC_NUMERAL_9("\u2468"),
     ARABIC_NUMERAL_10("\u2469");
 
-    @Getter private final String asString;
+    private final String asString;
     UnicodeCharacter(String asString) {
         this.asString = asString;
     }

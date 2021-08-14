@@ -25,7 +25,6 @@ import net.minecraft.util.ResourceLocation;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
-import xyz.matthewtgm.requisite.util.ResourceHelper;
 
 import javax.imageio.ImageIO;
 import javax.imageio.ImageReader;

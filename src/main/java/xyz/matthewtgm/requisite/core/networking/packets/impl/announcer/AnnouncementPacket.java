@@ -16,14 +16,13 @@
  * along with Requisite. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package xyz.matthewtgm.requisite.networking.packets.impl.announcer;
+package xyz.matthewtgm.requisite.core.networking.packets.impl.announcer;
 
 import xyz.matthewtgm.json.entities.JsonObject;
 import xyz.matthewtgm.requisite.Requisite;
-import xyz.matthewtgm.requisite.networking.RequisiteClientSocket;
-import xyz.matthewtgm.requisite.networking.packets.BasePacket;
+import xyz.matthewtgm.requisite.core.networking.RequisiteClientSocket;
+import xyz.matthewtgm.requisite.core.networking.packets.BasePacket;
 import xyz.matthewtgm.requisite.core.util.ChatColour;
-import xyz.matthewtgm.requisite.util.Notifications;
 
 public class AnnouncementPacket extends BasePacket {
 

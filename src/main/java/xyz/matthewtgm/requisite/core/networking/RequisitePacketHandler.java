@@ -16,7 +16,7 @@
  * along with Requisite. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package xyz.matthewtgm.requisite.networking;
+package xyz.matthewtgm.requisite.core.networking;
 
 import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
@@ -27,13 +27,13 @@ import xyz.matthewtgm.json.entities.JsonObject;
 import xyz.matthewtgm.json.parser.JsonParser;
 import xyz.matthewtgm.json.util.JsonHelper;
 import xyz.matthewtgm.requisite.Requisite;
-import xyz.matthewtgm.requisite.networking.packets.BasePacket;
-import xyz.matthewtgm.requisite.networking.packets.impl.announcer.AnnouncementPacket;
-import xyz.matthewtgm.requisite.networking.packets.impl.cosmetics.CosmeticsRetrievePacket;
-import xyz.matthewtgm.requisite.networking.packets.impl.cosmetics.CosmeticsTogglePacket;
-import xyz.matthewtgm.requisite.networking.packets.impl.indication.RetrieveIndicationsPacket;
-import xyz.matthewtgm.requisite.networking.packets.impl.other.GameClosePacket;
-import xyz.matthewtgm.requisite.networking.packets.impl.other.GameOpenPacket;
+import xyz.matthewtgm.requisite.core.networking.packets.BasePacket;
+import xyz.matthewtgm.requisite.core.networking.packets.impl.announcer.AnnouncementPacket;
+import xyz.matthewtgm.requisite.core.networking.packets.impl.cosmetics.CosmeticsRetrievePacket;
+import xyz.matthewtgm.requisite.core.networking.packets.impl.cosmetics.CosmeticsTogglePacket;
+import xyz.matthewtgm.requisite.core.networking.packets.impl.indication.RetrieveIndicationsPacket;
+import xyz.matthewtgm.requisite.core.networking.packets.impl.other.GameClosePacket;
+import xyz.matthewtgm.requisite.core.networking.packets.impl.other.GameOpenPacket;
 
 import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;

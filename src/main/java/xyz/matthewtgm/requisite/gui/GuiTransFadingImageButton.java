@@ -25,7 +25,6 @@ import net.minecraft.client.gui.Gui;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.util.ResourceLocation;
 import xyz.matthewtgm.requisite.mixins.game.MinecraftAccessor;
-import xyz.matthewtgm.requisite.util.RenderHelper;
 
 import java.awt.*;
 

@@ -16,7 +16,7 @@
  * along with Requisite. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package xyz.matthewtgm.requisite.networking;
+package xyz.matthewtgm.requisite.core.networking;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -24,7 +24,7 @@ import org.java_websocket.client.WebSocketClient;
 import org.java_websocket.drafts.Draft_6455;
 import org.java_websocket.handshake.ServerHandshake;
 import xyz.matthewtgm.requisite.Requisite;
-import xyz.matthewtgm.requisite.networking.packets.BasePacket;
+import xyz.matthewtgm.requisite.core.networking.packets.BasePacket;
 import xyz.matthewtgm.requisite.core.util.ChatColour;
 
 import java.net.URI;

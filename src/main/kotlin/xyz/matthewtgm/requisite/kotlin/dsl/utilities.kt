@@ -28,9 +28,6 @@ import net.minecraftforge.fml.common.eventhandler.Event
 import xyz.matthewtgm.json.entities.JsonObject
 import xyz.matthewtgm.json.util.JsonHelper
 import xyz.matthewtgm.requisite.data.ColourRGB
-import xyz.matthewtgm.requisite.util.NpcHelper
-import xyz.matthewtgm.requisite.util.ResourceHelper
-import xyz.matthewtgm.requisite.util.StringHelper
 import xyz.matthewtgm.requisite.util.global.GlobalMinecraft
 import java.awt.Color
 import java.io.InputStream

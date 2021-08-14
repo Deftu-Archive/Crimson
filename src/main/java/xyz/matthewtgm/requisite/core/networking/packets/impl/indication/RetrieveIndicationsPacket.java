@@ -16,12 +16,12 @@
  * along with Requisite. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package xyz.matthewtgm.requisite.networking.packets.impl.indication;
+package xyz.matthewtgm.requisite.core.networking.packets.impl.indication;
 
 import xyz.matthewtgm.json.entities.JsonObject;
 import xyz.matthewtgm.requisite.Requisite;
-import xyz.matthewtgm.requisite.networking.RequisiteClientSocket;
-import xyz.matthewtgm.requisite.networking.packets.BasePacket;
+import xyz.matthewtgm.requisite.core.networking.RequisiteClientSocket;
+import xyz.matthewtgm.requisite.core.networking.packets.BasePacket;
 
 public class RetrieveIndicationsPacket extends BasePacket {
 

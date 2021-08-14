@@ -18,8 +18,6 @@
 
 package xyz.matthewtgm.requisite.data;
 
-import xyz.matthewtgm.requisite.util.ScreenHelper;
-
 /**
  * Adapted from EvergreenHUD under LGPL 3.0 license
  * https://github.com/isXander/EvergreenHUD/blob/kotlin-rewrite/LICENSE.md

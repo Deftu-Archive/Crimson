@@ -10,7 +10,6 @@ import xyz.matthewtgm.json.util.JsonHelper;
 import xyz.matthewtgm.requisite.events.ChatMessageReceivedEvent;
 import xyz.matthewtgm.requisite.events.LocrawReceivedEvent;
 import xyz.matthewtgm.requisite.util.ServerHelper;
-import xyz.matthewtgm.requisite.util.StringHelper;
 
 import java.util.concurrent.TimeUnit;
 

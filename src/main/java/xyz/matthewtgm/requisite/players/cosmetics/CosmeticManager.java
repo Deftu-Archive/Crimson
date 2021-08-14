@@ -34,10 +34,8 @@ import xyz.matthewtgm.requisite.data.GifResourceLocation;
 import xyz.matthewtgm.requisite.players.cosmetics.impl.AnimatedCloakCosmetic;
 import xyz.matthewtgm.requisite.players.cosmetics.impl.CloakCosmetic;
 import xyz.matthewtgm.requisite.players.cosmetics.impl.DragonWingsCosmetic;
-import xyz.matthewtgm.requisite.networking.RequisiteClientSocket;
-import xyz.matthewtgm.requisite.networking.packets.impl.cosmetics.CosmeticsRetrievePacket;
-import xyz.matthewtgm.requisite.util.PlayerRendererHelper;
-import xyz.matthewtgm.requisite.util.ResourceHelper;
+import xyz.matthewtgm.requisite.core.networking.RequisiteClientSocket;
+import xyz.matthewtgm.requisite.core.networking.packets.impl.cosmetics.CosmeticsRetrievePacket;
 
 import java.util.*;
 import java.util.concurrent.atomic.AtomicReference;

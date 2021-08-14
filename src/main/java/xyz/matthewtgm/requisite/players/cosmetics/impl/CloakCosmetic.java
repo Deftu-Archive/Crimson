@@ -29,7 +29,6 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
 import xyz.matthewtgm.requisite.players.cosmetics.BaseCosmetic;
 import xyz.matthewtgm.requisite.players.cosmetics.CosmeticType;
-import xyz.matthewtgm.requisite.util.RenderHelper;
 
 public class CloakCosmetic extends BaseCosmetic {
 

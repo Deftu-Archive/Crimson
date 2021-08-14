@@ -18,8 +18,6 @@
 
 package xyz.matthewtgm.requisite.core.util;
 
-import xyz.matthewtgm.requisite.util.StringHelper;
-
 public enum ChatColour {
 
     BLACK('0'),

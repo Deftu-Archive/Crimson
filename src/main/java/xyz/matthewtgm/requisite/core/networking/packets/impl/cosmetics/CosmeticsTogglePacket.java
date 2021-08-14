@@ -16,15 +16,15 @@
  * along with Requisite. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package xyz.matthewtgm.requisite.networking.packets.impl.cosmetics;
+package xyz.matthewtgm.requisite.core.networking.packets.impl.cosmetics;
 
 import xyz.matthewtgm.json.entities.JsonObject;
 import xyz.matthewtgm.requisite.Requisite;
 import xyz.matthewtgm.requisite.players.PlayerCosmeticData;
 import xyz.matthewtgm.requisite.players.cosmetics.BaseCosmetic;
 import xyz.matthewtgm.requisite.players.cosmetics.CosmeticManager;
-import xyz.matthewtgm.requisite.networking.RequisiteClientSocket;
-import xyz.matthewtgm.requisite.networking.packets.BasePacket;
+import xyz.matthewtgm.requisite.core.networking.RequisiteClientSocket;
+import xyz.matthewtgm.requisite.core.networking.packets.BasePacket;
 
 public class CosmeticsTogglePacket extends BasePacket {
 
