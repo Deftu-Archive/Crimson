@@ -47,7 +47,7 @@ public class AnnouncementPacket extends BasePacket {
     }
 
     public void read(RequisiteClientSocket socket, JsonObject object, JsonObject data) {
-        socket.getRequisite().getManager().getChatHelper().send(ChatColour.GRAY + "[" + ChatColour.RED + ChatColour.BOLD + Requisite.NAME + " Announcement" + ChatColour.RESET + ChatColour.GRAY + "] [" + data.get("title").getAsString() + "]", data.get("description").getAsString());
+        socket.getRequisite().getManager().getChatHelper().send(ChatColour.GRAY + "[" + ChatColour.RED + ChatColour.BOLD + "Announcement" + ChatColour.RESET + ChatColour.GRAY + "] [" + data.get("title").getAsString() + "]", data.get("description").getAsString());
     }
 
     public void handle(RequisiteClientSocket socket) {}

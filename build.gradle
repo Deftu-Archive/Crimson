@@ -33,10 +33,6 @@ sourceCompatibility = targetCompatibility = 1.8
 minecraft {
     version = forge_ver
     runDir = "run"
-    replace('@NAME@', mod_name)
-    replace('@ID@', mod_id)
-    replace('@VER@', mod_ver)
-    replace('@DEV@', mod_dev)
     mappings = "stable_22"
 }
 

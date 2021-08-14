@@ -37,6 +37,9 @@ public class RequisiteClientSocket extends WebSocketClient {
         super(serverUri, new Draft_6455());
         this.requisite = requisite;
         this.packetHandler = new RequisitePacketHandler(this);
+
+        setTcpNoDelay(true);
+        setConnectionLostTimeout(120);
     }
 
     public void connect() {

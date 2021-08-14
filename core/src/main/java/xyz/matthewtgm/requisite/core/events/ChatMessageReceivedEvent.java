@@ -18,10 +18,10 @@
 
 package xyz.matthewtgm.requisite.core.events;
 
-import net.minecraftforge.fml.common.eventhandler.Cancelable;
+import xyz.matthewtgm.simpleeventbus.Cancellable;
 import xyz.matthewtgm.simpleeventbus.Event;
 
-@Cancelable
+@Cancellable
 public class ChatMessageReceivedEvent extends Event {
     public final String message;
     public final ChatMessageType type;

@@ -36,7 +36,7 @@ public enum ChatColour {
     LIGHT_PURPLE('d'),
     YELLOW('e'),
     WHITE('f'),
-    MAGIC('k', true),
+    OBFUSCATED('k', true),
     BOLD('l', true),
     STRIKETHROUGH('m', true),
     UNDERLINE('n', true),
@@ -58,11 +58,10 @@ public enum ChatColour {
         this.toString = new String(new char[] {COLOR_CHAR.charAt(0), code});
     }
 
-    public char getChar() {
+    public char getCharacter() {
         return code;
     }
 
-    @Override
     public String toString() {
         return toString;
     }
@@ -73,12 +72,6 @@ public enum ChatColour {
 
     public boolean isColor() {
         return !isFormat && this != ChatColour.RESET;
-    }
-
-    public static String stripColor(String input) {
-        if (input == null)
-            return null;
-        return StringHelper.removeColourCodes(input);
     }
 
     public static String translateAlternateColorCodes(char altColorChar, String textToTranslate) {

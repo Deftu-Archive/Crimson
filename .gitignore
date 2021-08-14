@@ -1,6 +1,6 @@
 # Gradle
 .gradle
-/build/
+**/build/
 gradle-app.setting
 !gradle-wrapper.jar
 .gradletasknamecache
@@ -16,6 +16,3 @@ gradle-app.setting
 
 # Minecraft
 /run/
-
-# TGMLib
-/legacy-builds/

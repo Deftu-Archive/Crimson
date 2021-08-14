@@ -19,9 +19,6 @@
 package xyz.matthewtgm.requisite.core.networking.packets.impl.cosmetics;
 
 import xyz.matthewtgm.json.entities.JsonObject;
-import xyz.matthewtgm.requisite.players.PlayerCosmeticData;
-import xyz.matthewtgm.requisite.players.cosmetics.BaseCosmetic;
-import xyz.matthewtgm.requisite.players.cosmetics.CosmeticManager;
 import xyz.matthewtgm.requisite.core.networking.RequisiteClientSocket;
 import xyz.matthewtgm.requisite.core.networking.packets.BasePacket;
 
@@ -46,13 +43,13 @@ public class CosmeticsTogglePacket extends BasePacket {
     }
 
     public void read(RequisiteClientSocket socket, JsonObject object, JsonObject data) {
-        CosmeticManager cosmeticManager = Requisite.getManager().getCosmeticManager();
+        /*CosmeticManager cosmeticManager = Requisite.getManager().getCosmeticManager();
         BaseCosmetic cosmetic = cosmeticManager.getCosmeticFromId(data.get("cosmetic").getAsString());
         PlayerCosmeticData cosmeticData = Requisite.getManager().getDataManager().getDataMap().get(data.get("uuid").getAsString()).getCosmeticData();
         if (data.get("toggled").getAsBoolean())
             cosmeticData.getEnabledCosmetics().add(cosmetic);
         else
-            cosmeticData.getEnabledCosmetics().remove(cosmetic);
+            cosmeticData.getEnabledCosmetics().remove(cosmetic);*/
     }
 
     public void handle(RequisiteClientSocket socket) {}

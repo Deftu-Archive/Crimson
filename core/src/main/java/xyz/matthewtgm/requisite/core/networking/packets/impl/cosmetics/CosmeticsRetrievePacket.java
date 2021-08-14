@@ -18,12 +18,9 @@
 
 package xyz.matthewtgm.requisite.core.networking.packets.impl.cosmetics;
 
-import xyz.matthewtgm.json.entities.JsonElement;
 import xyz.matthewtgm.json.entities.JsonObject;
-import xyz.matthewtgm.requisite.players.PlayerCosmeticData;
-import xyz.matthewtgm.requisite.players.PlayerData;
-import xyz.matthewtgm.requisite.players.cosmetics.BaseCosmetic;
-import xyz.matthewtgm.requisite.players.cosmetics.CosmeticManager;
+import xyz.matthewtgm.requisite.core.cosmetics.BaseCosmetic;
+import xyz.matthewtgm.requisite.core.cosmetics.CosmeticManager;
 import xyz.matthewtgm.requisite.core.networking.RequisiteClientSocket;
 import xyz.matthewtgm.requisite.core.networking.packets.BasePacket;
 
@@ -48,10 +45,10 @@ public class CosmeticsRetrievePacket extends BasePacket {
     }
 
     public void read(RequisiteClientSocket socket, JsonObject object, JsonObject data) {
-        CosmeticManager cosmeticManager = Requisite.getManager().getCosmeticManager();
+        CosmeticManager cosmeticManager = socket.getRequisite().getManager().getCosmeticManager();
         List<BaseCosmetic> ownedCosmetics = new ArrayList<>();
         List<BaseCosmetic> enabledCosmetics = new ArrayList<>();
-        for (JsonElement element : data.get("cosmetics").getAsJsonArray())
+        /*for (JsonElement element : data.get("cosmetics").getAsJsonArray())
             ownedCosmetics.add(cosmeticManager.getCosmeticFromId(element.getAsString()));
         for (JsonElement element : data.get("enabled_cosmetics").getAsJsonArray())
             enabledCosmetics.add(cosmeticManager.getCosmeticFromId(element.getAsString()));
@@ -59,7 +56,7 @@ public class CosmeticsRetrievePacket extends BasePacket {
         enabledCosmetics.removeIf(cosmetic -> cosmetic == null);
         if (!Requisite.getManager().getDataManager().getDataMap().containsKey(data.get("uuid").getAsString()))
             Requisite.getManager().getDataManager().getDataMap().put(data.get("uuid").getAsString(), new PlayerData());
-        Requisite.getManager().getDataManager().getDataMap().get(data.get("uuid").getAsString()).setCosmeticData(new PlayerCosmeticData(data.get("uuid").getAsString(), ownedCosmetics, enabledCosmetics));
+        Requisite.getManager().getDataManager().getDataMap().get(data.get("uuid").getAsString()).setCosmeticData(new PlayerCosmeticData(data.get("uuid").getAsString(), ownedCosmetics, enabledCosmetics));*/
     }
 
     public void handle(RequisiteClientSocket socket) {}

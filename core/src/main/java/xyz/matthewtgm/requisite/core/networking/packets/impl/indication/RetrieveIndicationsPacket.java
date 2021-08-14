@@ -31,8 +31,8 @@ public class RetrieveIndicationsPacket extends BasePacket {
     public void write(RequisiteClientSocket socket) {}
 
     public void read(RequisiteClientSocket socket, JsonObject object, JsonObject data) {
-        Requisite.getManager().getIndicatorManager().getIndicatorArray().clear();
-        Requisite.getManager().getIndicatorManager().getIndicatorArray().addAll(data.getAsArray("indications"));
+        /*Requisite.getManager().getIndicatorManager().getIndicatorArray().clear();
+        Requisite.getManager().getIndicatorManager().getIndicatorArray().addAll(data.getAsArray("indications"));*/
     }
 
     public void handle(RequisiteClientSocket socket) {}

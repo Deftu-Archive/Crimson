@@ -18,7 +18,6 @@
 
 package xyz.matthewtgm.requisite.core;
 
-import lombok.Getter;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.spongepowered.asm.launch.MixinBootstrap;
@@ -26,7 +25,7 @@ import org.spongepowered.asm.mixin.Mixins;
 
 public class RequisiteLauncher {
 
-    @Getter private static boolean initialized = false;
+    private static boolean initialized = false;
 
     public static void initialize() {
         if (initialized)
@@ -36,6 +35,10 @@ public class RequisiteLauncher {
         MixinBootstrap.init();
         Mixins.addConfiguration("mixins.requisite.json");
         logger.info("Successfully added Requisite mixins config.");
+    }
+
+    public static boolean isInitialized() {
+        return initialized;
     }
 
 }
