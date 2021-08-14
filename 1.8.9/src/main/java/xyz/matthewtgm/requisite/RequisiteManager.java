@@ -12,9 +12,7 @@ import xyz.matthewtgm.requisite.core.util.*;
 import xyz.matthewtgm.requisite.core.util.messages.IMessageQueue;
 import xyz.matthewtgm.requisite.notifications.Notifications;
 import xyz.matthewtgm.requisite.rendering.EnhancedFontRenderer;
-import xyz.matthewtgm.requisite.util.ChatHelper;
-import xyz.matthewtgm.requisite.util.GlHelper;
-import xyz.matthewtgm.requisite.util.MouseHelper;
+import xyz.matthewtgm.requisite.util.*;
 import xyz.matthewtgm.simpleeventbus.SimpleEventBus;
 import xyz.matthewtgm.tgmconfig.Configuration;
 
@@ -42,9 +40,10 @@ public class RequisiteManager implements IRequisiteManager {
     private ObjectHelper objectHelper;
     private ReflectionHelper reflectionHelper;
     private RomanNumeral romanNumerals;
-
-
-
+    private RenderHelper renderHelper;
+    private StringHelper stringHelper;
+    private MessageQueue messageQueue;
+    private ServerHelper serverHelper;
     private MojangAPI mojangApi;
 
     /* 1.8.9-specific utilities. */
@@ -72,9 +71,10 @@ public class RequisiteManager implements IRequisiteManager {
         objectHelper = new ObjectHelper();
         reflectionHelper = new ReflectionHelper();
         romanNumerals = new RomanNumeral();
-
-
-
+        renderHelper = new RenderHelper();
+        stringHelper = new StringHelper();
+        messageQueue = new MessageQueue(requisite);
+        serverHelper = new ServerHelper();
         mojangApi = new MojangAPI();
 
         glHelper = new GlHelper();
@@ -157,19 +157,19 @@ public class RequisiteManager implements IRequisiteManager {
     }
 
     public IRenderHelper getRenderHelper() {
-        return null;
+        return renderHelper;
     }
 
     public IStringHelper getStringHelper() {
-        return null;
+        return stringHelper;
     }
 
     public IMessageQueue getMessageQueue() {
-        return null;
+        return messageQueue;
     }
 
     public IServerHelper getServerHelper() {
-        return null;
+        return serverHelper;
     }
 
     public MojangAPI getMojangApi() {
