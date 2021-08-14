@@ -29,8 +29,6 @@ public interface IRequisiteManager {
     ConfigurationManager getConfigurationManager();
     RequisiteClientSocket getRequisiteSocket();
 
-    CosmeticManager getCosmeticManager();
-
     /* Utilities. */
     KeyBindRegistry getKeyBindRegistry();
 
