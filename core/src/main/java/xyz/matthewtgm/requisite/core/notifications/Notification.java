@@ -7,9 +7,9 @@ public class Notification {
     public String title;
     public String description;
     public NotificationColour colour;
-    private final int duration;
-    private final Consumer<Notification> clickListener;
-    private final NotificationData data;
+    public final int duration;
+    public final Consumer<Notification> clickListener;
+    public final NotificationData data;
 
     public Notification(String title, String description, NotificationColour colour, int duration, Consumer<Notification> clickListener) {
         this.title = title;

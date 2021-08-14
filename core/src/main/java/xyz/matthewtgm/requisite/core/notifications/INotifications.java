@@ -12,5 +12,5 @@ public interface INotifications {
     void push(String title, String description, NotificationColour colour, Consumer<Notification> clickListener);
     void push(String title, String description);
 
-    void render();
+    void render(float ticks);
 }

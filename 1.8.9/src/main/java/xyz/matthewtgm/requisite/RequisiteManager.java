@@ -10,7 +10,11 @@ import xyz.matthewtgm.requisite.core.networking.RequisiteClientSocket;
 import xyz.matthewtgm.requisite.core.notifications.INotifications;
 import xyz.matthewtgm.requisite.core.util.*;
 import xyz.matthewtgm.requisite.core.util.messages.IMessageQueue;
+import xyz.matthewtgm.requisite.notifications.Notifications;
 import xyz.matthewtgm.requisite.rendering.EnhancedFontRenderer;
+import xyz.matthewtgm.requisite.util.ChatHelper;
+import xyz.matthewtgm.requisite.util.GlHelper;
+import xyz.matthewtgm.requisite.util.MouseHelper;
 import xyz.matthewtgm.simpleeventbus.SimpleEventBus;
 import xyz.matthewtgm.tgmconfig.Configuration;
 
@@ -26,6 +30,25 @@ public class RequisiteManager implements IRequisiteManager {
 
     private KeyBindRegistry keyBindRegistry;
     private EnhancedFontRenderer enhancedFontRenderer;
+    private ChatHelper chatHelper;
+    private ColourHelper colourHelper;
+    private ClipboardHelper clipboardHelper;
+    private DateHelper dateHelper;
+    private EasingHelper easingHelper;
+    private MathHelper mathHelper;
+    private MouseHelper mouseHelper;
+    private Multithreading multithreading;
+    private Notifications notifications;
+    private ObjectHelper objectHelper;
+    private ReflectionHelper reflectionHelper;
+    private RomanNumeral romanNumerals;
+
+
+
+    private MojangAPI mojangApi;
+
+    /* 1.8.9-specific utilities. */
+    private GlHelper glHelper;
 
     public void initialize(IRequisite requisite, File gameDirectory) {
         eventBus = new SimpleEventBus();
@@ -35,7 +58,26 @@ public class RequisiteManager implements IRequisiteManager {
         cosmeticManager = new CosmeticManager(requisite);
 
         keyBindRegistry = new KeyBindRegistry(requisite);
-        enhancedFontRenderer = new EnhancedFontRenderer();
+        enhancedFontRenderer = new EnhancedFontRenderer(requisite);
+        chatHelper = new ChatHelper();
+        colourHelper = new ColourHelper();
+        clipboardHelper = new ClipboardHelper();
+        dateHelper = new DateHelper();
+        easingHelper = new EasingHelper();
+        mathHelper = new MathHelper();
+        mouseHelper = new MouseHelper();
+        multithreading = new Multithreading();
+        notifications = new Notifications((Requisite) requisite);
+        notifications.push("Hello,", "world!");
+        objectHelper = new ObjectHelper();
+        reflectionHelper = new ReflectionHelper();
+        romanNumerals = new RomanNumeral();
+
+
+
+        mojangApi = new MojangAPI();
+
+        glHelper = new GlHelper();
     }
 
     public SimpleEventBus getEventBus() {
@@ -67,51 +109,51 @@ public class RequisiteManager implements IRequisiteManager {
     }
 
     public IChatHelper getChatHelper() {
-        return null;
+        return chatHelper;
     }
 
     public ColourHelper getColourHelper() {
-        return null;
+        return colourHelper;
     }
 
     public ClipboardHelper getClipboardHelper() {
-        return null;
+        return clipboardHelper;
     }
 
     public DateHelper getDateHelper() {
-        return null;
+        return dateHelper;
     }
 
     public EasingHelper getEasingHelper() {
-        return null;
+        return easingHelper;
     }
 
     public MathHelper getMathHelper() {
-        return null;
+        return mathHelper;
     }
 
     public IMouseHelper getMouseHelper() {
-        return null;
+        return mouseHelper;
     }
 
     public Multithreading getMultithreading() {
-        return null;
+        return multithreading;
     }
 
     public INotifications getNotifications() {
-        return null;
+        return notifications;
     }
 
     public ObjectHelper getObjectHelper() {
-        return null;
+        return objectHelper;
     }
 
     public ReflectionHelper getReflectionHelper() {
-        return null;
+        return reflectionHelper;
     }
 
     public RomanNumeral getRomanNumerals() {
-        return null;
+        return romanNumerals;
     }
 
     public IRenderHelper getRenderHelper() {
@@ -131,7 +173,11 @@ public class RequisiteManager implements IRequisiteManager {
     }
 
     public MojangAPI getMojangApi() {
-        return null;
+        return mojangApi;
+    }
+
+    public GlHelper getGlHelper() {
+        return glHelper;
     }
 
 }

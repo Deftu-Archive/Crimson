@@ -32,7 +32,7 @@ public class Requisite implements IRequisite {
         manager.initialize(this, gameDirectory);
     }
 
-    public IRequisiteManager getManager() {
+    public RequisiteManager getManager() {
         return manager;
     }
 

@@ -59,15 +59,15 @@ public interface IEnhancedFontRenderer {
     void drawCenteredChromaText(String text, double x, double y, boolean shadow);
     void drawCenteredChromaText(String text, double x, double y);
 
-    void drawScaledChromaText(String text, float x, float y, boolean shadow);
-    void drawScaledChromaText(String text, float x, float y);
-    void drawScaledChromaText(String text, double x, double y, boolean shadow);
-    void drawScaledChromaText(String text, double x, double y);
+    void drawScaledChromaText(String text, float scale, float x, float y, boolean shadow);
+    void drawScaledChromaText(String text, float scale, float x, float y);
+    void drawScaledChromaText(String text, float scale, double x, double y, boolean shadow);
+    void drawScaledChromaText(String text, float scale, double x, double y);
 
-    void drawCenteredScaledChromaText(String text, float x, float y, boolean shadow);
-    void drawCenteredScaledChromaText(String text, float x, float y);
-    void drawCenteredScaledChromaText(String text, double x, double y, boolean shadow);
-    void drawCenteredScaledChromaText(String text, double x, double y);
+    void drawCenteredScaledChromaText(String text, float scale, float x, float y, boolean shadow);
+    void drawCenteredScaledChromaText(String text, float scale, float x, float y);
+    void drawCenteredScaledChromaText(String text, float scale, double x, double y, boolean shadow);
+    void drawCenteredScaledChromaText(String text, float scale, double x, double y);
 
     /**
      * Adapted from XanderLib under GPL 3.0 license
@@ -108,6 +108,10 @@ public interface IEnhancedFontRenderer {
                 output.append(wrapText(word, width, "")).append(split);
         }
         return output.toString();
+    }
+
+    default float makeCentered(CharSequence input, float f) {
+        return f - getWidth(input) / 2;
     }
 
 }
