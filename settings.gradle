@@ -41,3 +41,5 @@ pluginManagement {
 }
 
 rootProject.name = mod_name
+include 'core'
+
