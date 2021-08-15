@@ -16,26 +16,14 @@
  * along with Requisite. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package xyz.matthewtgm.requisite.core;
+package xyz.matthewtgm.requisite.core.integration;
 
-import xyz.matthewtgm.requisite.core.commands.Command;
-import xyz.matthewtgm.requisite.core.integration.IMod;
-import xyz.matthewtgm.requisite.core.util.ChatColour;
+public class ModMetadata {
+    public final String name;
+    public final String version;
 
-import java.io.File;
-
-public interface IRequisite extends IMod {
-
-    void initialize(File gameDir);
-    IRequisiteManager getManager();
-
-    default void postInitialize() {
-        getManager().getModIntegration().registerIntegratedMod(this);
-        getManager().getCommandRegistry().register(new Command("requisite", getManager()::openMenu));
+    public ModMetadata(String name, String version) {
+        this.name = name;
+        this.version = version;
     }
-
-    default String getChatPrefix() {
-        return ChatColour.GRAY + "[" + ChatColour.GOLD + "@NAME@" + ChatColour.GRAY + "]";
-    }
-
 }

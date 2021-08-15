@@ -25,6 +25,7 @@ import xyz.matthewtgm.json.util.JsonApiHelper;
 import xyz.matthewtgm.requisite.core.commands.ICommandRegistry;
 import xyz.matthewtgm.requisite.core.files.ConfigurationManager;
 import xyz.matthewtgm.requisite.core.files.FileManager;
+import xyz.matthewtgm.requisite.core.integration.IModIntegration;
 import xyz.matthewtgm.requisite.core.keybinds.KeyBindRegistry;
 import xyz.matthewtgm.requisite.core.networking.RequisiteClientSocket;
 import xyz.matthewtgm.requisite.core.notifications.INotifications;
@@ -49,6 +50,7 @@ public interface IRequisiteManager {
     FileManager getFileManager();
     ConfigurationManager getConfigurationManager();
     ICommandRegistry getCommandRegistry();
+    IModIntegration getModIntegration();
     RequisiteClientSocket getRequisiteSocket();
 
     void openMenu();

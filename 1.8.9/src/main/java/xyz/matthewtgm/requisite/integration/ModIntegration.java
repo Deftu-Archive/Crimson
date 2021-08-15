@@ -16,43 +16,33 @@
  * along with Requisite. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package xyz.matthewtgm.requisite;
+package xyz.matthewtgm.requisite.integration;
 
-import net.minecraftforge.fml.common.Mod;
 import xyz.matthewtgm.requisite.core.IRequisite;
+import xyz.matthewtgm.requisite.core.integration.IMod;
+import xyz.matthewtgm.requisite.core.integration.IModIntegration;
 import xyz.matthewtgm.requisite.core.integration.ModMetadata;
 
-import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
-@Mod(
-        name = "@NAME@",
-        version = "@VER@",
-        modid = "@ID@",
-        acceptedMinecraftVersions = "[1.8.9]"
-)
-public class Requisite implements IRequisite {
+public class ModIntegration implements IModIntegration {
 
-    private static final Requisite instance = new Requisite();
-    private RequisiteManager manager;
+    private final IRequisite requisite;
+    private final List<IMod> integratedMods = new ArrayList<>();
 
-    public void initialize(File gameDirectory) {
-        if (manager == null)
-            manager = new RequisiteManager();
-
-        manager.initialize(this, gameDirectory);
-        postInitialize();
+    public ModIntegration(IRequisite requisite) {
+        this.requisite = requisite;
     }
 
-    public RequisiteManager getManager() {
-        return manager;
+    public void registerIntegratedMod(IMod mod) {
+        ModMetadata metadata = mod.metadata();
+        requisite.getManager().getLogger().info("Mod " + metadata.name + " v" + metadata.version + " was registered as an integrated @NAME@ mod.");
+        integratedMods.add(mod);
     }
 
-    public static Requisite getInstance() {
-        return instance;
-    }
-
-    public ModMetadata metadata() {
-        return new ModMetadata("@NAME@", "@VER@");
+    public List<IMod> getIntegratedMods() {
+        return integratedMods;
     }
 
 }

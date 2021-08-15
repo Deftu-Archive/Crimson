@@ -16,26 +16,20 @@
  * along with Requisite. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package xyz.matthewtgm.requisite.core;
+package xyz.matthewtgm.requisite.mixins.gui;
 
-import xyz.matthewtgm.requisite.core.commands.Command;
-import xyz.matthewtgm.requisite.core.integration.IMod;
-import xyz.matthewtgm.requisite.core.util.ChatColour;
+import net.minecraft.client.gui.GuiScreen;
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import java.io.File;
+@Mixin({GuiScreen.class})
+public class GuiScreenMixin {
 
-public interface IRequisite extends IMod {
-
-    void initialize(File gameDir);
-    IRequisiteManager getManager();
-
-    default void postInitialize() {
-        getManager().getModIntegration().registerIntegratedMod(this);
-        getManager().getCommandRegistry().register(new Command("requisite", getManager()::openMenu));
-    }
-
-    default String getChatPrefix() {
-        return ChatColour.GRAY + "[" + ChatColour.GOLD + "@NAME@" + ChatColour.GRAY + "]";
+    @Inject(method = "sendChatMessage(Ljava/lang/String;Z)V", at = @At("HEAD"))
+    private void onChatMessageSent(String msg, boolean addToChat, CallbackInfo ci) {
+        
     }
 
 }

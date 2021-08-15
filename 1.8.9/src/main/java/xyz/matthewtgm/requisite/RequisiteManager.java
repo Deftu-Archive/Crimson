@@ -27,12 +27,14 @@ import xyz.matthewtgm.requisite.core.IRequisiteManager;
 import xyz.matthewtgm.requisite.core.commands.ICommandRegistry;
 import xyz.matthewtgm.requisite.core.files.ConfigurationManager;
 import xyz.matthewtgm.requisite.core.files.FileManager;
+import xyz.matthewtgm.requisite.core.integration.IModIntegration;
 import xyz.matthewtgm.requisite.core.keybinds.KeyBindRegistry;
 import xyz.matthewtgm.requisite.core.networking.RequisiteClientSocket;
 import xyz.matthewtgm.requisite.core.notifications.INotifications;
 import xyz.matthewtgm.requisite.core.util.*;
 import xyz.matthewtgm.requisite.core.util.messages.IMessageQueue;
 import xyz.matthewtgm.requisite.hypixel.HypixelManager;
+import xyz.matthewtgm.requisite.integration.ModIntegration;
 import xyz.matthewtgm.requisite.notifications.Notifications;
 import xyz.matthewtgm.requisite.rendering.EnhancedFontRenderer;
 import xyz.matthewtgm.requisite.util.*;
@@ -48,6 +50,7 @@ public class RequisiteManager implements IRequisiteManager {
     private FileManager fileManager;
     private ConfigurationManager configurationManager;
     private CommandRegistry commandRegistry;
+    private ModIntegration modIntegration;
     private RequisiteClientSocket socket;
 
     private KeyBindRegistry keyBindRegistry;
@@ -82,6 +85,7 @@ public class RequisiteManager implements IRequisiteManager {
         fileManager = new FileManager();
         configurationManager = new ConfigurationManager(new Configuration(fileManager.getRequisiteDirectory(fileManager.getTgmDevelopmentDirectory(fileManager.getConfigDirectory(gameDirectory)))));
         commandRegistry = new CommandRegistry();
+        modIntegration = new ModIntegration(requisite);
         socket = new RequisiteClientSocket(fetchSocketUri(), requisite);
 
         keyBindRegistry = new KeyBindRegistry(requisite);
@@ -130,6 +134,10 @@ public class RequisiteManager implements IRequisiteManager {
 
     public ICommandRegistry getCommandRegistry() {
         return commandRegistry;
+    }
+
+    public IModIntegration getModIntegration() {
+        return modIntegration;
     }
 
     public RequisiteClientSocket getRequisiteSocket() {
