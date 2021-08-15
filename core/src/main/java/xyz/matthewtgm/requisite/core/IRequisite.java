@@ -18,12 +18,22 @@
 
 package xyz.matthewtgm.requisite.core;
 
+import xyz.matthewtgm.requisite.core.commands.Command;
+import xyz.matthewtgm.requisite.core.util.ChatColour;
+
 import java.io.File;
 
 public interface IRequisite {
 
     void initialize(File gameDir);
-
     IRequisiteManager getManager();
+
+    default void registerCommand() {
+        getManager().getCommandRegistry().register(new Command("requisite", getManager()::openMenu));
+    }
+
+    default String getChatPrefix() {
+        return ChatColour.GRAY + "[" + ChatColour.GOLD + "@NAME@" + ChatColour.GRAY + "]";
+    }
 
 }

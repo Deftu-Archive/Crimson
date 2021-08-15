@@ -16,31 +16,19 @@
  * along with Requisite. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package xyz.matthewtgm.requisite.core.networking.packets.impl.other;
+package xyz.matthewtgm.requisite.core.util;
 
-import xyz.matthewtgm.json.entities.JsonObject;
-import xyz.matthewtgm.requisite.core.networking.RequisiteClientSocket;
-import xyz.matthewtgm.requisite.core.networking.packets.BasePacket;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
-public class GameOpenPacket extends BasePacket {
+public class LoggingHelper {
 
-    private final String uuid;
-
-    public GameOpenPacket(String uuid) {
-        super("OPEN", "GAME", 0f);
-        this.uuid = uuid;
+    public Logger create(String prefix, String name) {
+        return LogManager.getLogger(prefix + " (" + name + ")");
     }
 
-    public GameOpenPacket() {
-        this(null);
+    public Logger create(String name) {
+        return LogManager.getLogger(name);
     }
-
-    public void write(RequisiteClientSocket socket) {
-        data.add("uuid", uuid);
-    }
-
-    public void read(RequisiteClientSocket socket, JsonObject object, JsonObject data) {}
-
-    public void handle(RequisiteClientSocket socket) {}
 
 }

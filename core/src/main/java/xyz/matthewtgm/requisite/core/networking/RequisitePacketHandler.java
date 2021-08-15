@@ -27,11 +27,6 @@ import xyz.matthewtgm.json.parser.JsonParser;
 import xyz.matthewtgm.json.util.JsonHelper;
 import xyz.matthewtgm.requisite.core.networking.packets.BasePacket;
 import xyz.matthewtgm.requisite.core.networking.packets.impl.announcer.AnnouncementPacket;
-import xyz.matthewtgm.requisite.core.networking.packets.impl.cosmetics.CosmeticsRetrievePacket;
-import xyz.matthewtgm.requisite.core.networking.packets.impl.cosmetics.CosmeticsTogglePacket;
-import xyz.matthewtgm.requisite.core.networking.packets.impl.indication.RetrieveIndicationsPacket;
-import xyz.matthewtgm.requisite.core.networking.packets.impl.other.GameClosePacket;
-import xyz.matthewtgm.requisite.core.networking.packets.impl.other.GameOpenPacket;
 
 import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
@@ -80,10 +75,7 @@ public final class RequisitePacketHandler {
             return false;
         }
 
-        if (throwable.getMessage().contains("WebSocketClient objects are not reuseable"))
-            return false;
-
-        return true;
+        return !throwable.getMessage().contains("WebSocketClient objects are not reuseable");
     }
 
     public byte[] compress(String input) {
@@ -99,15 +91,7 @@ public final class RequisitePacketHandler {
     }
 
     static {
-        packets.put(GameOpenPacket.class, 0f);
-        packets.put(GameClosePacket.class, 1f);
-
         packets.put(AnnouncementPacket.class, 2f);
-
-        packets.put(RetrieveIndicationsPacket.class, 3f);
-
-        packets.put(CosmeticsRetrievePacket.class, 6f);
-        packets.put(CosmeticsTogglePacket.class, 7f);
     }
 
 }

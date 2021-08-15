@@ -39,6 +39,7 @@ public class Requisite implements IRequisite {
             manager = new RequisiteManager();
 
         manager.initialize(this, gameDirectory);
+        registerCommand();
     }
 
     public RequisiteManager getManager() {

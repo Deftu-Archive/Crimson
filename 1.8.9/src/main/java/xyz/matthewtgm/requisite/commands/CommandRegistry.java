@@ -16,31 +16,24 @@
  * along with Requisite. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package xyz.matthewtgm.requisite.core.networking.packets.impl.other;
+package xyz.matthewtgm.requisite.commands;
 
-import xyz.matthewtgm.json.entities.JsonObject;
-import xyz.matthewtgm.requisite.core.networking.RequisiteClientSocket;
-import xyz.matthewtgm.requisite.core.networking.packets.BasePacket;
+import xyz.matthewtgm.requisite.core.commands.Command;
+import xyz.matthewtgm.requisite.core.commands.ICommandRegistry;
 
-public class GameClosePacket extends BasePacket {
+import java.util.ArrayList;
+import java.util.List;
 
-    private final String uuid;
+public class CommandRegistry implements ICommandRegistry {
 
-    public GameClosePacket(String uuid) {
-        super("CLOSE", "GAME", 1f);
-        this.uuid = uuid;
+    private final List<Command> commandList = new ArrayList<>();
+
+    public void register(Command command) {
+        commandList.add(command);
     }
 
-    public GameClosePacket() {
-        this(null);
+    public void unregister(String name) {
+        commandList.removeIf(command -> command.getName().equals(name));
     }
-
-    public void write(RequisiteClientSocket socket) {
-        data.add("uuid", uuid);
-    }
-
-    public void read(RequisiteClientSocket socket, JsonObject object, JsonObject data) {}
-
-    public void handle(RequisiteClientSocket socket) {}
 
 }

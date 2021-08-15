@@ -18,7 +18,7 @@
 
 package xyz.matthewtgm.requisite.kotlin.dsl
 
-import xyz.matthewtgm.json.entities.JsonObject
+import xyz.matthewtgm.json.entities.JsonElement
 import xyz.matthewtgm.json.util.JsonHelper
 import xyz.matthewtgm.requisite.core.data.ColourRGB
 import java.awt.Color
@@ -37,5 +37,5 @@ fun Number.isBetween(min: Int, max: Int): Boolean = this.toInt() in (min + 1) un
 /* java.awt.Color */
 fun Color.toColourRGB(): ColourRGB = ColourRGB(red, green, blue, alpha)
 
-/* xyz.matthewtgm.json.entities.JsonObject */
-fun JsonObject.prettify(): String = JsonHelper.makePretty(this)
+/* xyz.matthewtgm.json.entities.JsonElement */
+fun JsonElement.prettify(): String = JsonHelper.makePretty(this)

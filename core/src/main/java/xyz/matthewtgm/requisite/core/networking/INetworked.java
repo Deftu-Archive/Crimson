@@ -16,30 +16,12 @@
  * along with Requisite. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package xyz.matthewtgm.requisite.core.cosmetics.rendering;
+package xyz.matthewtgm.requisite.core.networking;
 
-public abstract class CosmeticLayer {
+import org.java_websocket.handshake.ServerHandshake;
 
-    private final String name, id;
-
-    public CosmeticLayer(String name, String id) {
-        this.name = name;
-        this.id = id;
-    }
-
-    public CosmeticLayer(String name) {
-        this(name, name.toUpperCase().replace("_", ""));
-    }
-
-    public abstract void render(CosmeticContext context);
-    public abstract void tick();
-
-    public String getName() {
-        return name;
-    }
-
-    public String getId() {
-        return id;
-    }
-
+public interface INetworked {
+    void connect(RequisiteClientSocket socket, ServerHandshake handshake);
+    void disconnect(RequisiteClientSocket socket, int code, String reason);
+    void receive(RequisiteClientSocket socket, String message);
 }

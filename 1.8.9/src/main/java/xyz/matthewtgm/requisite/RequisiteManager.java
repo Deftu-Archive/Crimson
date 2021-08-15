@@ -18,11 +18,13 @@
 
 package xyz.matthewtgm.requisite;
 
-import gg.essential.universal.UMinecraft;
 import net.minecraftforge.common.MinecraftForge;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import xyz.matthewtgm.requisite.commands.CommandRegistry;
 import xyz.matthewtgm.requisite.core.IRequisite;
 import xyz.matthewtgm.requisite.core.IRequisiteManager;
-import xyz.matthewtgm.requisite.core.cosmetics.CosmeticManager;
+import xyz.matthewtgm.requisite.core.commands.ICommandRegistry;
 import xyz.matthewtgm.requisite.core.files.ConfigurationManager;
 import xyz.matthewtgm.requisite.core.files.FileManager;
 import xyz.matthewtgm.requisite.core.keybinds.KeyBindRegistry;
@@ -30,7 +32,6 @@ import xyz.matthewtgm.requisite.core.networking.RequisiteClientSocket;
 import xyz.matthewtgm.requisite.core.notifications.INotifications;
 import xyz.matthewtgm.requisite.core.util.*;
 import xyz.matthewtgm.requisite.core.util.messages.IMessageQueue;
-import xyz.matthewtgm.requisite.cosmetics.CosmeticFinalizer;
 import xyz.matthewtgm.requisite.hypixel.HypixelManager;
 import xyz.matthewtgm.requisite.notifications.Notifications;
 import xyz.matthewtgm.requisite.rendering.EnhancedFontRenderer;
@@ -42,17 +43,19 @@ import java.io.File;
 
 public class RequisiteManager implements IRequisiteManager {
 
+    private Logger logger;
     private SimpleEventBus eventBus;
     private FileManager fileManager;
     private ConfigurationManager configurationManager;
+    private CommandRegistry commandRegistry;
     private RequisiteClientSocket socket;
-
-    private CosmeticManager cosmeticManager;
 
     private KeyBindRegistry keyBindRegistry;
     private EnhancedFontRenderer enhancedFontRenderer;
     private ChatHelper chatHelper;
     private ColourHelper colourHelper;
+    private LoggingHelper loggingHelper;
+    private UniversalLogger universalLogger;
     private ClipboardHelper clipboardHelper;
     private DateHelper dateHelper;
     private EasingHelper easingHelper;
@@ -74,17 +77,19 @@ public class RequisiteManager implements IRequisiteManager {
     private HypixelManager hypixelManager;
 
     public void initialize(IRequisite requisite, File gameDirectory) {
+        logger = LogManager.getLogger("Requisite");
         eventBus = new SimpleEventBus();
         fileManager = new FileManager();
         configurationManager = new ConfigurationManager(new Configuration(fileManager.getRequisiteDirectory(fileManager.getTgmDevelopmentDirectory(fileManager.getConfigDirectory(gameDirectory)))));
+        commandRegistry = new CommandRegistry();
         socket = new RequisiteClientSocket(fetchSocketUri(), requisite);
-
-        (cosmeticManager = new CosmeticManager(requisite, new CosmeticFinalizer())).initialize(UMinecraft.getMinecraft().getSession().getProfile().getId().toString());
 
         keyBindRegistry = new KeyBindRegistry(requisite);
         enhancedFontRenderer = new EnhancedFontRenderer(requisite);
         chatHelper = new ChatHelper();
         colourHelper = new ColourHelper();
+        loggingHelper = new LoggingHelper();
+        universalLogger = new UniversalLogger(requisite);
         clipboardHelper = new ClipboardHelper();
         dateHelper = new DateHelper();
         easingHelper = new EasingHelper();
@@ -107,6 +112,10 @@ public class RequisiteManager implements IRequisiteManager {
         MinecraftForge.EVENT_BUS.register(new RequisiteEventListener());
     }
 
+    public Logger getLogger() {
+        return logger;
+    }
+
     public SimpleEventBus getEventBus() {
         return eventBus;
     }
@@ -119,12 +128,16 @@ public class RequisiteManager implements IRequisiteManager {
         return configurationManager;
     }
 
+    public ICommandRegistry getCommandRegistry() {
+        return commandRegistry;
+    }
+
     public RequisiteClientSocket getRequisiteSocket() {
         return socket;
     }
 
-    public CosmeticManager getCosmeticManager() {
-        return cosmeticManager;
+    public void openMenu() {
+        universalLogger.info("Tried to open menu LMFAOOO");
     }
 
     public KeyBindRegistry getKeyBindRegistry() {
@@ -141,6 +154,14 @@ public class RequisiteManager implements IRequisiteManager {
 
     public ColourHelper getColourHelper() {
         return colourHelper;
+    }
+
+    public LoggingHelper getLoggingHelper() {
+        return loggingHelper;
+    }
+
+    public UniversalLogger getUniversalLogger() {
+        return universalLogger;
     }
 
     public ClipboardHelper getClipboardHelper() {

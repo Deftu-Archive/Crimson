@@ -16,13 +16,28 @@
  * along with Requisite. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package xyz.matthewtgm.requisite.core.cosmetics;
+package xyz.matthewtgm.requisite.core.commands;
 
-import xyz.matthewtgm.requisite.core.cosmetics.rendering.CosmeticLayer;
+public interface ICommandRegistry {
+    void register(Command command);
+    void unregister(String name);
+    default void unregister(Command command) {
+        unregister(command.getName());
+    }
 
-import java.util.List;
-
-public interface ICosmeticFinalizer {
-    void initialize(CosmeticManager cosmeticManager, List<CosmeticLayer> cosmetics);
-    void finalize(CosmeticLayer layer);
+    default void registerAll(Command... commands) {
+        for (Command command : commands) {
+            register(command);
+        }
+    }
+    default void unregisterAll(String... names) {
+        for (String name : names) {
+            unregister(name);
+        }
+    }
+    default void unregisterAll(Command... commands) {
+        for (Command command : commands) {
+            unregister(command);
+        }
+    }
 }

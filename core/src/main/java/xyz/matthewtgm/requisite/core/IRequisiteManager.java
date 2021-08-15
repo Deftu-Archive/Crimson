@@ -18,9 +18,11 @@
 
 package xyz.matthewtgm.requisite.core;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import xyz.matthewtgm.json.entities.JsonObject;
 import xyz.matthewtgm.json.util.JsonApiHelper;
-import xyz.matthewtgm.requisite.core.cosmetics.CosmeticManager;
+import xyz.matthewtgm.requisite.core.commands.ICommandRegistry;
 import xyz.matthewtgm.requisite.core.files.ConfigurationManager;
 import xyz.matthewtgm.requisite.core.files.FileManager;
 import xyz.matthewtgm.requisite.core.keybinds.KeyBindRegistry;
@@ -42,12 +44,14 @@ public interface IRequisiteManager {
     void initialize(IRequisite requisite, File gameDirectory);
 
     /* Requisite services. */
+    Logger getLogger();
     SimpleEventBus getEventBus();
     FileManager getFileManager();
     ConfigurationManager getConfigurationManager();
+    ICommandRegistry getCommandRegistry();
     RequisiteClientSocket getRequisiteSocket();
 
-    CosmeticManager getCosmeticManager();
+    void openMenu();
 
     /* Utilities. */
     KeyBindRegistry getKeyBindRegistry();
@@ -55,6 +59,8 @@ public interface IRequisiteManager {
     IEnhancedFontRenderer getEnhancedFontRenderer();
     IChatHelper getChatHelper();
     ColourHelper getColourHelper();
+    LoggingHelper getLoggingHelper();
+    UniversalLogger getUniversalLogger();
     ClipboardHelper getClipboardHelper();
     DateHelper getDateHelper();
     EasingHelper getEasingHelper();
