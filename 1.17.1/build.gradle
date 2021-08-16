@@ -1,0 +1,26 @@
+plugins {
+    id "fabric-loom" version "0.8-SNAPSHOT"
+    id "org.jetbrains.kotlin.jvm"
+}
+
+ext {
+    minecraft_version = "1.17.1"
+    minecraft_platform = "fabric"
+
+    elementa_mcversion_override = "1.17"
+    elementa_version_override = "359+next"
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation(project(":"))
+
+    minecraft("com.mojang:minecraft:${minecraft_version}")
+    mappings("net.fabricmc:yarn:${fabric___yarn_mappings}:v2")
+    modImplementation("net.fabricmc:fabric-loader:${fabric___loader_version}")
+
+    annotationProcessor('org.spongepowered:mixin:0.7.11-SNAPSHOT')
+}

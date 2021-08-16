@@ -17,9 +17,9 @@
  */
 
 plugins {
-    id "net.minecraftforge.gradle.forge"
+    id "net.minecraftforge.gradle.forge" version "d1a7165"
+    id "org.spongepowered.mixin" version "0.6-SNAPSHOT"
     id "org.jetbrains.kotlin.jvm"
-    id "org.spongepowered.mixin"
 }
 
 ext {
@@ -28,12 +28,14 @@ ext {
 }
 
 minecraft {
-    version = forge_ver
+    version = forge___forge_ver
     runDir = "run"
     replace('@NAME@', mod_name)
     replace('@ID@', mod_id)
     replace('@VER@', mod_ver)
     mappings = "stable_22"
+
+    clientRunArgs += "--mixin mixins.requisite.json"
 }
 
 repositories {

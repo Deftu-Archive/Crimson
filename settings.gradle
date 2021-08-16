@@ -26,6 +26,10 @@ pluginManagement {
             url = 'https://maven.minecraftforge.net/'
         }
         maven {
+            name = 'Fabric'
+            url = 'https://maven.fabricmc.net/'
+        }
+        maven {
             name = 'Jitpack'
             url = 'https://jitpack.io/'
         }
@@ -33,7 +37,7 @@ pluginManagement {
     resolutionStrategy {
         eachPlugin {
             if (requested.id.id == "net.minecraftforge.gradle.forge")
-                useModule("com.github.asbyth:ForgeGradle:${requested.version}")
+                useModule("com.github.ReplayMod:ForgeGradle:${requested.version}:all")
             if (requested.id.id == "org.spongepowered.mixin")
                 useModule("com.github.LXGaming:MixinGradle:${requested.version}")
         }
@@ -41,4 +45,7 @@ pluginManagement {
 }
 
 rootProject.name = mod_name
-include '1.8.9'
+include(
+        '1.8.9',
+        '1.17.1'
+)

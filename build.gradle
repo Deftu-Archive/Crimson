@@ -17,9 +17,7 @@
  */
 
 plugins {
-    id "net.minecraftforge.gradle.forge" version "8708bf3e01"
     id "com.github.johnrengelman.shadow" version "6.1.0"
-    id "org.spongepowered.mixin" version "0.6-SNAPSHOT"
     id "org.jetbrains.kotlin.jvm" version "1.5.21"
     id "java"
 }
@@ -29,12 +27,6 @@ version = mod_ver
 group = mod_group
 
 sourceCompatibility = targetCompatibility = 1.8
-
-minecraft {
-    version = forge_ver
-    runDir = "run"
-    mappings = "stable_22"
-}
 
 /* Add available repositories to areas where dependencies can be downloaded. */
 repositories {
@@ -80,12 +72,6 @@ dependencies {
     shade('org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.1-native-mt')
     shade('org.jetbrains.kotlin:kotlin-stdlib-jdk8')
     shade('org.jetbrains.kotlin:kotlin-reflect')
-}
-
-/* Disable mixin refMap warnings. */
-mixin {
-    disableRefMapWarning = true
-    add sourceSets.main, 'mixins.requisite.refmap.json'
 }
 
 /* Set the duplicatesStrategy and define configs. */
@@ -138,40 +124,6 @@ shadowJar {
     archiveClassifier.set('')
 }
 
-/* Force the Gradle wrapper version and distribution type. */
-wrapper {
-    gradleVersion = "6.8.1"
-    distributionType = Wrapper.DistributionType.ALL
-}
-
-/* Make shadow reobfuscate using SEARGE. */
-reobf {
-    shadowJar {
-        mappingType = 'SEARGE'
-    }
-}
-
-/* Process the mcmod.info. */
-processResources {
-    inputs.property 'version', project.version
-    inputs.property 'mcversion', project.minecraft.version
-    inputs.property 'name', mod_name
-    inputs.property 'modid', mod_id
-    from(sourceSets.main.resources.srcDirs) {
-        include 'mcmod.info'
-        expand(
-                'version': project.version,
-                'mcversion': project.minecraft.version,
-                'name': mod_name,
-                'modid': mod_id
-        )
-    }
-    from(sourceSets.main.resources.srcDirs) {
-        exclude 'mcmod.info'
-    }
-    rename('(.+_at.cfg)', 'META-INF/$1')
-}
-
 /* Move the resources to the working directory for runs. */
 task moveResources {
     doLast {
@@ -198,6 +150,9 @@ subprojects {
     ext {
         minecraft_version = ""
         minecraft_platform = ""
+
+        elementa_mcversion_override = ""
+        elementa_version_override = ""
     }
 
     repositories {
@@ -216,33 +171,28 @@ subprojects {
         }
     }
 
-    configurations {
-        shade
-        implementation.extendsFrom(shade)
-    }
-
     afterEvaluate {
         dependencies {
-            shade('xyz.matthewtgm:SimpleEventBus:2.0.1')
-            shade('xyz.matthewtgm:TGMConfig:3.2.0')
-            shade('xyz.matthewtgm:JsonTGM:2.10.0')
-            shade('xyz.matthewtgm:Mango:1.2.0')
+            implementation('xyz.matthewtgm:SimpleEventBus:2.0.1')
+            implementation('xyz.matthewtgm:TGMConfig:3.2.0')
+            implementation('xyz.matthewtgm:JsonTGM:2.10.0')
+            implementation('xyz.matthewtgm:Mango:1.2.0')
 
-            shade('org.java-websocket:Java-WebSocket:1.5.2')
+            implementation('org.java-websocket:Java-WebSocket:1.5.2')
 
-            shade("gg.essential:elementa-${minecraft_version}-${minecraft_platform}:358+next")
+            implementation("gg.essential:elementa-${elementa_mcversion_override.isEmpty() ? minecraft_version : elementa_mcversion_override}-${minecraft_platform}:${elementa_version_override.isEmpty() ? "358+next" : elementa_version_override}")
 
-            shade('org.spongepowered:mixin:0.7.11-SNAPSHOT')
+            implementation('org.spongepowered:mixin:0.7.11-SNAPSHOT')
             annotationProcessor('org.spongepowered:mixin:0.7.11-SNAPSHOT')
 
             /* Dependencies for cutting other mods' file sizes. */
-            shade('com.github.marcoacierno:pastebin-java-api:v0.2.1')
-            shade('com.squareup.okhttp3:okhttp:4.9.1')
-            shade('org.kohsuke:github-api:1.132')
+            implementation('com.github.marcoacierno:pastebin-java-api:v0.2.1')
+            implementation('com.squareup.okhttp3:okhttp:4.9.1')
+            implementation('org.kohsuke:github-api:1.132')
 
-            shade('org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.1-native-mt')
-            shade('org.jetbrains.kotlin:kotlin-stdlib-jdk8')
-            shade('org.jetbrains.kotlin:kotlin-reflect')
+            implementation('org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.1-native-mt')
+            implementation('org.jetbrains.kotlin:kotlin-stdlib-jdk8')
+            implementation('org.jetbrains.kotlin:kotlin-reflect')
         }
     }
 }
