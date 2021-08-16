@@ -69,8 +69,6 @@ dependencies {
 
     shade('org.java-websocket:Java-WebSocket:1.5.2')
 
-    shade('gg.essential:elementa-1.8.9-forge:356')
-
     shade('org.spongepowered:mixin:0.7.11-SNAPSHOT')
     annotationProcessor('org.spongepowered:mixin:0.7.11-SNAPSHOT')
 
@@ -192,12 +190,16 @@ task moveResources {
 
 
 
-allprojects {
+subprojects {
     apply plugin: "com.github.johnrengelman.shadow"
     apply plugin: "org.jetbrains.kotlin.jvm"
     apply plugin: "java"
 
-    /* Add available repositories to areas where dependencies can be downloaded. */
+    ext {
+        minecraft_version = ""
+        minecraft_platform = ""
+    }
+
     repositories {
         mavenCentral()
         maven {
@@ -214,35 +216,34 @@ allprojects {
         }
     }
 
-/* Adds a configuration for shading libraries. */
     configurations {
         shade
         implementation.extendsFrom(shade)
     }
 
-/* Define dependencies. */
-    dependencies {
-        /* Requisite dependencies. */
-        shade('xyz.matthewtgm:SimpleEventBus:2.0.1')
-        shade('xyz.matthewtgm:TGMConfig:3.2.0')
-        shade('xyz.matthewtgm:JsonTGM:2.10.0')
-        shade('xyz.matthewtgm:Mango:1.2.0')
+    afterEvaluate {
+        dependencies {
+            shade('xyz.matthewtgm:SimpleEventBus:2.0.1')
+            shade('xyz.matthewtgm:TGMConfig:3.2.0')
+            shade('xyz.matthewtgm:JsonTGM:2.10.0')
+            shade('xyz.matthewtgm:Mango:1.2.0')
 
-        shade('org.java-websocket:Java-WebSocket:1.5.2')
+            shade('org.java-websocket:Java-WebSocket:1.5.2')
 
-        shade('gg.essential:elementa-1.8.9-forge:356')
+            shade("gg.essential:elementa-${minecraft_version}-${minecraft_platform}:358+next")
 
-        shade('org.spongepowered:mixin:0.7.11-SNAPSHOT')
-        annotationProcessor('org.spongepowered:mixin:0.7.11-SNAPSHOT')
+            shade('org.spongepowered:mixin:0.7.11-SNAPSHOT')
+            annotationProcessor('org.spongepowered:mixin:0.7.11-SNAPSHOT')
 
-        /* Dependencies for cutting other mods' file sizes. */
-        shade('com.github.marcoacierno:pastebin-java-api:v0.2.1')
-        shade('com.squareup.okhttp3:okhttp:4.9.1')
-        shade('org.kohsuke:github-api:1.132')
+            /* Dependencies for cutting other mods' file sizes. */
+            shade('com.github.marcoacierno:pastebin-java-api:v0.2.1')
+            shade('com.squareup.okhttp3:okhttp:4.9.1')
+            shade('org.kohsuke:github-api:1.132')
 
-        shade('org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.1-native-mt')
-        shade('org.jetbrains.kotlin:kotlin-stdlib-jdk8')
-        shade('org.jetbrains.kotlin:kotlin-reflect')
+            shade('org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.1-native-mt')
+            shade('org.jetbrains.kotlin:kotlin-stdlib-jdk8')
+            shade('org.jetbrains.kotlin:kotlin-reflect')
+        }
     }
 }
 

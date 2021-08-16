@@ -18,11 +18,9 @@
 
 package xyz.matthewtgm.requisite.core;
 
-import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import xyz.matthewtgm.json.entities.JsonObject;
 import xyz.matthewtgm.json.util.JsonApiHelper;
-import xyz.matthewtgm.requisite.core.commands.ICommandRegistry;
 import xyz.matthewtgm.requisite.core.files.ConfigurationManager;
 import xyz.matthewtgm.requisite.core.files.FileManager;
 import xyz.matthewtgm.requisite.core.integration.IModIntegration;
@@ -49,7 +47,6 @@ public interface IRequisiteManager {
     SimpleEventBus getEventBus();
     FileManager getFileManager();
     ConfigurationManager getConfigurationManager();
-    ICommandRegistry getCommandRegistry();
     IModIntegration getModIntegration();
     RequisiteClientSocket getRequisiteSocket();
 

@@ -21,10 +21,8 @@ package xyz.matthewtgm.requisite;
 import net.minecraftforge.common.MinecraftForge;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import xyz.matthewtgm.requisite.commands.CommandRegistry;
 import xyz.matthewtgm.requisite.core.IRequisite;
 import xyz.matthewtgm.requisite.core.IRequisiteManager;
-import xyz.matthewtgm.requisite.core.commands.ICommandRegistry;
 import xyz.matthewtgm.requisite.core.files.ConfigurationManager;
 import xyz.matthewtgm.requisite.core.files.FileManager;
 import xyz.matthewtgm.requisite.core.integration.IModIntegration;
@@ -49,7 +47,6 @@ public class RequisiteManager implements IRequisiteManager {
     private SimpleEventBus eventBus;
     private FileManager fileManager;
     private ConfigurationManager configurationManager;
-    private CommandRegistry commandRegistry;
     private ModIntegration modIntegration;
     private RequisiteClientSocket socket;
 
@@ -84,7 +81,6 @@ public class RequisiteManager implements IRequisiteManager {
         eventBus = new SimpleEventBus();
         fileManager = new FileManager();
         configurationManager = new ConfigurationManager(new Configuration(fileManager.getRequisiteDirectory(fileManager.getTgmDevelopmentDirectory(fileManager.getConfigDirectory(gameDirectory)))));
-        commandRegistry = new CommandRegistry();
         modIntegration = new ModIntegration(requisite);
         socket = new RequisiteClientSocket(fetchSocketUri(), requisite);
 
@@ -130,10 +126,6 @@ public class RequisiteManager implements IRequisiteManager {
 
     public ConfigurationManager getConfigurationManager() {
         return configurationManager;
-    }
-
-    public ICommandRegistry getCommandRegistry() {
-        return commandRegistry;
     }
 
     public IModIntegration getModIntegration() {

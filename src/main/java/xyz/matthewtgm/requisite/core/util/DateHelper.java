@@ -16,28 +16,28 @@
  * along with Requisite. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package xyz.matthewtgm.requisite.core.commands;
+package xyz.matthewtgm.requisite.core.util;
 
-public interface ICommandRegistry {
-    void register(Command command);
-    void unregister(String name);
-    default void unregister(Command command) {
-        unregister(command.getName());
+import java.util.Calendar;
+
+public class DateHelper {
+
+    /**
+     * Adapted from SkyBlockAddons under MIT license
+     * https://github.com/BiscuitDevelopment/SkyblockAddons/blob/development/LICENSE
+     *
+     * @author Biscuit/Phoube
+     */
+    public boolean isHalloween() {
+        Calendar calendar = Calendar.getInstance();
+        return calendar.get(Calendar.MONTH) == Calendar.OCTOBER && calendar.get(Calendar.DAY_OF_MONTH) == 31;
     }
 
-    default void registerAll(Command... commands) {
-        for (Command command : commands) {
-            register(command);
-        }
+    /**
+     * @return Whether the current month is within the spectrum of pride month or not.
+     */
+    public boolean isLgbtqPrideMonth() {
+        return Calendar.getInstance().get(Calendar.MONTH) == Calendar.JUNE;
     }
-    default void unregisterAll(String... names) {
-        for (String name : names) {
-            unregister(name);
-        }
-    }
-    default void unregisterAll(Command... commands) {
-        for (Command command : commands) {
-            unregister(command);
-        }
-    }
+
 }

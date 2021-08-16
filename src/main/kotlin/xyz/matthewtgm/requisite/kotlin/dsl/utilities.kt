@@ -35,7 +35,8 @@ fun Number.percentage(min: Int, max: Int): Int = (this.toInt() - min) / (max - m
 fun Number.isBetween(min: Int, max: Int): Boolean = this.toInt() in (min + 1) until max
 
 /* java.awt.Color */
-fun Color.toColourRGB(): ColourRGB = ColourRGB(red, green, blue, alpha)
+fun Color.toColourRGB(): ColourRGB =
+    ColourRGB(red, green, blue, alpha)
 
 /* xyz.matthewtgm.json.entities.JsonElement */
 fun JsonElement.prettify(): String = JsonHelper.makePretty(this)
