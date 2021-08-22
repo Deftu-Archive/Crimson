@@ -18,7 +18,8 @@
 
 package xyz.matthewtgm.requisite.util;
 
-import gg.essential.universal.UResolution;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.ScaledResolution;
 import org.lwjgl.opengl.GL11;
 
 public class GlHelper {
@@ -39,7 +40,13 @@ public class GlHelper {
     }
 
     public void totalScissor(double xPosition, double yPosition, double width, double height) {
-        GL11.glScissor((int) ((xPosition * UResolution.getWindowWidth()) / UResolution.getScaledWidth()), (int) (((UResolution.getScaledHeight() - (yPosition + height)) * UResolution.getWindowHeight()) / UResolution.getScaledHeight()), (int) (width * UResolution.getWindowWidth() / UResolution.getScaledWidth()), (int) (height * UResolution.getWindowHeight() / UResolution.getScaledHeight()));
+        Minecraft mc = Minecraft.getMinecraft();
+        ScaledResolution scaledResolution = new ScaledResolution(mc);
+        int scaledWidth = scaledResolution.getScaledWidth();
+        int windowWidth = mc.displayWidth;
+        int scaledHeight = scaledResolution.getScaledHeight();
+        int windowHeight = mc.displayHeight;
+        GL11.glScissor((int) ((xPosition * windowWidth) / scaledWidth), (int) (((scaledHeight - (yPosition + height)) * windowHeight) / scaledHeight), (int) (width * windowWidth / scaledWidth), (int) (height * windowHeight / scaledHeight));
     }
 
 }

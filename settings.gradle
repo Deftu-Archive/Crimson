@@ -34,14 +34,6 @@ pluginManagement {
             url = 'https://jitpack.io/'
         }
     }
-    resolutionStrategy {
-        eachPlugin {
-            if (requested.id.id == "net.minecraftforge.gradle.forge")
-                useModule("com.github.ReplayMod:ForgeGradle:${requested.version}:all")
-            if (requested.id.id == "org.spongepowered.mixin")
-                useModule("com.github.LXGaming:MixinGradle:${requested.version}")
-        }
-    }
 }
 
 rootProject.name = mod_name

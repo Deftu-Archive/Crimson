@@ -16,15 +16,39 @@
  * along with Requisite. If not, see <https://www.gnu.org/licenses/>.
  */
 
+buildscript {
+    repositories {
+        maven {
+            name = "Jitpack"
+            url = "https://jitpack.io/"
+        }
+    }
+
+    dependencies {
+        classpath("com.github.ReplayMod:ForgeGradle:d1a7165:all")
+        classpath("dev.isXander:MixinGradle:0.6-SNAPSHOT")
+    }
+}
+
 plugins {
-    id "net.minecraftforge.gradle.forge" version "d1a7165"
-    id "org.spongepowered.mixin" version "0.6-SNAPSHOT"
     id "org.jetbrains.kotlin.jvm"
 }
+
+configurations {
+    compile
+    compile.extendsFrom(api)
+}
+
+apply plugin: 'net.minecraftforge.gradle.forge'
+apply plugin: 'org.spongepowered.mixin'
+
+sourceCompatibility = targetCompatibility = 1.8
 
 ext {
     minecraft_version = "1.8.9"
     minecraft_platform = "forge"
+
+    mixin_version = "0.7.11-SNAPSHOT"
 }
 
 minecraft {
@@ -44,8 +68,6 @@ repositories {
 
 dependencies {
     implementation(project(':'))
-
-    annotationProcessor('org.spongepowered:mixin:0.7.11-SNAPSHOT')
 }
 
 /* Disable mixin refMap warnings. */

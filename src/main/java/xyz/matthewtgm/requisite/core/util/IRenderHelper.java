@@ -18,9 +18,11 @@
 
 package xyz.matthewtgm.requisite.core.util;
 
-import java.awt.*;
-
 public interface IRenderHelper {
+
+    /* Will be re-added at a later date.
+    TODO: 2021/08/20
+
     void drawRoundedRect(int x, int y, int width, int height, int radius, int colour);
     void drawHollowRoundedRect(int x, int y, int width, int height, int thickness, int colour);
 
@@ -28,6 +30,8 @@ public interface IRenderHelper {
     void drawArc(int x, int y, int radius, int start, int end, int colour);
     void drawHollowArc(int x, int y, int radius, int start, int end, int thickness, Color colour);
     void drawHollowArc(int x, int y, int radius, int start, int end, int thickness, int colour);
+
+    */
 
     void drawRect(int left, int top, int right, int bottom, int colour);
     void drawRectEnhanced(int x, int y, int width, int height, int colour);

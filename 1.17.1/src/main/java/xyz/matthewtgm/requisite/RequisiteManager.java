@@ -18,20 +18,25 @@
 
 package xyz.matthewtgm.requisite;
 
+import net.minecraft.client.MinecraftClient;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import xyz.matthewtgm.requisite.core.IEventListener;
 import xyz.matthewtgm.requisite.core.IRequisite;
 import xyz.matthewtgm.requisite.core.IRequisiteManager;
+import xyz.matthewtgm.requisite.core.RequisiteEventManager;
 import xyz.matthewtgm.requisite.core.files.ConfigurationManager;
 import xyz.matthewtgm.requisite.core.files.FileManager;
 import xyz.matthewtgm.requisite.core.integration.IModIntegration;
 import xyz.matthewtgm.requisite.core.keybinds.KeyBindRegistry;
 import xyz.matthewtgm.requisite.core.networking.RequisiteClientSocket;
 import xyz.matthewtgm.requisite.core.notifications.INotifications;
-import xyz.matthewtgm.requisite.core.rendering.IEnhancedFontRenderer;
 import xyz.matthewtgm.requisite.core.util.*;
 import xyz.matthewtgm.requisite.core.util.messages.IMessageQueue;
 import xyz.matthewtgm.requisite.integration.ModIntegration;
+import xyz.matthewtgm.requisite.notifications.Notifications;
+import xyz.matthewtgm.requisite.rendering.EnhancedFontRenderer;
+import xyz.matthewtgm.requisite.util.*;
 import xyz.matthewtgm.simpleeventbus.SimpleEventBus;
 import xyz.matthewtgm.tgmconfig.Configuration;
 
@@ -44,9 +49,31 @@ public class RequisiteManager implements IRequisiteManager {
     private FileManager fileManager;
     private ConfigurationManager configurationManager;
     private ModIntegration modIntegration;
+    private RequisiteEventManager internalEventManager;
     private RequisiteClientSocket socket;
 
     private KeyBindRegistry keyBindRegistry;
+    private EnhancedFontRenderer enhancedFontRenderer;
+    private ChatHelper chatHelper;
+    private ColourHelper colourHelper;
+    private LoggingHelper loggingHelper;
+    private UniversalLogger universalLogger;
+    private ClipboardHelper clipboardHelper;
+    private DateHelper dateHelper;
+    private EasingHelper easingHelper;
+    private MathHelper mathHelper;
+    private MouseHelper mouseHelper;
+    private Multithreading multithreading;
+    private Notifications notifications;
+    private ReflectionHelper reflectionHelper;
+    private RomanNumeral romanNumerals;
+    private RenderHelper renderHelper;
+    private StringHelper stringHelper;
+    private MessageQueue messageQueue;
+    private ServerHelper serverHelper;
+    private MojangAPI mojangApi;
+
+    private GlHelper glHelper;
 
     public void initialize(IRequisite requisite, File gameDirectory) {
         logger = LogManager.getLogger("Requisite");
@@ -54,9 +81,31 @@ public class RequisiteManager implements IRequisiteManager {
         fileManager = new FileManager();
         configurationManager = new ConfigurationManager(new Configuration(fileManager.getRequisiteDirectory(fileManager.getTgmDevelopmentDirectory(fileManager.getConfigDirectory(gameDirectory)))));
         modIntegration = new ModIntegration(requisite);
+        internalEventManager = new RequisiteEventManager(requisite);
         socket = new RequisiteClientSocket(fetchSocketUri(), requisite);
 
         keyBindRegistry = new KeyBindRegistry(requisite);
+        enhancedFontRenderer = new EnhancedFontRenderer(requisite);
+        chatHelper = new ChatHelper();
+        colourHelper = new ColourHelper();
+        loggingHelper = new LoggingHelper();
+        universalLogger = new UniversalLogger(requisite);
+        clipboardHelper = new ClipboardHelper();
+        dateHelper = new DateHelper();
+        easingHelper = new EasingHelper();
+        mathHelper = new MathHelper();
+        mouseHelper = new MouseHelper();
+        multithreading = new Multithreading();
+        notifications = new Notifications((Requisite) requisite);
+        reflectionHelper = new ReflectionHelper();
+        romanNumerals = new RomanNumeral();
+        renderHelper = new RenderHelper();
+        stringHelper = new StringHelper();
+        messageQueue = new MessageQueue(requisite);
+        serverHelper = new ServerHelper();
+        mojangApi = new MojangAPI();
+
+        glHelper = new GlHelper();
     }
 
     public Logger getLogger() {
@@ -79,96 +128,104 @@ public class RequisiteManager implements IRequisiteManager {
         return modIntegration;
     }
 
+    public RequisiteEventManager getInternalEventManager() {
+        return internalEventManager;
+    }
+
+    public IEventListener getInternalEventListener() {
+        throw new UnsupportedOperationException("1.17.1/Fabric version does not support the internal event listener.");
+    }
+
     public RequisiteClientSocket getRequisiteSocket() {
         return socket;
     }
 
     public void openMenu() {
-        logger.info("LOL");
+        MinecraftClient.getInstance().setScreen(null);
     }
 
     public KeyBindRegistry getKeyBindRegistry() {
         return keyBindRegistry;
     }
 
-    public IEnhancedFontRenderer getEnhancedFontRenderer() {
-        return null;
+    public EnhancedFontRenderer getEnhancedFontRenderer() {
+        return enhancedFontRenderer;
     }
 
-    public IChatHelper getChatHelper() {
-        return null;
+    public ChatHelper getChatHelper() {
+        return chatHelper;
     }
 
     public ColourHelper getColourHelper() {
-        return null;
+        return colourHelper;
     }
 
     public LoggingHelper getLoggingHelper() {
-        return null;
+        return loggingHelper;
     }
 
     public UniversalLogger getUniversalLogger() {
-        return null;
+        return universalLogger;
     }
 
     public ClipboardHelper getClipboardHelper() {
-        return null;
+        return clipboardHelper;
     }
 
     public DateHelper getDateHelper() {
-        return null;
+        return dateHelper;
     }
 
     public EasingHelper getEasingHelper() {
-        return null;
+        return easingHelper;
     }
 
     public MathHelper getMathHelper() {
-        return null;
+        return mathHelper;
     }
 
-    public IMouseHelper getMouseHelper() {
-        return null;
+    public MouseHelper getMouseHelper() {
+        return mouseHelper;
     }
 
     public Multithreading getMultithreading() {
-        return null;
+        return multithreading;
     }
 
-    public INotifications getNotifications() {
-        return null;
-    }
-
-    public ObjectHelper getObjectHelper() {
-        return null;
+    public Notifications getNotifications() {
+        return notifications;
     }
 
     public ReflectionHelper getReflectionHelper() {
-        return null;
+        return reflectionHelper;
     }
 
     public RomanNumeral getRomanNumerals() {
-        return null;
+        return romanNumerals;
     }
 
-    public IRenderHelper getRenderHelper() {
-        return null;
+    public RenderHelper getRenderHelper() {
+        return renderHelper;
     }
 
-    public IStringHelper getStringHelper() {
-        return null;
+    public StringHelper getStringHelper() {
+        return stringHelper;
     }
 
-    public IMessageQueue getMessageQueue() {
-        return null;
+    public MessageQueue getMessageQueue() {
+        return messageQueue;
     }
 
     public IServerHelper getServerHelper() {
-        return null;
+        return serverHelper;
     }
 
     public MojangAPI getMojangApi() {
-        return null;
+        return mojangApi;
+    }
+
+    public GlHelper getGlHelper() {
+        return glHelper;
     }
 
 }

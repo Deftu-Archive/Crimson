@@ -1,37 +1,18 @@
-/*
- * Requisite - Minecraft library mod
- * Copyright (C) 2021 MatthewTGM
- *
- * Requisite is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 2.1 of the License, or
- * (at your option) any later version.
- *
- * Requisite is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU Lesser General Public License
- * along with Requisite. If not, see <https://www.gnu.org/licenses/>.
- */
-
 package xyz.matthewtgm.requisite.notifications;
 
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.ScaledResolution;
-import net.minecraft.client.renderer.GlStateManager;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.common.gameevent.TickEvent;
+import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.font.TextRenderer;
+import net.minecraft.client.util.math.MatrixStack;
+import org.lwjgl.opengl.GL11;
 import xyz.matthewtgm.requisite.Requisite;
 import xyz.matthewtgm.requisite.core.data.ColourRGB;
+import xyz.matthewtgm.requisite.core.events.RenderTickEvent;
 import xyz.matthewtgm.requisite.core.notifications.INotifications;
 import xyz.matthewtgm.requisite.core.notifications.Notification;
 import xyz.matthewtgm.requisite.core.notifications.NotificationColour;
 import xyz.matthewtgm.requisite.core.util.ChatColour;
+import xyz.matthewtgm.simpleeventbus.EventSubscriber;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.function.Consumer;
@@ -44,7 +25,7 @@ public class Notifications implements INotifications {
 
     public Notifications(Requisite requisite) {
         this.requisite = requisite;
-        MinecraftForge.EVENT_BUS.register(this);
+        requisite.getManager().getEventBus().register(this);
     }
 
     public void push(String title, String description, NotificationColour colour, int duration, Consumer<Notification> clickListener) {
@@ -80,9 +61,8 @@ public class Notifications implements INotifications {
     }
 
     public void render(float ticks) {
-        ScaledResolution scaledResolution = new ScaledResolution(Minecraft.getMinecraft());
-        int scaledWidth = scaledResolution.getScaledWidth();
-        int scaledHeight = scaledResolution.getScaledHeight();
+        int scaledWidth = MinecraftClient.getInstance().getWindow().getScaledWidth();
+        int scaledHeight = MinecraftClient.getInstance().getWindow().getScaledHeight();
 
         float y = 5;
         for (Notification notification : notifications) {
@@ -102,7 +82,7 @@ public class Notifications implements INotifications {
             int textLines = wrappedTitle.size() + wrappedDescription.size();
 
             /* Size and positon. */
-            float height = 18 + (textLines * Minecraft.getMinecraft().fontRendererObj.FONT_HEIGHT);
+            float height = 18 + (textLines * requisite.getManager().getEnhancedFontRenderer().getFontHeight());
             float x = notification.data.x = requisite.getManager().getMathHelper().lerp(notification.data.x, scaledWidth - width - 5, ticks / 4);
             if (notification.data.closing && notification.data.time < 0.75f)
                 x = notification.data.x = requisite.getManager().getMathHelper().lerp(notification.data.x, scaledWidth + width, ticks / 4);
@@ -117,8 +97,10 @@ public class Notifications implements INotifications {
                 notification.data.closing = true;
             }
 
-            /* Rendering. */
-            GlStateManager.pushMatrix();
+            MatrixStack matrices = new MatrixStack();
+
+            matrices.push();
+
             ColourRGB backgroundColour = notification.colour == null || notification.colour.background == null ? new ColourRGB(0, 0, 0, 200) : notification.colour.background.setA_builder(200);
             requisite.getManager().getRenderHelper().drawRectEnhanced((int) x, (int) y, (int) width, (int) height, backgroundColour.getRGBA());
             ColourRGB foregroundColour = notification.colour == null || notification.colour.foreground == null ? new ColourRGB(255, 175, 0, 200) : notification.colour.foreground.setA_builder(200);
@@ -130,16 +112,17 @@ public class Notifications implements INotifications {
                 requisite.getManager().getGlHelper().startScissorBox(x, y, width, height);
                 int i = 0;
                 for (String line : wrappedTitle) {
-                    requisite.getManager().getEnhancedFontRenderer().drawText(line, x + 8, y + 8 + (i * 2) + (i * Minecraft.getMinecraft().fontRendererObj.FONT_HEIGHT), textColour.getRGBA(), true);
+                    requisite.getManager().getEnhancedFontRenderer().drawText(line, x + 8, y + 8 + (i * 2) + (i * requisite.getManager().getEnhancedFontRenderer().getFontHeight()), textColour.getRGBA(), true);
                     i++;
                 }
                 for (String line : wrappedDescription) {
-                    requisite.getManager().getEnhancedFontRenderer().drawText(line, x + 8, y + 8 + (i * 2) + (i * Minecraft.getMinecraft().fontRendererObj.FONT_HEIGHT), textColour.getRGBA(), true);
+                    requisite.getManager().getEnhancedFontRenderer().drawText(line, x + 8, y + 8 + (i * 2) + (i * requisite.getManager().getEnhancedFontRenderer().getFontHeight()), textColour.getRGBA(), true);
                     i++;
                 }
                 requisite.getManager().getGlHelper().endScissorBox();
             }
-            GlStateManager.popMatrix();
+
+            matrices.pop();
 
             /* Positioning. */
             y += height + 5;
@@ -154,11 +137,9 @@ public class Notifications implements INotifications {
         }
     }
 
-    @SubscribeEvent
-    public void onRenderTick(TickEvent.RenderTickEvent event) {
-        if (event.phase == TickEvent.Phase.END) {
-            render(event.renderTickTime);
-        }
+    @EventSubscriber
+    private void onRenderTick(RenderTickEvent event) {
+        render(event.partialTicks);
     }
 
 }

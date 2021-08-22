@@ -18,32 +18,28 @@
 
 package xyz.matthewtgm.requisite;
 
-import net.fabricmc.api.ClientModInitializer;
-import net.minecraft.client.MinecraftClient;
 import xyz.matthewtgm.requisite.core.IRequisite;
-import xyz.matthewtgm.requisite.core.IRequisiteManager;
+import xyz.matthewtgm.requisite.core.events.TickEvent;
 import xyz.matthewtgm.requisite.core.integration.ModMetadata;
+import xyz.matthewtgm.simpleeventbus.EventSubscriber;
 
 import java.io.File;
 
-public class Requisite implements ClientModInitializer, IRequisite {
+public class Requisite implements IRequisite {
 
     private static final Requisite instance = new Requisite();
     private RequisiteManager manager;
-
-    public void onInitializeClient() {
-        initialize(MinecraftClient.getInstance().runDirectory);
-    }
 
     public void initialize(File gameDir) {
         if (manager == null)
             manager = new RequisiteManager();
 
         manager.initialize(this, gameDir);
+        manager.getEventBus().register(this);
         postInitialize();
     }
 
-    public IRequisiteManager getManager() {
+    public RequisiteManager getManager() {
         return manager;
     }
 

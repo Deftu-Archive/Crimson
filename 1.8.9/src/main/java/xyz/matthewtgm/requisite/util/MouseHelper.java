@@ -24,11 +24,11 @@ import xyz.matthewtgm.requisite.core.util.IMouseHelper;
 
 public class MouseHelper implements IMouseHelper {
 
-    public int getMouseX() {
+    public double getMouseX() {
         return Mouse.getX() * UResolution.getScaledWidth() / UResolution.getWindowWidth();
     }
 
-    public int getMouseY() {
+    public double getMouseY() {
         return UResolution.getScaledHeight() - Mouse.getY() * UResolution.getScaledHeight() / UResolution.getWindowHeight() - 1;
     }
 

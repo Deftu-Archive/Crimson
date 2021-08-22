@@ -27,7 +27,6 @@ import xyz.matthewtgm.requisite.core.integration.IModIntegration;
 import xyz.matthewtgm.requisite.core.keybinds.KeyBindRegistry;
 import xyz.matthewtgm.requisite.core.networking.RequisiteClientSocket;
 import xyz.matthewtgm.requisite.core.notifications.INotifications;
-import xyz.matthewtgm.requisite.core.util.ObjectHelper;
 import xyz.matthewtgm.requisite.core.rendering.IEnhancedFontRenderer;
 import xyz.matthewtgm.requisite.core.util.*;
 import xyz.matthewtgm.requisite.core.util.messages.IMessageQueue;
@@ -48,6 +47,8 @@ public interface IRequisiteManager {
     FileManager getFileManager();
     ConfigurationManager getConfigurationManager();
     IModIntegration getModIntegration();
+    RequisiteEventManager getInternalEventManager();
+    IEventListener getInternalEventListener();
     RequisiteClientSocket getRequisiteSocket();
 
     void openMenu();
@@ -67,7 +68,6 @@ public interface IRequisiteManager {
     IMouseHelper getMouseHelper();
     Multithreading getMultithreading();
     INotifications getNotifications();
-    ObjectHelper getObjectHelper();
     ReflectionHelper getReflectionHelper();
     RomanNumeral getRomanNumerals();
     IRenderHelper getRenderHelper();

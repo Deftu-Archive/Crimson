@@ -133,11 +133,11 @@ public class RenderHelper implements IRenderHelper {
         Gui.drawRect(x, y, width + x, height + y, color);
     }
 
-    public void drawHollowRect(int x, int y, int width, int height, int thickness, int color) {
-        drawHorizontalLine(x, x + width, y, thickness, color);
-        drawHorizontalLine(x, x + width, y + height, thickness, color);
-        drawVerticalLine(x, y + height, y, thickness, color);
-        drawVerticalLine(x + width, y + height, y, thickness, color);
+    public void drawHollowRect(int x, int y, int width, int height, int thickness, int colour) {
+        drawHorizontalLine(x, x + width, y, thickness, colour);
+        drawHorizontalLine(x, x + width, y + height, thickness, colour);
+        drawVerticalLine(x, y + height, y, thickness, colour);
+        drawVerticalLine(x + width, y + height, y, thickness, colour);
     }
 
     public void drawHorizontalLine(int start, int end, int y, int thickness, int colour) {

@@ -18,7 +18,7 @@
 
 package xyz.matthewtgm.requisite.util;
 
-import gg.essential.universal.wrappers.UPlayer;
+import net.minecraft.client.Minecraft;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
@@ -42,11 +42,11 @@ public class MessageQueue implements IMessageQueue {
     }
 
     public void queue(String message, int delay) {
-
+        queue.add(new MessageQueueEntry(message, delay));
     }
 
     public void queue(String message) {
-
+        queue.add(new MessageQueueEntry(message));
     }
 
     public void run(MessageQueueEntry entry) {
@@ -56,8 +56,8 @@ public class MessageQueue implements IMessageQueue {
 
             tickCounter = 0;
 
-            if (UPlayer.hasPlayer())
-                UPlayer.getPlayer().sendChatMessage(entry.getMessage());
+            if (Minecraft.getMinecraft().thePlayer != null)
+                Minecraft.getMinecraft().thePlayer.sendChatMessage(entry.getMessage());
             queue.remove(entry);
         }
     }

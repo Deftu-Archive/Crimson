@@ -21,8 +21,10 @@ package xyz.matthewtgm.requisite;
 import net.minecraftforge.common.MinecraftForge;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import xyz.matthewtgm.requisite.core.IEventListener;
 import xyz.matthewtgm.requisite.core.IRequisite;
 import xyz.matthewtgm.requisite.core.IRequisiteManager;
+import xyz.matthewtgm.requisite.core.RequisiteEventManager;
 import xyz.matthewtgm.requisite.core.files.ConfigurationManager;
 import xyz.matthewtgm.requisite.core.files.FileManager;
 import xyz.matthewtgm.requisite.core.integration.IModIntegration;
@@ -48,6 +50,8 @@ public class RequisiteManager implements IRequisiteManager {
     private FileManager fileManager;
     private ConfigurationManager configurationManager;
     private ModIntegration modIntegration;
+    private RequisiteEventManager internalEventManager;
+    private RequisiteEventListener internalEventListener;
     private RequisiteClientSocket socket;
 
     private KeyBindRegistry keyBindRegistry;
@@ -63,7 +67,6 @@ public class RequisiteManager implements IRequisiteManager {
     private MouseHelper mouseHelper;
     private Multithreading multithreading;
     private Notifications notifications;
-    private ObjectHelper objectHelper;
     private ReflectionHelper reflectionHelper;
     private RomanNumeral romanNumerals;
     private RenderHelper renderHelper;
@@ -74,6 +77,7 @@ public class RequisiteManager implements IRequisiteManager {
 
     /* 1.8.9-specific utilities. */
     private GlHelper glHelper;
+    private GuiHelper guiHelper;
     private HypixelManager hypixelManager;
 
     public void initialize(IRequisite requisite, File gameDirectory) {
@@ -82,6 +86,8 @@ public class RequisiteManager implements IRequisiteManager {
         fileManager = new FileManager();
         configurationManager = new ConfigurationManager(new Configuration(fileManager.getRequisiteDirectory(fileManager.getTgmDevelopmentDirectory(fileManager.getConfigDirectory(gameDirectory)))));
         modIntegration = new ModIntegration(requisite);
+        internalEventManager = new RequisiteEventManager(requisite);
+        internalEventListener = new RequisiteEventListener(requisite);
         socket = new RequisiteClientSocket(fetchSocketUri(), requisite);
 
         keyBindRegistry = new KeyBindRegistry(requisite);
@@ -97,7 +103,6 @@ public class RequisiteManager implements IRequisiteManager {
         mouseHelper = new MouseHelper();
         multithreading = new Multithreading();
         notifications = new Notifications((Requisite) requisite);
-        objectHelper = new ObjectHelper();
         reflectionHelper = new ReflectionHelper();
         romanNumerals = new RomanNumeral();
         renderHelper = new RenderHelper();
@@ -107,9 +112,10 @@ public class RequisiteManager implements IRequisiteManager {
         mojangApi = new MojangAPI();
 
         glHelper = new GlHelper();
+        guiHelper = new GuiHelper();
         hypixelManager = new HypixelManager(requisite);
 
-        MinecraftForge.EVENT_BUS.register(new RequisiteEventListener());
+        MinecraftForge.EVENT_BUS.register(new RequisiteEventListener(requisite));
     }
 
     public Logger getLogger() {
@@ -130,6 +136,14 @@ public class RequisiteManager implements IRequisiteManager {
 
     public IModIntegration getModIntegration() {
         return modIntegration;
+    }
+
+    public RequisiteEventManager getInternalEventManager() {
+        return internalEventManager;
+    }
+
+    public IEventListener getInternalEventListener() {
+        return internalEventListener;
     }
 
     public RequisiteClientSocket getRequisiteSocket() {
@@ -192,10 +206,6 @@ public class RequisiteManager implements IRequisiteManager {
         return notifications;
     }
 
-    public ObjectHelper getObjectHelper() {
-        return objectHelper;
-    }
-
     public ReflectionHelper getReflectionHelper() {
         return reflectionHelper;
     }
@@ -226,6 +236,10 @@ public class RequisiteManager implements IRequisiteManager {
 
     public GlHelper getGlHelper() {
         return glHelper;
+    }
+
+    public GuiHelper getGuiHelper() {
+        return guiHelper;
     }
 
     public HypixelManager getHypixelManager() {

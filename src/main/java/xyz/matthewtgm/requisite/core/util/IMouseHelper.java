@@ -20,8 +20,8 @@ package xyz.matthewtgm.requisite.core.util;
 
 public interface IMouseHelper {
 
-    int getMouseX();
-    int getMouseY();
+    double getMouseX();
+    double getMouseY();
     boolean isMouseButtonDown();
 
 }

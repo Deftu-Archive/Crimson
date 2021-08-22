@@ -19,17 +19,43 @@
 package xyz.matthewtgm.requisite;
 
 import net.minecraftforge.client.event.ClientChatReceivedEvent;
+import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.gameevent.TickEvent;
+import xyz.matthewtgm.requisite.core.IEventListener;
+import xyz.matthewtgm.requisite.core.IRequisite;
 import xyz.matthewtgm.requisite.core.events.ChatMessageReceivedEvent;
 
-public class RequisiteEventListener {
+public class RequisiteEventListener implements IEventListener {
+
+    private final IRequisite requisite;
+
+    public RequisiteEventListener(IRequisite requisite) {
+        this.requisite = requisite;
+    }
 
     @SubscribeEvent
     public void onClientChatReceived(ClientChatReceivedEvent event) {
         if (event.type == 0 || event.type == 1) {
-            ChatMessageReceivedEvent chatMessageReceivedEvent = new ChatMessageReceivedEvent(event.message.getUnformattedText(), event.type);
-            event.setCanceled(chatMessageReceivedEvent.isCancelled());
+            event.setCanceled(requisite.getManager().getInternalEventManager().handleChatMessageReceived(event.message.getUnformattedText(), event.type));
         }
+    }
+
+    @SubscribeEvent
+    public void onGameOverlayRendered(RenderGameOverlayEvent.Post event) {
+        if (event.type == RenderGameOverlayEvent.ElementType.ALL) {
+            requisite.getManager().getInternalEventManager().handleHudRender(event.partialTicks);
+        }
+    }
+
+    @SubscribeEvent
+    public void onClientTick(TickEvent.ClientTickEvent event) {
+        requisite.getManager().getInternalEventManager().handleTick();
+    }
+
+    @SubscribeEvent
+    public void onRenderTick(TickEvent.RenderTickEvent event) {
+        requisite.getManager().getInternalEventManager().handleRenderTick(event.renderTickTime);
     }
 
 }

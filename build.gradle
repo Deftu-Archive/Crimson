@@ -59,19 +59,29 @@ dependencies {
     shade('xyz.matthewtgm:JsonTGM:2.10.0')
     shade('xyz.matthewtgm:Mango:1.2.0')
 
+    shade('org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.1-native-mt')
+    shade('org.jetbrains.kotlin:kotlin-stdlib-jdk8')
+    shade('org.jetbrains.kotlin:kotlin-reflect')
+
     shade('org.java-websocket:Java-WebSocket:1.5.2')
 
-    shade('org.spongepowered:mixin:0.7.11-SNAPSHOT')
-    annotationProcessor('org.spongepowered:mixin:0.7.11-SNAPSHOT')
+    implementation('gg.essential:elementa-1.8.9-forge:358+next')
+
+    implementation('org.spongepowered:mixin:0.7.11-SNAPSHOT')
 
     /* Dependencies for cutting other mods' file sizes. */
     shade('com.github.marcoacierno:pastebin-java-api:v0.2.1')
     shade('com.squareup.okhttp3:okhttp:4.9.1')
     shade('org.kohsuke:github-api:1.132')
 
-    shade('org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.1-native-mt')
-    shade('org.jetbrains.kotlin:kotlin-stdlib-jdk8')
-    shade('org.jetbrains.kotlin:kotlin-reflect')
+    /* Libraries used globally in all Minecraft versions that Requisite takes advantage of. */
+    implementation('net.minecraft:launchwrapper:1.12')
+
+    implementation('com.google.guava:guava:17.0')
+
+    implementation('org.apache.logging.log4j:log4j-api:2.14.1')
+    implementation('org.apache.logging.log4j:log4j-core:2.14.1')
+    implementation('org.apache.logging.log4j:log4j-slf4j18-impl:2.14.1')
 }
 
 /* Set the duplicatesStrategy and define configs. */
@@ -147,31 +157,38 @@ subprojects {
     apply plugin: "org.jetbrains.kotlin.jvm"
     apply plugin: "java"
 
+    configurations {
+        shade
+        implementation.extendsFrom(shade)
+    }
+
     ext {
         minecraft_version = ""
         minecraft_platform = ""
 
         elementa_mcversion_override = ""
         elementa_version_override = ""
-    }
 
-    repositories {
-        mavenCentral()
-        maven {
-            name = "Sk1er Public"
-            url = "https://repo.sk1er.club/repository/maven-public"
-        }
-        maven {
-            name = "SpongePowered"
-            url = 'https://repo.spongepowered.org/maven/'
-        }
-        maven {
-            name = "JitPack"
-            url = 'https://jitpack.io/'
-        }
+        mixin_version = ""
     }
 
     afterEvaluate {
+        repositories {
+            mavenCentral()
+            maven {
+                name = "Sk1er Public"
+                url = "https://repo.sk1er.club/repository/maven-public"
+            }
+            maven {
+                name = "SpongePowered"
+                url = 'https://repo.spongepowered.org/maven/'
+            }
+            maven {
+                name = "JitPack"
+                url = 'https://jitpack.io/'
+            }
+        }
+
         dependencies {
             implementation('xyz.matthewtgm:SimpleEventBus:2.0.1')
             implementation('xyz.matthewtgm:TGMConfig:3.2.0')
@@ -180,19 +197,28 @@ subprojects {
 
             implementation('org.java-websocket:Java-WebSocket:1.5.2')
 
-            implementation("gg.essential:elementa-${elementa_mcversion_override.isEmpty() ? minecraft_version : elementa_mcversion_override}-${minecraft_platform}:${elementa_version_override.isEmpty() ? "358+next" : elementa_version_override}")
+            shade("org.spongepowered:mixin:${mixin_version}")
+            def mixinProc = "org.spongepowered:mixin:${mixin_version}"
+            def (mixinMajor, mixinMinor, mixinPatch) = mixin_version.tokenize('.')
+            def mixinVer = "${mixinMajor}${mixinMinor.padLeft(2, '0')}${(mixinPatch ?: '').padLeft(2, '0')}".replaceAll("[^\\d.]", "") as int
+            if (mixinVer >= 10803)
+                mixinProc += ":processor"
+            annotationProcessor(mixinProc)
 
-            implementation('org.spongepowered:mixin:0.7.11-SNAPSHOT')
-            annotationProcessor('org.spongepowered:mixin:0.7.11-SNAPSHOT')
-
-            /* Dependencies for cutting other mods' file sizes. */
-            implementation('com.github.marcoacierno:pastebin-java-api:v0.2.1')
-            implementation('com.squareup.okhttp3:okhttp:4.9.1')
-            implementation('org.kohsuke:github-api:1.132')
+            shade("gg.essential:elementa-${elementa_mcversion_override.isEmpty() ? minecraft_version : elementa_mcversion_override}-${minecraft_platform}:${elementa_version_override.isEmpty() ? "358+next" : elementa_version_override}") {
+                transitive = false
+            }
+            shade("gg.essential:universalcraft-${elementa_mcversion_override.isEmpty() ? minecraft_version : elementa_mcversion_override}-${minecraft_platform}:${elementa_version_override.isEmpty() ? "next-SNAPSHOT" : elementa_version_override}") {
+                transitive = false
+            }
 
             implementation('org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.1-native-mt')
             implementation('org.jetbrains.kotlin:kotlin-stdlib-jdk8')
             implementation('org.jetbrains.kotlin:kotlin-reflect')
+        }
+
+        shadowJar {
+
         }
     }
 }

@@ -1,13 +1,12 @@
 {
+  "compatibilityLevel": "JAVA_16",
   "package": "xyz.matthewtgm.requisite.mixins",
-  "minVersion": "0.7",
-  "compatibilityLevel": "JAVA_8",
   "verbose": true,
   "refmap": "mixins.requisite.refmap.json",
   "target":  "@env(CLIENT)",
   "mixins": [
-    "client.MinecraftMixin",
+    "client.MinecraftClientMixin",
 
-    "gui.GuiScreenMixin"
+    "gui.InGameHudMixin"
   ]
 }
