@@ -46,6 +46,8 @@ import java.io.File;
 
 public class RequisiteManager implements IRequisiteManager {
 
+    private boolean initialized;
+
     private Logger logger;
     private SimpleEventBus eventBus;
     private FileManager fileManager;
@@ -82,6 +84,9 @@ public class RequisiteManager implements IRequisiteManager {
     private HypixelManager hypixelManager;
 
     public void initialize(IRequisite requisite, File gameDirectory) {
+        if (initialized)
+            return;
+
         logger = LogManager.getLogger("Requisite");
         eventBus = new SimpleEventBus();
         fileManager = new FileManager();
@@ -117,133 +122,171 @@ public class RequisiteManager implements IRequisiteManager {
         hypixelManager = new HypixelManager(requisite);
 
         MinecraftForge.EVENT_BUS.register(new RequisiteEventListener(requisite));
+
+        initialized = true;
+    }
+
+    public boolean initialized() {
+        return initialized;
     }
 
     public Logger getLogger() {
+        checkInitialized();
         return logger;
     }
 
     public SimpleEventBus getEventBus() {
+        checkInitialized();
         return eventBus;
     }
 
     public FileManager getFileManager() {
+        checkInitialized();
         return fileManager;
     }
 
     public ConfigurationManager getConfigurationManager() {
+        checkInitialized();
         return configurationManager;
     }
 
     public IModIntegration getModIntegration() {
+        checkInitialized();
         return modIntegration;
     }
 
     public RequisiteEventManager getInternalEventManager() {
+        checkInitialized();
         return internalEventManager;
     }
 
     public IEventListener getInternalEventListener() {
+        checkInitialized();
         return internalEventListener;
     }
 
     public RequisiteClientSocket getRequisiteSocket() {
+        checkInitialized();
         return socket;
     }
 
     public void openMenu() {
+        checkInitialized();
         guiHelper.open(new RequisiteMenu());
     }
 
     public KeyBindRegistry getKeyBindRegistry() {
+        checkInitialized();
         return keyBindRegistry;
     }
 
     public EnhancedFontRenderer getEnhancedFontRenderer() {
+        checkInitialized();
         return enhancedFontRenderer;
     }
 
     public IChatHelper getChatHelper() {
+        checkInitialized();
         return chatHelper;
     }
 
     public ColourHelper getColourHelper() {
+        checkInitialized();
         return colourHelper;
     }
 
     public LoggingHelper getLoggingHelper() {
+        checkInitialized();
         return loggingHelper;
     }
 
     public UniversalLogger getUniversalLogger() {
+        checkInitialized();
         return universalLogger;
     }
 
     public ClipboardHelper getClipboardHelper() {
+        checkInitialized();
         return clipboardHelper;
     }
 
     public DateHelper getDateHelper() {
+        checkInitialized();
         return dateHelper;
     }
 
     public EasingHelper getEasingHelper() {
+        checkInitialized();
         return easingHelper;
     }
 
     public MathHelper getMathHelper() {
+        checkInitialized();
         return mathHelper;
     }
 
     public IMouseHelper getMouseHelper() {
+        checkInitialized();
         return mouseHelper;
     }
 
     public Multithreading getMultithreading() {
+        checkInitialized();
         return multithreading;
     }
 
     public INotifications getNotifications() {
+        checkInitialized();
         return notifications;
     }
 
     public ReflectionHelper getReflectionHelper() {
+        checkInitialized();
         return reflectionHelper;
     }
 
     public RomanNumeral getRomanNumerals() {
+        checkInitialized();
         return romanNumerals;
     }
 
     public IRenderHelper getRenderHelper() {
+        checkInitialized();
         return renderHelper;
     }
 
     public IStringHelper getStringHelper() {
+        checkInitialized();
         return stringHelper;
     }
 
     public IMessageQueue getMessageQueue() {
+        checkInitialized();
         return messageQueue;
     }
 
     public IServerHelper getServerHelper() {
+        checkInitialized();
         return serverHelper;
     }
 
     public MojangAPI getMojangApi() {
+        checkInitialized();
         return mojangApi;
     }
 
     public GlHelper getGlHelper() {
+        checkInitialized();
         return glHelper;
     }
 
     public GuiHelper getGuiHelper() {
+        checkInitialized();
         return guiHelper;
     }
 
     public HypixelManager getHypixelManager() {
+        checkInitialized();
         return hypixelManager;
     }
 

@@ -209,8 +209,9 @@ subprojects {
 
             shade("gg.essential:elementa-${elementa_mcversion_override.isEmpty() ? minecraft_version : elementa_mcversion_override}-${minecraft_platform}:${elementa_version_override.isEmpty() ? "358+next" : elementa_version_override}") {
                 exclude group: 'net.fabricmc'
+                exclude group: 'gg.essential.universal'
             }
-            shade("gg.essential:universalcraft-${universalcraft_mcversion_override.isEmpty() ? minecraft_version : universalcraft_mcversion_override}-${minecraft_platform}:${universalcraft_version_override.isEmpty() ? "156+next" : universalcraft_version_override}") {
+            shade("gg.essential:universalcraft-${universalcraft_mcversion_override.isEmpty() ? minecraft_version : universalcraft_mcversion_override}-${minecraft_platform}:${universalcraft_version_override.isEmpty() ? "152+next" : universalcraft_version_override}") {
                 exclude group: 'net.fabricmc'
             }
 

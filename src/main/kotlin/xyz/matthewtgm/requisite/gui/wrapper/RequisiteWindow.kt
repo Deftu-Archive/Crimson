@@ -26,7 +26,7 @@ class RequisiteWindow(
 
     val navbar = UIContainer().constrain {
         width = 100.percent()
-        height = 8.percent()
+        height = 20.pixels()
     } childOf background
     val navbarBackground = UIBlock(Color(71, 71, 71, 138)).constrain {
         width = 100.percent()
@@ -73,7 +73,7 @@ class RequisiteWindow(
         x = 2.pixels(alignOpposite = true)
         y = CenterConstraint()
     } childOf navbar
-    val backIcon = UIImage.ofResource("/assets/requisite/gui/icons/exit.png").constrain {
+    val backIcon = UIImage.ofResource("/gui/icons/exit.png").constrain {
         x = CenterConstraint()
         y = CenterConstraint()
         width = 32.pixels()

@@ -58,8 +58,6 @@ minecraft {
     replace('@ID@', mod_id)
     replace('@VER@', mod_ver)
     mappings = "stable_22"
-
-    clientRunArgs += "--mixin mixins.requisite.json"
 }
 
 repositories {
