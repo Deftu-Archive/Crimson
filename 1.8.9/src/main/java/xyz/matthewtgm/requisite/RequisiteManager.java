@@ -33,6 +33,7 @@ import xyz.matthewtgm.requisite.core.networking.RequisiteClientSocket;
 import xyz.matthewtgm.requisite.core.notifications.INotifications;
 import xyz.matthewtgm.requisite.core.util.*;
 import xyz.matthewtgm.requisite.core.util.messages.IMessageQueue;
+import xyz.matthewtgm.requisite.gui.RequisiteMenu;
 import xyz.matthewtgm.requisite.hypixel.HypixelManager;
 import xyz.matthewtgm.requisite.integration.ModIntegration;
 import xyz.matthewtgm.requisite.notifications.Notifications;
@@ -151,7 +152,7 @@ public class RequisiteManager implements IRequisiteManager {
     }
 
     public void openMenu() {
-        universalLogger.info("Tried to open menu LMFAOOO");
+        guiHelper.open(new RequisiteMenu());
     }
 
     public KeyBindRegistry getKeyBindRegistry() {

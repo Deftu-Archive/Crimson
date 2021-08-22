@@ -11,6 +11,8 @@ ext {
     elementa_mcversion_override = "1.17"
     elementa_version_override = "359+next"
 
+    universalcraft_mcversion_override = "1.17"
+
     mixin_version = "0.8.2"
 }
 

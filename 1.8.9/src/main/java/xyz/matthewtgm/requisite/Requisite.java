@@ -41,6 +41,7 @@ public class Requisite implements IRequisite {
 
         manager.initialize(this, gameDirectory);
         postInitialize();
+        manager.openMenu();
     }
 
     public RequisiteManager getManager() {

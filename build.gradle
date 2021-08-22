@@ -168,6 +168,8 @@ subprojects {
 
         elementa_mcversion_override = ""
         elementa_version_override = ""
+        universalcraft_mcversion_override = ""
+        universalcraft_version_override = ""
 
         mixin_version = ""
     }
@@ -206,10 +208,10 @@ subprojects {
             annotationProcessor(mixinProc)
 
             shade("gg.essential:elementa-${elementa_mcversion_override.isEmpty() ? minecraft_version : elementa_mcversion_override}-${minecraft_platform}:${elementa_version_override.isEmpty() ? "358+next" : elementa_version_override}") {
-                transitive = false
+                exclude group: 'net.fabricmc'
             }
-            shade("gg.essential:universalcraft-${elementa_mcversion_override.isEmpty() ? minecraft_version : elementa_mcversion_override}-${minecraft_platform}:${elementa_version_override.isEmpty() ? "next-SNAPSHOT" : elementa_version_override}") {
-                transitive = false
+            shade("gg.essential:universalcraft-${universalcraft_mcversion_override.isEmpty() ? minecraft_version : universalcraft_mcversion_override}-${minecraft_platform}:${universalcraft_version_override.isEmpty() ? "156+next" : universalcraft_version_override}") {
+                exclude group: 'net.fabricmc'
             }
 
             implementation('org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.1-native-mt')
