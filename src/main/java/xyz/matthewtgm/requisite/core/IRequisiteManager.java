@@ -23,6 +23,8 @@ import xyz.matthewtgm.json.entities.JsonObject;
 import xyz.matthewtgm.json.util.JsonApiHelper;
 import xyz.matthewtgm.requisite.core.files.ConfigurationManager;
 import xyz.matthewtgm.requisite.core.files.FileManager;
+import xyz.matthewtgm.requisite.core.hud.HudRegistry;
+import xyz.matthewtgm.requisite.core.hypixel.HypixelHelper;
 import xyz.matthewtgm.requisite.core.integration.IModIntegration;
 import xyz.matthewtgm.requisite.core.keybinds.KeyBindRegistry;
 import xyz.matthewtgm.requisite.core.networking.RequisiteClientSocket;
@@ -62,8 +64,10 @@ public interface IRequisiteManager {
 
     /* Utilities. */
     KeyBindRegistry getKeyBindRegistry();
+    HudRegistry getHudRegistry();
 
     IEnhancedFontRenderer getEnhancedFontRenderer();
+    IPlayerHelper getPlayerHelper();
     IChatHelper getChatHelper();
     ColourHelper getColourHelper();
     LoggingHelper getLoggingHelper();
@@ -76,7 +80,9 @@ public interface IRequisiteManager {
     Multithreading getMultithreading();
     INotifications getNotifications();
     ReflectionHelper getReflectionHelper();
+    IPositionHelper getPositionHelper();
     RomanNumeral getRomanNumerals();
+    HypixelHelper getHypixelHelper();
     IRenderHelper getRenderHelper();
     IStringHelper getStringHelper();
     IMessageQueue getMessageQueue();

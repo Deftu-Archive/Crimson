@@ -16,9 +16,9 @@
  * along with Requisite. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package xyz.matthewtgm.requisite.hypixel.events;
+package xyz.matthewtgm.requisite.core.hypixel.events;
 
-import xyz.matthewtgm.requisite.hypixel.locraw.HypixelLocraw;
+import xyz.matthewtgm.requisite.core.hypixel.locraw.HypixelLocraw;
 import xyz.matthewtgm.simpleeventbus.Event;
 
 public class LocrawReceivedEvent extends Event {

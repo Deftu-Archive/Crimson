@@ -18,7 +18,10 @@
 
 package xyz.matthewtgm.requisite.core.files;
 
+import xyz.matthewtgm.tgmconfig.Configuration;
+
 public interface IConfigurable {
     void save(ConfigurationManager configurationManager);
     void load(ConfigurationManager configurationManager);
+    Configuration mainConfig();
 }

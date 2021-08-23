@@ -16,7 +16,7 @@
  * along with Requisite. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package xyz.matthewtgm.requisite.hypixel.locraw;
+package xyz.matthewtgm.requisite.core.hypixel.locraw;
 
 import xyz.matthewtgm.json.entities.JsonObject;
 import xyz.matthewtgm.json.serialization.JsonSerializer;

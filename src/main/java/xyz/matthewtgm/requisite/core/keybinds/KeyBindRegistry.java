@@ -64,7 +64,7 @@ public class KeyBindRegistry implements IConfigurable {
                     break;
                 }
             }
-            if (categoryStillPresent) {
+            if (!categoryStillPresent) {
                 categories.remove(category);
             }
         }
@@ -81,7 +81,7 @@ public class KeyBindRegistry implements IConfigurable {
     }
 
     public void save(KeyBind keyBind) {
-        Configuration configuration = requisite.getManager().getConfigurationManager().getConfiguration();
+        Configuration configuration = mainConfig();
         if (!configuration.hasKey("keybinds"))
             configuration.createSubconfiguration("keybinds");
         Subconfiguration keyBindsConfiguration = configuration.getSubconfiguration("keybinds");
@@ -100,7 +100,7 @@ public class KeyBindRegistry implements IConfigurable {
     }
 
     public void load(KeyBind keyBind) {
-        Configuration configuration = requisite.getManager().getConfigurationManager().getConfiguration();
+        Configuration configuration = mainConfig();
         if (!configuration.hasKey("keybinds"))
             configuration.createSubconfiguration("keybinds");
         Subconfiguration keyBindsConfiguration = configuration.getSubconfiguration("keybinds");
@@ -113,6 +113,10 @@ public class KeyBindRegistry implements IConfigurable {
             JsonElement keyBindElement = categoryConfiguration.get(keyBind.getName());
             keyBind.updateKey(keyBindElement.isDouble() ? (int) keyBindElement.getAsDouble() : keyBindElement.isFloat() ? (int) keyBindElement.getAsFloat() : keyBindElement.getAsInt());
         }
+    }
+
+    public Configuration mainConfig() {
+        return requisite.getManager().getConfigurationManager().getConfiguration();
     }
 
     public List<KeyBind> getKeyBinds() {

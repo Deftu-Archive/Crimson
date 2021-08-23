@@ -27,6 +27,7 @@ import xyz.matthewtgm.requisite.core.IRequisiteManager;
 import xyz.matthewtgm.requisite.core.RequisiteEventManager;
 import xyz.matthewtgm.requisite.core.files.ConfigurationManager;
 import xyz.matthewtgm.requisite.core.files.FileManager;
+import xyz.matthewtgm.requisite.core.hud.HudRegistry;
 import xyz.matthewtgm.requisite.core.integration.IModIntegration;
 import xyz.matthewtgm.requisite.core.keybinds.KeyBindRegistry;
 import xyz.matthewtgm.requisite.core.networking.RequisiteClientSocket;
@@ -34,7 +35,7 @@ import xyz.matthewtgm.requisite.core.notifications.INotifications;
 import xyz.matthewtgm.requisite.core.util.*;
 import xyz.matthewtgm.requisite.core.util.messages.IMessageQueue;
 import xyz.matthewtgm.requisite.gui.RequisiteMenu;
-import xyz.matthewtgm.requisite.hypixel.HypixelManager;
+import xyz.matthewtgm.requisite.core.hypixel.HypixelHelper;
 import xyz.matthewtgm.requisite.integration.ModIntegration;
 import xyz.matthewtgm.requisite.notifications.Notifications;
 import xyz.matthewtgm.requisite.rendering.EnhancedFontRenderer;
@@ -58,7 +59,10 @@ public class RequisiteManager implements IRequisiteManager {
     private RequisiteClientSocket socket;
 
     private KeyBindRegistry keyBindRegistry;
+    private HudRegistry hudRegistry;
+
     private EnhancedFontRenderer enhancedFontRenderer;
+    private PlayerHelper playerHelper;
     private ChatHelper chatHelper;
     private ColourHelper colourHelper;
     private LoggingHelper loggingHelper;
@@ -71,7 +75,9 @@ public class RequisiteManager implements IRequisiteManager {
     private Multithreading multithreading;
     private Notifications notifications;
     private ReflectionHelper reflectionHelper;
+    private PositionHelper positionHelper;
     private RomanNumeral romanNumerals;
+    private HypixelHelper hypixelHelper;
     private RenderHelper renderHelper;
     private StringHelper stringHelper;
     private MessageQueue messageQueue;
@@ -81,7 +87,6 @@ public class RequisiteManager implements IRequisiteManager {
     /* 1.8.9-specific utilities. */
     private GlHelper glHelper;
     private GuiHelper guiHelper;
-    private HypixelManager hypixelManager;
 
     public void initialize(IRequisite requisite, File gameDirectory) {
         if (initialized)
@@ -97,7 +102,10 @@ public class RequisiteManager implements IRequisiteManager {
         socket = new RequisiteClientSocket(fetchSocketUri(), requisite);
 
         keyBindRegistry = new KeyBindRegistry(requisite);
+        hudRegistry = new HudRegistry(requisite);
+
         enhancedFontRenderer = new EnhancedFontRenderer(requisite);
+        playerHelper = new PlayerHelper();
         chatHelper = new ChatHelper();
         colourHelper = new ColourHelper();
         loggingHelper = new LoggingHelper();
@@ -110,7 +118,9 @@ public class RequisiteManager implements IRequisiteManager {
         multithreading = new Multithreading();
         notifications = new Notifications((Requisite) requisite);
         reflectionHelper = new ReflectionHelper();
+        positionHelper = new PositionHelper();
         romanNumerals = new RomanNumeral();
+        hypixelHelper = new HypixelHelper(requisite);
         renderHelper = new RenderHelper();
         stringHelper = new StringHelper();
         messageQueue = new MessageQueue(requisite);
@@ -119,7 +129,6 @@ public class RequisiteManager implements IRequisiteManager {
 
         glHelper = new GlHelper();
         guiHelper = new GuiHelper();
-        hypixelManager = new HypixelManager(requisite);
 
         MinecraftForge.EVENT_BUS.register(new RequisiteEventListener(requisite));
 
@@ -180,9 +189,19 @@ public class RequisiteManager implements IRequisiteManager {
         return keyBindRegistry;
     }
 
+    public HudRegistry getHudRegistry() {
+        checkInitialized();
+        return hudRegistry;
+    }
+
     public EnhancedFontRenderer getEnhancedFontRenderer() {
         checkInitialized();
         return enhancedFontRenderer;
+    }
+
+    public IPlayerHelper getPlayerHelper() {
+        checkInitialized();
+        return playerHelper;
     }
 
     public IChatHelper getChatHelper() {
@@ -245,9 +264,18 @@ public class RequisiteManager implements IRequisiteManager {
         return reflectionHelper;
     }
 
+    public IPositionHelper getPositionHelper() {
+        return positionHelper;
+    }
+
     public RomanNumeral getRomanNumerals() {
         checkInitialized();
         return romanNumerals;
+    }
+
+    public HypixelHelper getHypixelHelper() {
+        checkInitialized();
+        return hypixelHelper;
     }
 
     public IRenderHelper getRenderHelper() {
@@ -283,11 +311,6 @@ public class RequisiteManager implements IRequisiteManager {
     public GuiHelper getGuiHelper() {
         checkInitialized();
         return guiHelper;
-    }
-
-    public HypixelManager getHypixelManager() {
-        checkInitialized();
-        return hypixelManager;
     }
 
 }

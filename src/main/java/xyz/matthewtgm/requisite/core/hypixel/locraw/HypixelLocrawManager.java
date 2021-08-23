@@ -16,19 +16,16 @@
  * along with Requisite. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package xyz.matthewtgm.requisite.hypixel.locraw;
+package xyz.matthewtgm.requisite.core.hypixel.locraw;
 
-import net.minecraft.client.Minecraft;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.world.WorldEvent;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import xyz.matthewtgm.json.entities.JsonObject;
 import xyz.matthewtgm.json.parser.JsonParser;
 import xyz.matthewtgm.json.util.JsonHelper;
 import xyz.matthewtgm.requisite.core.IRequisite;
 import xyz.matthewtgm.requisite.core.events.ChatMessageReceivedEvent;
-import xyz.matthewtgm.requisite.hypixel.HypixelManager;
-import xyz.matthewtgm.requisite.hypixel.events.LocrawReceivedEvent;
+import xyz.matthewtgm.requisite.core.events.WorldLoadEvent;
+import xyz.matthewtgm.requisite.core.hypixel.HypixelHelper;
+import xyz.matthewtgm.requisite.core.hypixel.events.LocrawReceivedEvent;
 import xyz.matthewtgm.simpleeventbus.EventSubscriber;
 
 import java.util.concurrent.TimeUnit;
@@ -36,19 +33,19 @@ import java.util.concurrent.TimeUnit;
 public class HypixelLocrawManager {
 
     private final IRequisite requisite;
-    private final HypixelManager hypixelManager;
+    private final HypixelHelper hypixelManager;
 
     private HypixelLocraw locraw;
     private boolean allowCancel;
 
-    public HypixelLocrawManager(IRequisite requisite, HypixelManager hypixelManager) {
+    public HypixelLocrawManager(IRequisite requisite, HypixelHelper hypixelManager) {
         this.requisite = requisite;
         this.hypixelManager = hypixelManager;
-        MinecraftForge.EVENT_BUS.register(this);
+        requisite.getManager().getEventBus().register(this);
     }
 
-    @SubscribeEvent
-    protected void onWorldLoad(WorldEvent.Load event) {
+    @EventSubscriber
+    protected void onWorldLoad(WorldLoadEvent event) {
         locraw = null;
         allowCancel = false;
 
@@ -81,7 +78,7 @@ public class HypixelLocrawManager {
     public void enqueueUpdate(int interval) {
         if (!allowCancel) {
             allowCancel = true;
-            requisite.getManager().getMultithreading().schedule(() -> Minecraft.getMinecraft().thePlayer.sendChatMessage("/locraw"), interval, TimeUnit.MILLISECONDS);
+            requisite.getManager().getMultithreading().schedule(() -> requisite.getManager().getMessageQueue().queue("/locraw"), interval, TimeUnit.MILLISECONDS);
         }
     }
 

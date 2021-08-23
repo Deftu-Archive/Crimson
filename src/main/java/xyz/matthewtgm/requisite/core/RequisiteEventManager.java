@@ -35,6 +35,10 @@ public final class RequisiteEventManager {
         return parseCancellable(new ChatMessageReceivedEvent(message, type));
     }
 
+    public void handleWorldLoad() {
+        requisite.getManager().getEventBus().call(new WorldLoadEvent());
+    }
+
     private boolean parseCancellable(Event event) {
         requisite.getManager().getEventBus().call(event);
         return event.isCancellable() && event.isCancelled();
