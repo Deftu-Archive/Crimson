@@ -20,6 +20,7 @@ package xyz.matthewtgm.requisite.util;
 
 import gg.essential.universal.UMinecraft;
 import gg.essential.universal.UScreen;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.GuiConnecting;
 import xyz.matthewtgm.requisite.core.util.IServerHelper;
 
@@ -31,6 +32,16 @@ public class ServerHelper implements IServerHelper {
 
     public void join(String ip) {
         join(ip, 25565);
+    }
+
+    public String getBrand() {
+        if (Minecraft.getMinecraft().thePlayer == null)
+            return null;
+        return Minecraft.getMinecraft().thePlayer.getClientBrand();
+    }
+
+    public boolean isSingleplayer() {
+        return Minecraft.getMinecraft().isSingleplayer();
     }
 
 }

@@ -44,12 +44,6 @@ public interface IRequisiteManager {
     void initialize(IRequisite requisite, File gameDirectory);
     boolean initialized();
 
-    default void checkInitialized() {
-        if (!initialized()) {
-            throw new UnsupportedOperationException();
-        }
-    }
-
     /* Requisite services. */
     Logger getLogger();
     SimpleEventBus getEventBus();

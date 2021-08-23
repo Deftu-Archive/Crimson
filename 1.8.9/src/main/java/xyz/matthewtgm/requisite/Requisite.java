@@ -19,8 +19,12 @@
 package xyz.matthewtgm.requisite;
 
 import net.minecraftforge.fml.common.Mod;
+import org.lwjgl.input.Keyboard;
 import xyz.matthewtgm.requisite.core.IRequisite;
+import xyz.matthewtgm.requisite.core.data.IScreenPosition;
+import xyz.matthewtgm.requisite.core.hud.HudElement;
 import xyz.matthewtgm.requisite.core.integration.ModMetadata;
+import xyz.matthewtgm.requisite.core.keybinds.KeyBind;
 
 import java.io.File;
 
@@ -41,6 +45,19 @@ public class Requisite implements IRequisite {
 
         manager.initialize(this, gameDirectory);
         postInitialize();
+
+        manager.getKeyBindRegistry().register(new KeyBind("Requisite", "Requisite", Keyboard.KEY_N) {
+            public void press() {
+                manager.getLogger().warn("press");
+            }
+            public void hold() {
+                manager.getLogger().warn("hold");
+            }
+            public void release() {
+                manager.getLogger().warn("release");
+            }
+        });
+
         manager.openMenu();
     }
 

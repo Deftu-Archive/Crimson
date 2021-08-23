@@ -20,8 +20,10 @@ package xyz.matthewtgm.requisite.core.keybinds;
 
 import xyz.matthewtgm.json.entities.JsonElement;
 import xyz.matthewtgm.requisite.core.IRequisite;
+import xyz.matthewtgm.requisite.core.events.KeyInputEvent;
 import xyz.matthewtgm.requisite.core.files.ConfigurationManager;
 import xyz.matthewtgm.requisite.core.files.IConfigurable;
+import xyz.matthewtgm.simpleeventbus.EventSubscriber;
 import xyz.matthewtgm.tgmconfig.Configuration;
 import xyz.matthewtgm.tgmconfig.Subconfiguration;
 
@@ -38,6 +40,7 @@ public class KeyBindRegistry implements IConfigurable {
 
     public KeyBindRegistry(IRequisite requisite) {
         this.requisite = requisite;
+        requisite.getManager().getEventBus().register(this);
     }
 
     public void register(KeyBind keyBind) {
@@ -117,6 +120,25 @@ public class KeyBindRegistry implements IConfigurable {
 
     public Configuration mainConfig() {
         return requisite.getManager().getConfigurationManager().getConfiguration();
+    }
+
+    @EventSubscriber
+    private void onKeyInput(KeyInputEvent event) {
+        for (KeyBind keyBind : keyBinds) {
+            if (keyBind.getKey() == event.keyCode) {
+                if (event.down && !event.repeated) {
+                    keyBind.press();
+                }
+
+                if (event.down && event.repeated) {
+                    keyBind.hold();
+                }
+
+                if (!event.down) {
+                    keyBind.release();
+                }
+            }
+        }
     }
 
     public List<KeyBind> getKeyBinds() {

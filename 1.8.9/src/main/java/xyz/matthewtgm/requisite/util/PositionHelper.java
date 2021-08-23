@@ -6,7 +6,7 @@ import xyz.matthewtgm.requisite.data.ScreenPosition;
 public class PositionHelper implements IPositionHelper {
 
     public ScreenPosition createDefaultPosition() {
-        return ScreenPosition.fromRaw(10, 10);
+        return ScreenPosition.fromRaw(30, 30);
     }
 
     public ScreenPosition createPosition(float x, float y) {

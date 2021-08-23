@@ -95,14 +95,14 @@ public class RequisiteManager implements IRequisiteManager {
         logger = LogManager.getLogger("Requisite");
         eventBus = new SimpleEventBus();
         fileManager = new FileManager();
-        configurationManager = new ConfigurationManager(new Configuration(fileManager.getRequisiteDirectory(fileManager.getTgmDevelopmentDirectory(fileManager.getConfigDirectory(gameDirectory)))));
+        configurationManager = new ConfigurationManager(new Configuration(new File(fileManager.getRequisiteDirectory(fileManager.getTgmDevelopmentDirectory(fileManager.getConfigDirectory(gameDirectory))), "@NAME@")));
         modIntegration = new ModIntegration(requisite);
         internalEventManager = new RequisiteEventManager(requisite);
         internalEventListener = new RequisiteEventListener(requisite);
         socket = new RequisiteClientSocket(fetchSocketUri(), requisite);
 
-        keyBindRegistry = new KeyBindRegistry(requisite);
-        hudRegistry = new HudRegistry(requisite);
+        configurationManager.addConfigurable(keyBindRegistry = new KeyBindRegistry(requisite));
+        configurationManager.addConfigurable(hudRegistry = new HudRegistry(requisite));
 
         enhancedFontRenderer = new EnhancedFontRenderer(requisite);
         playerHelper = new PlayerHelper();
@@ -140,127 +140,102 @@ public class RequisiteManager implements IRequisiteManager {
     }
 
     public Logger getLogger() {
-        checkInitialized();
         return logger;
     }
 
     public SimpleEventBus getEventBus() {
-        checkInitialized();
         return eventBus;
     }
 
     public FileManager getFileManager() {
-        checkInitialized();
         return fileManager;
     }
 
     public ConfigurationManager getConfigurationManager() {
-        checkInitialized();
         return configurationManager;
     }
 
     public IModIntegration getModIntegration() {
-        checkInitialized();
         return modIntegration;
     }
 
     public RequisiteEventManager getInternalEventManager() {
-        checkInitialized();
         return internalEventManager;
     }
 
     public IEventListener getInternalEventListener() {
-        checkInitialized();
         return internalEventListener;
     }
 
     public RequisiteClientSocket getRequisiteSocket() {
-        checkInitialized();
         return socket;
     }
 
     public void openMenu() {
-        checkInitialized();
         guiHelper.open(new RequisiteMenu());
     }
 
     public KeyBindRegistry getKeyBindRegistry() {
-        checkInitialized();
         return keyBindRegistry;
     }
 
     public HudRegistry getHudRegistry() {
-        checkInitialized();
         return hudRegistry;
     }
 
     public EnhancedFontRenderer getEnhancedFontRenderer() {
-        checkInitialized();
         return enhancedFontRenderer;
     }
 
     public IPlayerHelper getPlayerHelper() {
-        checkInitialized();
         return playerHelper;
     }
 
     public IChatHelper getChatHelper() {
-        checkInitialized();
         return chatHelper;
     }
 
     public ColourHelper getColourHelper() {
-        checkInitialized();
         return colourHelper;
     }
 
     public LoggingHelper getLoggingHelper() {
-        checkInitialized();
         return loggingHelper;
     }
 
     public UniversalLogger getUniversalLogger() {
-        checkInitialized();
         return universalLogger;
     }
 
     public ClipboardHelper getClipboardHelper() {
-        checkInitialized();
         return clipboardHelper;
     }
 
     public DateHelper getDateHelper() {
-        checkInitialized();
         return dateHelper;
     }
 
     public EasingHelper getEasingHelper() {
-        checkInitialized();
         return easingHelper;
     }
 
     public MathHelper getMathHelper() {
-        checkInitialized();
         return mathHelper;
     }
 
     public IMouseHelper getMouseHelper() {
-        checkInitialized();
         return mouseHelper;
     }
 
     public Multithreading getMultithreading() {
-        checkInitialized();
         return multithreading;
     }
 
     public INotifications getNotifications() {
-        checkInitialized();
         return notifications;
     }
 
     public ReflectionHelper getReflectionHelper() {
-        checkInitialized();
         return reflectionHelper;
     }
 
@@ -269,47 +244,38 @@ public class RequisiteManager implements IRequisiteManager {
     }
 
     public RomanNumeral getRomanNumerals() {
-        checkInitialized();
         return romanNumerals;
     }
 
     public HypixelHelper getHypixelHelper() {
-        checkInitialized();
         return hypixelHelper;
     }
 
     public IRenderHelper getRenderHelper() {
-        checkInitialized();
         return renderHelper;
     }
 
     public IStringHelper getStringHelper() {
-        checkInitialized();
         return stringHelper;
     }
 
     public IMessageQueue getMessageQueue() {
-        checkInitialized();
         return messageQueue;
     }
 
     public IServerHelper getServerHelper() {
-        checkInitialized();
         return serverHelper;
     }
 
     public MojangAPI getMojangApi() {
-        checkInitialized();
         return mojangApi;
     }
 
     public GlHelper getGlHelper() {
-        checkInitialized();
         return glHelper;
     }
 
     public GuiHelper getGuiHelper() {
-        checkInitialized();
         return guiHelper;
     }
 

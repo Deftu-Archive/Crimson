@@ -2,6 +2,7 @@ package xyz.matthewtgm.requisite.core.hud;
 
 import xyz.matthewtgm.json.entities.JsonObject;
 import xyz.matthewtgm.requisite.core.IRequisite;
+import xyz.matthewtgm.requisite.core.data.IScreenPosition;
 import xyz.matthewtgm.requisite.core.events.RenderHudEvent;
 import xyz.matthewtgm.requisite.core.files.ConfigurationManager;
 import xyz.matthewtgm.requisite.core.files.IConfigurable;
@@ -26,6 +27,7 @@ public class HudRegistry implements IConfigurable {
 
     public void register(HudElement element) {
         if (!elements.contains(element)) {
+            element.initialize(requisite);
             elements.add(element);
 
             load(element);
@@ -84,13 +86,24 @@ public class HudRegistry implements IConfigurable {
         return requisite.getManager().getConfigurationManager().getConfiguration();
     }
 
-    @EventSubscriber
-    private void onHudRender(RenderHudEvent event) {
+    public void render(float partialTicks) {
         for (HudElement element : elements) {
             if (element.toggleSetting.get()) {
-                element.render(element.positionSetting.get(), event.partialTicks);
+                System.out.println(element);
+                IScreenPosition position = element.positionSetting.get();
+                System.out.println(position.getX() + " | " + position.getY());
+                element.render(element.positionSetting.get(), partialTicks);
             }
         }
+    }
+
+    @EventSubscriber
+    private void onHudRender(RenderHudEvent event) {
+        render(event.partialTicks);
+    }
+
+    public List<HudElement> getElements() {
+        return elements;
     }
 
 }

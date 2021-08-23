@@ -45,7 +45,7 @@ public class RequisiteEventListener implements IEventListener {
 
     @SubscribeEvent
     public void onKeyInput(InputEvent.KeyInputEvent event) {
-        requisite.getManager().getInternalEventManager().handleKeyInput(Keyboard.getEventKey());
+        requisite.getManager().getInternalEventManager().handleKeyInput(Keyboard.getEventKey(), Keyboard.getEventKeyState(), Keyboard.isRepeatEvent());
     }
 
     @SubscribeEvent
