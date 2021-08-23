@@ -72,9 +72,12 @@ public class HudRegistry implements IConfigurable {
         Configuration configuration = mainConfig();
         if (!configuration.hasKey("hud"))
             configuration.createSubconfiguration("hud");
-        Subconfiguration keyBindsConfiguration = configuration.getSubconfiguration("hud");
+        Subconfiguration hudConfiguration = configuration.getSubconfiguration("hud");
 
-        JsonObject elementSettings = new JsonObject();
+        if (!hudConfiguration.hasKey(element.getName()))
+            return;
+
+        JsonObject elementSettings = hudConfiguration.getAsJsonObject(element.getName());
         for (BaseSetting setting : element.getSettings()) {
             if (elementSettings.hasKey(setting.jsonKey())) {
                 setting.set(elementSettings.get(setting.jsonKey()).getAsJsonPrimitive().getValue());
