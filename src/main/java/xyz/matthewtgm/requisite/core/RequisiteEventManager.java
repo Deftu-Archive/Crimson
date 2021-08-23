@@ -35,6 +35,10 @@ public final class RequisiteEventManager {
         return parseCancellable(new ChatMessageReceivedEvent(message, type));
     }
 
+    public void handleKeyInput(int keyCode) {
+        requisite.getManager().getEventBus().call(new KeyInputEvent(keyCode));
+    }
+
     public void handleWorldLoad() {
         requisite.getManager().getEventBus().call(new WorldLoadEvent());
     }

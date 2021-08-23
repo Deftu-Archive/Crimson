@@ -20,11 +20,13 @@ package xyz.matthewtgm.requisite;
 
 import net.minecraftforge.client.event.ClientChatReceivedEvent;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
+import net.minecraftforge.event.world.WorldEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.gameevent.InputEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
+import org.lwjgl.input.Keyboard;
 import xyz.matthewtgm.requisite.core.IEventListener;
 import xyz.matthewtgm.requisite.core.IRequisite;
-import xyz.matthewtgm.requisite.core.events.ChatMessageReceivedEvent;
 
 public class RequisiteEventListener implements IEventListener {
 
@@ -42,6 +44,11 @@ public class RequisiteEventListener implements IEventListener {
     }
 
     @SubscribeEvent
+    public void onKeyInput(InputEvent.KeyInputEvent event) {
+        requisite.getManager().getInternalEventManager().handleKeyInput(Keyboard.getEventKey());
+    }
+
+    @SubscribeEvent
     public void onGameOverlayRendered(RenderGameOverlayEvent.Post event) {
         if (event.type == RenderGameOverlayEvent.ElementType.ALL) {
             requisite.getManager().getInternalEventManager().handleHudRender(event.partialTicks);
@@ -56,6 +63,11 @@ public class RequisiteEventListener implements IEventListener {
     @SubscribeEvent
     public void onRenderTick(TickEvent.RenderTickEvent event) {
         requisite.getManager().getInternalEventManager().handleRenderTick(event.renderTickTime);
+    }
+
+    @SubscribeEvent
+    public void onWorldLoad(WorldEvent.Load event) {
+        requisite.getManager().getInternalEventManager().handleWorldLoad();
     }
 
 }
