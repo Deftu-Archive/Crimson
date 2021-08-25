@@ -42,6 +42,10 @@ public class ScreenPosition implements IScreenPosition {
         return this;
     }
 
+    public String toString() {
+        return toJson().getAsString();
+    }
+
     public static ScreenPosition fromRaw(float x, float y) {
         ScaledResolution resolution = new ScaledResolution(Minecraft.getMinecraft());
         return new ScreenPosition(Requisite.getInstance().getManager().getMathHelper().percentageOf(x, 0, resolution.getScaledWidth()), Requisite.getInstance().getManager().getMathHelper().percentageOf(y, 0, resolution.getScaledHeight()));

@@ -20,14 +20,15 @@ package xyz.matthewtgm.requisite;
 
 import net.minecraftforge.fml.common.Mod;
 import xyz.matthewtgm.requisite.core.IRequisite;
+import xyz.matthewtgm.requisite.core.RequisiteInfo;
 import xyz.matthewtgm.requisite.core.integration.ModMetadata;
 
 import java.io.File;
 
 @Mod(
-        name = "@NAME@",
-        version = "@VER@",
-        modid = "@ID@",
+        name = RequisiteInfo.NAME,
+        version = RequisiteInfo.VER,
+        modid = RequisiteInfo.ID,
         acceptedMinecraftVersions = "[1.8.9]"
 )
 public class Requisite implements IRequisite {
@@ -53,7 +54,7 @@ public class Requisite implements IRequisite {
     }
 
     public ModMetadata metadata() {
-        return new ModMetadata("@NAME@", "@VER@");
+        return new ModMetadata(name(), version());
     }
 
 }

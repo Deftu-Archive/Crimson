@@ -27,12 +27,12 @@ import xyz.matthewtgm.requisite.core.IRequisiteManager;
 import xyz.matthewtgm.requisite.core.RequisiteEventManager;
 import xyz.matthewtgm.requisite.core.files.ConfigurationManager;
 import xyz.matthewtgm.requisite.core.files.FileManager;
+import xyz.matthewtgm.requisite.core.hud.HudRegistry;
+import xyz.matthewtgm.requisite.core.hypixel.HypixelHelper;
 import xyz.matthewtgm.requisite.core.integration.IModIntegration;
 import xyz.matthewtgm.requisite.core.keybinds.KeyBindRegistry;
 import xyz.matthewtgm.requisite.core.networking.RequisiteClientSocket;
-import xyz.matthewtgm.requisite.core.notifications.INotifications;
 import xyz.matthewtgm.requisite.core.util.*;
-import xyz.matthewtgm.requisite.core.util.messages.IMessageQueue;
 import xyz.matthewtgm.requisite.integration.ModIntegration;
 import xyz.matthewtgm.requisite.notifications.Notifications;
 import xyz.matthewtgm.requisite.rendering.EnhancedFontRenderer;
@@ -43,6 +43,8 @@ import xyz.matthewtgm.tgmconfig.Configuration;
 import java.io.File;
 
 public class RequisiteManager implements IRequisiteManager {
+
+    private boolean initialized;
 
     private Logger logger;
     private SimpleEventBus eventBus;
@@ -78,7 +80,7 @@ public class RequisiteManager implements IRequisiteManager {
     public void initialize(IRequisite requisite, File gameDirectory) {
         logger = LogManager.getLogger("Requisite");
         eventBus = new SimpleEventBus();
-        fileManager = new FileManager();
+        fileManager = new FileManager(requisite);
         configurationManager = new ConfigurationManager(new Configuration(fileManager.getRequisiteDirectory(fileManager.getTgmDevelopmentDirectory(fileManager.getConfigDirectory(gameDirectory)))));
         modIntegration = new ModIntegration(requisite);
         internalEventManager = new RequisiteEventManager(requisite);
@@ -106,6 +108,12 @@ public class RequisiteManager implements IRequisiteManager {
         mojangApi = new MojangAPI();
 
         glHelper = new GlHelper();
+
+        initialized = true;
+    }
+
+    public boolean initialized() {
+        return initialized;
     }
 
     public Logger getLogger() {
@@ -148,8 +156,16 @@ public class RequisiteManager implements IRequisiteManager {
         return keyBindRegistry;
     }
 
+    public HudRegistry getHudRegistry() {
+        return null;
+    }
+
     public EnhancedFontRenderer getEnhancedFontRenderer() {
         return enhancedFontRenderer;
+    }
+
+    public IPlayerHelper getPlayerHelper() {
+        return null;
     }
 
     public ChatHelper getChatHelper() {
@@ -200,8 +216,16 @@ public class RequisiteManager implements IRequisiteManager {
         return reflectionHelper;
     }
 
+    public IPositionHelper getPositionHelper() {
+        return null;
+    }
+
     public RomanNumeral getRomanNumerals() {
         return romanNumerals;
+    }
+
+    public HypixelHelper getHypixelHelper() {
+        return null;
     }
 
     public RenderHelper getRenderHelper() {

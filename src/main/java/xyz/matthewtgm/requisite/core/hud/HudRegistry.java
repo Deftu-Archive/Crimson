@@ -56,10 +56,11 @@ public class HudRegistry implements IConfigurable {
         Subconfiguration hudConfiguration = configuration.getSubconfiguration("hud");
 
         JsonObject elementSettings = new JsonObject();
-        for (BaseSetting<?> setting : element.getSettings()) {
+        for (BaseSetting<?> setting : element.getSettings())
             elementSettings.add(setting.jsonKey(), setting.get());
-        }
-        hudConfiguration.add(element.getName(), elementSettings);
+        hudConfiguration.add(element.getJsonKey(), elementSettings);
+
+        configuration.save();
     }
 
     public void load(ConfigurationManager configurationManager) {
@@ -74,13 +75,13 @@ public class HudRegistry implements IConfigurable {
             configuration.createSubconfiguration("hud");
         Subconfiguration hudConfiguration = configuration.getSubconfiguration("hud");
 
-        if (!hudConfiguration.hasKey(element.getName()))
+        if (!hudConfiguration.hasKey(element.getJsonKey()))
             return;
 
-        JsonObject elementSettings = hudConfiguration.getAsJsonObject(element.getName());
+        JsonObject elementSettings = hudConfiguration.getAsJsonObject(element.getJsonKey());
         for (BaseSetting setting : element.getSettings()) {
             if (elementSettings.hasKey(setting.jsonKey())) {
-                setting.set(elementSettings.get(setting.jsonKey()).getAsJsonPrimitive().getValue());
+                setting.set(elementSettings.get(setting.jsonKey())); // TODO: 2021/08/23 | FIX POSITION SETTING.
             }
         }
     }

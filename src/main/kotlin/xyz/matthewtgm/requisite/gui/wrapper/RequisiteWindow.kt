@@ -46,7 +46,7 @@ class RequisiteWindow(
         width = ChildBasedSizeConstraint()
         height = ChildBasedSizeConstraint()
     } childOf navbar
-    val titleText = UIText(requisite.getName()).constrain {
+    val titleText = UIText(requisite.name()).constrain {
         x = CenterConstraint()
         y = CenterConstraint()
     } childOf titleTextContainer
@@ -76,8 +76,8 @@ class RequisiteWindow(
     val backIcon = UIImage.ofResource("/gui/icons/exit.png").constrain {
         x = CenterConstraint()
         y = CenterConstraint()
-        width = 32.pixels()
-        height = 32.pixels()
+        width = 16.pixels()
+        height = 16.pixels()
     } childOf backContainer
     init {
         backContainer.onMouseEnter {

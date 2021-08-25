@@ -14,4 +14,12 @@ public class ServerHelper implements IServerHelper {
         join(ip, -1);
     }
 
+    public String getBrand() {
+        return MinecraftClient.getInstance().player.getServerBrand();
+    }
+
+    public boolean isSingleplayer() {
+        return MinecraftClient.getInstance().isInSingleplayer();
+    }
+
 }

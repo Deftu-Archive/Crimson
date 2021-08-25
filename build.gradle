@@ -18,6 +18,7 @@
 
 plugins {
     id "com.github.johnrengelman.shadow" version "6.1.0"
+    id "com.github.gmazzo.buildconfig" version "3.0.1"
     id "org.jetbrains.kotlin.jvm" version "1.5.21"
     id "java"
 }
@@ -27,6 +28,15 @@ version = mod_ver
 group = mod_group
 
 sourceCompatibility = targetCompatibility = 1.8
+
+buildConfig {
+    className('RequisiteInfo')
+    packageName('xyz.matthewtgm.requisite.core')
+
+    buildConfigField('String', 'NAME', "\"${mod_name}\"")
+    buildConfigField('String', 'VER', "\"${mod_ver}\"")
+    buildConfigField('String', 'ID', "\"${mod_id}\"")
+}
 
 /* Add available repositories to areas where dependencies can be downloaded. */
 repositories {
@@ -154,6 +164,7 @@ task moveResources {
 
 subprojects {
     apply plugin: "com.github.johnrengelman.shadow"
+    apply plugin: "com.github.gmazzo.buildconfig"
     apply plugin: "org.jetbrains.kotlin.jvm"
     apply plugin: "java"
 

@@ -40,10 +40,15 @@ public class ConfigurationManager extends Thread {
         }
     }
 
+    public void save() {
+        configuration.save();
+    }
+
     public ConfigurationManager addConfigurable(IConfigurable configurable) {
         this.configurables.add(configurable);
         configurable.load(this);
         configurable.save(this);
+        configuration.save();
 
         return this;
     }

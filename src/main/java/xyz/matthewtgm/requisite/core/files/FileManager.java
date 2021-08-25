@@ -18,9 +18,17 @@
 
 package xyz.matthewtgm.requisite.core.files;
 
+import xyz.matthewtgm.requisite.core.IRequisite;
+
 import java.io.File;
 
 public class FileManager {
+
+    private final IRequisite requisite;
+
+    public FileManager(IRequisite requisite) {
+        this.requisite = requisite;
+    }
 
     public File getConfigDirectory(File gameDirectory) {
        return checkExistence(new File(gameDirectory, "config"));
@@ -31,7 +39,7 @@ public class FileManager {
     }
 
     public File getRequisiteDirectory(File tgmDevelopmentDirectory) {
-        return checkExistence(new File(tgmDevelopmentDirectory, "@NAME@"));
+        return checkExistence(new File(tgmDevelopmentDirectory, requisite.name()));
     }
 
     private File checkExistence(File directory) {

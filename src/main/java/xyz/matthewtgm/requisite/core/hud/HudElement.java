@@ -62,6 +62,10 @@ public abstract class HudElement {
         return name;
     }
 
+    public final String getJsonKey() {
+        return name.toLowerCase().replace(' ', '_');
+    }
+
     public final Pair<Integer, Integer> getDimensions() {
         return dimensions;
     }

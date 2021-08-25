@@ -32,16 +32,18 @@ public interface IRequisite extends IMod {
         getManager().getModIntegration().registerIntegratedMod(this);
     }
 
-    default String getName() {
-        return "@NAME@";
-    }
-
-    default String getVersion() {
-        return "@VER@";
-    }
-
     default String getChatPrefix() {
         return ChatColour.GRAY + "[" + ChatColour.GOLD + "@NAME@" + ChatColour.GRAY + "]";
+    }
+
+    default String name() {
+        return RequisiteInfo.NAME;
+    }
+    default String version() {
+        return RequisiteInfo.VER;
+    }
+    default String id() {
+        return RequisiteInfo.ID;
     }
 
 }

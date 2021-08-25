@@ -94,8 +94,8 @@ public class RequisiteManager implements IRequisiteManager {
 
         logger = LogManager.getLogger("Requisite");
         eventBus = new SimpleEventBus();
-        fileManager = new FileManager();
-        configurationManager = new ConfigurationManager(new Configuration(new File(fileManager.getRequisiteDirectory(fileManager.getTgmDevelopmentDirectory(fileManager.getConfigDirectory(gameDirectory))), "@NAME@")));
+        fileManager = new FileManager(requisite);
+        configurationManager = new ConfigurationManager(new Configuration(new File(fileManager.getRequisiteDirectory(fileManager.getTgmDevelopmentDirectory(fileManager.getConfigDirectory(gameDirectory))), requisite.name())));
         modIntegration = new ModIntegration(requisite);
         internalEventManager = new RequisiteEventManager(requisite);
         internalEventListener = new RequisiteEventListener(requisite);

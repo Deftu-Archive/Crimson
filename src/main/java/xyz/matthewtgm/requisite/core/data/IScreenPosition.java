@@ -18,6 +18,8 @@
 
 package xyz.matthewtgm.requisite.core.data;
 
+import xyz.matthewtgm.json.entities.JsonObject;
+
 public interface IScreenPosition {
     float getX();
     IScreenPosition setX(float x);
@@ -25,4 +27,13 @@ public interface IScreenPosition {
     IScreenPosition setY(float y);
 
     IScreenPosition setPosition(float x, float y);
+
+    default JsonObject toJson() {
+        JsonObject value = new JsonObject();
+
+        value.add("x", getX());
+        value.add("y", getY());
+
+        return value;
+    }
 }
