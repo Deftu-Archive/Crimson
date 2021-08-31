@@ -25,6 +25,7 @@ import xyz.matthewtgm.requisite.core.IEventListener;
 import xyz.matthewtgm.requisite.core.IRequisite;
 import xyz.matthewtgm.requisite.core.IRequisiteManager;
 import xyz.matthewtgm.requisite.core.RequisiteEventManager;
+import xyz.matthewtgm.requisite.core.commands.CommandRegistry;
 import xyz.matthewtgm.requisite.core.files.ConfigurationManager;
 import xyz.matthewtgm.requisite.core.files.FileManager;
 import xyz.matthewtgm.requisite.core.hud.HudRegistry;
@@ -55,25 +56,20 @@ public class RequisiteManager implements IRequisiteManager {
     private RequisiteClientSocket socket;
 
     private KeyBindRegistry keyBindRegistry;
+    private HudRegistry hudRegistry;
+
     private EnhancedFontRenderer enhancedFontRenderer;
+    private PlayerHelper playerHelper;
     private ChatHelper chatHelper;
-    private ColourHelper colourHelper;
-    private LoggingHelper loggingHelper;
     private UniversalLogger universalLogger;
-    private ClipboardHelper clipboardHelper;
-    private DateHelper dateHelper;
-    private EasingHelper easingHelper;
-    private MathHelper mathHelper;
     private MouseHelper mouseHelper;
-    private Multithreading multithreading;
     private Notifications notifications;
-    private ReflectionHelper reflectionHelper;
-    private RomanNumeral romanNumerals;
+    private PositionHelper positionHelper;
+    private ExternalModHelper externalModHelper;
+    private HypixelHelper hypixelHelper;
     private RenderHelper renderHelper;
-    private StringHelper stringHelper;
     private MessageQueue messageQueue;
     private ServerHelper serverHelper;
-    private MojangAPI mojangApi;
 
     private GlHelper glHelper;
 
@@ -87,25 +83,20 @@ public class RequisiteManager implements IRequisiteManager {
         socket = new RequisiteClientSocket(fetchSocketUri(), requisite);
 
         keyBindRegistry = new KeyBindRegistry(requisite);
+        hudRegistry = new HudRegistry(requisite);
+
         enhancedFontRenderer = new EnhancedFontRenderer(requisite);
+        playerHelper = new PlayerHelper();
         chatHelper = new ChatHelper();
-        colourHelper = new ColourHelper();
-        loggingHelper = new LoggingHelper();
         universalLogger = new UniversalLogger(requisite);
-        clipboardHelper = new ClipboardHelper();
-        dateHelper = new DateHelper();
-        easingHelper = new EasingHelper();
-        mathHelper = new MathHelper();
         mouseHelper = new MouseHelper();
-        multithreading = new Multithreading();
         notifications = new Notifications((Requisite) requisite);
-        reflectionHelper = new ReflectionHelper();
-        romanNumerals = new RomanNumeral();
+        positionHelper = new PositionHelper();
+        externalModHelper = new ExternalModHelper(requisite);
+        hypixelHelper = new HypixelHelper(requisite);
         renderHelper = new RenderHelper();
-        stringHelper = new StringHelper();
         messageQueue = new MessageQueue(requisite);
         serverHelper = new ServerHelper();
-        mojangApi = new MojangAPI();
 
         glHelper = new GlHelper();
 
@@ -144,6 +135,10 @@ public class RequisiteManager implements IRequisiteManager {
         throw new UnsupportedOperationException("1.17.1/Fabric version does not support the internal event listener.");
     }
 
+    public CommandRegistry getCommandRegistry() {
+        return null;
+    }
+
     public RequisiteClientSocket getRequisiteSocket() {
         return socket;
     }
@@ -157,7 +152,7 @@ public class RequisiteManager implements IRequisiteManager {
     }
 
     public HudRegistry getHudRegistry() {
-        return null;
+        return hudRegistry;
     }
 
     public EnhancedFontRenderer getEnhancedFontRenderer() {
@@ -165,75 +160,39 @@ public class RequisiteManager implements IRequisiteManager {
     }
 
     public IPlayerHelper getPlayerHelper() {
-        return null;
+        return playerHelper;
     }
 
     public ChatHelper getChatHelper() {
         return chatHelper;
     }
 
-    public ColourHelper getColourHelper() {
-        return colourHelper;
-    }
-
-    public LoggingHelper getLoggingHelper() {
-        return loggingHelper;
-    }
-
     public UniversalLogger getUniversalLogger() {
         return universalLogger;
-    }
-
-    public ClipboardHelper getClipboardHelper() {
-        return clipboardHelper;
-    }
-
-    public DateHelper getDateHelper() {
-        return dateHelper;
-    }
-
-    public EasingHelper getEasingHelper() {
-        return easingHelper;
-    }
-
-    public MathHelper getMathHelper() {
-        return mathHelper;
     }
 
     public MouseHelper getMouseHelper() {
         return mouseHelper;
     }
 
-    public Multithreading getMultithreading() {
-        return multithreading;
-    }
-
     public Notifications getNotifications() {
         return notifications;
     }
 
-    public ReflectionHelper getReflectionHelper() {
-        return reflectionHelper;
-    }
-
     public IPositionHelper getPositionHelper() {
-        return null;
+        return positionHelper;
     }
 
-    public RomanNumeral getRomanNumerals() {
-        return romanNumerals;
+    public ExternalModHelper getExternalModHelper() {
+        return externalModHelper;
     }
 
     public HypixelHelper getHypixelHelper() {
-        return null;
+        return hypixelHelper;
     }
 
     public RenderHelper getRenderHelper() {
         return renderHelper;
-    }
-
-    public StringHelper getStringHelper() {
-        return stringHelper;
     }
 
     public MessageQueue getMessageQueue() {
@@ -242,10 +201,6 @@ public class RequisiteManager implements IRequisiteManager {
 
     public IServerHelper getServerHelper() {
         return serverHelper;
-    }
-
-    public MojangAPI getMojangApi() {
-        return mojangApi;
     }
 
     public GlHelper getGlHelper() {

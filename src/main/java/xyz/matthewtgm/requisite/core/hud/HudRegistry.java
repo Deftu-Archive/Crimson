@@ -6,6 +6,7 @@ import xyz.matthewtgm.requisite.core.data.IScreenPosition;
 import xyz.matthewtgm.requisite.core.events.RenderHudEvent;
 import xyz.matthewtgm.requisite.core.files.ConfigurationManager;
 import xyz.matthewtgm.requisite.core.files.IConfigurable;
+import xyz.matthewtgm.requisite.core.settings.RequisiteSettingsParser;
 import xyz.matthewtgm.simpleeventbus.EventSubscriber;
 import xyz.matthewtgm.tgmconfig.Configuration;
 import xyz.matthewtgm.tgmconfig.Subconfiguration;
@@ -17,11 +18,13 @@ import java.util.List;
 public class HudRegistry implements IConfigurable {
 
     private final IRequisite requisite;
+    private final RequisiteSettingsParser settingsParser;
 
     private final List<HudElement> elements = new ArrayList<>();
 
     public HudRegistry(IRequisite requisite) {
         this.requisite = requisite;
+        this.settingsParser = new RequisiteSettingsParser(requisite);
         requisite.getManager().getEventBus().register(this);
     }
 
@@ -81,7 +84,8 @@ public class HudRegistry implements IConfigurable {
         JsonObject elementSettings = hudConfiguration.getAsJsonObject(element.getJsonKey());
         for (BaseSetting setting : element.getSettings()) {
             if (elementSettings.hasKey(setting.jsonKey())) {
-                setting.set(elementSettings.get(setting.jsonKey())); // TODO: 2021/08/23 | FIX POSITION SETTING.
+                System.out.println(settingsParser.parse(elementSettings.get(setting.jsonKey())).toString());
+                setting.set(settingsParser.parse(elementSettings.get(setting.jsonKey())));
             }
         }
     }
@@ -93,9 +97,7 @@ public class HudRegistry implements IConfigurable {
     public void render(float partialTicks) {
         for (HudElement element : elements) {
             if (element.toggleSetting.get()) {
-                System.out.println(element);
                 IScreenPosition position = element.positionSetting.get();
-                System.out.println(position.getX() + " | " + position.getY());
                 element.render(element.positionSetting.get(), partialTicks);
             }
         }

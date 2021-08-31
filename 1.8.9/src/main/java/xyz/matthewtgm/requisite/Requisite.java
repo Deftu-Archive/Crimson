@@ -21,6 +21,7 @@ package xyz.matthewtgm.requisite;
 import net.minecraftforge.fml.common.Mod;
 import xyz.matthewtgm.requisite.core.IRequisite;
 import xyz.matthewtgm.requisite.core.RequisiteInfo;
+import xyz.matthewtgm.requisite.core.Test;
 import xyz.matthewtgm.requisite.core.integration.ModMetadata;
 
 import java.io.File;
@@ -36,12 +37,15 @@ public class Requisite implements IRequisite {
     private static final Requisite instance = new Requisite();
     private RequisiteManager manager;
 
+    private final Test test = new Test();
+
     public void initialize(File gameDirectory) {
         if (manager == null)
             manager = new RequisiteManager();
 
         manager.initialize(this, gameDirectory);
         postInitialize();
+        test.initialize(this);
         manager.openMenu();
     }
 

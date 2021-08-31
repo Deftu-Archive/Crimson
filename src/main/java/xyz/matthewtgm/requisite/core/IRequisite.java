@@ -18,6 +18,7 @@
 
 package xyz.matthewtgm.requisite.core;
 
+import xyz.matthewtgm.requisite.core.commands.impl.CommandRequisite;
 import xyz.matthewtgm.requisite.core.integration.IMod;
 import xyz.matthewtgm.requisite.core.util.ChatColour;
 
@@ -30,10 +31,11 @@ public interface IRequisite extends IMod {
 
     default void postInitialize() {
         getManager().getModIntegration().registerIntegratedMod(this);
+        getManager().getCommandRegistry().register(new CommandRequisite(this));
     }
 
     default String getChatPrefix() {
-        return ChatColour.GRAY + "[" + ChatColour.GOLD + "@NAME@" + ChatColour.GRAY + "]";
+        return ChatColour.GRAY + "[" + ChatColour.GOLD + name() + ChatColour.GRAY + "]";
     }
 
     default String name() {

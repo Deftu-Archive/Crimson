@@ -21,6 +21,7 @@ package xyz.matthewtgm.requisite.core;
 import org.apache.logging.log4j.Logger;
 import xyz.matthewtgm.json.entities.JsonObject;
 import xyz.matthewtgm.json.util.JsonApiHelper;
+import xyz.matthewtgm.requisite.core.commands.CommandRegistry;
 import xyz.matthewtgm.requisite.core.files.ConfigurationManager;
 import xyz.matthewtgm.requisite.core.files.FileManager;
 import xyz.matthewtgm.requisite.core.hud.HudRegistry;
@@ -45,13 +46,18 @@ public interface IRequisiteManager {
     boolean initialized();
 
     /* Requisite services. */
-    Logger getLogger();
-    SimpleEventBus getEventBus();
+    default Logger getLogger() {
+        return RequisiteDefaultImplementations.logger;
+    }
+    default SimpleEventBus getEventBus() {
+        return RequisiteDefaultImplementations.eventBus;
+    }
     FileManager getFileManager();
     ConfigurationManager getConfigurationManager();
     IModIntegration getModIntegration();
     RequisiteEventManager getInternalEventManager();
     IEventListener getInternalEventListener();
+    CommandRegistry getCommandRegistry();
     RequisiteClientSocket getRequisiteSocket();
 
     void openMenu();
@@ -63,25 +69,48 @@ public interface IRequisiteManager {
     IEnhancedFontRenderer getEnhancedFontRenderer();
     IPlayerHelper getPlayerHelper();
     IChatHelper getChatHelper();
-    ColourHelper getColourHelper();
-    LoggingHelper getLoggingHelper();
+    default ColourHelper getColourHelper() {
+        return RequisiteDefaultImplementations.colourHelper;
+    }
+    default LoggingHelper getLoggingHelper() {
+        return RequisiteDefaultImplementations.loggingHelper;
+    }
     UniversalLogger getUniversalLogger();
-    ClipboardHelper getClipboardHelper();
-    DateHelper getDateHelper();
-    EasingHelper getEasingHelper();
-    MathHelper getMathHelper();
+    default ClipboardHelper getClipboardHelper() {
+        return RequisiteDefaultImplementations.clipboardHelper;
+    }
+    default DateHelper getDateHelper() {
+        return RequisiteDefaultImplementations.dateHelper;
+    }
+    default EasingHelper getEasingHelper() {
+        return RequisiteDefaultImplementations.easingHelper;
+    }
+    default MathHelper getMathHelper() {
+        return RequisiteDefaultImplementations.mathHelper;
+    }
     IMouseHelper getMouseHelper();
-    Multithreading getMultithreading();
+    default Multithreading getMultithreading() {
+        return RequisiteDefaultImplementations.multithreading;
+    }
     INotifications getNotifications();
-    ReflectionHelper getReflectionHelper();
+    default ReflectionHelper getReflectionHelper() {
+        return RequisiteDefaultImplementations.reflectionHelper;
+    }
     IPositionHelper getPositionHelper();
-    RomanNumeral getRomanNumerals();
+    ExternalModHelper getExternalModHelper();
+    default RomanNumeral getRomanNumerals() {
+        return RequisiteDefaultImplementations.romanNumerals;
+    }
     HypixelHelper getHypixelHelper();
     IRenderHelper getRenderHelper();
-    IStringHelper getStringHelper();
+    default StringHelper getStringHelper() {
+        return RequisiteDefaultImplementations.stringHelper;
+    }
     IMessageQueue getMessageQueue();
     IServerHelper getServerHelper();
-    MojangAPI getMojangApi();
+    default MojangAPI getMojangApi() {
+        return RequisiteDefaultImplementations.mojangApi;
+    }
 
     /* Default. */
     default URI fetchSocketUri() {

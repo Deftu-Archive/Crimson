@@ -55,7 +55,12 @@ public abstract class HudElement {
 
     public final boolean isMouseInside(int mouseX, int mouseY) {
         IScreenPosition position = this.positionSetting.get();
-        return (mouseX >= position.getX() && mouseX <= position.getX() + dimensions.left()) && (mouseY >= position.getY() && mouseY <= position.getY() + dimensions.right());
+        return (mouseX >= position.getX()
+                        && mouseX <= position.getX() +
+                        dimensions.left())
+                        && (mouseY >= position.getY()
+                        && mouseY <= position.getY() +
+                        dimensions.right());
     }
 
     public final String getName() {

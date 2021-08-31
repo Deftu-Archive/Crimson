@@ -9,7 +9,7 @@ public class ScreenPosition implements IScreenPosition {
 
     private float x, y;
 
-    public ScreenPosition(float x, float y) {
+    private ScreenPosition(float x, float y) {
         this.x = x;
         this.y = y;
     }

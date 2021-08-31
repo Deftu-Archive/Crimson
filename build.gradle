@@ -41,6 +41,12 @@ buildConfig {
 /* Add available repositories to areas where dependencies can be downloaded. */
 repositories {
     mavenCentral()
+
+    maven {
+        name = "TGMDevelopment Public"
+        url = "http://maven.matthewtgm.xyz/repository/maven-public/"
+        allowInsecureProtocol = true
+    }
     maven {
         name = "Sk1er Public"
         url = "https://repo.sk1er.club/repository/maven-public/"
@@ -64,14 +70,19 @@ configurations {
 /* Define dependencies. */
 dependencies {
     /* Requisite dependencies. */
-    shade('xyz.matthewtgm:SimpleEventBus:2.0.1')
-    shade('xyz.matthewtgm:TGMConfig:3.2.0')
-    shade('xyz.matthewtgm:JsonTGM:2.10.0')
-    shade('xyz.matthewtgm:Mango:1.2.0')
+    shade('xyz.matthewtgm.event:SimpleEventBus:2.0')
+    shade('xyz.matthewtgm.config:TGMConfig:3.2')
+    shade('xyz.matthewtgm.config:TGMConfig:3.2:settings')
+    shade('xyz.matthewtgm.json:JsonTGM:2.10')
+    shade('xyz.matthewtgm.json:JsonTGM:2.10:files')
+    shade('xyz.matthewtgm.json:JsonTGM:2.10:kotlin')
+    shade('xyz.matthewtgm.json:JsonTGM:2.10:serialization')
+    shade('xyz.matthewtgm.json:JsonTGM:2.10:utilities')
+    shade('xyz.matthewtgm.mango:Mango:1.3')
 
     shade('org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.1-native-mt')
     shade('org.jetbrains.kotlin:kotlin-stdlib-jdk8')
-    shade('org.jetbrains.kotlin:kotlin-reflect')
+    //shade('org.jetbrains.kotlin:kotlin-reflect')
 
     shade('org.java-websocket:Java-WebSocket:1.5.2')
 
@@ -188,25 +199,36 @@ subprojects {
     afterEvaluate {
         repositories {
             mavenCentral()
+
+            maven {
+                name = "TGMDevelopment Public"
+                url = "http://maven.matthewtgm.xyz/repository/maven-public/"
+                allowInsecureProtocol = true
+            }
             maven {
                 name = "Sk1er Public"
-                url = "https://repo.sk1er.club/repository/maven-public"
+                url = "https://repo.sk1er.club/repository/maven-public/"
             }
             maven {
                 name = "SpongePowered"
-                url = 'https://repo.spongepowered.org/maven/'
+                url = "https://repo.spongepowered.org/maven/"
             }
             maven {
                 name = "JitPack"
-                url = 'https://jitpack.io/'
+                url = "https://jitpack.io/"
             }
         }
 
         dependencies {
-            implementation('xyz.matthewtgm:SimpleEventBus:2.0.1')
-            implementation('xyz.matthewtgm:TGMConfig:3.2.0')
-            implementation('xyz.matthewtgm:JsonTGM:2.10.0')
-            implementation('xyz.matthewtgm:Mango:1.2.0')
+            implementation('xyz.matthewtgm.event:SimpleEventBus:2.0')
+            implementation('xyz.matthewtgm.config:TGMConfig:3.2')
+            implementation('xyz.matthewtgm.config:TGMConfig:3.2:settings')
+            implementation('xyz.matthewtgm.json:JsonTGM:2.10')
+            implementation('xyz.matthewtgm.json:JsonTGM:2.10:files')
+            implementation('xyz.matthewtgm.json:JsonTGM:2.10:kotlin')
+            implementation('xyz.matthewtgm.json:JsonTGM:2.10:serialization')
+            implementation('xyz.matthewtgm.json:JsonTGM:2.10:utilities')
+            implementation('xyz.matthewtgm.mango:Mango:1.3')
 
             implementation('org.java-websocket:Java-WebSocket:1.5.2')
 
@@ -229,10 +251,6 @@ subprojects {
             implementation('org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.1-native-mt')
             implementation('org.jetbrains.kotlin:kotlin-stdlib-jdk8')
             implementation('org.jetbrains.kotlin:kotlin-reflect')
-        }
-
-        shadowJar {
-
         }
     }
 }

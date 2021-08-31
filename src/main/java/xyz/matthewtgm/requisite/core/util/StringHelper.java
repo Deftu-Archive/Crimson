@@ -16,13 +16,10 @@
  * along with Requisite. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package xyz.matthewtgm.requisite.util;
-
-import xyz.matthewtgm.requisite.core.util.IStringHelper;
-
+package xyz.matthewtgm.requisite.core.util;
 import java.util.regex.Pattern;
 
-public class StringHelper implements IStringHelper {
+public class StringHelper {
 
     private final Pattern formattingCodePattern = Pattern.compile("(?i)\\u00A7[0-9A-FK-OR]");
 

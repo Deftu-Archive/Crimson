@@ -18,30 +18,24 @@
 
 package xyz.matthewtgm.requisite;
 
-import net.minecraftforge.common.MinecraftForge;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-import xyz.matthewtgm.requisite.core.IEventListener;
-import xyz.matthewtgm.requisite.core.IRequisite;
-import xyz.matthewtgm.requisite.core.IRequisiteManager;
-import xyz.matthewtgm.requisite.core.RequisiteEventManager;
-import xyz.matthewtgm.requisite.core.files.ConfigurationManager;
-import xyz.matthewtgm.requisite.core.files.FileManager;
-import xyz.matthewtgm.requisite.core.hud.HudRegistry;
-import xyz.matthewtgm.requisite.core.integration.IModIntegration;
-import xyz.matthewtgm.requisite.core.keybinds.KeyBindRegistry;
-import xyz.matthewtgm.requisite.core.networking.RequisiteClientSocket;
-import xyz.matthewtgm.requisite.core.notifications.INotifications;
+import net.minecraftforge.common.*;
+import xyz.matthewtgm.requisite.core.*;
+import xyz.matthewtgm.requisite.core.commands.CommandRegistry;
+import xyz.matthewtgm.requisite.core.files.*;
+import xyz.matthewtgm.requisite.core.hud.*;
+import xyz.matthewtgm.requisite.core.integration.*;
+import xyz.matthewtgm.requisite.core.keybinds.*;
+import xyz.matthewtgm.requisite.core.networking.*;
+import xyz.matthewtgm.requisite.core.notifications.*;
 import xyz.matthewtgm.requisite.core.util.*;
-import xyz.matthewtgm.requisite.core.util.messages.IMessageQueue;
-import xyz.matthewtgm.requisite.gui.RequisiteMenu;
-import xyz.matthewtgm.requisite.core.hypixel.HypixelHelper;
+import xyz.matthewtgm.requisite.core.util.messages.*;
+import xyz.matthewtgm.requisite.gui.*;
+import xyz.matthewtgm.requisite.core.hypixel.*;
 import xyz.matthewtgm.requisite.integration.ModIntegration;
 import xyz.matthewtgm.requisite.notifications.Notifications;
 import xyz.matthewtgm.requisite.rendering.EnhancedFontRenderer;
 import xyz.matthewtgm.requisite.util.*;
-import xyz.matthewtgm.simpleeventbus.SimpleEventBus;
-import xyz.matthewtgm.tgmconfig.Configuration;
+import xyz.matthewtgm.tgmconfig.*;
 
 import java.io.File;
 
@@ -49,13 +43,12 @@ public class RequisiteManager implements IRequisiteManager {
 
     private boolean initialized;
 
-    private Logger logger;
-    private SimpleEventBus eventBus;
     private FileManager fileManager;
     private ConfigurationManager configurationManager;
     private ModIntegration modIntegration;
     private RequisiteEventManager internalEventManager;
     private RequisiteEventListener internalEventListener;
+    private CommandRegistry commandRegistry;
     private RequisiteClientSocket socket;
 
     private KeyBindRegistry keyBindRegistry;
@@ -64,25 +57,16 @@ public class RequisiteManager implements IRequisiteManager {
     private EnhancedFontRenderer enhancedFontRenderer;
     private PlayerHelper playerHelper;
     private ChatHelper chatHelper;
-    private ColourHelper colourHelper;
-    private LoggingHelper loggingHelper;
     private UniversalLogger universalLogger;
-    private ClipboardHelper clipboardHelper;
-    private DateHelper dateHelper;
-    private EasingHelper easingHelper;
-    private MathHelper mathHelper;
     private MouseHelper mouseHelper;
-    private Multithreading multithreading;
     private Notifications notifications;
-    private ReflectionHelper reflectionHelper;
     private PositionHelper positionHelper;
-    private RomanNumeral romanNumerals;
+    private ExternalModHelper externalModHelper;
     private HypixelHelper hypixelHelper;
     private RenderHelper renderHelper;
     private StringHelper stringHelper;
     private MessageQueue messageQueue;
     private ServerHelper serverHelper;
-    private MojangAPI mojangApi;
 
     /* 1.8.9-specific utilities. */
     private GlHelper glHelper;
@@ -92,13 +76,12 @@ public class RequisiteManager implements IRequisiteManager {
         if (initialized)
             return;
 
-        logger = LogManager.getLogger("Requisite");
-        eventBus = new SimpleEventBus();
         fileManager = new FileManager(requisite);
         configurationManager = new ConfigurationManager(new Configuration(new File(fileManager.getRequisiteDirectory(fileManager.getTgmDevelopmentDirectory(fileManager.getConfigDirectory(gameDirectory))), requisite.name())));
         modIntegration = new ModIntegration(requisite);
         internalEventManager = new RequisiteEventManager(requisite);
         internalEventListener = new RequisiteEventListener(requisite);
+        commandRegistry = new CommandRegistry(requisite);
         socket = new RequisiteClientSocket(fetchSocketUri(), requisite);
 
         configurationManager.addConfigurable(keyBindRegistry = new KeyBindRegistry(requisite));
@@ -107,25 +90,16 @@ public class RequisiteManager implements IRequisiteManager {
         enhancedFontRenderer = new EnhancedFontRenderer(requisite);
         playerHelper = new PlayerHelper();
         chatHelper = new ChatHelper();
-        colourHelper = new ColourHelper();
-        loggingHelper = new LoggingHelper();
         universalLogger = new UniversalLogger(requisite);
-        clipboardHelper = new ClipboardHelper();
-        dateHelper = new DateHelper();
-        easingHelper = new EasingHelper();
-        mathHelper = new MathHelper();
         mouseHelper = new MouseHelper();
-        multithreading = new Multithreading();
         notifications = new Notifications((Requisite) requisite);
-        reflectionHelper = new ReflectionHelper();
         positionHelper = new PositionHelper();
-        romanNumerals = new RomanNumeral();
+        externalModHelper = new ExternalModHelper(requisite);
         hypixelHelper = new HypixelHelper(requisite);
         renderHelper = new RenderHelper();
         stringHelper = new StringHelper();
         messageQueue = new MessageQueue(requisite);
         serverHelper = new ServerHelper();
-        mojangApi = new MojangAPI();
 
         glHelper = new GlHelper();
         guiHelper = new GuiHelper();
@@ -137,14 +111,6 @@ public class RequisiteManager implements IRequisiteManager {
 
     public boolean initialized() {
         return initialized;
-    }
-
-    public Logger getLogger() {
-        return logger;
-    }
-
-    public SimpleEventBus getEventBus() {
-        return eventBus;
     }
 
     public FileManager getFileManager() {
@@ -165,6 +131,10 @@ public class RequisiteManager implements IRequisiteManager {
 
     public IEventListener getInternalEventListener() {
         return internalEventListener;
+    }
+
+    public CommandRegistry getCommandRegistry() {
+        return commandRegistry;
     }
 
     public RequisiteClientSocket getRequisiteSocket() {
@@ -195,56 +165,24 @@ public class RequisiteManager implements IRequisiteManager {
         return chatHelper;
     }
 
-    public ColourHelper getColourHelper() {
-        return colourHelper;
-    }
-
-    public LoggingHelper getLoggingHelper() {
-        return loggingHelper;
-    }
-
     public UniversalLogger getUniversalLogger() {
         return universalLogger;
-    }
-
-    public ClipboardHelper getClipboardHelper() {
-        return clipboardHelper;
-    }
-
-    public DateHelper getDateHelper() {
-        return dateHelper;
-    }
-
-    public EasingHelper getEasingHelper() {
-        return easingHelper;
-    }
-
-    public MathHelper getMathHelper() {
-        return mathHelper;
     }
 
     public IMouseHelper getMouseHelper() {
         return mouseHelper;
     }
 
-    public Multithreading getMultithreading() {
-        return multithreading;
-    }
-
     public INotifications getNotifications() {
         return notifications;
-    }
-
-    public ReflectionHelper getReflectionHelper() {
-        return reflectionHelper;
     }
 
     public IPositionHelper getPositionHelper() {
         return positionHelper;
     }
 
-    public RomanNumeral getRomanNumerals() {
-        return romanNumerals;
+    public ExternalModHelper getExternalModHelper() {
+        return externalModHelper;
     }
 
     public HypixelHelper getHypixelHelper() {
@@ -255,7 +193,7 @@ public class RequisiteManager implements IRequisiteManager {
         return renderHelper;
     }
 
-    public IStringHelper getStringHelper() {
+    public StringHelper getStringHelper() {
         return stringHelper;
     }
 
@@ -265,10 +203,6 @@ public class RequisiteManager implements IRequisiteManager {
 
     public IServerHelper getServerHelper() {
         return serverHelper;
-    }
-
-    public MojangAPI getMojangApi() {
-        return mojangApi;
     }
 
     public GlHelper getGlHelper() {

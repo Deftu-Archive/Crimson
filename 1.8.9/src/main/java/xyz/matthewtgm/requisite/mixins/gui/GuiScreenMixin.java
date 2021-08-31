@@ -10,6 +10,7 @@ import org.spongepowered.asm.mixin.injection.ModifyVariable;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import xyz.matthewtgm.mango.collections.Pair;
 import xyz.matthewtgm.requisite.Requisite;
+import xyz.matthewtgm.requisite.core.util.ChatColour;
 
 @Mixin({GuiScreen.class})
 public class GuiScreenMixin {
@@ -18,6 +19,7 @@ public class GuiScreenMixin {
 
     @Inject(method = "sendChatMessage(Ljava/lang/String;Z)V", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/entity/EntityPlayerSP;sendChatMessage(Ljava/lang/String;)V"), cancellable = true)
     private void onChatMessageSent(String msg, boolean addToChat, CallbackInfo ci) {
+        System.out.println(msg);
         Pair<String, Boolean> chatMessageEvent = Requisite.getInstance().getManager().getInternalEventManager().handleChatMessageSent(msg);
         if (chatMessageEvent.right())
             ci.cancel();

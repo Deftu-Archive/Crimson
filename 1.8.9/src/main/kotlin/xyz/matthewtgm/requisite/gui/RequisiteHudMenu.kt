@@ -16,14 +16,13 @@ class RequisiteHudMenu : WindowScreen(
 
     private val requisiteWindow = RequisiteWindow(Requisite.getInstance(), window, {
         restorePreviousScreen()
-    }).constrain {
-        width = 100.percent()
-        height = 100.percent()
-    } childOf window
-    private val menu = RequisiteHudMenuWindow(Requisite.getInstance()).constrain {
-        width = 100.percent()
-        height = 100.percent()
-    } childOf requisiteWindow
+    }) childOf window
+    private val menu = RequisiteHudMenuWindow(Requisite.getInstance()) childOf requisiteWindow
+
+    override fun onMouseClicked(mouseX: Double, mouseY: Double, mouseButton: Int) {
+        menu.mouseClick(mouseX, mouseY, mouseButton)
+        super.onMouseClicked(mouseX, mouseY, mouseButton)
+    }
 
     override fun onDrawScreen(matrixStack: UMatrixStack, mouseX: Int, mouseY: Int, partialTicks: Float) {
         menu.draw(Requisite.getInstance(), partialTicks)

@@ -15,10 +15,7 @@ class RequisiteMenu : WindowScreen(
     init {
         val window = RequisiteWindow(Requisite.getInstance(), window, {
             restorePreviousScreen()
-        }).constrain {
-            width = 100.percent()
-            height = 100.percent()
-        } childOf this.window
+        }) childOf this.window
 
         val menu = RequisiteMenuWindow(window, {
 
@@ -26,10 +23,7 @@ class RequisiteMenu : WindowScreen(
             displayScreen(RequisiteHudMenu())
         }, {
 
-        }).constrain {
-            width = 100.percent()
-            height = 100.percent()
-        } childOf window
+        }) childOf window
     }
 
     override fun setWorldAndResolution(mc: Minecraft?, width: Int, height: Int) {
