@@ -1,0 +1,58 @@
+package xyz.deftu.requisite.gui
+
+import gg.essential.elementa.UIComponent
+import xyz.deftu.requisite.core.IRequisite
+import xyz.deftu.requisite.core.hud.HudElement
+import java.util.*
+
+class RequisiteHudMenuWindow(
+    requisite: IRequisite
+) : UIComponent() {
+
+    private var dragging = false
+    private var selected = Optional.empty<HudElement>()
+
+    private var prevX: Int? = null
+    private var prevY: Int? = null
+
+    init {
+        onMouseClick { event ->
+            prevX = event.absoluteX.toInt()
+            prevY = event.absoluteY.toInt()
+            selected = requisite.hudRegistry.elements.stream().filter {
+                it.isMouseInside(event.absoluteX.toInt(), event.absoluteY.toInt())
+            }.findFirst()
+
+            println("Click")
+            if (selected.isPresent) {
+                dragging = true
+                println("Dragging")
+                event.stopImmediatePropagation()
+            }
+        }
+        onMouseRelease {
+            dragging = false
+        }
+        onMouseDrag { mouseX, mouseY, _ ->
+            if (selected.isPresent && dragging) {
+                val element = selected.get()
+                val position = element.positionSetting.get()
+                position.setPosition(position.x + mouseX.toInt() - prevX!!, position.y + mouseY.toInt() - prevY!!)
+                println("New position: $position")
+                element.positionSetting.set(position)
+            }
+
+            prevX = mouseX.toInt()
+            prevY = mouseY.toInt()
+        }
+    }
+
+    fun draw(requisite: IRequisite, partialTicks: Float) {
+        requisite.hudRegistry.render(partialTicks)
+    }
+
+    fun close(requisite: IRequisite) {
+        requisite.hudRegistry.save(requisite.configurationManager)
+    }
+
+}

@@ -1,5 +1,5 @@
 {
-  "package": "xyz.matthewtgm.requisite.mixins",
+  "package": "xyz.deftu.requisite.mixins",
   "minVersion": "0.7",
   "compatibilityLevel": "JAVA_8",
   "verbose": true,
@@ -7,7 +7,6 @@
   "target":  "@env(CLIENT)",
   "mixins": [
     "client.MinecraftMixin",
-
     "gui.GuiScreenMixin"
   ]
 }

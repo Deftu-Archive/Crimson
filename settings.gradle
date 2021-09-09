@@ -18,9 +18,10 @@
 
 pluginManagement {
     repositories {
-        gradlePluginPortal()
-        mavenCentral()
-        mavenLocal()
+        maven {
+            name = 'SonaType'
+            url = 'https://oss.sonatype.org/content/repositories/snapshots/'
+        }
         maven {
             name = 'Forge'
             url = 'https://maven.minecraftforge.net/'
@@ -32,6 +33,18 @@ pluginManagement {
         maven {
             name = 'Jitpack'
             url = 'https://jitpack.io/'
+        }
+
+        gradlePluginPortal()
+        mavenCentral()
+        mavenLocal()
+    }
+
+    resolutionStrategy {
+        eachPlugin {
+            if (it.requested.id.id == "com.replaymod.preprocess") {
+                useModule("com.github.replaymod:preprocessor:${it.requested.version}")
+            }
         }
     }
 }
