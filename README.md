@@ -1,6 +1,5 @@
-<div align="center">
-
-# Requisite - Forge Modding Library
+# Requisite
+## The ultimate Minecraft modding library.
 [![forthebadge](https://forthebadge.com/images/badges/makes-people-smile.svg)](https://forthebadge.com)
 [![forthebadge](https://forthebadge.com/images/badges/fixed-bugs.svg)](https://forthebadge.com)
 [![forthebadge](https://forthebadge.com/images/badges/check-it-out.svg)](https://forthebadge.com)
@@ -9,15 +8,22 @@
 [![forthebadge](https://forthebadge.com/images/badges/open-source.svg)](https://forthebadge.com)
 [![forthebadge](https://forthebadge.com/images/badges/built-with-love.svg)](https://forthebadge.com)
 
-</div>
-
 ## What is it?
-Requisite is a library for making MinecraftForge mods, including utilities for most needs and other commonly used components!
-
-## Why should I use it?
-There's no reason in specific. The library is just for your own QoL.
+Requisite is a library for making Minecraft mods, including utilities for most needs and other commonly used components!
 
 ## How do I use it?
-You simply import it into your project using Maven, Gradle or whatever :)
+Inside your project's `build.gradle` file, add these fields.
+```gradle
+repositories {
+    maven {
+        name = 'Requisite'
+        url = 'http://maven.deftu.xyz/repository/maven-public/'
+        allowInsecureProtocol = true
+    }
+}
 
-(I'm not teaching you how to do that if you're already making mods. I will block you if you DM me about it.)
+dependencies {
+    implementation('xyz.deftu.requisite:Requisite-MCVERSION:VERSION')
+    shade('xyz.deftu.requisite:RequisiteLaunchwrapper:VERSION')
+}
+```
