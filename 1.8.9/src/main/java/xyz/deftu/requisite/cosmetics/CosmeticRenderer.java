@@ -1,6 +1,5 @@
 package xyz.deftu.requisite.cosmetics;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.client.renderer.entity.layers.LayerRenderer;
 import xyz.deftu.requisite.core.cosmetics.ICosmetic;

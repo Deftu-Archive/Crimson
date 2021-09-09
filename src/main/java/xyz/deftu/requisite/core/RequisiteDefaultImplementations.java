@@ -2,6 +2,7 @@ package xyz.deftu.requisite.core;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import xyz.deftu.requisite.core.discord.DiscordCore;
 import xyz.deftu.requisite.core.util.*;
 import xyz.deftu.simpleeventbus.SimpleEventBus;
 
@@ -21,5 +22,6 @@ public class RequisiteDefaultImplementations {
     static final RomanNumeral romanNumerals = new RomanNumeral();
     static final StringHelper stringHelper = new StringHelper();
     static final MojangAPI mojangApi = new MojangAPI();
+    static final DiscordCore discordCore = new DiscordCore();
 
 }

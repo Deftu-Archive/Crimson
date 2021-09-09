@@ -20,6 +20,7 @@ package xyz.deftu.requisite.core;
 
 import org.apache.logging.log4j.Logger;
 import xyz.deftu.requisite.core.cosmetics.CosmeticManager;
+import xyz.deftu.requisite.core.discord.DiscordCore;
 import xyz.deftu.requisite.core.files.ConfigurationManager;
 import xyz.deftu.requisite.core.files.FileManager;
 import xyz.deftu.requisite.core.hud.HudRegistry;
@@ -105,6 +106,9 @@ public interface IRequisite {
     IServerHelper getServerHelper();
     default MojangAPI getMojangApi() {
         return RequisiteDefaultImplementations.mojangApi;
+    }
+    default DiscordCore getDiscordCore() {
+        return RequisiteDefaultImplementations.discordCore;
     }
 
     /* Default. */
