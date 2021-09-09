@@ -2,10 +2,12 @@ package xyz.deftu.requisite.cosmetics;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.AbstractClientPlayer;
+import net.minecraft.util.ResourceLocation;
 import xyz.deftu.requisite.core.cosmetics.CosmeticData;
 import xyz.deftu.requisite.core.cosmetics.ICosmetic;
 import xyz.deftu.requisite.core.cosmetics.ICosmeticInitializer;
 import xyz.deftu.requisite.cosmetics.impl.CloakCosmetic;
+import xyz.deftu.requisite.textures.InputStreamTexture;
 
 import java.util.List;
 
@@ -18,6 +20,7 @@ public class CosmeticInitializer implements ICosmeticInitializer<AbstractClientP
     }
 
     public void initialize(List<ICosmetic<AbstractClientPlayer>> cosmetics, CosmeticData data) {
+        Minecraft.getMinecraft().getTextureManager().loadTexture(new ResourceLocation("requisite:dynamic", data.getTexture().name), new InputStreamTexture(data.getTexture().texture));
         cosmetics.add(new CloakCosmetic(data));
     }
 

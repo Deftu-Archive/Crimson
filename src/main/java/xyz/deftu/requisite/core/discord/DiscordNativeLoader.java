@@ -20,20 +20,22 @@ public class DiscordNativeLoader {
         if (fileName == null)
             throw new IllegalArgumentException("Cannot determine current operating system.");
 
-        File nativeFile = new File("DiscordInteg/natives", fileName);
-        File jni = new File("DiscordInteg/natives/", ((SystemUtils.IS_OS_WINDOWS ? "discord_game_sdk_jni.dll" : "libdiscord_game_sdk_jni" +
+        File nativeFile = new File("Requisite/Discord/natives", fileName);
+        File jni = new File("Requisite/Discord/natives/", ((SystemUtils.IS_OS_WINDOWS ? "discord_game_sdk_jni.dll" : "libdiscord_game_sdk_jni" +
                 (SystemUtils.IS_OS_MAC ? ".dylib" : ".so"))));
 
         if (nativeFile.exists() && jni.exists()) {
             load(nativeFile, jni);
         } else {
-            File nativesDirectory = new File("DiscordInteg/natives");
+            File nativesDirectory = new File("Requisite/Discord/natives");
             if (!nativesDirectory.mkdirs()) {
-                throw new IllegalStateException("Couldn't make directories for DiscordInteg natives.");
+                throw new IllegalStateException("Couldn't make directories for Requisite Discord natives.");
             }
 
             String arch = System.getProperty("os.arch").toLowerCase();
-            if (arch.equals("amd64")) arch = "x86_64";
+            if (arch.equals("amd64")) {
+                arch = "x86_64";
+            }
 
             try {
                 URL downloadUrl = new URL("https://dl-game-sdk.discordapp.net/3.1.0/discord_game_sdk.zip");
@@ -80,7 +82,7 @@ public class DiscordNativeLoader {
                 (SystemUtils.IS_OS_MAC ? ".dylib" : ".so"));
         InputStream input = DiscordNativeLoader.class.getResourceAsStream(path);
 
-        File jni = new File("DiscordInteg/natives/", (SystemUtils.IS_OS_WINDOWS ? "discord_game_sdk_jni.dll" : "libdiscord_game_sdk_jni" +
+        File jni = new File("Requisite/Discord/natives/", (SystemUtils.IS_OS_WINDOWS ? "discord_game_sdk_jni.dll" : "libdiscord_game_sdk_jni" +
                 (SystemUtils.IS_OS_MAC ? ".dylib" : ".so")));
         Files.copy(input, jni.toPath(), StandardCopyOption.REPLACE_EXISTING);
 

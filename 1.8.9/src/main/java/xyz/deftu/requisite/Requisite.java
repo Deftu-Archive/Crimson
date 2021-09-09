@@ -18,6 +18,7 @@
 
 package xyz.deftu.requisite;
 
+import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraftforge.fml.common.Mod;
 import xyz.deftu.requisite.core.IRequisite;
 import xyz.deftu.requisite.core.RequisiteEventManager;
@@ -53,7 +54,7 @@ public class Requisite implements IRequisite {
     /* Services. */
     private FileManager fileManager;
     private ConfigurationManager configurationManager;
-    private CosmeticManager cosmeticManager;
+    private CosmeticManager<AbstractClientPlayer> cosmeticManager;
     private ModIntegration modIntegration;
     private RequisiteEventManager internalEventManager;
     private RequisiteEventListener internalEventListener;
@@ -128,7 +129,7 @@ public class Requisite implements IRequisite {
         return configurationManager;
     }
 
-    public CosmeticManager getCosmeticManager() {
+    public CosmeticManager<AbstractClientPlayer> getCosmeticManager() {
         return cosmeticManager;
     }
 

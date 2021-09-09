@@ -6,7 +6,7 @@ import xyz.deftu.requisite.core.discord.DiscordCore;
 import xyz.deftu.requisite.core.util.*;
 import xyz.deftu.simpleeventbus.SimpleEventBus;
 
-public class RequisiteDefaultImplementations {
+class RequisiteDefaultImplementations {
 
     static final Logger logger = LogManager.getLogger("Requisite");
     static final SimpleEventBus eventBus = new SimpleEventBus();

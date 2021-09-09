@@ -5,11 +5,8 @@ import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EnumPlayerModelParts;
 import net.minecraft.util.MathHelper;
-import net.minecraft.util.ResourceLocation;
 import xyz.deftu.requisite.core.cosmetics.CosmeticData;
 import xyz.deftu.requisite.cosmetics.BaseCosmetic;
 
@@ -26,7 +23,7 @@ public class CloakCosmetic extends BaseCosmetic {
     public void render(AbstractClientPlayer player, float partialTicks) {
         if (player.hasPlayerInfo() && !player.isInvisible() && player.isWearing(EnumPlayerModelParts.CAPE) && player.getLocationCape() == null) {
             GlStateManager.color(1f, 1f, 1f, 1f);
-
+            Minecraft.getMinecraft().getTextureManager().bindTexture(texture);
             GlStateManager.pushMatrix();
             GlStateManager.translate(0f, 0f, 0.125f);
             double d0 = player.prevChasingPosX + (player.chasingPosX - player.prevChasingPosX) * (double)partialTicks - (player.prevPosX + (player.posX - player.prevPosX) * (double)partialTicks);

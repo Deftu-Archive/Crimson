@@ -12,7 +12,6 @@ public class CosmeticRenderer implements LayerRenderer<AbstractClientPlayer>, IC
     private List<ICosmetic<AbstractClientPlayer>> cosmetics;
 
     public void doRenderLayer(AbstractClientPlayer player, float limbSwing, float limbSwingAmount, float partialTicks, float tickAge, float netHeadYaw, float netHeadPitch, float scale) {
-        System.out.println(cosmetics);
         if (cosmetics != null) {
             for (ICosmetic<AbstractClientPlayer> cosmetic : cosmetics) {
                 cosmetic.render(player, partialTicks);

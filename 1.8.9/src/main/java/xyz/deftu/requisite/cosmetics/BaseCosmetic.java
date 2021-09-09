@@ -1,15 +1,22 @@
 package xyz.deftu.requisite.cosmetics;
 
 import net.minecraft.client.entity.AbstractClientPlayer;
+import net.minecraft.util.ResourceLocation;
 import xyz.deftu.requisite.core.cosmetics.CosmeticData;
 import xyz.deftu.requisite.core.cosmetics.ICosmetic;
 
 public abstract class BaseCosmetic implements ICosmetic<AbstractClientPlayer> {
 
     protected final CosmeticData cosmeticData;
+    protected final ResourceLocation texture;
+
+    public BaseCosmetic(CosmeticData cosmeticData, String fileExtension) {
+        this.cosmeticData = cosmeticData;
+        this.texture = new ResourceLocation("requisite:dynamic", data().getTexture().name);
+    }
 
     public BaseCosmetic(CosmeticData cosmeticData) {
-        this.cosmeticData = cosmeticData;
+        this(cosmeticData, "png");
     }
 
     public abstract void render(AbstractClientPlayer player, float partialTicks);

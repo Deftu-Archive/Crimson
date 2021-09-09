@@ -10,6 +10,10 @@ public class DiscordCore {
     private Core core;
     private boolean running;
 
+    public DiscordCore() {
+        initialize();
+    }
+
     public void initialize() {
         if (initialized)
             return;
