@@ -36,6 +36,7 @@ public class ConfigurationManager extends Thread {
 
     public void update() {
         for (IConfigurable configurable : configurables) {
+            configurable.initialize(configuration);
             configurable.load(this);
             configurable.save(this);
         }
@@ -47,6 +48,7 @@ public class ConfigurationManager extends Thread {
 
     public ConfigurationManager addConfigurable(IConfigurable configurable) {
         this.configurables.add(configurable);
+        configurable.initialize(configuration);
         configurable.load(this);
         configurable.save(this);
         configuration.save();

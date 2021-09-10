@@ -19,11 +19,6 @@
 package xyz.deftu.requisite;
 
 import net.minecraft.client.entity.AbstractClientPlayer;
-import net.minecraft.command.CommandBase;
-import net.minecraft.command.CommandException;
-import net.minecraft.command.ICommandSender;
-import net.minecraft.util.ChatComponentText;
-import net.minecraftforge.client.ClientCommandHandler;
 import net.minecraftforge.fml.common.Mod;
 import xyz.deftu.requisite.commands.CommandHelper;
 import xyz.deftu.requisite.core.IRequisite;
@@ -95,7 +90,7 @@ public class Requisite implements IRequisite {
         /* Initialize services. */
         fileManager = new FileManager(this);
         configurationManager = new ConfigurationManager("config", fileManager.getRequisiteModDirectory(fileManager.getRequisiteDirectory(fileManager.getConfigDirectory(gameDir))));
-        cosmeticManager = new CosmeticManager<>(new CosmeticInitializer()); // TODO: 2021/09/09 finish.
+        cosmeticManager = new CosmeticManager<>(new CosmeticInitializer());
         cosmeticManager.initialize();
         modIntegration = new ModIntegration(this);
         commandRegistry = new CommandRegistry(this, new CommandHelper());
@@ -132,21 +127,6 @@ public class Requisite implements IRequisite {
 
         /* Initialize version-dependant utilities. */
         glHelper = new GlHelper();
-
-        ClientCommandHandler.instance.registerCommand(new CommandBase() {
-            public String getCommandName() {
-                return "test";
-            }
-            public String getCommandUsage(ICommandSender sender) {
-                return "usage";
-            }
-            public boolean canCommandSenderUseCommand(ICommandSender sender) {
-                return true;
-            }
-            public void processCommand(ICommandSender sender, String[] args) throws CommandException {
-                sender.addChatMessage(new ChatComponentText("Fuck you!"));
-            }
-        });
 
         return initialized = true;
     }

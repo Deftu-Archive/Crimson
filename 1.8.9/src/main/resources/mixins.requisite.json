@@ -8,8 +8,6 @@
   "mixins": [
     "client.MinecraftMixin",
 
-    "gui.GuiChatAccessor",
-    "gui.GuiChatInvoker",
     "gui.GuiChatMixin",
     "gui.GuiScreenMixin"
   ]

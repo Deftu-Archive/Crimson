@@ -54,3 +54,5 @@ include(
         '1.8.9',
         '1.17.1'
 )
+include 'core'
+

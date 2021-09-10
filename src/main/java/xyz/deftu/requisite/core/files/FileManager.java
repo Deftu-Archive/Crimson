@@ -35,7 +35,7 @@ public class FileManager {
     }
 
     public File getRequisiteDirectory(File configDirectory) {
-        return checkExistence(new File(configDirectory, "TGMDevelopment"));
+        return checkExistence(new File(configDirectory, "Requisite"));
     }
 
     public File getRequisiteModDirectory(File tgmDevelopmentDirectory) {

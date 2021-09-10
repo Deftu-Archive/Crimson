@@ -19,9 +19,12 @@
 package xyz.deftu.requisite.core.files;
 
 import xyz.deftu.simpleconfig.Configuration;
+import xyz.deftu.simpleconfig.Subconfiguration;
 
 public interface IConfigurable {
+    default void initialize(Configuration configuration) {
+    }
     void save(ConfigurationManager configurationManager);
     void load(ConfigurationManager configurationManager);
-    Configuration mainConfig();
+    Subconfiguration configuration();
 }

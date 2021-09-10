@@ -24,6 +24,7 @@ import xyz.deftu.requisite.core.cosmetics.CosmeticManager;
 import xyz.deftu.requisite.core.discord.DiscordCore;
 import xyz.deftu.requisite.core.files.ConfigurationManager;
 import xyz.deftu.requisite.core.files.FileManager;
+import xyz.deftu.requisite.core.files.configs.PrivacyConfigurations;
 import xyz.deftu.requisite.core.hud.HudRegistry;
 import xyz.deftu.requisite.core.hypixel.HypixelHelper;
 import xyz.deftu.requisite.core.integration.IModIntegration;
@@ -44,6 +45,11 @@ import java.util.Base64;
 public interface IRequisite {
 
     boolean initialize(File gameDir);
+    default boolean finish(File gameDir) {
+        boolean initial = initialize(gameDir);
+        getConfigurationManager().addConfigurable(getPrivacyConfigurations());
+        return initial;
+    }
 
     default Logger getLogger() {
         return RequisiteDefaultImplementations.logger;
@@ -59,6 +65,10 @@ public interface IRequisite {
     RequisiteEventManager getInternalEventManager();
     IEventListener getInternalEventListener();
     RequisiteClientSocket getRequisiteSocket();
+
+    default PrivacyConfigurations getPrivacyConfigurations() {
+        return RequisiteDefaultImplementations.privacyConfigurations;
+    }
 
     void openMenu();
 
@@ -108,6 +118,9 @@ public interface IRequisite {
     IServerHelper getServerHelper();
     default MojangAPI getMojangApi() {
         return RequisiteDefaultImplementations.mojangApi;
+    }
+    default NetworkPinger getNetworkPinger() {
+        return RequisiteDefaultImplementations.networkPinger;
     }
 
     /* Default. */
