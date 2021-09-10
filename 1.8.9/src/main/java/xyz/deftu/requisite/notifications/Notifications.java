@@ -28,12 +28,10 @@ import xyz.deftu.requisite.Requisite;
 import xyz.deftu.requisite.core.data.ColourRGB;
 import xyz.deftu.requisite.core.notifications.INotifications;
 import xyz.deftu.requisite.core.notifications.Notification;
-import xyz.deftu.requisite.core.notifications.NotificationColour;
 import xyz.deftu.requisite.core.util.ChatColour;
 
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
-import java.util.function.Consumer;
 
 public class Notifications implements INotifications {
 

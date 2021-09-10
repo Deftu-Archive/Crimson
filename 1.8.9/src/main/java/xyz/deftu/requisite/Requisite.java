@@ -28,9 +28,7 @@ import xyz.deftu.requisite.core.commands.CommandRegistry;
 import xyz.deftu.requisite.core.cosmetics.CosmeticManager;
 import xyz.deftu.requisite.core.files.ConfigurationManager;
 import xyz.deftu.requisite.core.files.FileManager;
-import xyz.deftu.requisite.core.hud.HudRegistry;
 import xyz.deftu.requisite.core.hypixel.HypixelHelper;
-import xyz.deftu.requisite.core.keybinds.KeyBindRegistry;
 import xyz.deftu.requisite.core.networking.RequisiteClientSocket;
 import xyz.deftu.requisite.core.util.*;
 import xyz.deftu.requisite.cosmetics.CosmeticInitializer;
@@ -65,9 +63,6 @@ public class Requisite implements IRequisite {
     private RequisiteClientSocket requisiteSocket;
 
     /* Utilities. */
-    private KeyBindRegistry keyBindRegistry;
-    private HudRegistry hudRegistry;
-
     private EnhancedFontRenderer enhancedFontRenderer;
     private PlayerHelper playerHelper;
     private ChatHelper chatHelper;
@@ -100,9 +95,6 @@ public class Requisite implements IRequisite {
         boolean socketConnected = requisiteSocket.awaitConnect();
 
         /* Initialize utilities. */
-        keyBindRegistry = new KeyBindRegistry(this);
-        hudRegistry = new HudRegistry(this);
-
         enhancedFontRenderer = new EnhancedFontRenderer(this);
         playerHelper = new PlayerHelper();
         chatHelper = new ChatHelper();
@@ -164,15 +156,7 @@ public class Requisite implements IRequisite {
     }
 
     public void openMenu() {
-        chatHelper.send("Unfinished.");
-    }
 
-    public KeyBindRegistry getKeyBindRegistry() {
-        return keyBindRegistry;
-    }
-
-    public HudRegistry getHudRegistry() {
-        return hudRegistry;
     }
 
     public EnhancedFontRenderer getEnhancedFontRenderer() {
@@ -225,6 +209,10 @@ public class Requisite implements IRequisite {
 
     public static Requisite getInstance() {
         return INSTANCE;
+    }
+
+    public static boolean isInitialized() {
+        return initialized;
     }
 
 }

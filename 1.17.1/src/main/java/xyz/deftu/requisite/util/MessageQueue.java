@@ -5,7 +5,6 @@ import xyz.deftu.requisite.core.IRequisite;
 import xyz.deftu.requisite.core.events.TickEvent;
 import xyz.deftu.requisite.core.util.messages.IMessageQueue;
 import xyz.deftu.requisite.core.util.messages.MessageQueueEntry;
-import xyz.matthewtgm.simpleeventbus.EventSubscriber;
 
 import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;
@@ -19,7 +18,7 @@ public class MessageQueue implements IMessageQueue {
 
     public MessageQueue(IRequisite requisite) {
         this.requisite = requisite;
-        requisite.getManager().getEventBus().register(this);
+        requisite.getEventBus().register(TickEvent.class, this::onClientTick);
     }
 
     public void queue(String message, int delay) {
@@ -43,7 +42,6 @@ public class MessageQueue implements IMessageQueue {
         }
     }
 
-    @EventSubscriber
     public void onClientTick(TickEvent event) {
         tickCounter++;
         if (!queue.isEmpty()) {

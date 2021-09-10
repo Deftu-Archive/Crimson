@@ -1,30 +1,8 @@
-/*
- * Requisite - Minecraft library mod
- * Copyright (C) 2021 MatthewTGM
- *
- * Requisite is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 2.1 of the License, or
- * (at your option) any later version.
- *
- * Requisite is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU Lesser General Public License
- * along with Requisite. If not, see <https://www.gnu.org/licenses/>.
- */
-
 pluginManagement {
     repositories {
         maven {
             name = 'SonaType'
             url = 'https://oss.sonatype.org/content/repositories/snapshots/'
-        }
-        maven {
-            name = 'Forge'
-            url = 'https://maven.minecraftforge.net/'
         }
         maven {
             name = 'Fabric'
@@ -39,20 +17,12 @@ pluginManagement {
         mavenCentral()
         mavenLocal()
     }
-
-    resolutionStrategy {
-        eachPlugin {
-            if (it.requested.id.id == "com.replaymod.preprocess") {
-                useModule("com.github.replaymod:preprocessor:${it.requested.version}")
-            }
-        }
-    }
 }
 
-rootProject.name = mod_name
+rootProject.name = project_name
 include(
+        'core',
         '1.8.9',
         '1.17.1'
 )
-include 'core'
 

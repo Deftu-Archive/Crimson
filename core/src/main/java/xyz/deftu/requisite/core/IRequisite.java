@@ -21,14 +21,11 @@ package xyz.deftu.requisite.core;
 import org.apache.logging.log4j.Logger;
 import xyz.deftu.requisite.core.commands.CommandRegistry;
 import xyz.deftu.requisite.core.cosmetics.CosmeticManager;
-import xyz.deftu.requisite.core.discord.DiscordCore;
 import xyz.deftu.requisite.core.files.ConfigurationManager;
 import xyz.deftu.requisite.core.files.FileManager;
 import xyz.deftu.requisite.core.files.configs.PrivacyConfigurations;
-import xyz.deftu.requisite.core.hud.HudRegistry;
 import xyz.deftu.requisite.core.hypixel.HypixelHelper;
 import xyz.deftu.requisite.core.integration.IModIntegration;
-import xyz.deftu.requisite.core.keybinds.KeyBindRegistry;
 import xyz.deftu.requisite.core.networking.RequisiteClientSocket;
 import xyz.deftu.requisite.core.notifications.INotifications;
 import xyz.deftu.requisite.core.rendering.IEnhancedFontRenderer;
@@ -71,9 +68,6 @@ public interface IRequisite {
     }
 
     void openMenu();
-
-    KeyBindRegistry getKeyBindRegistry();
-    HudRegistry getHudRegistry();
 
     IEnhancedFontRenderer getEnhancedFontRenderer();
     IPlayerHelper getPlayerHelper();

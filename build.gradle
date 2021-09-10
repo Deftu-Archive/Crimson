@@ -1,246 +1,54 @@
 plugins {
-    id "com.github.johnrengelman.shadow" version "6.1.0"
+    id "com.github.johnrengelman.shadow" version "7.0.0"
     id "com.github.gmazzo.buildconfig" version "3.0.1"
-    id "org.jetbrains.kotlin.jvm" version "1.5.21"
+    id "org.jetbrains.kotlin.jvm" version "1.5.30"
     id "java"
 }
 
-archivesBaseName = mod_name
-version = mod_ver
-group = mod_group
+sourceCompatibility = targetCompatibility = JavaVersion.VERSION_1_8
 
-sourceCompatibility = targetCompatibility = 1.8
-
-buildConfig {
-    className('RequisiteInfo')
-    packageName('xyz.deftu.requisite.core')
-
-    buildConfigField('String', 'NAME', "\"${mod_name}\"")
-    buildConfigField('String', 'VER', "\"${mod_ver}\"")
-    buildConfigField('String', 'ID', "\"${mod_id}\"")
-}
-
-/* Add available repositories to areas where dependencies can be downloaded. */
-repositories {
-    mavenCentral()
-
-    maven {
-        name = "Requisite"
-        url = "http://maven.deftu.xyz/repository/maven-public/"
-        allowInsecureProtocol = true
-    }
-    maven {
-        name = "Sk1er Public"
-        url = "https://repo.sk1er.club/repository/maven-public/"
-    }
-    maven {
-        name = "SpongePowered"
-        url = "https://repo.spongepowered.org/maven/"
-    }
-    maven {
-        name = "JitPack"
-        url = "https://jitpack.io/"
-    }
-}
-
-/* Adds a configuration for shading libraries. */
-configurations {
-    shade
-    implementation.extendsFrom(shade)
-}
-
-/* Define dependencies. */
-dependencies {
-    /* Requisite dependencies. */
-    shade('xyz.deftu.eventbus:SimpleEventBus:3.0')
-    shade('xyz.deftu.simpleconfig:SimpleConfig:3.3.0')
-    shade('xyz.deftu.simpleconfig:SimpleConfig:3.3.0:settings')
-    shade('xyz.deftu.json:JSON+:2.11')
-    shade('xyz.deftu.json:JSON+:2.11:files')
-    shade('xyz.deftu.json:JSON+:2.11:kotlin')
-    shade('xyz.deftu.json:JSON+:2.11:serialization')
-    shade('xyz.deftu.json:JSON+:2.11:utilities')
-    shade('xyz.deftu.mango:Mango:1.5')
-
-    shade('org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.1-native-mt')
-    shade('org.jetbrains.kotlin:kotlin-stdlib-jdk8')
-
-    shade('org.java-websocket:Java-WebSocket:1.5.2')
-
-    implementation('gg.essential:elementa-1.8.9-forge:358+next')
-
-    implementation('org.spongepowered:mixin:0.7.11-SNAPSHOT')
-
-    /* Dependencies used for internal APIs. */
-    shade('com.github.JnCrMx:discord-game-sdk4j:v0.5.4')
-
-    /* Dependencies for cutting other mods' file sizes. */
-    shade('com.github.marcoacierno:pastebin-java-api:v0.2.1')
-    shade('com.squareup.okhttp3:okhttp:4.9.1')
-    shade('org.kohsuke:github-api:1.132')
-
-    /* Libraries used globally in all Minecraft versions that Requisite takes advantage of. */
-    implementation('net.minecraft:launchwrapper:1.12')
-
-    implementation('com.google.guava:guava:17.0')
-
-    implementation('org.apache.logging.log4j:log4j-api:2.14.1')
-    implementation('org.apache.logging.log4j:log4j-core:2.14.1')
-    implementation('org.apache.logging.log4j:log4j-slf4j18-impl:2.14.1')
-}
-
-/* Set the duplicatesStrategy and define configs. */
-jar {
-    enabled = false
-    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
-    manifest.attributes(
-            'TweakClass': 'org.spongepowered.asm.launch.MixinTweaker',
-            'MixinConfigs': 'mixins.requisite.json',
-            'FMLCorePluginContainsFMLMod': true,
-            'ForceLoadAsMod': true,
-            'ModSide': 'CLIENT',
-            'TweakOrder': 0
-    )
-    exclude 'META-INF/*.RSA', 'META-INF/*.SF', 'META-INF/*.DSA'
-}
-
-/* Makes the shade configuration work and re-define the duplicatesStrategy. */
-shadowJar {
-    configurations = [project.configurations.shade]
-    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
-
-    relocate('com.besaba.revonline', mod_shaded + 'besaba.revonline')
-    relocate('okio', mod_shaded + 'okio')
-    relocate('okhttp3', mod_shaded + 'okhttp3')
-    relocate('org.java_websocket', mod_shaded + 'websocket')
-
-    exclude('LICENSE.md')
-    exclude('pack.mcmeta')
-    exclude('dummyThing')
-    exclude('**/module-info.class')
-    exclude('*.so')
-    exclude('*.dylib')
-    exclude('*.dll')
-    exclude('*.jnilib')
-    exclude('ibxm/**')
-    exclude('com/jcraft/**')
-    exclude('org/lwjgl/**')
-    exclude('net/java/**')
-
-    exclude('META-INF/proguard/**')
-    exclude('META-INF/maven/**')
-    exclude('META-INF/versions/**')
-    exclude('META-INF/com.android.tools/**')
-    
-    exclude('**/*.kotlin_metadata')
-    exclude('**/*.kotlin_module')
-    exclude('**/*.kotlin_builtins')
-
-    archiveClassifier.set('')
-}
-
-/* Move the resources to the working directory for runs. */
-task moveResources {
-    doLast {
-        try {
-            ant.move file: "${buildDir}/resources/main",
-                    todir: "${buildDir}/classes/java"
-        } catch (Exception e) {
-            e.printStackTrace()
-        }
-    }
-}
-
-
-
-
-
-
-
-subprojects {
+allprojects {
     apply plugin: "com.github.johnrengelman.shadow"
     apply plugin: "com.github.gmazzo.buildconfig"
     apply plugin: "org.jetbrains.kotlin.jvm"
     apply plugin: "java"
 
+    group = 'xyz.deftu.requisite'
+
+    sourceCompatibility = targetCompatibility = JavaVersion.VERSION_1_8
+
     configurations {
         shade
         implementation.extendsFrom(shade)
+
+        shadeApi
+        api.extendsFrom(shadeApi)
     }
 
-    ext {
-        minecraft_version = ""
-        minecraft_platform = ""
+    repositories {
+        mavenCentral()
 
-        elementa_mcversion_override = ""
-        elementa_version_override = ""
-        universalcraft_mcversion_override = ""
-        universalcraft_version_override = ""
-
-        mixin_version = ""
+        maven {
+            url = "http://maven.deftu.xyz/repository/maven-public/"
+            allowInsecureProtocol = true
+        }
+        maven {
+            url = "https://repo.sk1er.club/repository/maven-public/"
+        }
+        maven {
+            url = "https://repo.spongepowered.org/maven/"
+        }
+        maven {
+            url = "https://jitpack.io/"
+        }
     }
 
-    afterEvaluate {
-        repositories {
-            mavenCentral()
+    shadowJar {
+        archiveClassifier.set('')
 
-            maven {
-                name = "Requisite"
-                url = "http://maven.deftu.xyz/repository/maven-public/"
-                allowInsecureProtocol = true
-            }
-            maven {
-                name = "Sk1er Public"
-                url = "https://repo.sk1er.club/repository/maven-public/"
-            }
-            maven {
-                name = "SpongePowered"
-                url = "https://repo.spongepowered.org/maven/"
-            }
-            maven {
-                name = "JitPack"
-                url = "https://jitpack.io/"
-            }
-        }
-
-        dependencies {
-            implementation('xyz.deftu.eventbus:SimpleEventBus:3.0')
-            implementation('xyz.deftu.simpleconfig:SimpleConfig:3.3.0')
-            implementation('xyz.deftu.simpleconfig:SimpleConfig:3.3.0:settings')
-            implementation('xyz.deftu.json:JSON+:2.11')
-            implementation('xyz.deftu.json:JSON+:2.11:files')
-            implementation('xyz.deftu.json:JSON+:2.11:kotlin')
-            implementation('xyz.deftu.json:JSON+:2.11:serialization')
-            implementation('xyz.deftu.json:JSON+:2.11:utilities')
-            implementation('xyz.deftu.mango:Mango:1.5')
-
-            implementation('org.java-websocket:Java-WebSocket:1.5.2')
-
-            shade("org.spongepowered:mixin:${mixin_version}")
-            def mixinProc = "org.spongepowered:mixin:${mixin_version}"
-            def (mixinMajor, mixinMinor, mixinPatch) = mixin_version.tokenize('.')
-            def mixinVer = "${mixinMajor}${mixinMinor.padLeft(2, '0')}${(mixinPatch ?: '').padLeft(2, '0')}".replaceAll("[^\\d.]", "") as int
-            if (mixinVer >= 10803)
-                mixinProc += ":processor"
-            annotationProcessor(mixinProc)
-
-            shade("gg.essential:elementa-${elementa_mcversion_override.isEmpty() ? minecraft_version : elementa_mcversion_override}-${minecraft_platform}:${elementa_version_override.isEmpty() ? "358+next" : elementa_version_override}") {
-                exclude group: 'net.fabricmc'
-                exclude group: 'gg.essential.universal'
-            }
-            shade("gg.essential:universalcraft-${universalcraft_mcversion_override.isEmpty() ? minecraft_version : universalcraft_mcversion_override}-${minecraft_platform}:${universalcraft_version_override.isEmpty() ? "152+next" : universalcraft_version_override}") {
-                exclude group: 'net.fabricmc'
-            }
-
-            implementation('org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.1-native-mt')
-            implementation('org.jetbrains.kotlin:kotlin-stdlib-jdk8')
-            implementation('org.jetbrains.kotlin:kotlin-reflect')
-
-            implementation('com.github.JnCrMx:discord-game-sdk4j:v0.5.4')
-        }
+        configurations = [project.configurations.shade]
+        duplicatesStrategy DuplicatesStrategy.EXCLUDE
     }
 }
 
-moveResources.dependsOn(processResources)
-classes.dependsOn(moveResources)
 jar.finalizedBy(shadowJar)

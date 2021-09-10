@@ -136,7 +136,7 @@ public class EnhancedFontRenderer implements IEnhancedFontRenderer {
 
     public void drawChromaText(MatrixStack matrices, String text, float x, float y, boolean shadow) {
         for (char c : text.toCharArray()) {
-            int colour = requisite.getManager().getColourHelper().getChroma(x, y).getRGB();
+            int colour = requisite.getColourHelper().getChroma(x, y).getRGB();
             String str = String.valueOf(c);
             drawText(matrices, str, x, y, colour, shadow);
             x += getWidth(c);

@@ -2,7 +2,6 @@ package xyz.deftu.requisite.core;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import xyz.deftu.requisite.core.discord.DiscordCore;
 import xyz.deftu.requisite.core.files.configs.PrivacyConfigurations;
 import xyz.deftu.requisite.core.util.*;
 import xyz.deftu.simpleeventbus.SimpleEventBus;

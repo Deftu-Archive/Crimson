@@ -1,11 +1,11 @@
 {
   "compatibilityLevel": "JAVA_16",
-  "package": "xyz.matthewtgm.requisite.mixins",
+  "package": "xyz.deftu.requisite.mixins",
   "verbose": true,
   "refmap": "mixins.requisite.refmap.json",
   "target":  "@env(CLIENT)",
   "mixins": [
-    "xyz.deftu.requisite.mixins.client.MinecraftClientMixin",
-    "xyz.deftu.requisite.mixins.gui.InGameHudMixin"
+    "client.MinecraftClientMixin",
+    "gui.InGameHudMixin"
   ]
 }

@@ -22,20 +22,22 @@ public abstract class MinecraftClientMixin {
 
     @Shadow @Nullable public Screen currentScreen;
 
-    @Inject(method = "<init>", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/screen/SplashOverlay;init(Lnet/minecraft/client/MinecraftClient;)V"))
-    private void onSplashOverlayInitialized(RunArgs args, CallbackInfo ci) {
-        Requisite.getInstance().initialize(runDirectory);
+    @Inject(method = "<init>", at = @At("RETURN"))
+    private void onSplashOverlayInitialized(CallbackInfo ci) {
+        if (Requisite.getInstance().finish(runDirectory)) {
+            Requisite.getInstance().getLogger().info("Initialized Requisite.");
+        }
     }
 
     @Inject(method = "tick", at = @At("HEAD"))
     private void onTick(CallbackInfo ci) {
-        Requisite.getInstance().getManager().getInternalEventManager().handleTick();
+        Requisite.getInstance().getInternalEventManager().handleTick();
     }
 
     @Inject(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/render/GameRenderer;render(FJZ)V", shift = At.Shift.AFTER))
     private void onRenderTick(boolean tick, CallbackInfo ci) {
         if (currentScreen != null) {
-            Requisite.getInstance().getManager().getInternalEventManager().handleRenderTick(getTickDelta());
+            Requisite.getInstance().getInternalEventManager().handleRenderTick(getTickDelta());
         }
     }
 

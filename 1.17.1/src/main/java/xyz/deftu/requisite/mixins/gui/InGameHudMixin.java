@@ -11,9 +11,9 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyArg;
 import org.spongepowered.asm.mixin.injection.Slice;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import xyz.deftu.mango.Strings;
+import xyz.deftu.mango.collections.Pair;
 import xyz.deftu.requisite.Requisite;
-import xyz.matthewtgm.mango.Strings;
-import xyz.matthewtgm.mango.collections.Pair;
 
 import java.util.UUID;
 
@@ -24,12 +24,12 @@ public class InGameHudMixin {
 
     @Inject(method = "render", at = @At(value = "INVOKE", target = "Lcom/mojang/blaze3d/systems/RenderSystem;setShaderColor(FFFF)V"), slice = @Slice(from = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/hud/PlayerListHud;render(Lnet/minecraft/client/util/math/MatrixStack;ILnet/minecraft/scoreboard/Scoreboard;Lnet/minecraft/scoreboard/ScoreboardObjective;)V")))
     public void render(MatrixStack matrixStack, float tickDelta, CallbackInfo callbackInfo) {
-        Requisite.getInstance().getManager().getInternalEventManager().handleRenderTick(tickDelta);
+        Requisite.getInstance().getInternalEventManager().handleRenderTick(tickDelta);
     }
 
     @Inject(method = "addChatMessage", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/ClientChatListener;onChatMessage(Lnet/minecraft/network/MessageType;Lnet/minecraft/text/Text;Ljava/util/UUID;)V"), cancellable = true)
     private void onChatMessageAdded(MessageType type, Text message, UUID sender, CallbackInfo ci) {
-        Pair<String, Boolean> chatMessageEvent = Requisite.getInstance().getManager().getInternalEventManager().handleChatMessageSent(message.asString());
+        Pair<String, Boolean> chatMessageEvent = Requisite.getInstance().getInternalEventManager().handleChatMessageSent(message.asString());
         if (chatMessageEvent.right())
             ci.cancel();
 
