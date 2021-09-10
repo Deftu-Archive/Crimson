@@ -22,7 +22,7 @@ public abstract class MinecraftClientMixin {
 
     @Shadow @Nullable public Screen currentScreen;
 
-    @Inject(method = "<init>", at = @At("RETURN"))
+    @Inject(method = "<init>", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/MinecraftClient;onResolutionChanged()V", shift = At.Shift.AFTER))
     private void onSplashOverlayInitialized(CallbackInfo ci) {
         if (Requisite.getInstance().finish(runDirectory)) {
             Requisite.getInstance().getLogger().info("Initialized Requisite.");

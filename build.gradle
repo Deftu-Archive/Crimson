@@ -15,8 +15,6 @@ allprojects {
 
     group = 'xyz.deftu.requisite'
 
-    sourceCompatibility = targetCompatibility = JavaVersion.VERSION_1_8
-
     configurations {
         shade
         implementation.extendsFrom(shade)

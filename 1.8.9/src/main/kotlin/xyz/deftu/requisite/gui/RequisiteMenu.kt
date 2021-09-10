@@ -20,7 +20,6 @@ class RequisiteMenu : WindowScreen(
         val menu = RequisiteMenuWindow(window, {
 
         }, {
-            displayScreen(RequisiteHudMenu())
         }, {
 
         }) childOf window

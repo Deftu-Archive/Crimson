@@ -1,3 +1,5 @@
+sourceCompatibility = targetCompatibility = JavaVersion.VERSION_1_8
+
 buildConfig {
     className('RequisiteInfo')
     packageName('xyz.deftu.requisite.core')
@@ -18,12 +20,12 @@ dependencies {
     shadeApi('xyz.deftu.json:JSON+:2.11:utilities')
     shadeApi('xyz.deftu.mango:Mango:1.5')
 
-    shadeApi('org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.1-native-mt')
-    shadeApi('org.jetbrains.kotlin:kotlin-stdlib-jdk8')
+    shade('org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.1-native-mt')
+    shade('org.jetbrains.kotlin:kotlin-stdlib-jdk8')
 
-    shadeApi('org.java-websocket:Java-WebSocket:1.5.2')
+    shade('org.java-websocket:Java-WebSocket:1.5.2')
 
-    api('gg.essential:elementa-1.8.9-forge:358+next') {
+    implementation('gg.essential:elementa-1.8.9-forge:358+next') {
         exclude module: 'kotlin-stdlib-jdk8'
         exclude module: 'kotlin-reflect'
         exclude module: 'minecraft'
@@ -33,21 +35,21 @@ dependencies {
         exclude module: 'forge'
     }
 
-    api('org.spongepowered:mixin:0.7.11-SNAPSHOT')
+    implementation('org.spongepowered:mixin:0.7.11-SNAPSHOT')
 
-    shadeApi('com.github.JnCrMx:discord-game-sdk4j:v0.5.4')
+    shade('com.github.JnCrMx:discord-game-sdk4j:v0.5.4')
 
     /* Dependencies for cutting other mods' file sizes. */
-    shadeApi('com.github.marcoacierno:pastebin-java-api:v0.2.1')
-    shadeApi('com.squareup.okhttp3:okhttp:4.9.1')
-    shadeApi('org.kohsuke:github-api:1.132')
+    shade('com.github.marcoacierno:pastebin-java-api:v0.2.1')
+    shade('com.squareup.okhttp3:okhttp:4.9.1')
+    shade('org.kohsuke:github-api:1.132')
 
     /* Libraries used globally in all Minecraft versions that Requisite takes advantage of. */
-    api('net.minecraft:launchwrapper:1.12')
+    implementation('net.minecraft:launchwrapper:1.12')
 
-    api('com.google.guava:guava:17.0')
+    implementation('com.google.guava:guava:17.0')
 
-    api('org.apache.logging.log4j:log4j-api:2.14.1')
-    api('org.apache.logging.log4j:log4j-core:2.14.1')
-    api('org.apache.logging.log4j:log4j-slf4j18-impl:2.14.1')
+    implementation('org.apache.logging.log4j:log4j-api:2.14.1')
+    implementation('org.apache.logging.log4j:log4j-core:2.14.1')
+    implementation('org.apache.logging.log4j:log4j-slf4j18-impl:2.14.1')
 }
