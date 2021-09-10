@@ -2,7 +2,6 @@ package xyz.deftu.requisite.core.cosmetics;
 
 import xyz.deftu.mango.Lists;
 
-import java.io.InputStream;
 import java.util.Collections;
 import java.util.List;
 
@@ -21,8 +20,8 @@ public class CosmeticManager<T> {
     }
 
     public void initialize() {
-        //cosmeticData.add(CosmeticData.from("Beehive Cloak", CosmeticType.CLOAK, texture("cloak/beehive_cloak.png")));
-        //cosmeticData.add(CosmeticData.from("Booster Cloak", CosmeticType.CLOAK, texture("cloak/booster_cloak.png")));
+        cosmeticData.add(CosmeticData.from("Beehive Cloak", CosmeticType.CLOAK, texture("cloak/beehive_cloak.png")));
+        cosmeticData.add(CosmeticData.from("Booster Cloak", CosmeticType.CLOAK, texture("cloak/booster_cloak.png")));
         cosmeticData.add(CosmeticData.from("Bug Hunter Cloak", CosmeticType.CLOAK, texture("cloak/bug_hunter_cloak.png")));
 
         for (CosmeticData cosmeticData : cosmeticData) {

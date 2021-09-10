@@ -19,6 +19,7 @@
 package xyz.deftu.requisite.core;
 
 import org.apache.logging.log4j.Logger;
+import xyz.deftu.requisite.core.commands.CommandRegistry;
 import xyz.deftu.requisite.core.cosmetics.CosmeticManager;
 import xyz.deftu.requisite.core.discord.DiscordCore;
 import xyz.deftu.requisite.core.files.ConfigurationManager;
@@ -42,7 +43,7 @@ import java.util.Base64;
 
 public interface IRequisite {
 
-    void initialize(File gameDir);
+    boolean initialize(File gameDir);
 
     default Logger getLogger() {
         return RequisiteDefaultImplementations.logger;
@@ -54,6 +55,7 @@ public interface IRequisite {
     ConfigurationManager getConfigurationManager();
     CosmeticManager getCosmeticManager();
     IModIntegration getModIntegration();
+    CommandRegistry getCommandRegistry();
     RequisiteEventManager getInternalEventManager();
     IEventListener getInternalEventListener();
     RequisiteClientSocket getRequisiteSocket();
@@ -106,9 +108,6 @@ public interface IRequisite {
     IServerHelper getServerHelper();
     default MojangAPI getMojangApi() {
         return RequisiteDefaultImplementations.mojangApi;
-    }
-    default DiscordCore getDiscordCore() {
-        return RequisiteDefaultImplementations.discordCore;
     }
 
     /* Default. */

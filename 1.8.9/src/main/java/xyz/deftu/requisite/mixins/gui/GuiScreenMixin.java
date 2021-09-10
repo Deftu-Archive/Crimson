@@ -17,7 +17,6 @@ public class GuiScreenMixin {
 
     @Inject(method = "sendChatMessage(Ljava/lang/String;Z)V", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/entity/EntityPlayerSP;sendChatMessage(Ljava/lang/String;)V"), cancellable = true)
     private void onChatMessageSent(String msg, boolean addToChat, CallbackInfo ci) {
-        System.out.println(msg);
         Pair<String, Boolean> chatMessageEvent = Requisite.getInstance().getInternalEventManager().handleChatMessageSent(msg);
         if (chatMessageEvent.right()) {
             ci.cancel();

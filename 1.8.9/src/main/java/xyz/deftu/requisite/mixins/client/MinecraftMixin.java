@@ -37,7 +37,9 @@ public class MinecraftMixin {
 
     @Inject(method = "startGame", at = @At("RETURN"))
     private void onGameStarted(CallbackInfo ci) {
-        Requisite.getInstance().initialize(mcDataDir);
+        if (Requisite.getInstance().initialize(mcDataDir)) {
+            Requisite.getInstance().getLogger().info("Initialized Requisite.");
+        }
     }
 
     @Inject(method = "dispatchKeypresses", at = @At("HEAD"), cancellable = true)

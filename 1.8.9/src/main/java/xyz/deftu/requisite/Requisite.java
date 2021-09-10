@@ -19,10 +19,17 @@
 package xyz.deftu.requisite;
 
 import net.minecraft.client.entity.AbstractClientPlayer;
+import net.minecraft.command.CommandBase;
+import net.minecraft.command.CommandException;
+import net.minecraft.command.ICommandSender;
+import net.minecraft.util.ChatComponentText;
+import net.minecraftforge.client.ClientCommandHandler;
 import net.minecraftforge.fml.common.Mod;
+import xyz.deftu.requisite.commands.CommandHelper;
 import xyz.deftu.requisite.core.IRequisite;
 import xyz.deftu.requisite.core.RequisiteEventManager;
 import xyz.deftu.requisite.core.RequisiteInfo;
+import xyz.deftu.requisite.core.commands.CommandRegistry;
 import xyz.deftu.requisite.core.cosmetics.CosmeticManager;
 import xyz.deftu.requisite.core.files.ConfigurationManager;
 import xyz.deftu.requisite.core.files.FileManager;
@@ -50,12 +57,14 @@ public class Requisite implements IRequisite {
 
     /* Constants. */
     private static final Requisite INSTANCE = new Requisite();
+    private static boolean initialized;
 
     /* Services. */
     private FileManager fileManager;
     private ConfigurationManager configurationManager;
     private CosmeticManager<AbstractClientPlayer> cosmeticManager;
     private ModIntegration modIntegration;
+    private CommandRegistry commandRegistry;
     private RequisiteEventManager internalEventManager;
     private RequisiteEventListener internalEventListener;
     private RequisiteClientSocket requisiteSocket;
@@ -79,13 +88,17 @@ public class Requisite implements IRequisite {
     /* Version-dependant utilities. */
     private GlHelper glHelper;
 
-    public void initialize(File gameDir) {
+    public boolean initialize(File gameDir) {
+        if (initialized)
+            return false;
+
         /* Initialize services. */
         fileManager = new FileManager(this);
         configurationManager = new ConfigurationManager("config", fileManager.getRequisiteModDirectory(fileManager.getRequisiteDirectory(fileManager.getConfigDirectory(gameDir))));
-        cosmeticManager = new CosmeticManager<>(new CosmeticInitializer()); // TODO: 2021/09/09 finish. 
+        cosmeticManager = new CosmeticManager<>(new CosmeticInitializer()); // TODO: 2021/09/09 finish.
         cosmeticManager.initialize();
         modIntegration = new ModIntegration(this);
+        commandRegistry = new CommandRegistry(this, new CommandHelper());
         internalEventManager = new RequisiteEventManager(this);
         internalEventListener = new RequisiteEventListener(this);
         requisiteSocket = new RequisiteClientSocket(this, new SocketHelper());
@@ -119,6 +132,23 @@ public class Requisite implements IRequisite {
 
         /* Initialize version-dependant utilities. */
         glHelper = new GlHelper();
+
+        ClientCommandHandler.instance.registerCommand(new CommandBase() {
+            public String getCommandName() {
+                return "test";
+            }
+            public String getCommandUsage(ICommandSender sender) {
+                return "usage";
+            }
+            public boolean canCommandSenderUseCommand(ICommandSender sender) {
+                return true;
+            }
+            public void processCommand(ICommandSender sender, String[] args) throws CommandException {
+                sender.addChatMessage(new ChatComponentText("Fuck you!"));
+            }
+        });
+
+        return initialized = true;
     }
 
     public FileManager getFileManager() {
@@ -137,6 +167,10 @@ public class Requisite implements IRequisite {
         return modIntegration;
     }
 
+    public CommandRegistry getCommandRegistry() {
+        return commandRegistry;
+    }
+
     public RequisiteEventManager getInternalEventManager() {
         return internalEventManager;
     }
@@ -149,7 +183,9 @@ public class Requisite implements IRequisite {
         return requisiteSocket;
     }
 
-    public void openMenu() {}
+    public void openMenu() {
+        chatHelper.send("Unfinished.");
+    }
 
     public KeyBindRegistry getKeyBindRegistry() {
         return keyBindRegistry;

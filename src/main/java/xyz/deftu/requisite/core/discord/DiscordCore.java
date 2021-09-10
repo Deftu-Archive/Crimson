@@ -5,12 +5,15 @@ import de.jcm.discordgamesdk.CreateParams;
 
 public class DiscordCore {
 
+    private final long applicationId;
+
     private boolean initialized;
     private DiscordNativeLoader nativeLoader;
     private Core core;
     private boolean running;
 
-    public DiscordCore() {
+    public DiscordCore(long applicationId) {
+        this.applicationId = applicationId;
         initialize();
     }
 
@@ -27,7 +30,7 @@ public class DiscordCore {
 
     private void initializeCore() {
         CreateParams createParams = new CreateParams();
-        createParams.setClientID(885353581501349928L);
+        createParams.setClientID(applicationId);
         createParams.setFlags(CreateParams.Flags.NO_REQUIRE_DISCORD);
 
         try {

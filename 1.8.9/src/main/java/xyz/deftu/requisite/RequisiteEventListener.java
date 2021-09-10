@@ -20,6 +20,7 @@ package xyz.deftu.requisite;
 
 import net.minecraftforge.client.event.ClientChatReceivedEvent;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.world.WorldEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.InputEvent;
@@ -34,6 +35,7 @@ public class RequisiteEventListener implements IEventListener {
 
     public RequisiteEventListener(IRequisite requisite) {
         this.requisite = requisite;
+        MinecraftForge.EVENT_BUS.register(this);
     }
 
     @SubscribeEvent
