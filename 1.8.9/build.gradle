@@ -11,7 +11,7 @@ buildscript {
         }
     }
     dependencies {
-        classpath('com.github.ReplayMod:ForgeGradle:d1a7165:all')
+        classpath('com.github.RequisiteGitHub:ForgeGradle:c00c291546:all')
         classpath('dev.isXander:MixinGradle:0.6-SNAPSHOT')
     }
 }
