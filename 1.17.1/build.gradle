@@ -13,6 +13,7 @@ dependencies {
         exclude module: 'Elementa'
         exclude module: 'UniversalCraft'
     }
+    impl('org.java-websocket:Java-WebSocket:1.5.2')
 
     shade impl('gg.essential:elementa-1.17-fabric:359+next') {
         exclude module: 'fabric-loader'
