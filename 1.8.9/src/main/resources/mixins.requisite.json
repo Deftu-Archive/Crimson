@@ -1,5 +1,5 @@
 {
-  "package": "xyz.deftu.requisite.mixins",
+  "package": "xyz.qalcyo.requisite.mixins",
   "minVersion": "0.7",
   "compatibilityLevel": "JAVA_8",
   "verbose": true,

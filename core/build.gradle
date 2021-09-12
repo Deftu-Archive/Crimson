@@ -2,23 +2,23 @@ sourceCompatibility = targetCompatibility = JavaVersion.VERSION_1_8
 
 buildConfig {
     className('RequisiteInfo')
-    packageName('xyz.deftu.requisite.core')
+    packageName('xyz.qalcyo.requisite.core')
 
     buildConfigField('String', 'NAME', "\"${project_name}\"")
-    buildConfigField('String', 'VER', "\"${mod_version}\"")
+    buildConfigField('String', 'VER', "\"${project_version}\"")
     buildConfigField('String', 'ID', "\"${project_id}\"")
 }
 
 dependencies {
-    shadeApi('xyz.deftu.eventbus:SimpleEventBus:3.0')
-    shadeApi('xyz.deftu.simpleconfig:SimpleConfig:3.3.0')
-    shadeApi('xyz.deftu.simpleconfig:SimpleConfig:3.3.0:settings')
-    shadeApi('xyz.deftu.json:JSON+:2.11')
-    shadeApi('xyz.deftu.json:JSON+:2.11:files')
-    shadeApi('xyz.deftu.json:JSON+:2.11:kotlin')
-    shadeApi('xyz.deftu.json:JSON+:2.11:serialization')
-    shadeApi('xyz.deftu.json:JSON+:2.11:utilities')
-    shadeApi('xyz.deftu.mango:Mango:1.5')
+    shadeApi('xyz.qalcyo.eventbus:SimpleEventBus:3.1')
+    shadeApi('xyz.qalcyo.simpleconfig:SimpleConfig:3.4')
+    shadeApi('xyz.qalcyo.simpleconfig:SimpleConfig:3.4:settings')
+    shadeApi('xyz.qalcyo.json:JSON+:2.12')
+    shadeApi('xyz.qalcyo.json:JSON+:2.12:files')
+    shadeApi('xyz.qalcyo.json:JSON+:2.12:kotlin')
+    shadeApi('xyz.qalcyo.json:JSON+:2.12:serialization')
+    shadeApi('xyz.qalcyo.json:JSON+:2.12:utilities')
+    shadeApi('xyz.qalcyo.mango:Mango:1.6')
 
     shade('org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.1-native-mt')
     shade('org.jetbrains.kotlin:kotlin-stdlib-jdk8')

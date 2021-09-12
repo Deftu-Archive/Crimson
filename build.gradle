@@ -1,5 +1,5 @@
 plugins {
-    id "com.github.johnrengelman.shadow" version "7.0.0"
+    id "com.github.johnrengelman.shadow" version "6.1.0"
     id "com.github.gmazzo.buildconfig" version "3.0.1"
     id "org.jetbrains.kotlin.jvm" version "1.5.30"
     id "java"
@@ -41,12 +41,48 @@ allprojects {
         }
     }
 
-    shadowJar {
-        archiveClassifier.set('')
+    jar {
+        duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+        from {
+            'LICENSE'
+        }
 
-        configurations = [project.configurations.shade]
-        duplicatesStrategy DuplicatesStrategy.EXCLUDE
+        exclude 'META-INF/INDEX.LIST', 'META-INF/*.SF', 'META-INF/*.DSA', 'META-INF/*.RSA', 'module-info.class'
     }
-}
 
-jar.finalizedBy(shadowJar)
+    shadowJar {
+        configurations = [project.configurations.shade, project.configurations.shadeApi]
+        duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+
+        relocate('com.besaba.revonline', project_shaded + 'besaba.revonline')
+        relocate('okio', project_shaded + 'okio')
+        relocate('okhttp3', project_shaded + 'okhttp3')
+        relocate('org.java_websocket', project_shaded + 'websocket')
+
+        exclude('LICENSE.md')
+        exclude('pack.mcmeta')
+        exclude('dummyThing')
+        exclude('**/module-info.class')
+        exclude('*.so')
+        exclude('*.dylib')
+        exclude('*.dll')
+        exclude('*.jnilib')
+        exclude('ibxm/**')
+        exclude('com/jcraft/**')
+        exclude('org/lwjgl/**')
+        exclude('net/java/**')
+
+        exclude('META-INF/proguard/**')
+        exclude('META-INF/maven/**')
+        exclude('META-INF/versions/**')
+        exclude('META-INF/com.android.tools/**')
+
+        exclude('**/*.kotlin_metadata')
+        exclude('**/*.kotlin_module')
+        exclude('**/*.kotlin_builtins')
+
+        archiveClassifier.set('')
+    }
+
+    jar.finalizedBy(shadowJar)
+}
