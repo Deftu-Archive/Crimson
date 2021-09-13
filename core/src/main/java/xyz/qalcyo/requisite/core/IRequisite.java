@@ -33,6 +33,7 @@ import xyz.qalcyo.requisite.core.notifications.INotifications;
 import xyz.qalcyo.requisite.core.rendering.IEnhancedFontRenderer;
 import xyz.qalcyo.json.entities.JsonObject;
 import xyz.qalcyo.json.util.JsonApiHelper;
+import xyz.qalcyo.requisite.popups.PopupRegistry;
 import xyz.qalcyo.simpleeventbus.SimpleEventBus;
 
 import java.io.File;
@@ -59,6 +60,7 @@ public interface IRequisite {
     CosmeticManager<?> getCosmeticManager();
     IModIntegration getModIntegration();
     CommandRegistry getCommandRegistry();
+    PopupRegistry getPopupRegistry();
     RequisiteEventManager getInternalEventManager();
     IEventListener getInternalEventListener();
     RequisiteClientSocket getRequisiteSocket();

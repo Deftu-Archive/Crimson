@@ -28,8 +28,6 @@ import net.minecraftforge.fml.common.gameevent.TickEvent;
 import org.lwjgl.input.Keyboard;
 import xyz.qalcyo.requisite.core.IEventListener;
 import xyz.qalcyo.requisite.core.IRequisite;
-import gg.essential.universal.UMatrixStack;
-import xyz.qalcyo.requisite.popups.PopupManager;
 
 public class RequisiteEventListener implements IEventListener {
 
@@ -56,7 +54,6 @@ public class RequisiteEventListener implements IEventListener {
     public void onGameOverlayRendered(RenderGameOverlayEvent.Post event) {
         if (event.type == RenderGameOverlayEvent.ElementType.ALL) {
             requisite.getInternalEventManager().handleHudRender(event.partialTicks);
-            PopupManager.INSTANCE.getListPopups().forEach((pair) -> pair.component2().drawPopup(UMatrixStack.Compat.INSTANCE.get()));
         }
     }
 
@@ -68,9 +65,6 @@ public class RequisiteEventListener implements IEventListener {
     @SubscribeEvent
     public void onRenderTick(TickEvent.RenderTickEvent event) {
         requisite.getInternalEventManager().handleRenderTick(event.renderTickTime);
-        if (Requisite.getInstance().keyBinding.isPressed()) {
-            PopupManager.INSTANCE.getListPopups().remove(PopupManager.INSTANCE.getListPopups().size() - 1);
-        }
     }
 
     @SubscribeEvent
