@@ -19,7 +19,10 @@
 package xyz.qalcyo.requisite;
 
 import net.minecraft.client.entity.AbstractClientPlayer;
+import net.minecraft.client.settings.KeyBinding;
+import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.common.Mod;
+import org.lwjgl.input.Keyboard;
 import xyz.qalcyo.requisite.commands.CommandHelper;
 import xyz.qalcyo.requisite.cosmetics.CosmeticInitializer;
 import xyz.qalcyo.requisite.util.*;
@@ -78,6 +81,7 @@ public class Requisite implements IRequisite {
 
     /* Version-dependant utilities. */
     private GlHelper glHelper;
+    public KeyBinding keyBinding;
 
     public boolean initialize(File gameDir) {
         if (initialized)
@@ -120,7 +124,8 @@ public class Requisite implements IRequisite {
 
         /* Initialize version-dependant utilities. */
         glHelper = new GlHelper();
-
+        keyBinding = new KeyBinding("Close Popup", Keyboard.KEY_X, "Requisite");
+        ClientRegistry.registerKeyBinding(keyBinding);
         return initialized = true;
     }
 
