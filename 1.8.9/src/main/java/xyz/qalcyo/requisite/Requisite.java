@@ -22,7 +22,6 @@ import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraftforge.fml.common.Mod;
 import xyz.qalcyo.requisite.commands.CommandHelper;
 import xyz.qalcyo.requisite.cosmetics.CosmeticInitializer;
-import xyz.qalcyo.requisite.popups.PopupRegistry;
 import xyz.qalcyo.requisite.util.*;
 import xyz.qalcyo.requisite.core.IRequisite;
 import xyz.qalcyo.requisite.core.RequisiteEventManager;
@@ -60,7 +59,6 @@ public class Requisite implements IRequisite {
     private CosmeticManager<AbstractClientPlayer> cosmeticManager;
     private ModIntegration modIntegration;
     private CommandRegistry commandRegistry;
-    private PopupRegistry popupRegistry;
     private RequisiteEventManager internalEventManager;
     private RequisiteEventListener internalEventListener;
     private RequisiteClientSocket requisiteSocket;
@@ -92,14 +90,10 @@ public class Requisite implements IRequisite {
         cosmeticManager.initialize();
         modIntegration = new ModIntegration(this);
         commandRegistry = new CommandRegistry(this, new CommandHelper());
-        popupRegistry = new PopupRegistry();
-        popupRegistry.initialize(this);
         internalEventManager = new RequisiteEventManager(this);
         internalEventListener = new RequisiteEventListener(this);
         requisiteSocket = new RequisiteClientSocket(this, new SocketHelper());
         boolean socketConnected = requisiteSocket.awaitConnect();
-
-        new Test().execute(this);
 
         /* Initialize utilities. */
         enhancedFontRenderer = new EnhancedFontRenderer(this);
@@ -148,10 +142,6 @@ public class Requisite implements IRequisite {
 
     public CommandRegistry getCommandRegistry() {
         return commandRegistry;
-    }
-
-    public PopupRegistry getPopupRegistry() {
-        return popupRegistry;
     }
 
     public RequisiteEventManager getInternalEventManager() {
