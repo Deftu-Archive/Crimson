@@ -11,8 +11,8 @@ buildConfig {
 
 dependencies {
     shadeApi('xyz.qalcyo.eventbus:SimpleEventBus:3.1')
-    shadeApi('xyz.qalcyo.simpleconfig:SimpleConfig:3.4')
-    shadeApi('xyz.qalcyo.simpleconfig:SimpleConfig:3.4:settings')
+    shadeApi('xyz.qalcyo.simpleconfig:SimpleConfig:3.5')
+    shadeApi('xyz.qalcyo.simpleconfig:SimpleConfig:3.5:settings')
     shadeApi('xyz.qalcyo.json:JSON+:2.12')
     shadeApi('xyz.qalcyo.json:JSON+:2.12:files')
     shadeApi('xyz.qalcyo.json:JSON+:2.12:kotlin')

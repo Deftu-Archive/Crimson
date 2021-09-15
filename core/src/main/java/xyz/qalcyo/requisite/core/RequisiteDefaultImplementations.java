@@ -24,6 +24,5 @@ class RequisiteDefaultImplementations {
     static final RomanNumeral romanNumerals = new RomanNumeral();
     static final StringHelper stringHelper = new StringHelper();
     static final MojangAPI mojangApi = new MojangAPI();
-    static final NetworkPinger networkPinger = new NetworkPinger();
 
 }

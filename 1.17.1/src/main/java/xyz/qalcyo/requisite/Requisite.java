@@ -77,7 +77,7 @@ public class Requisite implements IRequisite {
 
         /* Initialize services. */
         fileManager = new FileManager(this);
-        configurationManager = new ConfigurationManager("config", fileManager.getRequisiteModDirectory(fileManager.getRequisiteDirectory(fileManager.getConfigDirectory(gameDir))));
+        configurationManager = new ConfigurationManager("config", fileManager.getRequisiteDirectory(fileManager.getQalcyoDirectory(fileManager.getConfigDirectory(gameDir))));
         //cosmeticManager = new CosmeticManager<>(new CosmeticInitializer());
         //cosmeticManager.initialize();
         modIntegration = new ModIntegration(this);

@@ -34,17 +34,18 @@ public class FileManager {
        return checkExistence(new File(gameDirectory, "config"));
     }
 
-    public File getRequisiteDirectory(File configDirectory) {
-        return checkExistence(new File(configDirectory, "Requisite"));
+    public File getQalcyoDirectory(File configDirectory) {
+        return checkExistence(new File(configDirectory, "Qalcyo"));
     }
 
-    public File getRequisiteModDirectory(File tgmDevelopmentDirectory) {
-        return checkExistence(new File(tgmDevelopmentDirectory, requisite.name()));
+    public File getRequisiteDirectory(File qalcyoDirectory) {
+        return checkExistence(new File(qalcyoDirectory, requisite.name()));
     }
 
     private File checkExistence(File directory) {
         if (!directory.exists() && !directory.mkdirs())
             throw new IllegalStateException("Unable to create Requisite directories.");
+
         return directory;
     }
 

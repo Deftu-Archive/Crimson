@@ -44,7 +44,7 @@ public class MinecraftMixin {
 
     @Inject(method = "dispatchKeypresses", at = @At("HEAD"), cancellable = true)
     private void onKeypressesDispatched(CallbackInfo ci) {
-        if (Requisite.getInstance().getInternalEventManager().handleKeyInput(Keyboard.getEventKey(), Keyboard.getEventKeyState(), Keyboard.isRepeatEvent())) {
+        if (Requisite.getInstance().getInternalEventManager().handleKeyInput(Keyboard.getEventKey() == 0 ? Keyboard.getEventCharacter() : Keyboard.getEventKey(), Keyboard.getEventKeyState(), Keyboard.isRepeatEvent())) {
             ci.cancel();
         }
     }

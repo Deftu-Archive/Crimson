@@ -19,11 +19,36 @@
 package xyz.qalcyo.requisite.core.integration;
 
 public class ModMetadata {
-    public final String name;
-    public final String version;
 
-    public ModMetadata(String name, String version) {
+    private final String name, version;
+    private String command;
+
+    ModMetadata(String name, String version) {
         this.name = name;
         this.version = version;
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getVersion() {
+        return version;
+    }
+
+    public String getCommand() {
+        return command;
+    }
+
+    public ModMetadata setCommand(String command) {
+        if (!command.startsWith("/"))
+            command = "/" + command;
+        this.command = command;
+        return this;
+    }
+
+    public static ModMetadata from(String name, String version) {
+        return new ModMetadata(name, version);
+    }
+
 }

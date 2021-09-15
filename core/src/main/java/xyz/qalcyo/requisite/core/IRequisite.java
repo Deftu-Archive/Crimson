@@ -19,7 +19,12 @@
 package xyz.qalcyo.requisite.core;
 
 import org.apache.logging.log4j.Logger;
+import org.lwjgl.input.Keyboard;
 import xyz.qalcyo.requisite.core.files.ConfigurationManager;
+import xyz.qalcyo.requisite.core.integration.IMod;
+import xyz.qalcyo.requisite.core.keybinds.KeyBind;
+import xyz.qalcyo.requisite.core.keybinds.KeyBindRegistry;
+import xyz.qalcyo.requisite.core.keybinds.KeyBindState;
 import xyz.qalcyo.requisite.core.util.*;
 import xyz.qalcyo.requisite.core.util.messages.IMessageQueue;
 import xyz.qalcyo.requisite.core.commands.CommandRegistry;
@@ -39,7 +44,7 @@ import java.io.File;
 import java.net.URI;
 import java.util.Base64;
 
-public interface IRequisite {
+public interface IRequisite extends IMod {
 
     boolean initialize(File gameDir);
     default boolean finish(File gameDir) {
@@ -59,6 +64,7 @@ public interface IRequisite {
     CosmeticManager<?> getCosmeticManager();
     IModIntegration getModIntegration();
     CommandRegistry getCommandRegistry();
+    KeyBindRegistry getKeyBindRegistry();
     RequisiteEventManager getInternalEventManager();
     IEventListener getInternalEventListener();
     RequisiteClientSocket getRequisiteSocket();
@@ -112,9 +118,6 @@ public interface IRequisite {
     IServerHelper getServerHelper();
     default MojangAPI getMojangApi() {
         return RequisiteDefaultImplementations.mojangApi;
-    }
-    default NetworkPinger getNetworkPinger() {
-        return RequisiteDefaultImplementations.networkPinger;
     }
 
     /* Default. */
