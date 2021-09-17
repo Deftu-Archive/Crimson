@@ -1,5 +1,7 @@
 package xyz.qalcyo.requisite.core.cosmetics;
 
+import xyz.qalcyo.json.entities.JsonObject;
+
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
@@ -51,6 +53,16 @@ public class CosmeticData {
 
     public boolean hasFlag(CosmeticFlag flag) {
         return this.flags.contains(flag);
+    }
+
+    public String toString() {
+        return new JsonObject()
+                .add("name", name)
+                .add("id", id)
+                .add("type", type)
+                .add("texture", texture)
+                .add("flags", flags)
+                .getAsString();
     }
 
     public static CosmeticData from(String name, String id, CosmeticType type, CosmeticTexture texture, CosmeticFlag... flags) {

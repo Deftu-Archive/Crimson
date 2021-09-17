@@ -61,13 +61,13 @@ public interface IRequisite extends IMod {
     }
     FileManager getFileManager();
     ConfigurationManager getConfigurationManager();
+    RequisiteClientSocket getRequisiteSocket();
     CosmeticManager<?> getCosmeticManager();
     IModIntegration getModIntegration();
     CommandRegistry getCommandRegistry();
     KeyBindRegistry getKeyBindRegistry();
     RequisiteEventManager getInternalEventManager();
     IEventListener getInternalEventListener();
-    RequisiteClientSocket getRequisiteSocket();
 
     default PrivacyConfigurations getPrivacyConfigurations() {
         return RequisiteDefaultImplementations.privacyConfigurations;
@@ -122,6 +122,10 @@ public interface IRequisite extends IMod {
 
     /* Default. */
     default URI fetchSocketUri() {
+        if (Boolean.parseBoolean(System.getProperty("requisite.socket.debug", "false"))) {
+            return URI.create("ws://localhost:8080/");
+        }
+
         JsonObject object = JsonApiHelper.getJsonObject("https://raw.githubusercontent.com/TGMDevelopment/RequisiteData/main/websocket.json", true);
         String encoded = object.getAsString("uri");
         for (int i = 0; i < object.getAsInt("loop"); i++)

@@ -18,6 +18,7 @@
 
 package xyz.qalcyo.requisite.core.hypixel.locraw;
 
+import xyz.qalcyo.json.entities.JsonElement;
 import xyz.qalcyo.json.entities.JsonObject;
 import xyz.qalcyo.json.parser.JsonParser;
 import xyz.qalcyo.json.util.JsonHelper;
@@ -56,20 +57,22 @@ public class HypixelLocrawManager {
     protected void onChatMessageReceived(ChatMessageReceivedEvent event) {
         String stripped = requisite.getStringHelper().removeFormattingCodes(event.message);
         if (JsonHelper.isValidJson(stripped)) {
-            JsonObject parsed = JsonParser.parse(stripped).getAsJsonObject();
+            JsonElement parsed = JsonParser.parse(stripped);
+            if (parsed.isJsonObject()) {
+                JsonObject object = parsed.getAsJsonObject();
+                if (object.hasKey("server") && object.getAsString("server").contains("limbo")) {
+                    forceUpdate(HypixelLocraw.LIMBO);
+                    event.cancel();
+                }
 
-            if (parsed.hasKey("server") && parsed.getAsString("server").contains("limbo")) {
-                forceUpdate(HypixelLocraw.LIMBO);
+                forceUpdate(new HypixelLocraw(
+                        object.get("server"),
+                        object.get("mode"),
+                        object.get("map"),
+                        object.get("gametype")
+                ));
                 event.cancel();
             }
-
-            forceUpdate(new HypixelLocraw(
-                    parsed.get("server"),
-                    parsed.get("mode"),
-                    parsed.get("map"),
-                    parsed.get("gametype")
-            ));
-            event.cancel();
         }
     }
 

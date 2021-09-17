@@ -8,7 +8,7 @@ import xyz.qalcyo.requisite.core.cosmetics.ICosmetic;
 public abstract class BaseCosmetic implements ICosmetic<AbstractClientPlayer> {
 
     protected final CosmeticData cosmeticData;
-    protected final ResourceLocation texture;
+    protected ResourceLocation texture;
 
     public BaseCosmetic(CosmeticData cosmeticData, String fileExtension) {
         this.cosmeticData = cosmeticData;

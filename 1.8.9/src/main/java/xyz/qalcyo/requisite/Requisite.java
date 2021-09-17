@@ -23,6 +23,7 @@ import net.minecraftforge.fml.common.Mod;
 import xyz.qalcyo.requisite.commands.CommandHelper;
 import xyz.qalcyo.requisite.core.integration.ModMetadata;
 import xyz.qalcyo.requisite.core.keybinds.KeyBindRegistry;
+import xyz.qalcyo.requisite.cosmetics.CosmeticHelper;
 import xyz.qalcyo.requisite.cosmetics.CosmeticInitializer;
 import xyz.qalcyo.requisite.util.*;
 import xyz.qalcyo.requisite.core.IRequisite;
@@ -89,15 +90,15 @@ public class Requisite implements IRequisite {
         /* Initialize services. */
         fileManager = new FileManager(this);
         configurationManager = new ConfigurationManager("config", fileManager.getRequisiteDirectory(fileManager.getQalcyoDirectory(fileManager.getConfigDirectory(gameDir))));
-        cosmeticManager = new CosmeticManager<>(new CosmeticInitializer());
+        requisiteSocket = new RequisiteClientSocket(this, new SocketHelper());
+        boolean socketConnected = requisiteSocket.awaitConnect();
+        cosmeticManager = new CosmeticManager<>(this, new CosmeticInitializer(), new CosmeticHelper());
         cosmeticManager.initialize();
         modIntegration = new ModIntegration(this);
         commandRegistry = new CommandRegistry(this, new CommandHelper());
         keyBindRegistry = new KeyBindRegistry(this);
         internalEventManager = new RequisiteEventManager(this);
         internalEventListener = new RequisiteEventListener(this);
-        requisiteSocket = new RequisiteClientSocket(this, new SocketHelper());
-        boolean socketConnected = requisiteSocket.awaitConnect();
 
         /* Initialize utilities. */
         enhancedFontRenderer = new EnhancedFontRenderer(this);
@@ -136,6 +137,10 @@ public class Requisite implements IRequisite {
         return configurationManager;
     }
 
+    public RequisiteClientSocket getRequisiteSocket() {
+        return requisiteSocket;
+    }
+
     public CosmeticManager<AbstractClientPlayer> getCosmeticManager() {
         return cosmeticManager;
     }
@@ -158,10 +163,6 @@ public class Requisite implements IRequisite {
 
     public RequisiteEventListener getInternalEventListener() {
         return internalEventListener;
-    }
-
-    public RequisiteClientSocket getRequisiteSocket() {
-        return requisiteSocket;
     }
 
     public void openMenu() {

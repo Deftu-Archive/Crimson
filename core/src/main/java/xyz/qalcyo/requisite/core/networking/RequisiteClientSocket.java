@@ -11,6 +11,8 @@ import xyz.qalcyo.json.parser.JsonParser;
 import xyz.qalcyo.mango.Lists;
 import xyz.qalcyo.mango.Maps;
 import xyz.qalcyo.requisite.core.IRequisite;
+import xyz.qalcyo.requisite.core.networking.packets.cosmetics.CosmeticRetrievePacket;
+import xyz.qalcyo.requisite.core.util.ChatColour;
 
 import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
@@ -24,8 +26,7 @@ public class RequisiteClientSocket extends WebSocketClient {
     private final Logger logger;
     private final ISocketHelper helper;
 
-    private final List<ISocketHandler> socketHandlers;
-    private final Map<String, IPacketHandler> packetHandlers;
+    private final Map<String, Class<? extends BasePacket>> packetRegistry;
 
     public RequisiteClientSocket(IRequisite requisite, ISocketHelper helper) {
         super(requisite.fetchSocketUri(), new Draft_6455());
@@ -33,13 +34,14 @@ public class RequisiteClientSocket extends WebSocketClient {
         this.logger = LogManager.getLogger("RequisiteClientSocket");
         this.helper = helper;
 
-        this.socketHandlers = Lists.newArrayList();
-        this.packetHandlers = Maps.newHashMap();
+        this.packetRegistry = Maps.newHashMap();
 
         /* Settings. */
         setTcpNoDelay(true);
         setReuseAddr(true);
         setConnectionLostTimeout(120);
+
+        initialize();
     }
 
     /**
@@ -77,10 +79,6 @@ public class RequisiteClientSocket extends WebSocketClient {
      */
     public void onOpen(ServerHandshake handshake) {
         logger.info(String.format("Opened connection with Requisite's server websocket. (code=%s | message=%s)", handshake.getHttpStatus(), handshake.getHttpStatusMessage()));
-        initialize();
-        for (ISocketHandler socketHandler : socketHandlers) {
-            socketHandler.connect(this);
-        }
     }
 
     /**
@@ -91,10 +89,15 @@ public class RequisiteClientSocket extends WebSocketClient {
      * @param remote Whether this close was remote or not.
      */
     public void onClose(int code, String reason, boolean remote) {
-        logger.error("Closed connection with Requisite's server websocket. (code={} | reason={})", code, reason);
-        for (ISocketHandler socketHandler : socketHandlers) {
-            socketHandler.disconnect(this);
-        }
+        logger.error(String.format("Closed connection with Requisite's server websocket. (code=%s | reason=%s)", code, reason));
+
+        requisite.getNotifications().push("Error!", "Failed to connect to Requisite WebSocket. " + ChatColour.BOLD + "Click to try a reconnect.", notification -> {
+            boolean socketReconnected = awaitReconnect();
+            if (!socketReconnected) {
+                requisite.getNotifications().push(notification.clone());
+                notification.close();
+            }
+        });
     }
 
     /**
@@ -120,7 +123,16 @@ public class RequisiteClientSocket extends WebSocketClient {
             if (json.isJsonObject()) {
                 JsonObject object = json.getAsJsonObject();
                 if (!object.isEmpty() && object.hasKey("type") && object.hasKey("data")) {
-                    packetHandlers.get(object.getAsString("type")).handle(object);
+                    Class<? extends BasePacket> packet = packetRegistry.get(object.getAsString("type"));
+                    if (packet != null) {
+                        try {
+                            BasePacket instance = packet.getDeclaredConstructor().newInstance();
+                            instance.receive(this, object, object.getAsObject("data"));
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                            helper.chat(ChatColour.RED + "An unexpected error occurred while handling a Requisite packet.\n" + e);
+                        }
+                    }
                 }
             }
         }
@@ -136,32 +148,25 @@ public class RequisiteClientSocket extends WebSocketClient {
         helper.chat(Arrays.toString(ex.getStackTrace()));
     }
 
-    /**
-     * Called when the websocket connection is opened.
-     */
-    public void initialize() {
-        for (ISocketHandler socketHandler : socketHandlers) {
-            socketHandler.initialize(this);
+    public void send(BasePacket packet) {
+        try {
+            packet.send(this, packet.getData());
+            if (isOpen()) {
+                send(packet.jsonify().getAsString());
+            } else {
+                logger.error("Tried to send " + packet.getType() + " but connection wasn't open!");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            helper.chat(ChatColour.RED + "An unexpected error occurred while handling a Requisite packet.\n" + e);
         }
     }
 
     /**
-     * Adds a socket handler to the socket handler registry list.
-     *
-     * @param handler The handler to add.
+     * Initializes packets.
      */
-    public void registerSocketHandler(ISocketHandler handler) {
-        socketHandlers.add(handler);
-    }
-
-    /**
-     * Adds a packet handler to the packet handler registry map.
-     *
-     * @param type The packet name/type to handle.
-     * @param handler The handler to use.
-     */
-    public void registerPacketHandler(String type, IPacketHandler handler) {
-        packetHandlers.put(type, handler);
+    private void initialize() {
+        packetRegistry.put("COSMETIC_RETRIEVE", CosmeticRetrievePacket.class);
     }
 
     public IRequisite getRequisite() {
@@ -174,14 +179,6 @@ public class RequisiteClientSocket extends WebSocketClient {
 
     public ISocketHelper getHelper() {
         return helper;
-    }
-
-    public List<ISocketHandler> getSocketHandlers() {
-        return socketHandlers;
-    }
-
-    public Map<String, IPacketHandler> getPacketHandlers() {
-        return packetHandlers;
     }
 
 }
