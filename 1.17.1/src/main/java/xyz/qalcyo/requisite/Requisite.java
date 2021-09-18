@@ -23,8 +23,6 @@ import xyz.qalcyo.mango.exceptions.UnfinishedApiException;
 import xyz.qalcyo.requisite.commands.CommandHelper;
 import xyz.qalcyo.requisite.core.commands.CommandRegistry;
 import xyz.qalcyo.requisite.core.cosmetics.CosmeticManager;
-import xyz.qalcyo.requisite.core.files.ConfigurationManager;
-import xyz.qalcyo.requisite.core.files.FileManager;
 import xyz.qalcyo.requisite.integration.ModIntegration;
 import xyz.qalcyo.requisite.networking.SocketHelper;
 import xyz.qalcyo.requisite.notifications.Notifications;
