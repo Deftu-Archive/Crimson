@@ -1,6 +1,6 @@
 /*
  * Requisite - Minecraft library mod
- * Copyright (C) 2021 MatthewTGM
+ *  Copyright (C) 2021 Qalcyo
  *
  * Requisite is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
@@ -22,9 +22,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
-import xyz.qalcyo.requisite.core.IRequisite;
 import xyz.qalcyo.requisite.core.util.messages.IMessageQueue;
-import xyz.qalcyo.requisite.core.util.messages.MessageQueueEntry;
 
 import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;

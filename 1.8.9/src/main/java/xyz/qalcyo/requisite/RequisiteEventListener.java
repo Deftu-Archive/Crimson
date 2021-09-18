@@ -1,6 +1,6 @@
 /*
  * Requisite - Minecraft library mod
- * Copyright (C) 2021 MatthewTGM
+ *  Copyright (C) 2021 Qalcyo
  *
  * Requisite is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
@@ -26,10 +26,8 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.InputEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 import org.lwjgl.input.Keyboard;
-import xyz.qalcyo.requisite.core.IEventListener;
-import xyz.qalcyo.requisite.core.IRequisite;
 
-public class RequisiteEventListener implements IEventListener {
+public class RequisiteEventListener {
 
     private final IRequisite requisite;
 

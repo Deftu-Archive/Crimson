@@ -1,6 +1,6 @@
 /*
  * Requisite - Minecraft library mod
- * Copyright (C) 2021 MatthewTGM
+ *  Copyright (C) 2021 Qalcyo
  *
  * Requisite is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
@@ -22,7 +22,6 @@ import gg.essential.universal.UMinecraft;
 import gg.essential.universal.UScreen;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.GuiConnecting;
-import xyz.qalcyo.requisite.core.util.IServerHelper;
 
 public class ServerHelper implements IServerHelper {
 
