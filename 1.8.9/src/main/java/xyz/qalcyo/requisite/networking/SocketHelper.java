@@ -19,27 +19,26 @@
 package xyz.qalcyo.requisite.networking;
 
 import net.minecraft.client.Minecraft;
-import org.jetbrains.annotations.NotNull;
 import xyz.qalcyo.requisite.Requisite;
-import xyz.qalcyo.requisite.core.networking.ISocketHelper;
 import xyz.qalcyo.requisite.util.ChatHelper;
 
 import java.util.UUID;
 
 public class SocketHelper implements ISocketHelper {
 
-    @NotNull
     public UUID getUuid() {
         return Minecraft.getMinecraft().getSession().getProfile().getId();
     }
 
-    @NotNull
     public String getName() {
         return Minecraft.getMinecraft().getSession().getUsername();
     }
 
-    public void chat(@NotNull String message) {
-        Requisite.getInstance().getChatHelper().send(message);
+    public void chat(String message) {
+        ChatHelper chatHelper = Requisite.getInstance().getChatHelper();
+        if (chatHelper != null) {
+            chatHelper.send(message);
+        }
     }
 
 }

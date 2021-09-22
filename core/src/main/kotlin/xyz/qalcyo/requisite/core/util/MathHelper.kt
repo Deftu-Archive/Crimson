@@ -18,7 +18,7 @@
 
 package xyz.qalcyo.requisite.core.util
 
-object MathHelper {
+class MathHelper {
 
     fun clamp01(value: Float): Float {
         if (value.toDouble() < 0.0) return 0.0f

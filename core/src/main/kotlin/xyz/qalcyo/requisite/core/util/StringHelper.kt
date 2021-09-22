@@ -20,7 +20,7 @@ package xyz.qalcyo.requisite.core.util
 
 import java.util.regex.Pattern
 
-object StringHelper {
+class StringHelper {
 
     val formattingCodePattern = Pattern.compile("(?i)\\u00A7[0-9A-FK-OR]")
     fun removeFormattingCodes(input: String) =

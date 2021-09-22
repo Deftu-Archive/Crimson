@@ -20,7 +20,7 @@ package xyz.qalcyo.requisite.core.util
 
 import java.util.*
 
-object DateHelper {
+class DateHelper {
 
     /**
      * Adapted from SkyBlockAddons under MIT license

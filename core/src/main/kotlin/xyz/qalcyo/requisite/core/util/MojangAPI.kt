@@ -20,7 +20,7 @@ package xyz.qalcyo.requisite.core.util
 
 import xyz.qalcyo.json.util.JsonApiHelper
 
-object MojangAPI {
+class MojangAPI {
 
     /**
      * @param username The username of the player to fetch

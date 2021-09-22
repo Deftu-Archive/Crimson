@@ -20,7 +20,6 @@ package xyz.qalcyo.requisite.core.dev;
 
 import net.minecraft.launchwrapper.ITweaker;
 import net.minecraft.launchwrapper.LaunchClassLoader;
-import xyz.qalcyo.requisite.core.RequisiteLauncher;
 
 import java.io.File;
 import java.util.List;
@@ -30,7 +29,7 @@ public class RequisiteDeveloperTweaker implements ITweaker {
     public void acceptOptions(List<String> args, File gameDir, File assetsDir, String profile) {}
 
     public void injectIntoClassLoader(LaunchClassLoader classLoader) {
-        RequisiteLauncher.INSTANCE.initialize();
+        RequisiteLauncher.initialize();
     }
 
     public String getLaunchTarget() {

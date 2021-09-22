@@ -23,7 +23,7 @@ import java.awt.datatransfer.Clipboard
 import java.awt.datatransfer.DataFlavor
 import java.awt.datatransfer.StringSelection
 
-object ClipboardHelper {
+class ClipboardHelper {
 
     /**
      * @return The string currently copied to the clipboard.

@@ -20,7 +20,6 @@ package xyz.qalcyo.requisite.util;
 
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ServerInfo;
-import xyz.qalcyo.requisite.core.util.IServerHelper;
 
 public class ServerHelper implements IServerHelper {
 

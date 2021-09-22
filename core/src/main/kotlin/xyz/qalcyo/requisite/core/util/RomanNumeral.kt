@@ -21,7 +21,7 @@ package xyz.qalcyo.requisite.core.util
 import java.util.*
 
 // https://stackoverflow.com/a/19759564
-object RomanNumeral {
+class RomanNumeral {
 
     private val map = TreeMap<Int, String>()
     private val numeralCache: MutableMap<Int, String?> = HashMap()

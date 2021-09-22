@@ -20,7 +20,6 @@ package xyz.qalcyo.requisite.util;
 
 import net.minecraft.client.gui.DrawableHelper;
 import net.minecraft.client.util.math.MatrixStack;
-import xyz.qalcyo.requisite.core.util.IRenderHelper;
 
 public class RenderHelper extends DrawableHelper implements IRenderHelper {
 

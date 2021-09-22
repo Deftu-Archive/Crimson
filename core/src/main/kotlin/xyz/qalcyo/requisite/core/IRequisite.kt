@@ -61,6 +61,8 @@ interface IRequisite : IMod {
     val fileManager: FileManager
     val configurationManager: ConfigurationManager
     val notifications: INotifications
+    val multithreading: Multithreading
+        get() = RequisiteDefaultImplementations.multithreading
     val requisiteSocket: RequisiteClientSocket
     val cosmeticManager: CosmeticManager<*>
     val modIntegration: IModIntegration
@@ -75,12 +77,30 @@ interface IRequisite : IMod {
     val enhancedFontRenderer: IEnhancedFontRenderer
     val playerHelper: IPlayerHelper
     val chatHelper: IChatHelper
+    val colourHelper: ColourHelper
+        get() = RequisiteDefaultImplementations.colourHelper
+    val loggingHelper: LoggingHelper
+        get() = RequisiteDefaultImplementations.loggingHelper
+    val clipboardHelper: ClipboardHelper
+        get() = RequisiteDefaultImplementations.clipboardHelper
+    val dateHelper: DateHelper
+        get() = RequisiteDefaultImplementations.dateHelper
+    val easingHelper: EasingHelper
+        get() = RequisiteDefaultImplementations.easingHelper
+    val mathHelper: MathHelper
+        get() = RequisiteDefaultImplementations.mathHelper
     val mouseHelper: IMouseHelper
     val positionHelper: IPositionHelper
+    val romanNumerals: RomanNumeral
+        get() = RequisiteDefaultImplementations.romanNumerals
     val hypixelHelper: HypixelHelper
     val renderHelper: IRenderHelper
+    val stringHelper: StringHelper
+        get() = RequisiteDefaultImplementations.stringHelper
     val messageQueue: IMessageQueue
     val serverHelper: IServerHelper
+    val mojangApi: MojangAPI
+        get() = RequisiteDefaultImplementations.mojangApi
 
     fun initialize(gameDir: File?): Boolean
     fun finish(gameDir: File?): Boolean {

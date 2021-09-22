@@ -22,7 +22,6 @@ import gg.essential.universal.UMinecraft;
 import gg.essential.universal.UScreen;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.GuiConnecting;
-import xyz.qalcyo.requisite.core.util.IServerHelper;
 
 public class ServerHelper implements IServerHelper {
 

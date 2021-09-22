@@ -22,12 +22,7 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.text.LiteralText;
-import org.jetbrains.annotations.NotNull;
-import xyz.qalcyo.requisite.core.IRequisite;
 import xyz.qalcyo.requisite.core.rendering.IEnhancedFontRenderer;
-import xyz.qalcyo.requisite.core.util.ColourHelper;
-
-import java.util.List;
 
 public class EnhancedFontRenderer implements IEnhancedFontRenderer {
 
@@ -51,11 +46,11 @@ public class EnhancedFontRenderer implements IEnhancedFontRenderer {
         return textRenderer.getWidth(Character.toString(input));
     }
 
-    public @NotNull CharSequence trim(CharSequence input, int width, boolean reverse) {
+    public CharSequence trim(CharSequence input, int width, boolean reverse) {
         return textRenderer.trimToWidth(input.toString(), width, reverse);
     }
 
-    public @NotNull CharSequence trim(@NotNull CharSequence input, int width) {
+    public CharSequence trim(CharSequence input, int width) {
         return trim(input, width, false);
     }
 
@@ -68,15 +63,15 @@ public class EnhancedFontRenderer implements IEnhancedFontRenderer {
         }
     }
 
-    public void drawText(@NotNull String text, float x, float y, int colour, boolean shadow) {
+    public void drawText(String text, float x, float y, int colour, boolean shadow) {
         drawText(new MatrixStack(), text, x, y, colour, shadow);
     }
 
-    public void drawText(@NotNull String text, float x, float y, int colour) {
+    public void drawText(String text, float x, float y, int colour) {
         drawText(text, x, y, colour, false);
     }
 
-    public void drawText(@NotNull String text, float x, float y) {
+    public void drawText(String text, float x, float y) {
         drawText(text, x, y, -1);
     }
 
@@ -84,15 +79,15 @@ public class EnhancedFontRenderer implements IEnhancedFontRenderer {
         drawText(matrices, text, (float) x, (float) y, colour, shadow);
     }
 
-    public void drawText(@NotNull String text, double x, double y, int colour, boolean shadow) {
+    public void drawText(String text, double x, double y, int colour, boolean shadow) {
         drawText(text, (float) x, (float) y, colour, shadow);
     }
 
-    public void drawText(@NotNull String text, double x, double y, int colour) {
+    public void drawText(String text, double x, double y, int colour) {
         drawText(text, x, y, colour, false);
     }
 
-    public void drawText(@NotNull String text, double x, double y) {
+    public void drawText(String text, double x, double y) {
         drawText(text, x, y, -1);
     }
 
@@ -100,15 +95,15 @@ public class EnhancedFontRenderer implements IEnhancedFontRenderer {
         drawText(matrices, text, makeCentered(text, x), y, colour, shadow);
     }
 
-    public void drawCenteredText(@NotNull String text, float x, float y, int colour, boolean shadow) {
+    public void drawCenteredText(String text, float x, float y, int colour, boolean shadow) {
         drawCenteredText(new MatrixStack(), text, makeCentered(text, x), y, colour, shadow);
     }
 
-    public void drawCenteredText(@NotNull String text, float x, float y, int colour) {
+    public void drawCenteredText(String text, float x, float y, int colour) {
         drawCenteredText(text, x, y, colour, false);
     }
 
-    public void drawCenteredText(@NotNull String text, float x, float y) {
+    public void drawCenteredText(String text, float x, float y) {
         drawCenteredText(text, x, y, -1);
     }
 
@@ -116,19 +111,19 @@ public class EnhancedFontRenderer implements IEnhancedFontRenderer {
         drawCenteredText(matrices, text, (float) x, (float) y, colour, shadow);
     }
 
-    public void drawCenteredText(@NotNull String text, double x, double y, int colour, boolean shadow) {
+    public void drawCenteredText(String text, double x, double y, int colour, boolean shadow) {
         drawCenteredText(new MatrixStack(), text, x, y, colour, shadow);
     }
 
-    public void drawCenteredText(@NotNull String text, double x, double y, int colour) {
+    public void drawCenteredText(String text, double x, double y, int colour) {
         drawCenteredText(text, x, y, colour, false);
     }
 
-    public void drawCenteredText(@NotNull String text, double x, double y) {
+    public void drawCenteredText(String text, double x, double y) {
         drawCenteredText(text, x, y, -1);
     }
 
-    public void drawScaledText(@NotNull String text, float scale, float x, float y, int colour, boolean shadow) {
+    public void drawScaledText(String text, float scale, float x, float y, int colour, boolean shadow) {
         MatrixStack matrices = new MatrixStack();
         matrices.push();
         matrices.scale(scale, scale, scale);
@@ -136,40 +131,40 @@ public class EnhancedFontRenderer implements IEnhancedFontRenderer {
         matrices.pop();
     }
 
-    public void drawScaledText(@NotNull String text, float scale, float x, float y, int colour) {
+    public void drawScaledText(String text, float scale, float x, float y, int colour) {
         drawScaledText(text, scale, x, y, colour, false);
     }
 
-    public void drawScaledText(@NotNull String text, float scale, float x, float y) {
+    public void drawScaledText(String text, float scale, float x, float y) {
         drawScaledText(text, scale, x, y, -1);
     }
 
-    public void drawScaledText(@NotNull String text, float scale, double x, double y, int colour, boolean shadow) {
+    public void drawScaledText(String text, float scale, double x, double y, int colour, boolean shadow) {
         drawScaledText(text, scale, (float) x, (float) y, colour, shadow);
     }
 
-    public void drawScaledText(@NotNull String text, float scale, double x, double y, int colour) {
+    public void drawScaledText(String text, float scale, double x, double y, int colour) {
         drawScaledText(text, scale, x, y, colour, false);
     }
 
-    public void drawScaledText(@NotNull String text, float scale, double x, double y) {
+    public void drawScaledText(String text, float scale, double x, double y) {
         drawScaledText(text, scale, x, y, -1);
     }
 
     public void drawChromaText(MatrixStack matrices, String text, float x, float y, boolean shadow) {
         for (char c : text.toCharArray()) {
-            int colour = ColourHelper.INSTANCE.getChroma(x, y).getRGB();
+            int colour = requisite.getColourHelper().getChroma(x, y).getRGB();
             String str = String.valueOf(c);
             drawText(matrices, str, x, y, colour, shadow);
             x += getWidth(c);
         }
     }
 
-    public void drawChromaText(@NotNull String text, float x, float y, boolean shadow) {
+    public void drawChromaText(String text, float x, float y, boolean shadow) {
         drawChromaText(new MatrixStack(), text, x, y, shadow);
     }
 
-    public void drawChromaText(@NotNull String text, float x, float y) {
+    public void drawChromaText(String text, float x, float y) {
         drawChromaText(text, x, y, false);
     }
 
@@ -177,15 +172,15 @@ public class EnhancedFontRenderer implements IEnhancedFontRenderer {
         drawChromaText(matrices, text, (float) x, (float) y, shadow);
     }
 
-    public void drawChromaText(@NotNull String text, double x, double y, boolean shadow) {
+    public void drawChromaText(String text, double x, double y, boolean shadow) {
         drawChromaText(text, (float) x, (float) y, shadow);
     }
 
-    public void drawChromaText(@NotNull String text, double x, double y) {
+    public void drawChromaText(String text, double x, double y) {
         drawChromaText(text, x, y, false);
     }
 
-    public void drawCenteredScaledText(@NotNull String text, float scale, float x, float y, int colour, boolean shadow) {
+    public void drawCenteredScaledText(String text, float scale, float x, float y, int colour, boolean shadow) {
         MatrixStack matrices = new MatrixStack();
         matrices.push();
         matrices.scale(scale, scale, scale);
@@ -193,43 +188,43 @@ public class EnhancedFontRenderer implements IEnhancedFontRenderer {
         matrices.pop();
     }
 
-    public void drawCenteredScaledText(@NotNull String text, float scale, float x, float y, int colour) {
+    public void drawCenteredScaledText(String text, float scale, float x, float y, int colour) {
         drawCenteredScaledText(text, scale, x, y, colour, false);
     }
 
-    public void drawCenteredScaledText(@NotNull String text, float scale, float x, float y) {
+    public void drawCenteredScaledText(String text, float scale, float x, float y) {
         drawCenteredScaledText(text, scale, x, y, -1);
     }
 
-    public void drawCenteredScaledText(@NotNull String text, float scale, double x, double y, int colour, boolean shadow) {
+    public void drawCenteredScaledText(String text, float scale, double x, double y, int colour, boolean shadow) {
         drawCenteredScaledText(text, scale, (float) x, (float) y, colour, shadow);
     }
 
-    public void drawCenteredScaledText(@NotNull String text, float scale, double x, double y, int colour) {
+    public void drawCenteredScaledText(String text, float scale, double x, double y, int colour) {
         drawCenteredScaledText(text, scale, x, y, colour, false);
     }
 
-    public void drawCenteredScaledText(@NotNull String text, float scale, double x, double y) {
+    public void drawCenteredScaledText(String text, float scale, double x, double y) {
         drawCenteredScaledText(text, scale, x, y, -1);
     }
 
-    public void drawCenteredChromaText(@NotNull String text, float x, float y, boolean shadow) {
+    public void drawCenteredChromaText(String text, float x, float y, boolean shadow) {
         drawChromaText(text, makeCentered(text, x), y, shadow);
     }
 
-    public void drawCenteredChromaText(@NotNull String text, float x, float y) {
+    public void drawCenteredChromaText(String text, float x, float y) {
         drawCenteredChromaText(text, x, y, false);
     }
 
-    public void drawCenteredChromaText(@NotNull String text, double x, double y, boolean shadow) {
+    public void drawCenteredChromaText(String text, double x, double y, boolean shadow) {
         drawCenteredChromaText(text, (float) x, (float) y, shadow);
     }
 
-    public void drawCenteredChromaText(@NotNull String text, double x, double y) {
+    public void drawCenteredChromaText(String text, double x, double y) {
         drawCenteredChromaText(text, x, y, false);
     }
 
-    public void drawScaledChromaText(@NotNull String text, float scale, float x, float y, boolean shadow) {
+    public void drawScaledChromaText(String text, float scale, float x, float y, boolean shadow) {
         MatrixStack matrices = new MatrixStack();
         matrices.push();
         matrices.scale(scale, scale, scale);
@@ -237,19 +232,19 @@ public class EnhancedFontRenderer implements IEnhancedFontRenderer {
         matrices.pop();
     }
 
-    public void drawScaledChromaText(@NotNull String text, float scale, float x, float y) {
+    public void drawScaledChromaText(String text, float scale, float x, float y) {
         drawScaledChromaText(text, scale, x, y, false);
     }
 
-    public void drawScaledChromaText(@NotNull String text, float scale, double x, double y, boolean shadow) {
+    public void drawScaledChromaText(String text, float scale, double x, double y, boolean shadow) {
         drawScaledChromaText(text, scale, (float) x, (float) y, shadow);
     }
 
-    public void drawScaledChromaText(@NotNull String text, float scale, double x, double y) {
+    public void drawScaledChromaText(String text, float scale, double x, double y) {
         drawScaledChromaText(text, scale, x, y, false);
     }
 
-    public void drawCenteredScaledChromaText(@NotNull String text, float scale, float x, float y, boolean shadow) {
+    public void drawCenteredScaledChromaText(String text, float scale, float x, float y, boolean shadow) {
         MatrixStack matrices = new MatrixStack();
         matrices.push();
         matrices.scale(scale, scale, scale);
@@ -257,30 +252,16 @@ public class EnhancedFontRenderer implements IEnhancedFontRenderer {
         matrices.pop();
     }
 
-    public void drawCenteredScaledChromaText(@NotNull String text, float scale, float x, float y) {
+    public void drawCenteredScaledChromaText(String text, float scale, float x, float y) {
         drawCenteredScaledChromaText(text, scale, x, y, false);
     }
 
-    public void drawCenteredScaledChromaText(@NotNull String text, float scale, double x, double y, boolean shadow) {
+    public void drawCenteredScaledChromaText(String text, float scale, double x, double y, boolean shadow) {
         drawCenteredScaledChromaText(text, scale, (float) x, (float) y, shadow);
     }
 
-    public void drawCenteredScaledChromaText(@NotNull String text, float scale, double x, double y) {
+    public void drawCenteredScaledChromaText(String text, float scale, double x, double y) {
         drawCenteredScaledChromaText(text, scale, x, y, false);
     }
 
-    public @NotNull List<String> wrapTextLines(@NotNull String text, int width, @NotNull String split) {
-        //TODO: Implement this
-        return IEnhancedFontRenderer.super.wrapTextLines(text, width, split);
-    }
-
-    public @NotNull String wrapText(@NotNull String text, int width, @NotNull String split) {
-        //TODO: Implement this
-        return IEnhancedFontRenderer.super.wrapText(text, width, split);
-    }
-
-    public float makeCentered(@NotNull CharSequence input, float f) {
-        //TODO: Implement this
-        return IEnhancedFontRenderer.super.makeCentered(input, f);
-    }
 }

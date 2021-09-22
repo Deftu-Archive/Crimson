@@ -18,10 +18,6 @@
 
 package xyz.qalcyo.requisite.integration;
 
-import org.jetbrains.annotations.NotNull;
-import xyz.qalcyo.requisite.core.IRequisite;
-import xyz.qalcyo.requisite.core.integration.IMod;
-import xyz.qalcyo.requisite.core.integration.IModIntegration;
 import xyz.qalcyo.requisite.core.integration.ModMetadata;
 
 import java.util.ArrayList;
@@ -38,11 +34,11 @@ public class ModIntegration implements IModIntegration {
 
     public void registerIntegratedMod(IMod mod) {
         ModMetadata metadata = mod.metadata();
-        requisite.getLogger().info("Mod " + metadata.getName() + " v" + metadata.getVersion() + " was registered as an integrated @NAME@ mod.");
+        requisite.getLogger().info("Mod " + metadata.name + " v" + metadata.version + " was registered as an integrated @NAME@ mod.");
         integratedMods.add(mod);
     }
 
-    public @NotNull List<IMod> getIntegratedMods() {
+    public List<IMod> getIntegratedMods() {
         return integratedMods;
     }
 

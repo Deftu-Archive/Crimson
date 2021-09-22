@@ -19,6 +19,7 @@ package xyz.qalcyo.requisite.core
 
 import org.apache.logging.log4j.LogManager
 import xyz.qalcyo.requisite.core.files.configs.PrivacyConfigurations
+import xyz.qalcyo.requisite.core.util.*
 import xyz.qalcyo.simpleeventbus.SimpleEventBus
 
 internal object RequisiteDefaultImplementations {
@@ -27,4 +28,16 @@ internal object RequisiteDefaultImplementations {
     val eventBus = SimpleEventBus()
 
     val privacyConfigurations = PrivacyConfigurations()
+
+    val colourHelper = ColourHelper()
+    val loggingHelper = LoggingHelper()
+    val clipboardHelper = ClipboardHelper()
+    val dateHelper = DateHelper()
+    val easingHelper = EasingHelper()
+    val mathHelper = MathHelper()
+    val multithreading = Multithreading()
+    val reflectionHelper = ReflectionHelper()
+    val romanNumerals = RomanNumeral()
+    val stringHelper = StringHelper()
+    val mojangApi = MojangAPI()
 }

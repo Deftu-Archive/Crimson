@@ -18,19 +18,14 @@
 
 package xyz.qalcyo.requisite.notifications;
 
-import gg.essential.universal.ChatColor;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
-import org.jetbrains.annotations.NotNull;
 import xyz.qalcyo.requisite.Requisite;
 import xyz.qalcyo.requisite.core.data.ColourRGB;
-import xyz.qalcyo.requisite.core.notifications.INotifications;
-import xyz.qalcyo.requisite.core.notifications.Notification;
-import xyz.qalcyo.requisite.core.util.MathHelper;
 
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
@@ -46,7 +41,7 @@ public class Notifications implements INotifications {
         MinecraftForge.EVENT_BUS.register(this);
     }
 
-    public void push(@NotNull Notification notification) {
+    public void push(Notification notification) {
         notifications.add(notification);
     }
 
@@ -60,45 +55,43 @@ public class Notifications implements INotifications {
             if (notifications.indexOf(notification) > 2)
                 continue;
 
-            if (notification.getData().getX() < 1)
-                notification.getData().setX(scaledWidth);
+            if (notification.data.x < 1)
+                notification.data.x = scaledWidth;
 
-            int duration = (notification.getDuration() == -1 ? 4 : notification.getDuration());
+            int duration = (notification.duration == -1 ? 4 : notification.duration);
 
             /* Text. */
-            String title = ChatColor.BOLD + notification.getTitle();
+            String title = ChatColour.BOLD + notification.title;
             float width = 225;
             List<String> wrappedTitle = requisite.getEnhancedFontRenderer().wrapTextLines(title, (int) (width - 10), " ");
-            List<String> wrappedDescription = requisite.getEnhancedFontRenderer().wrapTextLines(notification.getDescription(), (int) (width - 10), " ");
+            List<String> wrappedDescription = requisite.getEnhancedFontRenderer().wrapTextLines(notification.description, (int) (width - 10), " ");
             int textLines = wrappedTitle.size() + wrappedDescription.size();
 
             /* Size and positon. */
             float height = 18 + (textLines * Minecraft.getMinecraft().fontRendererObj.FONT_HEIGHT);
-            notification.getData().setX(MathHelper.INSTANCE.lerp(notification.getData().getX(), scaledWidth - width - 5, ticks / 4));
-            float x;
-            if (notification.getData().getClosing() && notification.getData().getTime() < 0.75f)
-                notification.getData().setX(MathHelper.INSTANCE.lerp(notification.getData().getX(), scaledWidth + width, ticks / 4));
-                x = notification.getData().getX();
+            float x = notification.data.x = requisite.getMathHelper().lerp(notification.data.x, scaledWidth - width - 5, ticks / 4);
+            if (notification.data.closing && notification.data.time < 0.75f)
+                x = notification.data.x = requisite.getMathHelper().lerp(notification.data.x, scaledWidth + width, ticks / 4);
 
             /* Mouse handling. */
             float mouseX = (float) requisite.getMouseHelper().getMouseX();
             float mouseY = (float) requisite.getMouseHelper().getMouseY();
             boolean hovered = mouseX >= x && mouseX <= x + width && mouseY >= y && mouseY <= y + height;
-            if (hovered && !notification.getData().getClicked() && requisite.getMouseHelper().isMouseButtonDown()) {
-                notification.getData().setClicked(true);
+            if (hovered && !notification.data.clicked && requisite.getMouseHelper().isMouseButtonDown()) {
+                notification.data.clicked = true;
                 notification.click();
-                notification.getData().setClosing(true);
+                notification.data.closing = true;
             }
 
             /* Rendering. */
             GlStateManager.pushMatrix();
-            ColourRGB backgroundColour = notification.getColour() == null || notification.getColour().getBackground() == null ? new ColourRGB(0, 0, 0, 200) : notification.getColour().getBackground().setA_builder(200);
+            ColourRGB backgroundColour = notification.colour == null || notification.colour.background == null ? new ColourRGB(0, 0, 0, 200) : notification.colour.background.setA_builder(200);
             requisite.getRenderHelper().drawRectEnhanced((int) x, (int) y, (int) width, (int) height, backgroundColour.getRGBA());
-            ColourRGB foregroundColour = notification.getColour() == null || notification.getColour().getForeground() == null ? new ColourRGB(255, 175, 0, 200) : notification.getColour().getForeground().setA_builder(200);
+            ColourRGB foregroundColour = notification.colour == null || notification.colour.foreground == null ? new ColourRGB(255, 175, 0, 200) : notification.colour.foreground.setA_builder(200);
             requisite.getRenderHelper().drawHollowRect((int) x + 4, (int) y + 4, (int) width - 8, (int) height - 8, 1, foregroundColour.getRGBA());
 
             /* Text. */
-            if (notification.getData().getTime() > 0.1f) {
+            if (notification.data.time > 0.1f) {
                 ColourRGB textColour = new ColourRGB(255, 255, 255, 200);
                 requisite.getGlHelper().startScissorBox(x, y, width, height);
                 int i = 0;
@@ -118,11 +111,11 @@ public class Notifications implements INotifications {
             y += height + 5;
 
             /* Other handling things. */
-            if (notification.getData().getTime() >= duration)
-                notification.getData().setClosing(true);
+            if (notification.data.time >= duration)
+                notification.data.closing = true;
             if (!hovered)
-                notification.getData().setTime((float) (notification.getData().getTime() + (notification.getData().getClosing() ? -0.02 : 0.02) * (ticks * 3)));
-            if (notification.getData().getClosing() && notification.getData().getTime() <= 0)
+                notification.data.time += (notification.data.closing ? -0.02 : 0.02) * (ticks * 3);
+            if (notification.data.closing && notification.data.time <= 0)
                 notifications.remove(notification);
         }
     }

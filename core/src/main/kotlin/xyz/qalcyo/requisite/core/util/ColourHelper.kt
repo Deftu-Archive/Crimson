@@ -20,7 +20,7 @@ package xyz.qalcyo.requisite.core.util
 
 import java.awt.Color
 
-object ColourHelper {
+class ColourHelper {
 
     /**
      * @return A changing colour based on the users' computer time. Simulates a "chroma" colour.

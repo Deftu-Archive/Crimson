@@ -21,10 +21,7 @@ package xyz.qalcyo.requisite.rendering;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.renderer.GlStateManager;
-import org.jetbrains.annotations.NotNull;
-import xyz.qalcyo.requisite.core.IRequisite;
 import xyz.qalcyo.requisite.core.rendering.IEnhancedFontRenderer;
-import xyz.qalcyo.requisite.core.util.ColourHelper;
 
 public class EnhancedFontRenderer implements IEnhancedFontRenderer {
 
@@ -46,190 +43,188 @@ public class EnhancedFontRenderer implements IEnhancedFontRenderer {
         return getFontRenderer().getCharWidth(input);
     }
 
-    @NotNull
     public CharSequence trim(CharSequence input, int width, boolean reverse) {
         return getFontRenderer().trimStringToWidth(input.toString(), width, reverse);
     }
 
-    @NotNull
     public CharSequence trim(CharSequence input, int width) {
         return getFontRenderer().trimStringToWidth(input.toString(), width);
     }
 
-    public void drawText(@NotNull String text, float x, float y, int colour, boolean shadow) {
+    public void drawText(String text, float x, float y, int colour, boolean shadow) {
         getFontRenderer().drawString(text, x, y, colour, shadow);
     }
 
-    public void drawText(@NotNull String text, float x, float y, int colour) {
+    public void drawText(String text, float x, float y, int colour) {
         drawText(text, x, y, colour, false);
     }
 
-    public void drawText(@NotNull String text, float x, float y) {
+    public void drawText(String text, float x, float y) {
         drawText(text, x, y, -1);
     }
 
-    public void drawText(@NotNull String text, double x, double y, int colour, boolean shadow) {
+    public void drawText(String text, double x, double y, int colour, boolean shadow) {
         drawText(text, (float) x, (float) y, colour, shadow);
     }
 
-    public void drawText(@NotNull String text, double x, double y, int colour) {
+    public void drawText(String text, double x, double y, int colour) {
         drawText(text, x, y, colour, false);
     }
 
-    public void drawText(@NotNull String text, double x, double y) {
+    public void drawText(String text, double x, double y) {
         drawText(text, x, y, -1);
     }
 
-    public void drawCenteredText(@NotNull String text, float x, float y, int colour, boolean shadow) {
+    public void drawCenteredText(String text, float x, float y, int colour, boolean shadow) {
         drawText(text, makeCentered(text, x), y, colour, shadow);
     }
 
-    public void drawCenteredText(@NotNull String text, float x, float y, int colour) {
+    public void drawCenteredText(String text, float x, float y, int colour) {
         drawCenteredText(text, x, y, colour, false);
     }
 
-    public void drawCenteredText(@NotNull String text, float x, float y) {
+    public void drawCenteredText(String text, float x, float y) {
         drawCenteredText(text, x, y, -1);
     }
 
-    public void drawCenteredText(@NotNull String text, double x, double y, int colour, boolean shadow) {
+    public void drawCenteredText(String text, double x, double y, int colour, boolean shadow) {
         drawCenteredText(text, (float) x, (float) y, colour, shadow);
     }
 
-    public void drawCenteredText(@NotNull String text, double x, double y, int colour) {
+    public void drawCenteredText(String text, double x, double y, int colour) {
         drawCenteredText(text, x, y, colour, false);
     }
 
-    public void drawCenteredText(@NotNull String text, double x, double y) {
+    public void drawCenteredText(String text, double x, double y) {
         drawCenteredText(text, x, y, -1);
     }
 
-    public void drawScaledText(@NotNull String text, float scale, float x, float y, int colour, boolean shadow) {
+    public void drawScaledText(String text, float scale, float x, float y, int colour, boolean shadow) {
         GlStateManager.pushMatrix();
         GlStateManager.scale(scale, scale, scale);
         drawText(text, x, y, colour, shadow);
         GlStateManager.popMatrix();
     }
 
-    public void drawScaledText(@NotNull String text, float scale, float x, float y, int colour) {
+    public void drawScaledText(String text, float scale, float x, float y, int colour) {
         drawScaledText(text, scale, x, y, colour, false);
     }
 
-    public void drawScaledText(@NotNull String text, float scale, float x, float y) {
+    public void drawScaledText(String text, float scale, float x, float y) {
         drawScaledText(text, scale, x, y, -1);
     }
 
-    public void drawScaledText(@NotNull String text, float scale, double x, double y, int colour, boolean shadow) {
+    public void drawScaledText(String text, float scale, double x, double y, int colour, boolean shadow) {
         drawScaledText(text, scale, (float) x, (float) y, colour, shadow);
     }
 
-    public void drawScaledText(@NotNull String text, float scale, double x, double y, int colour) {
+    public void drawScaledText(String text, float scale, double x, double y, int colour) {
         drawScaledText(text, scale, x, y, colour, false);
     }
 
-    public void drawScaledText(@NotNull String text, float scale, double x, double y) {
+    public void drawScaledText(String text, float scale, double x, double y) {
         drawScaledText(text, scale, x, y, -1);
     }
 
     public void drawChromaText(String text, float x, float y, boolean shadow) {
         for (char c : text.toCharArray()) {
-            int colour = ColourHelper.INSTANCE.getChroma(x, y).getRGB();
+            int colour = requisite.getColourHelper().getChroma(x, y).getRGB();
             String str = String.valueOf(c);
             drawText(str, x, y, colour, shadow);
             x += getWidth(c);
         }
     }
 
-    public void drawChromaText(@NotNull String text, float x, float y) {
+    public void drawChromaText(String text, float x, float y) {
         drawChromaText(text, x, y, false);
     }
 
-    public void drawChromaText(@NotNull String text, double x, double y, boolean shadow) {
+    public void drawChromaText(String text, double x, double y, boolean shadow) {
         drawChromaText(text, (float) x, (float) y, shadow);
     }
 
-    public void drawChromaText(@NotNull String text, double x, double y) {
+    public void drawChromaText(String text, double x, double y) {
         drawChromaText(text, x, y, false);
     }
 
-    public void drawCenteredScaledText(@NotNull String text, float scale, float x, float y, int colour, boolean shadow) {
+    public void drawCenteredScaledText(String text, float scale, float x, float y, int colour, boolean shadow) {
         GlStateManager.pushMatrix();
         GlStateManager.scale(scale, scale, scale);
         drawCenteredText(text, x, y, colour, shadow);
         GlStateManager.popMatrix();
     }
 
-    public void drawCenteredScaledText(@NotNull String text, float scale, float x, float y, int colour) {
+    public void drawCenteredScaledText(String text, float scale, float x, float y, int colour) {
         drawCenteredScaledText(text, scale, x, y, colour, false);
     }
 
-    public void drawCenteredScaledText(@NotNull String text, float scale, float x, float y) {
+    public void drawCenteredScaledText(String text, float scale, float x, float y) {
         drawCenteredScaledText(text, scale, x, y, -1);
     }
 
-    public void drawCenteredScaledText(@NotNull String text, float scale, double x, double y, int colour, boolean shadow) {
+    public void drawCenteredScaledText(String text, float scale, double x, double y, int colour, boolean shadow) {
         drawCenteredScaledText(text, scale, (float) x, (float) y, colour, shadow);
     }
 
-    public void drawCenteredScaledText(@NotNull String text, float scale, double x, double y, int colour) {
+    public void drawCenteredScaledText(String text, float scale, double x, double y, int colour) {
         drawCenteredScaledText(text, scale, x, y, colour, false);
     }
 
-    public void drawCenteredScaledText(@NotNull String text, float scale, double x, double y) {
+    public void drawCenteredScaledText(String text, float scale, double x, double y) {
         drawCenteredScaledText(text, scale, x, y, -1);
     }
 
-    public void drawCenteredChromaText(@NotNull String text, float x, float y, boolean shadow) {
+    public void drawCenteredChromaText(String text, float x, float y, boolean shadow) {
         drawChromaText(text, makeCentered(text, x), y, shadow);
     }
 
-    public void drawCenteredChromaText(@NotNull String text, float x, float y) {
+    public void drawCenteredChromaText(String text, float x, float y) {
         drawCenteredChromaText(text, x, y, false);
     }
 
-    public void drawCenteredChromaText(@NotNull String text, double x, double y, boolean shadow) {
+    public void drawCenteredChromaText(String text, double x, double y, boolean shadow) {
         drawCenteredChromaText(text, (float) x, (float) y, shadow);
     }
 
-    public void drawCenteredChromaText(@NotNull String text, double x, double y) {
+    public void drawCenteredChromaText(String text, double x, double y) {
         drawCenteredChromaText(text, x, y, false);
     }
 
-    public void drawScaledChromaText(@NotNull String text, float scale, float x, float y, boolean shadow) {
+    public void drawScaledChromaText(String text, float scale, float x, float y, boolean shadow) {
         GlStateManager.pushMatrix();
         GlStateManager.scale(scale, scale, scale);
         drawChromaText(text, x, y, shadow);
         GlStateManager.popMatrix();
     }
 
-    public void drawScaledChromaText(@NotNull String text, float scale, float x, float y) {
+    public void drawScaledChromaText(String text, float scale, float x, float y) {
         drawScaledChromaText(text, scale, x, y, false);
     }
 
-    public void drawScaledChromaText(@NotNull String text, float scale, double x, double y, boolean shadow) {
+    public void drawScaledChromaText(String text, float scale, double x, double y, boolean shadow) {
         drawScaledChromaText(text, scale, (float) x, (float) y, shadow);
     }
 
-    public void drawScaledChromaText(@NotNull String text, float scale, double x, double y) {
+    public void drawScaledChromaText(String text, float scale, double x, double y) {
         drawScaledChromaText(text, scale, x, y, false);
     }
 
-    public void drawCenteredScaledChromaText(@NotNull String text, float scale, float x, float y, boolean shadow) {
+    public void drawCenteredScaledChromaText(String text, float scale, float x, float y, boolean shadow) {
         GlStateManager.pushMatrix();
         GlStateManager.scale(scale, scale, scale);
         drawCenteredChromaText(text, x, y, shadow);
         GlStateManager.popMatrix();
     }
 
-    public void drawCenteredScaledChromaText(@NotNull String text, float scale, float x, float y) {
+    public void drawCenteredScaledChromaText(String text, float scale, float x, float y) {
         drawCenteredScaledChromaText(text, scale, x, y, false);
     }
 
-    public void drawCenteredScaledChromaText(@NotNull String text, float scale, double x, double y, boolean shadow) {
+    public void drawCenteredScaledChromaText(String text, float scale, double x, double y, boolean shadow) {
         drawCenteredScaledChromaText(text, scale, (float) x, (float) y, shadow);
     }
 
-    public void drawCenteredScaledChromaText(@NotNull String text, float scale, double x, double y) {
+    public void drawCenteredScaledChromaText(String text, float scale, double x, double y) {
         drawCenteredScaledChromaText(text, scale, x, y, false);
     }
 

@@ -18,15 +18,13 @@
 
 package xyz.qalcyo.requisite.util;
 
-import gg.essential.universal.ChatColor;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.text.LiteralText;
-import xyz.qalcyo.requisite.core.util.IChatHelper;
 
 public class ChatHelper implements IChatHelper {
 
     public void send(String prefix, String message) {
-        MinecraftClient.getInstance().inGameHud.getChatHud().addMessage(new LiteralText(prefix + ChatColor.RESET + " " + message));
+        MinecraftClient.getInstance().inGameHud.getChatHud().addMessage(new LiteralText(prefix + ChatColour.RESET + " " + message));
     }
 
     public void send(String message) {

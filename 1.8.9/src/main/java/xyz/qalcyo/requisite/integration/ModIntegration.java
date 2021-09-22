@@ -18,11 +18,6 @@
 
 package xyz.qalcyo.requisite.integration;
 
-import org.jetbrains.annotations.NotNull;
-import xyz.qalcyo.requisite.core.IRequisite;
-import xyz.qalcyo.requisite.core.integration.IMod;
-import xyz.qalcyo.requisite.core.integration.IModIntegration;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,7 +34,6 @@ public class ModIntegration implements IModIntegration {
         integratedMods.add(mod);
     }
 
-    @NotNull
     public List<IMod> getIntegratedMods() {
         return integratedMods;
     }

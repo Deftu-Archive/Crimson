@@ -21,7 +21,7 @@ package xyz.qalcyo.requisite.core.util
 import org.apache.logging.log4j.LogManager
 import org.apache.logging.log4j.Logger
 
-object LoggingHelper {
+class LoggingHelper {
 
     fun create(prefix: String, name: String) =
         LogManager.getLogger("$prefix ($name)")

@@ -18,18 +18,12 @@
 
 package xyz.qalcyo.requisite;
 
-import gg.essential.universal.ChatColor;
 import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraftforge.fml.common.Mod;
 import xyz.qalcyo.requisite.commands.CommandHelper;
 import xyz.qalcyo.requisite.core.IRequisite;
 import xyz.qalcyo.requisite.core.RequisiteEventManager;
-import xyz.qalcyo.requisite.core.files.ConfigurationManager;
-import xyz.qalcyo.requisite.core.files.FileManager;
-import xyz.qalcyo.requisite.core.hypixel.HypixelHelper;
 import xyz.qalcyo.requisite.core.integration.ModMetadata;
-import xyz.qalcyo.requisite.core.keybinds.KeyBindRegistry;
-import xyz.qalcyo.requisite.core.networking.RequisiteClientSocket;
 import xyz.qalcyo.requisite.cosmetics.CosmeticHelper;
 import xyz.qalcyo.requisite.cosmetics.CosmeticInitializer;
 import xyz.qalcyo.requisite.util.*;
@@ -90,7 +84,7 @@ public class Requisite implements IRequisite {
         configurationManager = new ConfigurationManager("config", fileManager.getRequisiteDirectory(fileManager.getQalcyoDirectory(fileManager.getConfigDirectory(gameDir))));
         requisiteSocket = new RequisiteClientSocket(this, new SocketHelper());
         boolean socketConnected = requisiteSocket.awaitConnect();
-        cosmeticManager = new CosmeticManager<AbstractClientPlayer>(this, new CosmeticInitializer(), new CosmeticHelper());
+        cosmeticManager = new CosmeticManager<>(this, new CosmeticInitializer(), new CosmeticHelper());
         cosmeticManager.initialize();
         modIntegration = new ModIntegration(this);
         commandRegistry = new CommandRegistry(this, new CommandHelper());
@@ -102,6 +96,7 @@ public class Requisite implements IRequisite {
         enhancedFontRenderer = new EnhancedFontRenderer(this);
         playerHelper = new PlayerHelper();
         chatHelper = new ChatHelper();
+        universalLogger = new UniversalLogger(this);
         mouseHelper = new MouseHelper();
         notifications = new Notifications(this);
         positionHelper = new PositionHelper();
@@ -111,7 +106,7 @@ public class Requisite implements IRequisite {
         serverHelper = new ServerHelper();
 
         if (!socketConnected) {
-            notifications.push("Error!", "Failed to connect to Requisite WebSocket. " + ChatColor.BOLD + "Click to try a reconnect.", notification -> {
+            notifications.push("Error!", "Failed to connect to Requisite WebSocket. " + ChatColour.BOLD + "Click to try a reconnect.", notification -> {
                 boolean socketReconnected = requisiteSocket.awaitReconnect();
                 if (!socketReconnected) {
                     notifications.push(notification.clone());
@@ -178,6 +173,10 @@ public class Requisite implements IRequisite {
         return chatHelper;
     }
 
+    public UniversalLogger getUniversalLogger() {
+        return universalLogger;
+    }
+
     public MouseHelper getMouseHelper() {
         return mouseHelper;
     }
@@ -211,7 +210,7 @@ public class Requisite implements IRequisite {
     }
 
     public ModMetadata metadata() {
-        return ModMetadata.Companion.from(getName(), getVersion())
+        return ModMetadata.from(name(), version())
                 .setCommand("/requisite");
     }
 

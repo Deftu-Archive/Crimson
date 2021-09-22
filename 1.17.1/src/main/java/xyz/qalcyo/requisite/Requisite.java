@@ -18,21 +18,11 @@
 
 package xyz.qalcyo.requisite;
 
-import gg.essential.universal.ChatColor;
 import net.minecraft.client.network.AbstractClientPlayerEntity;
-import org.jetbrains.annotations.NotNull;
 import xyz.qalcyo.mango.exceptions.UnfinishedApiException;
 import xyz.qalcyo.requisite.commands.CommandHelper;
-import xyz.qalcyo.requisite.core.IEventListener;
-import xyz.qalcyo.requisite.core.IRequisite;
-import xyz.qalcyo.requisite.core.RequisiteEventManager;
 import xyz.qalcyo.requisite.core.commands.CommandRegistry;
 import xyz.qalcyo.requisite.core.cosmetics.CosmeticManager;
-import xyz.qalcyo.requisite.core.files.ConfigurationManager;
-import xyz.qalcyo.requisite.core.files.FileManager;
-import xyz.qalcyo.requisite.core.hypixel.HypixelHelper;
-import xyz.qalcyo.requisite.core.networking.RequisiteClientSocket;
-import xyz.qalcyo.requisite.core.util.IPositionHelper;
 import xyz.qalcyo.requisite.integration.ModIntegration;
 import xyz.qalcyo.requisite.networking.SocketHelper;
 import xyz.qalcyo.requisite.notifications.Notifications;
@@ -60,6 +50,7 @@ public class Requisite implements IRequisite {
     private EnhancedFontRenderer enhancedFontRenderer;
     private PlayerHelper playerHelper;
     private ChatHelper chatHelper;
+    private UniversalLogger universalLogger;
     private MouseHelper mouseHelper;
     private Notifications notifications;
     private HypixelHelper hypixelHelper;
@@ -89,6 +80,7 @@ public class Requisite implements IRequisite {
         enhancedFontRenderer = new EnhancedFontRenderer(this);
         playerHelper = new PlayerHelper();
         chatHelper = new ChatHelper();
+        universalLogger = new UniversalLogger(this);
         mouseHelper = new MouseHelper();
         notifications = new Notifications(this);
         //positionHelper = new PositionHelper();
@@ -98,7 +90,7 @@ public class Requisite implements IRequisite {
         serverHelper = new ServerHelper();
 
         if (!socketConnected) {
-            notifications.push("Error!", "Failed to connect to Requisite WebSocket. " + ChatColor.BOLD + "Click to try a reconnect.", notification -> {
+            notifications.push("Error!", "Failed to connect to Requisite WebSocket. " + ChatColour.BOLD + "Click to try a reconnect.", notification -> {
                 boolean socketReconnected = requisiteSocket.awaitReconnect();
                 if (!socketReconnected) {
                     notifications.push(notification.clone());
@@ -113,35 +105,35 @@ public class Requisite implements IRequisite {
         return initialized = true;
     }
 
-    public @NotNull FileManager getFileManager() {
+    public FileManager getFileManager() {
         return fileManager;
     }
 
-    public @NotNull ConfigurationManager getConfigurationManager() {
+    public ConfigurationManager getConfigurationManager() {
         return configurationManager;
     }
 
-    public @NotNull CosmeticManager<AbstractClientPlayerEntity> getCosmeticManager() {
+    public CosmeticManager<AbstractClientPlayerEntity> getCosmeticManager() {
         return cosmeticManager;
     }
 
-    public @NotNull ModIntegration getModIntegration() {
+    public ModIntegration getModIntegration() {
         return modIntegration;
     }
 
-    public @NotNull CommandRegistry getCommandRegistry() {
+    public CommandRegistry getCommandRegistry() {
         return commandRegistry;
     }
 
-    public @NotNull RequisiteEventManager getInternalEventManager() {
+    public RequisiteEventManager getInternalEventManager() {
         return internalEventManager;
     }
 
-    public @NotNull IEventListener getInternalEventListener() {
-        throw new UnsupportedOperationException(getName() + " 1.17.1 does not support the internal event listener.");
+    public IEventListener getInternalEventListener() {
+        throw new UnsupportedOperationException(name() + " 1.17.1 does not support the internal event listener.");
     }
 
-    public @NotNull RequisiteClientSocket getRequisiteSocket() {
+    public RequisiteClientSocket getRequisiteSocket() {
         return requisiteSocket;
     }
 
@@ -149,43 +141,47 @@ public class Requisite implements IRequisite {
 
     }
 
-    public @NotNull EnhancedFontRenderer getEnhancedFontRenderer() {
+    public EnhancedFontRenderer getEnhancedFontRenderer() {
         return enhancedFontRenderer;
     }
 
-    public @NotNull PlayerHelper getPlayerHelper() {
+    public PlayerHelper getPlayerHelper() {
         return playerHelper;
     }
 
-    public @NotNull ChatHelper getChatHelper() {
+    public ChatHelper getChatHelper() {
         return chatHelper;
     }
 
-    public @NotNull MouseHelper getMouseHelper() {
+    public UniversalLogger getUniversalLogger() {
+        return universalLogger;
+    }
+
+    public MouseHelper getMouseHelper() {
         return mouseHelper;
     }
 
-    public @NotNull Notifications getNotifications() {
+    public Notifications getNotifications() {
         return notifications;
     }
 
-    public @NotNull IPositionHelper getPositionHelper() {
+    public IPositionHelper getPositionHelper() {
         throw new UnfinishedApiException();
     }
 
-    public @NotNull HypixelHelper getHypixelHelper() {
+    public HypixelHelper getHypixelHelper() {
         return hypixelHelper;
     }
 
-    public @NotNull RenderHelper getRenderHelper() {
+    public RenderHelper getRenderHelper() {
         return renderHelper;
     }
 
-    public @NotNull MessageQueue getMessageQueue() {
+    public MessageQueue getMessageQueue() {
         return messageQueue;
     }
 
-    public @NotNull ServerHelper getServerHelper() {
+    public ServerHelper getServerHelper() {
         return serverHelper;
     }
 
