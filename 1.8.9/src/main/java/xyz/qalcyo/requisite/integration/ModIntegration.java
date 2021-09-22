@@ -1,6 +1,6 @@
 /*
  * Requisite - Minecraft library mod
- *  Copyright (C) 2021 Qalcyo
+ * Copyright (C) 2021 MatthewTGM
  *
  * Requisite is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
@@ -17,6 +17,11 @@
  */
 
 package xyz.qalcyo.requisite.integration;
+
+import xyz.qalcyo.requisite.core.IRequisite;
+import xyz.qalcyo.requisite.core.integration.IMod;
+import xyz.qalcyo.requisite.core.integration.IModIntegration;
+import xyz.qalcyo.requisite.core.integration.ModMetadata;
 
 import java.util.ArrayList;
 import java.util.List;

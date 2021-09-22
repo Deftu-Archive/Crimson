@@ -1,6 +1,6 @@
 /*
  * Requisite - Minecraft library mod
- *  Copyright (C) 2021 Qalcyo
+ * Copyright (C) 2021 MatthewTGM
  *
  * Requisite is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
@@ -21,17 +21,22 @@ package xyz.qalcyo.requisite;
 import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraftforge.fml.common.Mod;
 import xyz.qalcyo.requisite.commands.CommandHelper;
-import xyz.qalcyo.requisite.core.IRequisite;
-import xyz.qalcyo.requisite.core.RequisiteEventManager;
 import xyz.qalcyo.requisite.core.integration.ModMetadata;
+import xyz.qalcyo.requisite.core.keybinds.KeyBindRegistry;
 import xyz.qalcyo.requisite.cosmetics.CosmeticHelper;
 import xyz.qalcyo.requisite.cosmetics.CosmeticInitializer;
 import xyz.qalcyo.requisite.util.*;
+import xyz.qalcyo.requisite.core.IRequisite;
+import xyz.qalcyo.requisite.core.RequisiteEventManager;
 import xyz.qalcyo.requisite.core.RequisiteInfo;
 import xyz.qalcyo.requisite.core.commands.CommandRegistry;
 import xyz.qalcyo.requisite.core.cosmetics.CosmeticManager;
 import xyz.qalcyo.requisite.core.files.ConfigurationManager;
 import xyz.qalcyo.requisite.core.files.FileManager;
+import xyz.qalcyo.requisite.core.hypixel.HypixelHelper;
+import xyz.qalcyo.requisite.core.networking.RequisiteClientSocket;
+import xyz.qalcyo.requisite.core.util.ChatColour;
+import xyz.qalcyo.requisite.core.util.UniversalLogger;
 import xyz.qalcyo.requisite.integration.ModIntegration;
 import xyz.qalcyo.requisite.networking.SocketHelper;
 import xyz.qalcyo.requisite.notifications.Notifications;
@@ -66,6 +71,7 @@ public class Requisite implements IRequisite {
     private EnhancedFontRenderer enhancedFontRenderer;
     private PlayerHelper playerHelper;
     private ChatHelper chatHelper;
+    private UniversalLogger universalLogger;
     private MouseHelper mouseHelper;
     private Notifications notifications;
     private PositionHelper positionHelper;

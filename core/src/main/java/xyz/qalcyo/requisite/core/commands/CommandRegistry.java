@@ -1,32 +1,16 @@
-/*
- * Requisite - Minecraft library mod
- *  Copyright (C) 2021 Qalcyo
- *
- * Requisite is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 2.1 of the License, or
- * (at your option) any later version.
- *
- * Requisite is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU Lesser General Public License
- * along with Requisite. If not, see <https://www.gnu.org/licenses/>.
- */
-
 package xyz.qalcyo.requisite.core.commands;
 
 import xyz.qalcyo.mango.Lists;
 import xyz.qalcyo.mango.Objects;
 import xyz.qalcyo.mango.collections.Pair;
 import xyz.qalcyo.mango.collections.impl.ImmutablePair;
+import xyz.qalcyo.requisite.core.IRequisite;
 import xyz.qalcyo.requisite.core.commands.annotations.Command;
 import xyz.qalcyo.requisite.core.commands.exceptions.CommandException;
 import xyz.qalcyo.requisite.core.commands.exceptions.IncorrectUsageException;
 import xyz.qalcyo.requisite.core.commands.impl.RequisiteCommand;
 import xyz.qalcyo.requisite.core.commands.impl.RequisiteTestCommand;
+import xyz.qalcyo.requisite.core.util.ChatColour;
 import xyz.qalcyo.requisite.core.events.SendChatMessageEvent;
 
 import java.lang.reflect.Method;

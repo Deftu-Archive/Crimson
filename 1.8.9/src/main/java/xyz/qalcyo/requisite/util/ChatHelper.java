@@ -1,6 +1,6 @@
 /*
  * Requisite - Minecraft library mod
- *  Copyright (C) 2021 Qalcyo
+ * Copyright (C) 2021 MatthewTGM
  *
  * Requisite is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
@@ -21,6 +21,8 @@ package xyz.qalcyo.requisite.util;
 import gg.essential.universal.wrappers.UPlayer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.util.ChatComponentText;
+import xyz.qalcyo.requisite.core.util.ChatColour;
+import xyz.qalcyo.requisite.core.util.IChatHelper;
 
 public class ChatHelper implements IChatHelper {
 
