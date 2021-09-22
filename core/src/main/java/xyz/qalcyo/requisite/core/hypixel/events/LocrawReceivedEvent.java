@@ -16,23 +16,14 @@
  * along with Requisite. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package xyz.qalcyo.requisite.core.files
+package xyz.qalcyo.requisite.core.hypixel.events;
 
-import xyz.qalcyo.requisite.core.IRequisite
-import java.io.File
+import xyz.qalcyo.requisite.core.hypixel.locraw.HypixelLocraw;
+import xyz.qalcyo.simpleeventbus.Event;
 
-class FileManager(val requisite: IRequisite) {
-
-    fun getConfigDirectory(gameDirectory: File?): File =
-        checkExistence(File(gameDirectory, "config"))
-    fun getQalcyoDirectory(configDirectory: File?): File =
-        checkExistence(File(configDirectory, "Qalcyo"))
-    fun getRequisiteDirectory(qalcyoDirectory: File?): File =
-        checkExistence(File(qalcyoDirectory, requisite.name))
-
-    private fun checkExistence(directory: File): File {
-        check(!(!directory.exists() && !directory.mkdirs())) { "Unable to create Requisite directories." }
-        return directory
+public class LocrawReceivedEvent extends Event {
+    public final HypixelLocraw locraw;
+    public LocrawReceivedEvent(HypixelLocraw locraw) {
+        this.locraw = locraw;
     }
-
 }

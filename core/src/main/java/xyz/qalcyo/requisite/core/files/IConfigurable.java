@@ -16,9 +16,15 @@
  * along with Requisite. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package xyz.qalcyo.requisite.core.hypixel.events
+package xyz.qalcyo.requisite.core.files;
 
-import xyz.qalcyo.requisite.core.hypixel.locraw.HypixelLocraw
-import xyz.qalcyo.simpleeventbus.Event
+import xyz.qalcyo.simpleconfig.Configuration;
+import xyz.qalcyo.simpleconfig.Subconfiguration;
 
-class LocrawReceivedEvent(val locraw: HypixelLocraw) : Event()
+public interface IConfigurable {
+    default void initialize(Configuration configuration) {
+    }
+    void save(ConfigurationManager configurationManager);
+    void load(ConfigurationManager configurationManager);
+    Subconfiguration configuration();
+}

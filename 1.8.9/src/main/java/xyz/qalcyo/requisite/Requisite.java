@@ -30,6 +30,8 @@ import xyz.qalcyo.requisite.util.*;
 import xyz.qalcyo.requisite.core.RequisiteInfo;
 import xyz.qalcyo.requisite.core.commands.CommandRegistry;
 import xyz.qalcyo.requisite.core.cosmetics.CosmeticManager;
+import xyz.qalcyo.requisite.core.files.ConfigurationManager;
+import xyz.qalcyo.requisite.core.files.FileManager;
 import xyz.qalcyo.requisite.integration.ModIntegration;
 import xyz.qalcyo.requisite.networking.SocketHelper;
 import xyz.qalcyo.requisite.notifications.Notifications;
