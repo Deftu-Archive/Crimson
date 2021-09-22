@@ -20,6 +20,7 @@ package xyz.qalcyo.requisite.util;
 
 import gg.essential.universal.UResolution;
 import org.lwjgl.input.Mouse;
+import xyz.qalcyo.requisite.core.util.IMouseHelper;
 
 public class MouseHelper implements IMouseHelper {
 

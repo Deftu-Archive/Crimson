@@ -21,7 +21,7 @@ package xyz.qalcyo.requisite.core.util
 import java.util.concurrent.*
 import java.util.concurrent.atomic.AtomicInteger
 
-class Multithreading {
+object Multithreading {
 
     private val threadCount = AtomicInteger(0)
     private val executor = ThreadPoolExecutor(

@@ -24,6 +24,7 @@ import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.WorldRenderer;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import org.lwjgl.opengl.GL11;
+import xyz.qalcyo.requisite.core.util.IRenderHelper;
 
 import java.awt.*;
 

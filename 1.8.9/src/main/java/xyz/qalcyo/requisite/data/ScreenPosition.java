@@ -20,8 +20,8 @@ package xyz.qalcyo.requisite.data;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.ScaledResolution;
-import xyz.qalcyo.requisite.Requisite;
 import xyz.qalcyo.requisite.core.data.IScreenPosition;
+import xyz.qalcyo.requisite.core.util.MathHelper;
 
 public class ScreenPosition implements IScreenPosition {
 
@@ -39,7 +39,7 @@ public class ScreenPosition implements IScreenPosition {
 
     public ScreenPosition setX(float x) {
         ScaledResolution resolution = new ScaledResolution(Minecraft.getMinecraft());
-        this.x = Requisite.getInstance().getMathHelper().percentageOf(x, 0, resolution.getScaledWidth());
+        this.x = MathHelper.INSTANCE.percentageOf(x, 0, resolution.getScaledWidth());
         return this;
     }
 
@@ -50,7 +50,7 @@ public class ScreenPosition implements IScreenPosition {
 
     public ScreenPosition setY(float y) {
         ScaledResolution resolution = new ScaledResolution(Minecraft.getMinecraft());
-        this.y = Requisite.getInstance().getMathHelper().percentageOf(0, y, resolution.getScaledHeight());
+        this.y = MathHelper.INSTANCE.percentageOf(0, y, resolution.getScaledHeight());
         return this;
     }
 
@@ -66,7 +66,7 @@ public class ScreenPosition implements IScreenPosition {
 
     public static ScreenPosition fromRaw(float x, float y) {
         ScaledResolution resolution = new ScaledResolution(Minecraft.getMinecraft());
-        return new ScreenPosition(Requisite.getInstance().getMathHelper().percentageOf(x, 0, resolution.getScaledWidth()), Requisite.getInstance().getMathHelper().percentageOf(y, 0, resolution.getScaledHeight()));
+        return new ScreenPosition(MathHelper.INSTANCE.percentageOf(x, 0, resolution.getScaledWidth()), MathHelper.INSTANCE.percentageOf(y, 0, resolution.getScaledHeight()));
     }
 
     public static ScreenPosition fromScaled(float x, float y) {

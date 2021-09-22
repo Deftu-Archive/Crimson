@@ -19,8 +19,10 @@
 package xyz.qalcyo.requisite.util;
 
 import net.minecraft.client.MinecraftClient;
+import xyz.qalcyo.requisite.core.IRequisite;
 import xyz.qalcyo.requisite.core.events.TickEvent;
 import xyz.qalcyo.requisite.core.util.messages.IMessageQueue;
+import xyz.qalcyo.requisite.core.util.messages.MessageQueueEntry;
 
 import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;
@@ -46,9 +48,9 @@ public class MessageQueue implements IMessageQueue {
     }
 
     public void run(MessageQueueEntry entry) {
+        assert entry != null;
         if (tickCounter % entry.getDelay() == 0) {
-            if (entry == null || entry.getMessage() == null)
-                return;
+            entry.getMessage();
 
             tickCounter = 0;
 

@@ -18,10 +18,12 @@
 
 package xyz.qalcyo.requisite.core.commands;
 
+import gg.essential.universal.ChatColor;
 import xyz.qalcyo.mango.Lists;
 import xyz.qalcyo.mango.Objects;
 import xyz.qalcyo.mango.collections.Pair;
 import xyz.qalcyo.mango.collections.impl.ImmutablePair;
+import xyz.qalcyo.requisite.core.IRequisite;
 import xyz.qalcyo.requisite.core.commands.annotations.Command;
 import xyz.qalcyo.requisite.core.commands.exceptions.CommandException;
 import xyz.qalcyo.requisite.core.commands.exceptions.IncorrectUsageException;
@@ -159,11 +161,11 @@ public class CommandRegistry {
             if (options != null && !options.isEmpty()) {
                 if (input.indexOf(' ') == -1) {
                     for (int i = 0; i < options.size(); i++) {
-                        options.set(i, ChatColour.RED + "/" + options.get(i) + ChatColour.RESET);
+                        options.set(i, ChatColor.RED + "/" + options.get(i) + ChatColor.RESET);
                     }
                 } else {
                     for (int i = 0; i < options.size(); i++) {
-                        options.set(i, ChatColour.RED + "/" + options.get(i) + ChatColour.RESET);
+                        options.set(i, ChatColor.RED + "/" + options.get(i) + ChatColor.RESET);
                     }
                 }
 

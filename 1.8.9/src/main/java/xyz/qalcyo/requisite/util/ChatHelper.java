@@ -18,9 +18,11 @@
 
 package xyz.qalcyo.requisite.util;
 
+import gg.essential.universal.ChatColor;
 import gg.essential.universal.wrappers.UPlayer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.util.ChatComponentText;
+import xyz.qalcyo.requisite.core.util.IChatHelper;
 
 public class ChatHelper implements IChatHelper {
 
@@ -29,7 +31,7 @@ public class ChatHelper implements IChatHelper {
             return;
         if (!UPlayer.hasPlayer())
             return;
-        Minecraft.getMinecraft().thePlayer.addChatMessage(new ChatComponentText(prefix).appendText(ChatColour.RESET + " ").appendText(message));
+        Minecraft.getMinecraft().thePlayer.addChatMessage(new ChatComponentText(prefix).appendText(ChatColor.RESET + " ").appendText(message));
     }
 
     public void send(String message) {

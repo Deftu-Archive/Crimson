@@ -19,6 +19,7 @@
 package xyz.qalcyo.requisite.util;
 
 import net.minecraft.client.Minecraft;
+import xyz.qalcyo.requisite.core.util.IPlayerHelper;
 
 import java.util.UUID;
 

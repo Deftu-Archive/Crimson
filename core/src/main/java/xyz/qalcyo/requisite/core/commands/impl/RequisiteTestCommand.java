@@ -18,6 +18,7 @@
 
 package xyz.qalcyo.requisite.core.commands.impl;
 
+import xyz.qalcyo.requisite.core.IRequisite;
 import xyz.qalcyo.requisite.core.commands.annotations.Command;
 
 @Command(

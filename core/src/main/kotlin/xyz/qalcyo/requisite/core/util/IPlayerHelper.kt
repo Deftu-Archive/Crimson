@@ -18,7 +18,7 @@
 
 package xyz.qalcyo.requisite.core.util
 
-import java.util.*
+import java.util.UUID
 
 interface IPlayerHelper {
     val isPlayerPresent: Boolean

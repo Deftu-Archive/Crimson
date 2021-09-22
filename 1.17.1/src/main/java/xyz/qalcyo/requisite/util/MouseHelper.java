@@ -19,6 +19,7 @@
 package xyz.qalcyo.requisite.util;
 
 import net.minecraft.client.MinecraftClient;
+import xyz.qalcyo.requisite.core.util.IMouseHelper;
 
 public class MouseHelper implements IMouseHelper {
 

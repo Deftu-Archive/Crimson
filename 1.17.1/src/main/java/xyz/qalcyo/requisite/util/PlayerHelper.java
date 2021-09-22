@@ -19,6 +19,9 @@
 package xyz.qalcyo.requisite.util;
 
 import net.minecraft.client.MinecraftClient;
+import xyz.qalcyo.requisite.core.util.IPlayerHelper;
+
+import java.util.UUID;
 
 public class PlayerHelper implements IPlayerHelper {
 
@@ -26,4 +29,8 @@ public class PlayerHelper implements IPlayerHelper {
         return MinecraftClient.getInstance().player != null;
     }
 
+    public UUID getUuid() {
+        //TODO: implement this
+        return null;
+    }
 }
