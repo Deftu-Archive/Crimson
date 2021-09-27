@@ -23,6 +23,7 @@ import xyz.qalcyo.mango.Multithreading;
 import xyz.qalcyo.requisite.commands.CommandHelper;
 import xyz.qalcyo.requisite.core.integration.ModMetadata;
 import xyz.qalcyo.requisite.core.keybinds.KeyBindRegistry;
+import xyz.qalcyo.requisite.core.util.IGuiHelper;
 import xyz.qalcyo.requisite.util.*;
 import xyz.qalcyo.requisite.core.IRequisite;
 import xyz.qalcyo.requisite.core.RequisiteEventManager;
@@ -66,6 +67,7 @@ public class Requisite implements IRequisite {
 
     /* Utilities. */
     private EnhancedFontRenderer enhancedFontRenderer;
+    private GuiHelper guiHelper;
     private PlayerHelper playerHelper;
     private ChatHelper chatHelper;
     private UniversalLogger universalLogger;
@@ -97,6 +99,7 @@ public class Requisite implements IRequisite {
         /* Initialize utilities. */
         Multithreading.runAsync(() -> {
             enhancedFontRenderer = new EnhancedFontRenderer(this);
+            guiHelper = new GuiHelper(this);
             playerHelper = new PlayerHelper();
             chatHelper = new ChatHelper();
             universalLogger = new UniversalLogger(this);
@@ -106,6 +109,7 @@ public class Requisite implements IRequisite {
             renderHelper = new RenderHelper();
             messageQueue = new MessageQueue(this);
             serverHelper = new ServerHelper();
+            glHelper = new GlHelper();
 
             if (!socketConnected) {
                 notifications.push("Error!", "Failed to connect to Requisite WebSocket. " + ChatColour.BOLD + "Click to attempt a reconnect.", notification -> {
@@ -117,9 +121,6 @@ public class Requisite implements IRequisite {
                 });
             }
         });
-
-        /* Initialize version-dependant utilities. */
-        glHelper = new GlHelper();
 
         return initialized = true;
     }
@@ -166,6 +167,10 @@ public class Requisite implements IRequisite {
 
     public EnhancedFontRenderer getEnhancedFontRenderer() {
         return enhancedFontRenderer;
+    }
+
+    public GuiHelper getGuiHelper() {
+        return guiHelper;
     }
 
     public PlayerHelper getPlayerHelper() {

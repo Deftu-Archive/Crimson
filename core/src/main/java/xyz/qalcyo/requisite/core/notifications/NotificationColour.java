@@ -21,10 +21,26 @@ package xyz.qalcyo.requisite.core.notifications;
 import xyz.qalcyo.requisite.core.data.ColourRGB;
 
 public class NotificationColour {
+
+    /* Constants. */
+    private static final ColourRGB defaultBackground = new ColourRGB(0, 0, 0, 200);
+    private static final ColourRGB defaultForeground = new ColourRGB(255, 175, 0, 200);
+
+    /* Data. */
     public final ColourRGB background;
     public final ColourRGB foreground;
+
     public NotificationColour(ColourRGB background, ColourRGB foreground) {
         this.background = background;
         this.foreground = foreground;
     }
+
+    public static ColourRGB getDefaultBackground() {
+        return defaultBackground;
+    }
+
+    public static ColourRGB getDefaultForeground() {
+        return defaultForeground;
+    }
+
 }

@@ -21,8 +21,9 @@ package xyz.qalcyo.requisite.util;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.ScaledResolution;
 import org.lwjgl.opengl.GL11;
+import xyz.qalcyo.requisite.core.util.IGlHelper;
 
-public class GlHelper {
+public class GlHelper implements IGlHelper {
 
     public void startScissorBox(int x, int y, int width, int height) {
         GL11.glPushMatrix();
@@ -46,7 +47,12 @@ public class GlHelper {
         int windowWidth = mc.displayWidth;
         int scaledHeight = scaledResolution.getScaledHeight();
         int windowHeight = mc.displayHeight;
-        GL11.glScissor((int) ((xPosition * windowWidth) / scaledWidth), (int) (((scaledHeight - (yPosition + height)) * windowHeight) / scaledHeight), (int) (width * windowWidth / scaledWidth), (int) (height * windowHeight / scaledHeight));
+        GL11.glScissor(
+                (int) ((xPosition * windowWidth) / scaledWidth),
+                (int) (((scaledHeight - (yPosition + height)) * windowHeight) / scaledHeight),
+                (int) (width * windowWidth / scaledWidth),
+                (int) (height * windowHeight / scaledHeight)
+        );
     }
 
 }

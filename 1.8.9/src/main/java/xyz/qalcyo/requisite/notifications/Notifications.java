@@ -28,6 +28,7 @@ import xyz.qalcyo.requisite.Requisite;
 import xyz.qalcyo.requisite.core.data.ColourRGB;
 import xyz.qalcyo.requisite.core.notifications.INotifications;
 import xyz.qalcyo.requisite.core.notifications.Notification;
+import xyz.qalcyo.requisite.core.notifications.NotificationColour;
 import xyz.qalcyo.requisite.core.util.ChatColour;
 
 import java.util.List;
@@ -88,9 +89,9 @@ public class Notifications implements INotifications {
 
             /* Rendering. */
             GlStateManager.pushMatrix();
-            ColourRGB backgroundColour = notification.colour == null || notification.colour.background == null ? new ColourRGB(0, 0, 0, 200) : notification.colour.background.setA_builder(200);
+            ColourRGB backgroundColour = notification.colour == null || notification.colour.background == null ? NotificationColour.getDefaultBackground() : notification.colour.background.setA_builder(200);
             requisite.getRenderHelper().drawRectEnhanced((int) x, (int) y, (int) width, (int) height, backgroundColour.getRGBA());
-            ColourRGB foregroundColour = notification.colour == null || notification.colour.foreground == null ? new ColourRGB(255, 175, 0, 200) : notification.colour.foreground.setA_builder(200);
+            ColourRGB foregroundColour = notification.colour == null || notification.colour.foreground == null ? NotificationColour.getDefaultForeground() : notification.colour.foreground.setA_builder(200);
             requisite.getRenderHelper().drawHollowRect((int) x + 4, (int) y + 4, (int) width - 8, (int) height - 8, 1, foregroundColour.getRGBA());
 
             /* Text. */

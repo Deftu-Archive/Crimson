@@ -20,30 +20,34 @@ package xyz.qalcyo.requisite.util;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiScreen;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.common.gameevent.TickEvent;
+import xyz.qalcyo.requisite.core.IRequisite;
+import xyz.qalcyo.requisite.core.events.TickEvent;
+import xyz.qalcyo.requisite.core.util.IGuiHelper;
 
-public class GuiHelper {
+public class GuiHelper implements IGuiHelper<GuiScreen> {
 
     private GuiScreen awaitingDisplay = new GuiNull();
 
-    public GuiHelper() {
-        MinecraftForge.EVENT_BUS.register(this);
+    public GuiHelper(IRequisite requisite) {
+        requisite.getEventBus().register(TickEvent.class, this::onClientTick);
     }
 
     public void open(GuiScreen screen) {
         awaitingDisplay = screen;
     }
 
-    @SubscribeEvent
-    protected void onClientTick(TickEvent.ClientTickEvent event) {
+    public GuiScreen getAwaiting() {
+        return awaitingDisplay;
+    }
+
+    protected void onClientTick(TickEvent event) {
         if (!(awaitingDisplay instanceof GuiNull)) {
             Minecraft.getMinecraft().displayGuiScreen(awaitingDisplay);
             awaitingDisplay = new GuiNull();
         }
     }
 
-    private static class GuiNull extends GuiScreen {}
+    private static class GuiNull extends GuiScreen {
+    }
 
 }

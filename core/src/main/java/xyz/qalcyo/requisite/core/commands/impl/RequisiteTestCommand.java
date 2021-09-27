@@ -20,6 +20,8 @@ package xyz.qalcyo.requisite.core.commands.impl;
 
 import xyz.qalcyo.requisite.core.IRequisite;
 import xyz.qalcyo.requisite.core.commands.annotations.Command;
+import xyz.qalcyo.requisite.core.data.ColourRGB;
+import xyz.qalcyo.requisite.core.notifications.NotificationColour;
 
 @Command(
         name = "requisitetest",
@@ -36,6 +38,18 @@ public class RequisiteTestCommand {
     @Command.Argument(name = "1")
     public void one() {
         requisite.getNotifications().push("Test one", "This is the test one notification.");
+    }
+
+    @Command.Argument(name = "2")
+    public void two() {
+        requisite.getNotifications().push(
+                "Test two",
+                "This is the test two notification, now with colour.",
+                new NotificationColour(
+                        new ColourRGB(255, 165, 190),
+                        new ColourRGB(255, 156, 132)
+                )
+        );
     }
 
 }

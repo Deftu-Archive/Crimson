@@ -75,6 +75,7 @@ public interface IRequisite extends IMod {
     void openMenu();
 
     IEnhancedFontRenderer getEnhancedFontRenderer();
+    IGuiHelper<?> getGuiHelper();
     IPlayerHelper getPlayerHelper();
     IChatHelper getChatHelper();
     default ColourHelper getColourHelper() {
@@ -114,6 +115,7 @@ public interface IRequisite extends IMod {
     default MojangAPI getMojangApi() {
         return RequisiteDefaultImplementations.mojangApi;
     }
+    IGlHelper getGlHelper();
 
     /* Default. */
     default URI fetchSocketUri() {
