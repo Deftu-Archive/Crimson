@@ -26,16 +26,13 @@ import org.java_websocket.handshake.ServerHandshake;
 import xyz.qalcyo.json.entities.JsonElement;
 import xyz.qalcyo.json.entities.JsonObject;
 import xyz.qalcyo.json.parser.JsonParser;
-import xyz.qalcyo.mango.Lists;
 import xyz.qalcyo.mango.Maps;
 import xyz.qalcyo.requisite.core.IRequisite;
-import xyz.qalcyo.requisite.core.networking.packets.cosmetics.CosmeticRetrievePacket;
 import xyz.qalcyo.requisite.core.util.ChatColour;
 
 import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
-import java.util.List;
 import java.util.Map;
 
 public class RequisiteClientSocket extends WebSocketClient {
@@ -109,13 +106,15 @@ public class RequisiteClientSocket extends WebSocketClient {
     public void onClose(int code, String reason, boolean remote) {
         logger.error(String.format("Closed connection with Requisite's server websocket. (code=%s | reason=%s)", code, reason));
 
-        requisite.getNotifications().push("Error!", "Failed to connect to Requisite WebSocket. " + ChatColour.BOLD + "Click to try a reconnect.", notification -> {
-            boolean socketReconnected = awaitReconnect();
-            if (!socketReconnected) {
-                requisite.getNotifications().push(notification.clone());
-                notification.close();
-            }
-        });
+        if (requisite.getNotifications() != null) {
+            requisite.getNotifications().push("Error!", "Connection to Requisite WebSocket closed. " + ChatColour.BOLD + "Click to attempt a reconnect.", notification -> {
+                boolean socketReconnected = awaitReconnect();
+                if (!socketReconnected) {
+                    requisite.getNotifications().push(notification.clone());
+                    notification.close();
+                }
+            });
+        }
     }
 
     /**
@@ -184,7 +183,6 @@ public class RequisiteClientSocket extends WebSocketClient {
      * Initializes packets.
      */
     private void initialize() {
-        packetRegistry.put("COSMETIC_RETRIEVE", CosmeticRetrievePacket.class);
     }
 
     public IRequisite getRequisite() {

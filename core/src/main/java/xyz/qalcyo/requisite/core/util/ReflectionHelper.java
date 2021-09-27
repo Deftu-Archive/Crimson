@@ -28,7 +28,6 @@ public class ReflectionHelper {
      * @param clazz The class to change the field in.
      * @param name The name of the field.
      * @return The field requested from the class provided.
-     * @author MatthewTGM
      */
     public Field getField(Class<?> clazz, String name) {
         try {
@@ -49,7 +48,6 @@ public class ReflectionHelper {
      * @param instance An instance of the class.
      * @param name The name of the field.
      * @param value The value to set it to.
-     * @author MatthewTGM
      */
     public <I, V> void setField(Class<?> clazz, I instance, String name, V value) {
         try {
@@ -62,7 +60,6 @@ public class ReflectionHelper {
 
     /**
      * @return The method requested in the class provided.
-     * @author MatthewTGM
      */
     public Method getMethod(Class<?> clazz, String name, Class<?>... paramTypes) {
         try {

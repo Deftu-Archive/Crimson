@@ -28,7 +28,6 @@ import xyz.qalcyo.requisite.core.keybinds.KeyBindState;
 import xyz.qalcyo.requisite.core.util.*;
 import xyz.qalcyo.requisite.core.util.messages.IMessageQueue;
 import xyz.qalcyo.requisite.core.commands.CommandRegistry;
-import xyz.qalcyo.requisite.core.cosmetics.CosmeticManager;
 import xyz.qalcyo.requisite.core.files.FileManager;
 import xyz.qalcyo.requisite.core.files.configs.PrivacyConfigurations;
 import xyz.qalcyo.requisite.core.hypixel.HypixelHelper;
@@ -61,8 +60,8 @@ public interface IRequisite extends IMod {
     }
     FileManager getFileManager();
     ConfigurationManager getConfigurationManager();
+    INotifications getNotifications();
     RequisiteClientSocket getRequisiteSocket();
-    CosmeticManager<?> getCosmeticManager();
     IModIntegration getModIntegration();
     CommandRegistry getCommandRegistry();
     KeyBindRegistry getKeyBindRegistry();
@@ -98,10 +97,6 @@ public interface IRequisite extends IMod {
         return RequisiteDefaultImplementations.mathHelper;
     }
     IMouseHelper getMouseHelper();
-    default Multithreading getMultithreading() {
-        return RequisiteDefaultImplementations.multithreading;
-    }
-    INotifications getNotifications();
     default ReflectionHelper getReflectionHelper() {
         return RequisiteDefaultImplementations.reflectionHelper;
     }

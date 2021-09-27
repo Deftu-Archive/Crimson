@@ -18,19 +18,16 @@
 
 package xyz.qalcyo.requisite;
 
-import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraftforge.fml.common.Mod;
+import xyz.qalcyo.mango.Multithreading;
 import xyz.qalcyo.requisite.commands.CommandHelper;
 import xyz.qalcyo.requisite.core.integration.ModMetadata;
 import xyz.qalcyo.requisite.core.keybinds.KeyBindRegistry;
-import xyz.qalcyo.requisite.cosmetics.CosmeticHelper;
-import xyz.qalcyo.requisite.cosmetics.CosmeticInitializer;
 import xyz.qalcyo.requisite.util.*;
 import xyz.qalcyo.requisite.core.IRequisite;
 import xyz.qalcyo.requisite.core.RequisiteEventManager;
 import xyz.qalcyo.requisite.core.RequisiteInfo;
 import xyz.qalcyo.requisite.core.commands.CommandRegistry;
-import xyz.qalcyo.requisite.core.cosmetics.CosmeticManager;
 import xyz.qalcyo.requisite.core.files.ConfigurationManager;
 import xyz.qalcyo.requisite.core.files.FileManager;
 import xyz.qalcyo.requisite.core.hypixel.HypixelHelper;
@@ -59,13 +56,13 @@ public class Requisite implements IRequisite {
     /* Services. */
     private FileManager fileManager;
     private ConfigurationManager configurationManager;
-    private CosmeticManager<AbstractClientPlayer> cosmeticManager;
+    private Notifications notifications;
+    private RequisiteClientSocket requisiteSocket;
     private ModIntegration modIntegration;
     private CommandRegistry commandRegistry;
     private KeyBindRegistry keyBindRegistry;
     private RequisiteEventManager internalEventManager;
     private RequisiteEventListener internalEventListener;
-    private RequisiteClientSocket requisiteSocket;
 
     /* Utilities. */
     private EnhancedFontRenderer enhancedFontRenderer;
@@ -73,7 +70,6 @@ public class Requisite implements IRequisite {
     private ChatHelper chatHelper;
     private UniversalLogger universalLogger;
     private MouseHelper mouseHelper;
-    private Notifications notifications;
     private PositionHelper positionHelper;
     private HypixelHelper hypixelHelper;
     private RenderHelper renderHelper;
@@ -90,10 +86,8 @@ public class Requisite implements IRequisite {
         /* Initialize services. */
         fileManager = new FileManager(this);
         configurationManager = new ConfigurationManager("config", fileManager.getRequisiteDirectory(fileManager.getQalcyoDirectory(fileManager.getConfigDirectory(gameDir))));
-        requisiteSocket = new RequisiteClientSocket(this, new SocketHelper());
-        boolean socketConnected = requisiteSocket.awaitConnect();
-        cosmeticManager = new CosmeticManager<>(this, new CosmeticInitializer(), new CosmeticHelper());
-        cosmeticManager.initialize();
+        notifications = new Notifications(this);
+        boolean socketConnected = (requisiteSocket = new RequisiteClientSocket(this, new SocketHelper())).awaitConnect();
         modIntegration = new ModIntegration(this);
         commandRegistry = new CommandRegistry(this, new CommandHelper());
         keyBindRegistry = new KeyBindRegistry(this);
@@ -101,27 +95,28 @@ public class Requisite implements IRequisite {
         internalEventListener = new RequisiteEventListener(this);
 
         /* Initialize utilities. */
-        enhancedFontRenderer = new EnhancedFontRenderer(this);
-        playerHelper = new PlayerHelper();
-        chatHelper = new ChatHelper();
-        universalLogger = new UniversalLogger(this);
-        mouseHelper = new MouseHelper();
-        notifications = new Notifications(this);
-        positionHelper = new PositionHelper();
-        hypixelHelper = new HypixelHelper(this);
-        renderHelper = new RenderHelper();
-        messageQueue = new MessageQueue(this);
-        serverHelper = new ServerHelper();
+        Multithreading.runAsync(() -> {
+            enhancedFontRenderer = new EnhancedFontRenderer(this);
+            playerHelper = new PlayerHelper();
+            chatHelper = new ChatHelper();
+            universalLogger = new UniversalLogger(this);
+            mouseHelper = new MouseHelper();
+            positionHelper = new PositionHelper();
+            hypixelHelper = new HypixelHelper(this);
+            renderHelper = new RenderHelper();
+            messageQueue = new MessageQueue(this);
+            serverHelper = new ServerHelper();
 
-        if (!socketConnected) {
-            notifications.push("Error!", "Failed to connect to Requisite WebSocket. " + ChatColour.BOLD + "Click to try a reconnect.", notification -> {
-                boolean socketReconnected = requisiteSocket.awaitReconnect();
-                if (!socketReconnected) {
-                    notifications.push(notification.clone());
-                    notification.close();
-                }
-            });
-        }
+            if (!socketConnected) {
+                notifications.push("Error!", "Failed to connect to Requisite WebSocket. " + ChatColour.BOLD + "Click to attempt a reconnect.", notification -> {
+                    boolean socketReconnected = requisiteSocket.awaitReconnect();
+                    if (!socketReconnected) {
+                        notifications.push(notification.clone());
+                        notification.close();
+                    }
+                });
+            }
+        });
 
         /* Initialize version-dependant utilities. */
         glHelper = new GlHelper();
@@ -137,12 +132,12 @@ public class Requisite implements IRequisite {
         return configurationManager;
     }
 
-    public RequisiteClientSocket getRequisiteSocket() {
-        return requisiteSocket;
+    public Notifications getNotifications() {
+        return notifications;
     }
 
-    public CosmeticManager<AbstractClientPlayer> getCosmeticManager() {
-        return cosmeticManager;
+    public RequisiteClientSocket getRequisiteSocket() {
+        return requisiteSocket;
     }
 
     public ModIntegration getModIntegration() {
@@ -187,10 +182,6 @@ public class Requisite implements IRequisite {
 
     public MouseHelper getMouseHelper() {
         return mouseHelper;
-    }
-
-    public Notifications getNotifications() {
-        return notifications;
     }
 
     public PositionHelper getPositionHelper() {

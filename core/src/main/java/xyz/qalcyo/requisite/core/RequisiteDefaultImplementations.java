@@ -37,7 +37,6 @@ class RequisiteDefaultImplementations {
     static final DateHelper dateHelper = new DateHelper();
     static final EasingHelper easingHelper = new EasingHelper();
     static final MathHelper mathHelper = new MathHelper();
-    static final Multithreading multithreading = new Multithreading();
     static final ReflectionHelper reflectionHelper = new ReflectionHelper();
     static final RomanNumeral romanNumerals = new RomanNumeral();
     static final StringHelper stringHelper = new StringHelper();

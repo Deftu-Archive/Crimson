@@ -20,6 +20,7 @@ package xyz.qalcyo.requisite.core.data;
 
 import xyz.qalcyo.json.entities.JsonObject;
 import xyz.qalcyo.json.util.JsonApiHelper;
+import xyz.qalcyo.mango.Multithreading;
 import xyz.qalcyo.requisite.core.IRequisite;
 
 import java.util.concurrent.TimeUnit;
@@ -31,18 +32,15 @@ public class VersionChecker {
     private BiConsumer<VersionChecker, JsonObject> fetchListener;
     private JsonObject versionObject;
 
-    private IRequisite requisite;
-
-    public VersionChecker(IRequisite requisite, String url, boolean periodicallyFetch) {
+    public VersionChecker(String url, boolean periodicallyFetch) {
         this.url = url;
-        this.requisite = requisite;
         if (periodicallyFetch) {
-            requisite.getMultithreading().schedule(this::fetch, 0, 5, TimeUnit.MINUTES);
+            Multithreading.schedule(this::fetch, 0, 5, TimeUnit.MINUTES);
         }
     }
 
-    public VersionChecker(IRequisite requisite, String url) {
-        this(requisite, url, false);
+    public VersionChecker(String url) {
+        this(url, false);
     }
 
     public VersionChecker fetch() {

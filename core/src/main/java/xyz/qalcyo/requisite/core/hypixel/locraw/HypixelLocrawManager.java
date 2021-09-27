@@ -22,6 +22,7 @@ import xyz.qalcyo.json.entities.JsonElement;
 import xyz.qalcyo.json.entities.JsonObject;
 import xyz.qalcyo.json.parser.JsonParser;
 import xyz.qalcyo.json.util.JsonHelper;
+import xyz.qalcyo.mango.Multithreading;
 import xyz.qalcyo.requisite.core.IRequisite;
 import xyz.qalcyo.requisite.core.events.ChatMessageReceivedEvent;
 import xyz.qalcyo.requisite.core.events.WorldLoadEvent;
@@ -79,7 +80,7 @@ public class HypixelLocrawManager {
     public void enqueueUpdate(int interval) {
         if (!allowCancel) {
             allowCancel = true;
-            requisite.getMultithreading().schedule(() -> requisite.getMessageQueue().queue("/locraw"), interval, TimeUnit.MILLISECONDS);
+            Multithreading.schedule(() -> requisite.getMessageQueue().queue("/locraw"), interval, TimeUnit.MILLISECONDS);
         }
     }
 

@@ -36,7 +36,7 @@ dependencies {
     shadeApi('xyz.qalcyo.json:JSON+:2.12:kotlin')
     shadeApi('xyz.qalcyo.json:JSON+:2.12:serialization')
     shadeApi('xyz.qalcyo.json:JSON+:2.12:utilities')
-    shadeApi('xyz.qalcyo.mango:Mango:1.6')
+    shadeApi('xyz.qalcyo.mango:Mango:1.7')
 
     shade('org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.1-native-mt')
     shade('org.jetbrains.kotlin:kotlin-stdlib-jdk8')
