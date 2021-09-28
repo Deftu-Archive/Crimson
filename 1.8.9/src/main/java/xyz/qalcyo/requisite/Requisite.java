@@ -23,7 +23,10 @@ import xyz.qalcyo.mango.Multithreading;
 import xyz.qalcyo.requisite.commands.CommandHelper;
 import xyz.qalcyo.requisite.core.integration.ModMetadata;
 import xyz.qalcyo.requisite.core.keybinds.KeyBindRegistry;
-import xyz.qalcyo.requisite.core.util.IGuiHelper;
+import xyz.qalcyo.requisite.gui.components.ComponentFactory;
+import xyz.qalcyo.requisite.gui.components.IComponentFactory;
+import xyz.qalcyo.requisite.gui.screens.RequisiteMenu;
+import xyz.qalcyo.requisite.gui.screens.TestMenu;
 import xyz.qalcyo.requisite.util.*;
 import xyz.qalcyo.requisite.core.IRequisite;
 import xyz.qalcyo.requisite.core.RequisiteEventManager;
@@ -62,6 +65,7 @@ public class Requisite implements IRequisite {
     private ModIntegration modIntegration;
     private CommandRegistry commandRegistry;
     private KeyBindRegistry keyBindRegistry;
+    private ComponentFactory componentFactory;
     private RequisiteEventManager internalEventManager;
     private RequisiteEventListener internalEventListener;
 
@@ -93,6 +97,7 @@ public class Requisite implements IRequisite {
         modIntegration = new ModIntegration(this);
         commandRegistry = new CommandRegistry(this, new CommandHelper());
         keyBindRegistry = new KeyBindRegistry(this);
+        this.componentFactory = new ComponentFactory();
         internalEventManager = new RequisiteEventManager(this);
         internalEventListener = new RequisiteEventListener(this);
 
@@ -113,8 +118,7 @@ public class Requisite implements IRequisite {
 
             if (!socketConnected) {
                 notifications.push("Error!", "Failed to connect to Requisite WebSocket. " + ChatColour.BOLD + "Click to attempt a reconnect.", notification -> {
-                    boolean socketReconnected = requisiteSocket.awaitReconnect();
-                    if (!socketReconnected) {
+                    if (!requisiteSocket.awaitReconnect()) {
                         notifications.push(notification.clone());
                         notification.close();
                     }
@@ -153,6 +157,10 @@ public class Requisite implements IRequisite {
         return keyBindRegistry;
     }
 
+    public IComponentFactory getComponentFactory() {
+        return componentFactory;
+    }
+
     public RequisiteEventManager getInternalEventManager() {
         return internalEventManager;
     }
@@ -162,7 +170,7 @@ public class Requisite implements IRequisite {
     }
 
     public void openMenu() {
-
+        guiHelper.open(new TestMenu());
     }
 
     public EnhancedFontRenderer getEnhancedFontRenderer() {
@@ -213,9 +221,10 @@ public class Requisite implements IRequisite {
         return glHelper;
     }
 
-    public ModMetadata metadata() {
+    public ModMetadata getMetadata() {
         return ModMetadata.from(name(), version())
-                .setCommand("/requisite");
+                .setCommand("/requisite")
+                .setConfigurationMenu(new RequisiteMenu(this));
     }
 
     public static Requisite getInstance() {

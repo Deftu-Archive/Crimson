@@ -16,8 +16,27 @@
  * along with Requisite. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package xyz.qalcyo.requisite.core.integration;
+package xyz.qalcyo.requisite.core;
 
-public interface IMod {
-    ModMetadata getMetadata();
+import xyz.qalcyo.requisite.core.data.ColourRGB;
+
+public class RequisitePalette {
+
+    private static final ColourRGB main = new ColourRGB(40, 157, 140);
+
+    private static final ColourRGB success = new ColourRGB(43, 181, 66);
+    private static final ColourRGB fail = new ColourRGB(181, 43, 43);
+
+    public static ColourRGB getMain() {
+        return main;
+    }
+
+    public static ColourRGB getSuccess() {
+        return success;
+    }
+
+    public static ColourRGB getFail() {
+        return fail;
+    }
+
 }

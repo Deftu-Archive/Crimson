@@ -16,35 +16,26 @@
  * along with Requisite. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package xyz.qalcyo.requisite.gui
+package xyz.qalcyo.requisite.gui.screens
 
 import gg.essential.elementa.WindowScreen
 import gg.essential.elementa.dsl.*
-import gg.essential.universal.GuiScale
-import net.minecraft.client.Minecraft
 import xyz.qalcyo.requisite.Requisite
-import xyz.qalcyo.requisite.gui.wrapper.RequisiteWindow
+import xyz.qalcyo.requisite.gui.components.builders.ButtonBuilder
 
-class RequisiteMenu : WindowScreen(
-    drawDefaultBackground = false,
-    restoreCurrentGuiOnClose = true,
-    newGuiScale = GuiScale.scaleForScreenSize().ordinal
-) {
+class TestMenu : WindowScreen(drawDefaultBackground = false) {
+
     init {
-        val window = RequisiteWindow(Requisite.getInstance(), window, {
-            restorePreviousScreen()
-        }) childOf this.window
-
-        val menu = RequisiteMenuWindow(window, {
-
-        }, {
-        }, {
-
-        }) childOf window
+        val button = Requisite.getInstance().componentFactory.build(
+                ButtonBuilder({
+                    println("Button clicked!")
+                },
+                text = "Test button"
+            )
+        ).constrain {
+            x = 20.pixels()
+            y = 20.pixels()
+        } childOf window
     }
 
-    override fun setWorldAndResolution(mc: Minecraft?, width: Int, height: Int) {
-        newGuiScale = GuiScale.scaleForScreenSize().ordinal
-        super.setWorldAndResolution(mc, width, height)
-    }
 }

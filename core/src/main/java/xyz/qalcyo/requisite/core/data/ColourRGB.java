@@ -111,14 +111,14 @@ public class ColourRGB {
     }
 
     public int getRGB() {
-        return toJavaColor().getRGB();
+        return asColor().getRGB();
     }
 
     public int getRGBA() {
-        return toJavaColor().getRGB();
+        return asColor().getRGB();
     }
 
-    public Color toJavaColor() {
+    public Color asColor() {
         return new Color(r, g, b, a);
     }
 

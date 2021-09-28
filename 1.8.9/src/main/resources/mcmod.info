@@ -1,0 +1,17 @@
+[
+    {
+        "modid": "requisite",
+        "name": "Requisite",
+        "description": "Minecraft modding library by Qalcyo.",
+        "version": "${version}",
+        "mcversion": "${mcversion},",
+        "url": "https://github.com/Qalcyo/Requisite",
+        "authorList": [
+            "Qalcyo"
+        ],
+        "credits": "",
+        "logoFile": "",
+        "screenshots": [],
+        "dependencies": []
+    }
+]

@@ -36,7 +36,7 @@ public class ModIntegration implements IModIntegration {
     }
 
     public void registerIntegratedMod(IMod mod) {
-        ModMetadata metadata = mod.metadata();
+        ModMetadata metadata = mod.getMetadata();
         requisite.getLogger().info("Mod " + metadata.name + " v" + metadata.version + " was registered as an integrated @NAME@ mod.");
         integratedMods.add(mod);
     }

@@ -16,8 +16,10 @@
  * along with Requisite. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package xyz.qalcyo.requisite.core.integration;
+package xyz.qalcyo.requisite.gui.components
 
-public interface IMod {
-    ModMetadata getMetadata();
+import xyz.qalcyo.requisite.gui.components.builders.ButtonBuilder
+
+class ComponentFactory : IComponentFactory {
+    override fun build(builder: ButtonBuilder) = Button(builder)
 }

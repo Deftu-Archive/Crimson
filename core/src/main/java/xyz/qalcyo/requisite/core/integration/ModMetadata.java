@@ -21,6 +21,7 @@ package xyz.qalcyo.requisite.core.integration;
 public class ModMetadata {
 
     private final String name, version;
+    private IModConfigurationMenu configurationMenu;
     private String command;
 
     ModMetadata(String name, String version) {
@@ -44,6 +45,11 @@ public class ModMetadata {
         if (!command.startsWith("/"))
             command = "/" + command;
         this.command = command;
+        return this;
+    }
+
+    public ModMetadata setConfigurationMenu(IModConfigurationMenu configurationMenu) {
+        this.configurationMenu = configurationMenu;
         return this;
     }
 

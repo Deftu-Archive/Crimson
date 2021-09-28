@@ -16,8 +16,25 @@
  * along with Requisite. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package xyz.qalcyo.requisite.core.integration;
+package xyz.qalcyo.requisite.gui.components.builders
 
-public interface IMod {
-    ModMetadata getMetadata();
+import gg.essential.elementa.UIComponent
+import xyz.qalcyo.requisite.gui.components.IComponentFactory
+import java.awt.Color
+import java.awt.image.BufferedImage
+
+class ButtonBuilder(
+    var action: UIComponent.() -> Unit,
+
+    var width: Int = 200,
+    var height: Int = 20,
+
+    var text: String? = null,
+    var textShadow: Boolean = true,
+    var textShadowColour: Color? = null,
+
+    var image: BufferedImage? = null
+) {
+    fun build(factory: IComponentFactory): UIComponent =
+        factory.build(this)
 }

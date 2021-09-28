@@ -18,6 +18,7 @@
 
 package xyz.qalcyo.requisite.core.integration;
 
-public interface IMod {
-    ModMetadata getMetadata();
+public interface IModConfigurationMenu {
+    void open();
+    IMod getMod();
 }

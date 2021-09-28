@@ -16,8 +16,18 @@
  * along with Requisite. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package xyz.qalcyo.requisite.core.integration;
+package xyz.qalcyo.requisite.gui.screens
 
-public interface IMod {
-    ModMetadata getMetadata();
+import xyz.qalcyo.requisite.core.IRequisite
+import xyz.qalcyo.requisite.core.integration.IModConfigurationMenu
+
+class RequisiteMenu(
+    val requisite: IRequisite
+) : IModConfigurationMenu {
+
+    override fun open() =
+        requisite.openMenu()
+    override fun getMod() =
+        requisite
+
 }

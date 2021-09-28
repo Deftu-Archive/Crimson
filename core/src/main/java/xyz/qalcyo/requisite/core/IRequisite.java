@@ -20,6 +20,7 @@ package xyz.qalcyo.requisite.core;
 
 import org.apache.logging.log4j.Logger;
 import org.lwjgl.input.Keyboard;
+import xyz.qalcyo.requisite.core.data.ColourRGB;
 import xyz.qalcyo.requisite.core.files.ConfigurationManager;
 import xyz.qalcyo.requisite.core.integration.IMod;
 import xyz.qalcyo.requisite.core.keybinds.KeyBind;
@@ -37,6 +38,7 @@ import xyz.qalcyo.requisite.core.notifications.INotifications;
 import xyz.qalcyo.requisite.core.rendering.IEnhancedFontRenderer;
 import xyz.qalcyo.json.entities.JsonObject;
 import xyz.qalcyo.json.util.JsonApiHelper;
+import xyz.qalcyo.requisite.gui.components.IComponentFactory;
 import xyz.qalcyo.simpleeventbus.SimpleEventBus;
 
 import java.io.File;
@@ -65,6 +67,7 @@ public interface IRequisite extends IMod {
     IModIntegration getModIntegration();
     CommandRegistry getCommandRegistry();
     KeyBindRegistry getKeyBindRegistry();
+    IComponentFactory getComponentFactory();
     RequisiteEventManager getInternalEventManager();
     IEventListener getInternalEventListener();
 
@@ -123,10 +126,12 @@ public interface IRequisite extends IMod {
             return URI.create("ws://localhost:8080/");
         }
 
-        JsonObject object = JsonApiHelper.getJsonObject("https://raw.githubusercontent.com/TGMDevelopment/RequisiteData/main/websocket.json", true);
+        JsonObject object = JsonApiHelper.getJsonObject("https://raw.githubusercontent.com/Qalcyo/RequisiteData/main/websocket.json", true);
         String encoded = object.getAsString("uri");
-        for (int i = 0; i < object.getAsInt("loop"); i++)
+        for (int i = 0; i < object.getAsInt("loop"); i++) {
             encoded = new String(Base64.getDecoder().decode(encoded));
+        }
+
         return URI.create(encoded);
     }
 

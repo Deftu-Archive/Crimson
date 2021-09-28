@@ -43,6 +43,8 @@ public class RequisiteClientSocket extends WebSocketClient {
 
     private final Map<String, Class<? extends BasePacket>> packetRegistry;
 
+    private boolean createNotification;
+
     public RequisiteClientSocket(IRequisite requisite, ISocketHelper helper) {
         super(requisite.fetchSocketUri(), new Draft_6455());
         this.requisite = requisite;
@@ -62,6 +64,7 @@ public class RequisiteClientSocket extends WebSocketClient {
     /**
      * Connects to the websocket with an await fashion, not allowing the current thread to continue until the websocket has connected or failed.
      *
+     * @param failedConnection Whether this was the product of a failed connection or not.
      * @return Whether the socket was able to connect or not.
      */
     public boolean awaitConnect() {
@@ -76,15 +79,26 @@ public class RequisiteClientSocket extends WebSocketClient {
     /**
      * Reconnects to the websocket with an await fashion, not allowing the current thread to continue until the websocket has connected or failed.
      *
+     * @param createNotification Whether this was the product of a failed connection or not.
      * @return Whether the socket was able to connect or not.
      */
-    public boolean awaitReconnect() {
+    public boolean awaitReconnect(boolean createNotification) {
         try {
+            this.createNotification = createNotification;
             return reconnectBlocking();
         } catch (Exception e) {
             e.printStackTrace();
             return false;
         }
+    }
+
+    /**
+     * Reconnects to the websocket with an await fashion, not allowing the current thread to continue until the websocket has connected or failed.
+     *
+     * @return Whether the socket was able to connect or not.
+     */
+    public boolean awaitReconnect() {
+        return awaitReconnect(false);
     }
 
     /**
@@ -106,14 +120,16 @@ public class RequisiteClientSocket extends WebSocketClient {
     public void onClose(int code, String reason, boolean remote) {
         logger.error(String.format("Closed connection with Requisite's server websocket. (code=%s | reason=%s)", code, reason));
 
-        if (requisite.getNotifications() != null) {
+        if (createNotification) {
             requisite.getNotifications().push("Error!", "Connection to Requisite WebSocket closed. " + ChatColour.BOLD + "Click to attempt a reconnect.", notification -> {
-                boolean socketReconnected = awaitReconnect();
+                boolean socketReconnected = awaitReconnect(true);
                 if (!socketReconnected) {
                     requisite.getNotifications().push(notification.clone());
                     notification.close();
                 }
             });
+
+            createNotification = false;
         }
     }
 
