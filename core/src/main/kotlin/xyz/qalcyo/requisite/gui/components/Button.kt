@@ -18,58 +18,52 @@
 
 package xyz.qalcyo.requisite.gui.components
 
-import gg.essential.elementa.*
 import gg.essential.elementa.components.*
 import gg.essential.elementa.constraints.*
+import gg.essential.elementa.constraints.animation.Animations
 import gg.essential.elementa.dsl.*
-import gg.essential.elementa.effects.*
-import gg.essential.elementa.utils.*
+import gg.essential.elementa.effects.OutlineEffect
 import xyz.qalcyo.requisite.core.*
 import xyz.qalcyo.requisite.gui.components.builders.*
-import java.awt.*
-import java.util.concurrent.*
+import java.awt.Color
 
 class Button(
     private val builder: ButtonBuilder
-) : UIComponent() {
+) : UIContainer() {
+    
+    constructor(action: Button.() -> Unit, text: String) : this(ButtonBuilder(action, text))
 
-    val holder = UIContainer().constrain {
-        width = builder.width.pixels()
-        height = builder.height.pixels()
-    } childOf this
-
-    val box = UIBlock(Color.DARK_GRAY.withAlpha(219)).constrain {
+    private val border = UIBlock(Color(0, 0, 0, 0)).constrain {
         x = CenterConstraint()
         y = CenterConstraint()
-        width = holder.constraints.width
-        height = holder.constraints.height
-    } childOf holder effect OutlineEffect(RequisitePalette.getMain().asColor(), 0.5f)
+        width = RelativeConstraint()
+        height = RelativeConstraint()
+    } childOf this effect OutlineEffect(Color(0, 0, 0, 0), 1f)
+    private val content = UIBlock(RequisitePalette.getButtonPallete().content.asColor()).constrain {
+        x = CenterConstraint()
+        y = CenterConstraint()
+        width = RelativeConstraint()
+        height = RelativeConstraint()
+    } childOf this
+    private val text = UIText(builder.text).constrain {
+        x = CenterConstraint()
+        y = CenterConstraint()
+    } childOf content
 
     init {
-        if (!builder.text.isNullOrEmpty()) {
-            val text = UIWrappedText(builder.text!!, builder.textShadow)
-            if (builder.textShadow && builder.textShadowColour != null) {
-                text.setShadowColor(builder.textShadowColour)
+        onMouseEnter {
+            border.animate {
+                (border.effects[0] as OutlineEffect)::color.animate(Animations.OUT_EXP, 1f, RequisitePalette.getButtonPallete().border.asColor())
             }
-
-            text.constrain {
-                x = CenterConstraint()
-                y = CenterConstraint()
-                width = holder.constraints.width
-                height = holder.constraints.height
-            } childOf holder
-        }
-
-        if (builder.image != null) {
-            val image = UIImage(CompletableFuture.supplyAsync { builder.image }).constrain {
-                x = CenterConstraint()
-                y = CenterConstraint()
-            } childOf holder
-        }
-
-        holder.onMouseClick {
-            builder.action.invoke(this)
+        }.onMouseLeave {
+            border.animate {
+                (border.effects[0] as OutlineEffect)::color.animate(Animations.OUT_EXP, 1f, Color(0, 0, 0, 0))
+            }
+        }.onMouseClick {
+            builder.action.invoke(this as Button)
         }
     }
+
+    fun setText(input: String) = text.setText(input)
 
 }

@@ -19,13 +19,9 @@
 package xyz.qalcyo.requisite.core;
 
 import org.apache.logging.log4j.Logger;
-import org.lwjgl.input.Keyboard;
-import xyz.qalcyo.requisite.core.data.ColourRGB;
 import xyz.qalcyo.requisite.core.files.ConfigurationManager;
 import xyz.qalcyo.requisite.core.integration.IMod;
-import xyz.qalcyo.requisite.core.keybinds.KeyBind;
 import xyz.qalcyo.requisite.core.keybinds.KeyBindRegistry;
-import xyz.qalcyo.requisite.core.keybinds.KeyBindState;
 import xyz.qalcyo.requisite.core.util.*;
 import xyz.qalcyo.requisite.core.util.messages.IMessageQueue;
 import xyz.qalcyo.requisite.core.commands.CommandRegistry;

@@ -26,11 +26,11 @@ public class RequisiteJavaArguments {
 
     private static final Pattern booleanPattern = Pattern.compile("true|false", Pattern.CASE_INSENSITIVE);
 
-    private boolean socketDebug = retrieveSocketDebug();
-    private String socketUri = System.getProperty("requisite.socket.uri", null);
-    private String socketUrl = System.getProperty("requisite.socket.url", "https://raw.githubusercontent.com/Qalcyo/RequisiteData/main/websocket.json");
+    private final boolean socketDebug = retrieveSocketDebug();
+    private final String socketUri = System.getProperty("requisite.socket.uri", null);
+    private final String socketUrl = System.getProperty("requisite.socket.url", "https://raw.githubusercontent.com/Qalcyo/RequisiteData/main/websocket.json");
 
-    private ChatColour chatPrefixColour = retrieveChatPrefixColour();
+    private final ChatColour chatPrefixColour = retrieveChatPrefixColour();
 
     public boolean isSocketDebug() {
         return socketDebug;

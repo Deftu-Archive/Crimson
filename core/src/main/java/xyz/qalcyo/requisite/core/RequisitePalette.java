@@ -24,11 +24,17 @@ public class RequisitePalette {
 
     private static final ColourRGB main = new ColourRGB(40, 157, 140);
 
+    private static final ButtonPalette buttonPallete = new ButtonPalette();
+
     private static final ColourRGB success = new ColourRGB(43, 181, 66);
     private static final ColourRGB fail = new ColourRGB(181, 43, 43);
 
     public static ColourRGB getMain() {
         return main;
+    }
+
+    public static ButtonPalette getButtonPallete() {
+        return buttonPallete;
     }
 
     public static ColourRGB getSuccess() {
@@ -37,6 +43,21 @@ public class RequisitePalette {
 
     public static ColourRGB getFail() {
         return fail;
+    }
+
+    public static class ButtonPalette {
+
+        private final ColourRGB content = new ColourRGB(28, 28, 28, 189);
+        private final ColourRGB border = RequisitePalette.getMain();
+
+        public ColourRGB getContent() {
+            return content;
+        }
+
+        public ColourRGB getBorder() {
+            return border;
+        }
+
     }
 
 }

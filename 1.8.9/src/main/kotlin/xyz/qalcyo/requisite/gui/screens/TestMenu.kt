@@ -35,6 +35,8 @@ class TestMenu : WindowScreen(drawDefaultBackground = false) {
         ).constrain {
             x = 20.pixels()
             y = 20.pixels()
+            width = 200.pixels()
+            height = 20.pixels()
         } childOf window
     }
 
