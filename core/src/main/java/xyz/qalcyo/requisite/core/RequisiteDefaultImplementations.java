@@ -27,6 +27,7 @@ import xyz.qalcyo.simpleeventbus.SimpleEventBus;
 class RequisiteDefaultImplementations {
 
     static final Logger logger = LogManager.getLogger("Requisite");
+    static final RequisiteJavaArguments javaArguments = new RequisiteJavaArguments();
     static final SimpleEventBus eventBus = new SimpleEventBus();
 
     static final PrivacyConfigurations privacyConfigurations = new PrivacyConfigurations();

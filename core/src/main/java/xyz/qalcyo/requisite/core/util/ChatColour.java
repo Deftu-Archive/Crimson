@@ -74,8 +74,8 @@ public enum ChatColour {
         return !isFormat && this != ChatColour.RESET;
     }
 
-    public static String translateAlternateColorCodes(char altColorChar, String textToTranslate) {
-        final char[] b = textToTranslate.toCharArray();
+    public static String translateAlternateColorCodes(char altColorChar, String input) {
+        final char[] b = input.toCharArray();
         for (int i = 0; i < b.length - 1; ++i) {
             if (b[i] == altColorChar && "0123456789AaBbCcDdEeFfKkLlMmNnOoRr".indexOf(b[i + 1]) > -1) {
                 b[i] = COLOR_CHAR.charAt(0);
@@ -83,6 +83,20 @@ public enum ChatColour {
             }
         }
         return new String(b);
+    }
+
+    public static ChatColour fromInput(String input) {
+        for (ChatColour value : values()) {
+            if (value.name().equalsIgnoreCase(input)) {
+                return value;
+            }
+        }
+
+        return null;
+    }
+
+    public static boolean isPresent(String input) {
+        return fromInput(input) != null;
     }
 
 }

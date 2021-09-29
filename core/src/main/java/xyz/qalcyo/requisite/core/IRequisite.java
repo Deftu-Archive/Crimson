@@ -57,6 +57,9 @@ public interface IRequisite extends IMod {
     default Logger getLogger() {
         return RequisiteDefaultImplementations.logger;
     }
+    default RequisiteJavaArguments getJavaArguments() {
+        return RequisiteDefaultImplementations.javaArguments;
+    }
     default SimpleEventBus getEventBus() {
         return RequisiteDefaultImplementations.eventBus;
     }
@@ -122,11 +125,15 @@ public interface IRequisite extends IMod {
 
     /* Default. */
     default URI fetchSocketUri() {
-        if (Boolean.parseBoolean(System.getProperty("requisite.socket.debug", "false"))) {
+        if (getJavaArguments().isSocketDebug()) {
             return URI.create("ws://localhost:8080/");
         }
 
-        JsonObject object = JsonApiHelper.getJsonObject("https://raw.githubusercontent.com/Qalcyo/RequisiteData/main/websocket.json", true);
+        if (getJavaArguments().getSocketUri() != null) {
+            return URI.create(getJavaArguments().getSocketUri());
+        }
+
+        JsonObject object = JsonApiHelper.getJsonObject(getJavaArguments().getSocketUrl());
         String encoded = object.getAsString("uri");
         for (int i = 0; i < object.getAsInt("loop"); i++) {
             encoded = new String(Base64.getDecoder().decode(encoded));
@@ -136,7 +143,7 @@ public interface IRequisite extends IMod {
     }
 
     default String getChatPrefix() {
-        return ChatColour.GRAY + "[" + ChatColour.GOLD + name() + ChatColour.GRAY + "]";
+        return ChatColour.GRAY + "[" + getJavaArguments().getChatPrefixColour() + name() + ChatColour.GRAY + "]";
     }
     default String name() {
         return RequisiteInfo.NAME;
