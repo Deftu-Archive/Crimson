@@ -30,7 +30,7 @@ import java.awt.Color
 class Button(
     private val builder: ButtonBuilder
 ) : UIContainer() {
-    
+
     constructor(action: Button.() -> Unit, text: String) : this(ButtonBuilder(action, text))
 
     private val border = UIBlock(Color(0, 0, 0, 0)).constrain {
@@ -39,7 +39,7 @@ class Button(
         width = RelativeConstraint()
         height = RelativeConstraint()
     } childOf this effect OutlineEffect(Color(0, 0, 0, 0), 1f)
-    private val content = UIBlock(RequisitePalette.getButtonPallete().content.asColor()).constrain {
+    private val content = UIBlock(RequisitePalette.getComponentContent().asColor()).constrain {
         x = CenterConstraint()
         y = CenterConstraint()
         width = RelativeConstraint()
@@ -53,7 +53,7 @@ class Button(
     init {
         onMouseEnter {
             border.animate {
-                (border.effects[0] as OutlineEffect)::color.animate(Animations.OUT_EXP, 1f, RequisitePalette.getButtonPallete().border.asColor())
+                (border.effects[0] as OutlineEffect)::color.animate(Animations.OUT_EXP, 1f, RequisitePalette.getMain().asColor())
             }
         }.onMouseLeave {
             border.animate {

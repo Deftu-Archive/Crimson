@@ -16,34 +16,18 @@
  * along with Requisite. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package xyz.qalcyo.requisite.core;
+package xyz.qalcyo.requisite.gui.components.builders
 
-import xyz.qalcyo.requisite.core.data.ColourRGB;
+import gg.essential.elementa.UIComponent
+import xyz.qalcyo.requisite.gui.components.ConfirmationMenu
+import xyz.qalcyo.requisite.gui.components.IComponentFactory
 
-public class RequisitePalette {
+class ConfirmationMenuBuilder(
+    var accept: ConfirmationMenu.() -> Unit,
+    var decline: ConfirmationMenu.() -> Unit,
+    var text: String,
 
-    private static final ColourRGB main = new ColourRGB(40, 157, 140);
-
-    private static final ColourRGB componentContent = new ColourRGB(28, 28, 28, 189);
-
-
-    private static final ColourRGB success = new ColourRGB(43, 181, 66);
-    private static final ColourRGB fail = new ColourRGB(181, 43, 43);
-
-    public static ColourRGB getMain() {
-        return main;
-    }
-
-    public static ColourRGB getComponentContent() {
-        return componentContent;
-    }
-
-    public static ColourRGB getSuccess() {
-        return success;
-    }
-
-    public static ColourRGB getFail() {
-        return fail;
-    }
-
+    var backgroundOpacity: Int? = null
+) {
+    fun build(factory: IComponentFactory): UIComponent = factory.build(this)
 }

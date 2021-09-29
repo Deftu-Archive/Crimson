@@ -22,21 +22,32 @@ import gg.essential.elementa.WindowScreen
 import gg.essential.elementa.dsl.*
 import xyz.qalcyo.requisite.Requisite
 import xyz.qalcyo.requisite.gui.components.builders.ButtonBuilder
+import xyz.qalcyo.requisite.gui.components.builders.ConfirmationMenuBuilder
 
 class TestMenu : WindowScreen(drawDefaultBackground = false) {
 
     init {
-        val button = Requisite.getInstance().componentFactory.build(
-                ButtonBuilder({
-                    println("Button clicked!")
-                },
-                text = "Test button"
-            )
+        val button = Requisite.getInstance().componentFactory.build(ButtonBuilder({
+            println("Button clicked!")
+        }, "Test button")
         ).constrain {
-            x = 20.pixels()
-            y = 20.pixels()
-            width = 200.pixels()
+            x = 10.pixels()
+            y = 10.pixels()
+            width = 100.pixels()
             height = 20.pixels()
+        } childOf window
+
+        val confirmation = Requisite.getInstance().componentFactory.build(
+            ConfirmationMenuBuilder({
+                println("Accepted")
+            }, {
+                println("Declined")
+            },"Would you like to accept?")
+        ).constrain {
+            x = 160.pixels()
+            y = 20.pixels()
+            width = 320.pixels()
+            height = 240.pixels()
         } childOf window
     }
 

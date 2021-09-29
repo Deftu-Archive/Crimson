@@ -19,7 +19,9 @@
 package xyz.qalcyo.requisite.gui.components
 
 import xyz.qalcyo.requisite.gui.components.builders.ButtonBuilder
+import xyz.qalcyo.requisite.gui.components.builders.ConfirmationMenuBuilder
 
 class ComponentFactory : IComponentFactory {
     override fun build(builder: ButtonBuilder) = Button(builder)
+    override fun build(builder: ConfirmationMenuBuilder) = ConfirmationMenu(builder)
 }
