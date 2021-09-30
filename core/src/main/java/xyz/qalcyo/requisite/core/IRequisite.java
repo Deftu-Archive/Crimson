@@ -20,7 +20,7 @@ package xyz.qalcyo.requisite.core;
 
 import org.apache.logging.log4j.Logger;
 import xyz.qalcyo.requisite.core.files.ConfigurationManager;
-import xyz.qalcyo.requisite.core.integration.IMod;
+import xyz.qalcyo.requisite.core.mods.IMod;
 import xyz.qalcyo.requisite.core.keybinds.KeyBindRegistry;
 import xyz.qalcyo.requisite.core.util.*;
 import xyz.qalcyo.requisite.core.util.messages.IMessageQueue;
@@ -28,7 +28,7 @@ import xyz.qalcyo.requisite.core.commands.CommandRegistry;
 import xyz.qalcyo.requisite.core.files.FileManager;
 import xyz.qalcyo.requisite.core.files.configs.PrivacyConfigurations;
 import xyz.qalcyo.requisite.core.hypixel.HypixelHelper;
-import xyz.qalcyo.requisite.core.integration.IModIntegration;
+import xyz.qalcyo.requisite.core.mods.IModIntegration;
 import xyz.qalcyo.requisite.core.networking.RequisiteClientSocket;
 import xyz.qalcyo.requisite.core.notifications.INotifications;
 import xyz.qalcyo.requisite.core.rendering.IEnhancedFontRenderer;
