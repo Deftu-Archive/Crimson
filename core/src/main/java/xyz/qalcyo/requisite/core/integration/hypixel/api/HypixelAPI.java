@@ -16,7 +16,7 @@
  * along with Requisite. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package xyz.qalcyo.requisite.core.hypixel.api;
+package xyz.qalcyo.requisite.core.integration.hypixel.api;
 
 import xyz.qalcyo.json.entities.JsonObject;
 import xyz.qalcyo.json.util.JsonApiHelper;

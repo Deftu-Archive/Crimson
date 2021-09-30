@@ -16,11 +16,11 @@
  * along with Requisite. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package xyz.qalcyo.requisite.core.hypixel;
+package xyz.qalcyo.requisite.core.integration.hypixel;
 
 import xyz.qalcyo.requisite.core.IRequisite;
-import xyz.qalcyo.requisite.core.hypixel.api.HypixelAPI;
-import xyz.qalcyo.requisite.core.hypixel.locraw.HypixelLocrawManager;
+import xyz.qalcyo.requisite.core.integration.hypixel.api.HypixelAPI;
+import xyz.qalcyo.requisite.core.integration.hypixel.locraw.HypixelLocrawManager;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

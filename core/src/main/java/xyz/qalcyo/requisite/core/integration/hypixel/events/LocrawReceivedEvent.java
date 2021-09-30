@@ -16,9 +16,9 @@
  * along with Requisite. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package xyz.qalcyo.requisite.core.hypixel.events;
+package xyz.qalcyo.requisite.core.integration.hypixel.events;
 
-import xyz.qalcyo.requisite.core.hypixel.locraw.HypixelLocraw;
+import xyz.qalcyo.requisite.core.integration.hypixel.locraw.HypixelLocraw;
 import xyz.qalcyo.simpleeventbus.Event;
 
 public class LocrawReceivedEvent extends Event {

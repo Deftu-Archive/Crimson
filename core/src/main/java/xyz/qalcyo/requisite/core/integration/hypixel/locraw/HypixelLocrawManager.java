@@ -16,7 +16,7 @@
  * along with Requisite. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package xyz.qalcyo.requisite.core.hypixel.locraw;
+package xyz.qalcyo.requisite.core.integration.hypixel.locraw;
 
 import xyz.qalcyo.json.entities.JsonElement;
 import xyz.qalcyo.json.entities.JsonObject;
@@ -26,8 +26,8 @@ import xyz.qalcyo.mango.Multithreading;
 import xyz.qalcyo.requisite.core.IRequisite;
 import xyz.qalcyo.requisite.core.events.ChatMessageReceivedEvent;
 import xyz.qalcyo.requisite.core.events.WorldLoadEvent;
-import xyz.qalcyo.requisite.core.hypixel.HypixelHelper;
-import xyz.qalcyo.requisite.core.hypixel.events.LocrawReceivedEvent;
+import xyz.qalcyo.requisite.core.integration.hypixel.HypixelHelper;
+import xyz.qalcyo.requisite.core.integration.hypixel.events.LocrawReceivedEvent;
 
 import java.util.concurrent.TimeUnit;
 

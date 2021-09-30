@@ -16,7 +16,7 @@
  * along with Requisite. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package xyz.qalcyo.requisite.core.hypixel.locraw;
+package xyz.qalcyo.requisite.core.integration.hypixel.locraw;
 
 import xyz.qalcyo.json.entities.JsonObject;
 import xyz.qalcyo.json.serialization.JsonSerializer;
