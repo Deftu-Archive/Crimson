@@ -31,7 +31,7 @@ minecraft {
     mappings = 'stable_22'
 
     runDir = 'run'
-    clientRunArgs += '--tweakClass xyz.deftu.requisite.core.dev.RequisiteDeveloperTweaker'
+    clientRunArgs += '--tweakClass xyz.qalcyo.requisite.core.dev.RequisiteDeveloperTweaker'
 }
 
 repositories {

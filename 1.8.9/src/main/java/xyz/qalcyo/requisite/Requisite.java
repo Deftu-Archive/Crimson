@@ -21,13 +21,6 @@ package xyz.qalcyo.requisite;
 import net.minecraftforge.fml.common.Mod;
 import xyz.qalcyo.mango.Multithreading;
 import xyz.qalcyo.requisite.commands.CommandHelper;
-import xyz.qalcyo.requisite.core.integration.ModMetadata;
-import xyz.qalcyo.requisite.core.keybinds.KeyBindRegistry;
-import xyz.qalcyo.requisite.gui.components.ComponentFactory;
-import xyz.qalcyo.requisite.gui.components.IComponentFactory;
-import xyz.qalcyo.requisite.gui.screens.RequisiteMenu;
-import xyz.qalcyo.requisite.gui.screens.TestMenu;
-import xyz.qalcyo.requisite.util.*;
 import xyz.qalcyo.requisite.core.IRequisite;
 import xyz.qalcyo.requisite.core.RequisiteEventManager;
 import xyz.qalcyo.requisite.core.RequisiteInfo;
@@ -35,13 +28,20 @@ import xyz.qalcyo.requisite.core.commands.CommandRegistry;
 import xyz.qalcyo.requisite.core.files.ConfigurationManager;
 import xyz.qalcyo.requisite.core.files.FileManager;
 import xyz.qalcyo.requisite.core.hypixel.HypixelHelper;
+import xyz.qalcyo.requisite.core.integration.ModMetadata;
+import xyz.qalcyo.requisite.core.keybinds.KeyBindRegistry;
 import xyz.qalcyo.requisite.core.networking.RequisiteClientSocket;
 import xyz.qalcyo.requisite.core.util.ChatColour;
 import xyz.qalcyo.requisite.core.util.UniversalLogger;
+import xyz.qalcyo.requisite.gui.components.ComponentFactory;
+import xyz.qalcyo.requisite.gui.components.IComponentFactory;
+import xyz.qalcyo.requisite.gui.screens.RequisiteMenu;
+import xyz.qalcyo.requisite.gui.screens.TestMenu;
 import xyz.qalcyo.requisite.integration.ModIntegration;
 import xyz.qalcyo.requisite.networking.SocketHelper;
 import xyz.qalcyo.requisite.notifications.Notifications;
 import xyz.qalcyo.requisite.rendering.EnhancedFontRenderer;
+import xyz.qalcyo.requisite.util.*;
 
 import java.io.File;
 
@@ -125,7 +125,6 @@ public class Requisite implements IRequisite {
                 });
             }
         });
-
         return initialized = true;
     }
 
