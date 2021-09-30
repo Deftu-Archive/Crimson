@@ -37,6 +37,10 @@ public class ModMetadata {
         return version;
     }
 
+    public IModConfigurationMenu getConfigurationMenu() {
+        return configurationMenu;
+    }
+
     public String getCommand() {
         return command;
     }

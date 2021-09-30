@@ -56,6 +56,7 @@ dependencies {
     implementation('org.spongepowered:mixin:0.7.11-SNAPSHOT')
 
     shade('com.github.JnCrMx:discord-game-sdk4j:v0.5.4')
+    shade('se.michaelthelin.spotify:spotify-web-api-java:6.5.4')
 
     /* Dependencies for cutting other mods' file sizes. */
     shade('com.github.marcoacierno:pastebin-java-api:v0.2.1')
