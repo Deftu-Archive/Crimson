@@ -30,14 +30,14 @@ import xyz.qalcyo.requisite.core.files.ConfigurationManager;
 import xyz.qalcyo.requisite.core.files.FileManager;
 import xyz.qalcyo.requisite.core.integration.hypixel.HypixelHelper;
 import xyz.qalcyo.requisite.core.networking.RequisiteClientSocket;
+import xyz.qalcyo.requisite.core.util.ChatColour;
+import xyz.qalcyo.requisite.core.util.IPositionHelper;
+import xyz.qalcyo.requisite.core.util.UniversalLogger;
 import xyz.qalcyo.requisite.integration.ModIntegration;
 import xyz.qalcyo.requisite.networking.SocketHelper;
 import xyz.qalcyo.requisite.notifications.Notifications;
 import xyz.qalcyo.requisite.rendering.EnhancedFontRenderer;
 import xyz.qalcyo.requisite.util.*;
-import xyz.qalcyo.requisite.core.util.ChatColour;
-import xyz.qalcyo.requisite.core.util.IPositionHelper;
-import xyz.qalcyo.requisite.core.util.UniversalLogger;
 
 import java.io.File;
 
@@ -70,6 +70,7 @@ public class Requisite implements IRequisite {
 
     /* Version-dependant utilities. */
     private GlHelper glHelper;
+    private GuiHelper guiHelper;
 
     public boolean initialize(File gameDir) {
         if (initialized)
@@ -99,6 +100,7 @@ public class Requisite implements IRequisite {
         messageQueue = new MessageQueue(this);
         serverHelper = new ServerHelper();
 
+
         if (!socketConnected) {
             notifications.push("Error!", "Failed to connect to Requisite WebSocket. " + ChatColour.BOLD + "Click to try a reconnect.", notification -> {
                 boolean socketReconnected = requisiteSocket.awaitReconnect();
@@ -111,6 +113,7 @@ public class Requisite implements IRequisite {
 
         /* Initialize version-dependant utilities. */
         glHelper = new GlHelper();
+        guiHelper = new GuiHelper(this);
 
         return initialized = true;
     }
@@ -153,6 +156,10 @@ public class Requisite implements IRequisite {
 
     public EnhancedFontRenderer getEnhancedFontRenderer() {
         return enhancedFontRenderer;
+    }
+
+    public GuiHelper getGuiHelper() {
+        return guiHelper;
     }
 
     public PlayerHelper getPlayerHelper() {
