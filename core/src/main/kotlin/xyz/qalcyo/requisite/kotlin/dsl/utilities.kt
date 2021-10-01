@@ -29,15 +29,15 @@ import java.util.*
 fun Any.stringify(): String = Objects.toString(this)
 
 /* Numbers */
-fun Number.isPositive(): Boolean = this.toInt() >= 0f
-fun Number.isNegative(): Boolean = this.toInt() < 0
-fun Number.isZero(): Boolean = this.toInt() == 0
-fun Number.percentage(min: Int, max: Int): Int = (this.toInt() - min) / (max - min)
-fun Number.isBetween(min: Int, max: Int): Boolean = this.toInt() in (min + 1) until max
+fun Number.isPositive(): Boolean = toInt() >= 0f
+fun Number.isNegative(): Boolean = toInt() < 0
+fun Number.isZero(): Boolean = toInt() == 0
+fun Number.percentage(min: Int, max: Int): Int = (toInt() - min) / (max - min)
+fun Number.isBetween(min: Int, max: Int): Boolean = toInt() in (min + 1) until max
 
 /* Colours */
 fun Color.toColourRGB(): ColourRGB = ColourRGB(red, green, blue, alpha)
-fun Colour.toColourRGB(): ColourRGB = ColourRGB(this.red, this.green, this.blue, this.alpha)
+fun Colour.toColourRGB(): ColourRGB = ColourRGB(red, green, blue, alpha)
 
 /* xyz.qalcyo.json.entities.JsonElement */
 fun JsonElement.prettify(): String = JsonHelper.makePretty(this)
