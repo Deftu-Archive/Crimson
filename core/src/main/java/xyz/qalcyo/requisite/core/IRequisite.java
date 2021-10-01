@@ -35,7 +35,7 @@ import xyz.qalcyo.requisite.core.notifications.INotifications;
 import xyz.qalcyo.requisite.core.rendering.IEnhancedFontRenderer;
 import xyz.qalcyo.json.entities.JsonObject;
 import xyz.qalcyo.json.util.JsonApiHelper;
-import xyz.qalcyo.requisite.gui.components.IComponentFactory;
+import xyz.qalcyo.requisite.gui.components.factory.IComponentFactory;
 import xyz.qalcyo.requisite.gui.screens.RequisiteMenu;
 import xyz.qalcyo.simpleeventbus.SimpleEventBus;
 

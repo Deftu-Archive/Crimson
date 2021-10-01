@@ -19,10 +19,12 @@
 package xyz.qalcyo.requisite.gui.screens
 
 import gg.essential.elementa.WindowScreen
+import gg.essential.elementa.constraints.CenterConstraint
 import gg.essential.elementa.dsl.*
 import xyz.qalcyo.mango.data.Colour
 import xyz.qalcyo.requisite.Requisite
 import xyz.qalcyo.requisite.core.data.ColourRGB
+import xyz.qalcyo.requisite.gui.components.InteractableText
 import xyz.qalcyo.requisite.gui.components.builders.ButtonBuilder
 import xyz.qalcyo.requisite.gui.components.builders.ClockBuilder
 import xyz.qalcyo.requisite.gui.components.builders.ConfirmationMenuBuilder
@@ -31,38 +33,13 @@ import xyz.qalcyo.requisite.kotlin.dsl.*
 class TestMenu : WindowScreen(drawDefaultBackground = false) {
 
     init {
-        val button = Requisite.getInstance().componentFactory.build(ButtonBuilder({
-            println("Button clicked!")
-        }, "Test button")
-        ).constrain {
-            x = 10.pixels()
-            y = 10.pixels()
+        val text = InteractableText("Interact with me!", true, {
+            Requisite.getInstance().chatHelper.send("Hello!")
+        }).constrain {
+            x = CenterConstraint()
+            y = CenterConstraint() + 30.pixels()
             width = 100.pixels()
-            height = 20.pixels()
-        } childOf window
-
-        val confirmation = Requisite.getInstance().componentFactory.build(
-            ConfirmationMenuBuilder({
-                println("Accepted")
-            }, {
-                println("Declined")
-            },"Would you like to accept?")
-        ).constrain {
-            x = 160.pixels()
-            y = 20.pixels()
-            width = 320.pixels()
-            height = 240.pixels()
-        } childOf window
-
-        val clock = ClockBuilder(
-            ColourRGB(Colour.WHITE.asColor()),
-            format = "HH:mm:ss",
-            prefix = "Time: "
-        ).build(Requisite.getInstance().componentFactory).constrain {
-            x = 4.pixels()
-            y = 4.pixels(true)
-            width = 100.pixels()
-            height = 20.pixels()
+            height = 12.pixels()
         } childOf window
     }
 

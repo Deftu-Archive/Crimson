@@ -16,7 +16,7 @@
  * along with Requisite. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package xyz.qalcyo.requisite.gui.components
+package xyz.qalcyo.requisite.gui.components.factory
 
 import gg.essential.elementa.UIComponent
 import xyz.qalcyo.requisite.gui.components.builders.ButtonBuilder

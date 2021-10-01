@@ -20,7 +20,7 @@ package xyz.qalcyo.requisite.gui.components.builders
 
 import gg.essential.elementa.UIComponent
 import xyz.qalcyo.requisite.core.data.ColourRGB
-import xyz.qalcyo.requisite.gui.components.IComponentFactory
+import xyz.qalcyo.requisite.gui.components.factory.IComponentFactory
 
 class ClockBuilder(
     var colour: ColourRGB,

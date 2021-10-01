@@ -20,9 +20,7 @@ package xyz.qalcyo.requisite.gui.components.builders
 
 import gg.essential.elementa.UIComponent
 import xyz.qalcyo.requisite.gui.components.Button
-import xyz.qalcyo.requisite.gui.components.IComponentFactory
-import java.awt.Color
-import java.awt.image.BufferedImage
+import xyz.qalcyo.requisite.gui.components.factory.IComponentFactory
 
 class ButtonBuilder(
     var action: Button.() -> Unit,
