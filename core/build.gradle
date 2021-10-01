@@ -16,6 +16,8 @@
  * along with Requisite. If not, see <https://www.gnu.org/licenses/>.
  */
 
+apply plugin: 'java'
+
 sourceCompatibility = targetCompatibility = JavaVersion.VERSION_1_8
 
 buildConfig {
@@ -28,22 +30,22 @@ buildConfig {
 }
 
 dependencies {
-    shadeApi('xyz.qalcyo.eventbus:SimpleEventBus:3.1')
-    shadeApi('xyz.qalcyo.simpleconfig:SimpleConfig:3.5')
-    shadeApi('xyz.qalcyo.simpleconfig:SimpleConfig:3.5:settings')
-    shadeApi('xyz.qalcyo.json:JSON+:2.12')
-    shadeApi('xyz.qalcyo.json:JSON+:2.12:files')
-    shadeApi('xyz.qalcyo.json:JSON+:2.12:kotlin')
-    shadeApi('xyz.qalcyo.json:JSON+:2.12:serialization')
-    shadeApi('xyz.qalcyo.json:JSON+:2.12:utilities')
+    shade('xyz.qalcyo.eventbus:SimpleEventBus:3.1')
+    shade('xyz.qalcyo.simpleconfig:SimpleConfig:3.5')
+    shade('xyz.qalcyo.simpleconfig:SimpleConfig:3.5:settings')
+    shade('xyz.qalcyo.json:JSON+:2.12')
+    shade('xyz.qalcyo.json:JSON+:2.12:files')
+    shade('xyz.qalcyo.json:JSON+:2.12:kotlin')
+    shade('xyz.qalcyo.json:JSON+:2.12:serialization')
+    shade('xyz.qalcyo.json:JSON+:2.12:utilities')
     shadeApi('xyz.qalcyo.mango:Mango:1.7')
 
     shade('org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.1-native-mt')
     shade('org.jetbrains.kotlin:kotlin-stdlib-jdk8')
 
-    shade('org.java-websocket:Java-WebSocket:1.5.2')
+    shadeApi('org.java-websocket:Java-WebSocket:1.5.2')
 
-    implementation('gg.essential:elementa-1.8.9-forge:358+next') {
+    implementation('gg.essential:elementa-1.8.9-forge:359+next') {
         exclude module: 'kotlin-stdlib-jdk8'
         exclude module: 'kotlin-reflect'
         exclude module: 'minecraft'
@@ -53,10 +55,10 @@ dependencies {
         exclude module: 'forge'
     }
 
-    implementation('org.spongepowered:mixin:0.7.11-SNAPSHOT')
+    shadeApi('com.github.JnCrMx:discord-game-sdk4j:v0.5.4')
+    shadeApi('se.michaelthelin.spotify:spotify-web-api-java:6.5.4')
 
-    shade('com.github.JnCrMx:discord-game-sdk4j:v0.5.4')
-    shade('se.michaelthelin.spotify:spotify-web-api-java:6.5.4')
+    implementation('org.spongepowered:mixin:0.7.11-SNAPSHOT')
 
     /* Dependencies for cutting other mods' file sizes. */
     shade('com.github.marcoacierno:pastebin-java-api:v0.2.1')

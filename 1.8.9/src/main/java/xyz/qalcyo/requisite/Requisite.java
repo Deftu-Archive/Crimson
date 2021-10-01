@@ -34,7 +34,7 @@ import xyz.qalcyo.requisite.core.RequisiteInfo;
 import xyz.qalcyo.requisite.core.commands.CommandRegistry;
 import xyz.qalcyo.requisite.core.files.ConfigurationManager;
 import xyz.qalcyo.requisite.core.files.FileManager;
-import xyz.qalcyo.requisite.core.hypixel.HypixelHelper;
+import xyz.qalcyo.requisite.core.integration.hypixel.HypixelHelper;
 import xyz.qalcyo.requisite.core.networking.RequisiteClientSocket;
 import xyz.qalcyo.requisite.core.util.ChatColour;
 import xyz.qalcyo.requisite.core.util.UniversalLogger;

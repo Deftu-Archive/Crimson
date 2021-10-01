@@ -16,13 +16,9 @@ buildscript {
     }
 }
 
-configurations {
-    compile
-    compile.extendsFrom(api)
-}
-
 apply plugin: 'net.minecraftforge.gradle.forge'
 apply plugin: 'org.spongepowered.mixin'
+apply plugin: 'java'
 
 sourceCompatibility = targetCompatibility = JavaVersion.VERSION_1_8
 
@@ -46,11 +42,10 @@ dependencies {
         exclude module: 'Elementa'
         exclude module: 'UniversalCraft'
     }
-    implementation('org.java-websocket:Java-WebSocket:1.5.2') /* Fuck you too Gradle. */
 
     shade('gg.essential:elementa-1.8.9-forge:359+next')
 
-    implementation('org.spongepowered:mixin:0.7.11-SNAPSHOT')
+    shade('org.spongepowered:mixin:0.7.11-SNAPSHOT')
     annotationProcessor('org.spongepowered:mixin:0.7.11-SNAPSHOT')
 }
 
