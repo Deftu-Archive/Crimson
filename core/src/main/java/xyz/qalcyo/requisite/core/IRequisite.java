@@ -22,6 +22,7 @@ import org.apache.logging.log4j.Logger;
 import xyz.qalcyo.requisite.core.files.ConfigurationManager;
 import xyz.qalcyo.requisite.core.mods.IMod;
 import xyz.qalcyo.requisite.core.keybinds.KeyBindRegistry;
+import xyz.qalcyo.requisite.core.mods.ModMetadata;
 import xyz.qalcyo.requisite.core.util.*;
 import xyz.qalcyo.requisite.core.util.messages.IMessageQueue;
 import xyz.qalcyo.requisite.core.commands.CommandRegistry;
@@ -35,6 +36,7 @@ import xyz.qalcyo.requisite.core.rendering.IEnhancedFontRenderer;
 import xyz.qalcyo.json.entities.JsonObject;
 import xyz.qalcyo.json.util.JsonApiHelper;
 import xyz.qalcyo.requisite.gui.components.IComponentFactory;
+import xyz.qalcyo.requisite.gui.screens.RequisiteMenu;
 import xyz.qalcyo.simpleeventbus.SimpleEventBus;
 
 import java.io.File;
@@ -47,6 +49,7 @@ public interface IRequisite extends IMod {
     default boolean finish(File gameDir) {
         boolean initial = initialize(gameDir);
         getConfigurationManager().addConfigurable(getPrivacyConfigurations());
+        getModIntegration().registerIntegratedMod(this);
         return initial;
     }
 
@@ -149,6 +152,12 @@ public interface IRequisite extends IMod {
     }
     default String id() {
         return RequisiteInfo.ID;
+    }
+
+    default ModMetadata getMetadata() {
+        return ModMetadata.from(name(), version())
+                .setCommand("/requisite")
+                .setConfigurationMenu(new RequisiteMenu(this));
     }
 
 }

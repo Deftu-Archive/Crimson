@@ -30,14 +30,14 @@ buildConfig {
 }
 
 dependencies {
-    shade('xyz.qalcyo.eventbus:SimpleEventBus:3.1')
-    shade('xyz.qalcyo.simpleconfig:SimpleConfig:3.5')
-    shade('xyz.qalcyo.simpleconfig:SimpleConfig:3.5:settings')
-    shade('xyz.qalcyo.json:JSON+:2.12')
-    shade('xyz.qalcyo.json:JSON+:2.12:files')
-    shade('xyz.qalcyo.json:JSON+:2.12:kotlin')
-    shade('xyz.qalcyo.json:JSON+:2.12:serialization')
-    shade('xyz.qalcyo.json:JSON+:2.12:utilities')
+    shadeApi('xyz.qalcyo.eventbus:SimpleEventBus:3.1')
+    shadeApi('xyz.qalcyo.simpleconfig:SimpleConfig:3.5')
+    shadeApi('xyz.qalcyo.simpleconfig:SimpleConfig:3.5:settings')
+    shadeApi('xyz.qalcyo.json:JSON+:2.12')
+    shadeApi('xyz.qalcyo.json:JSON+:2.12:files')
+    shadeApi('xyz.qalcyo.json:JSON+:2.12:kotlin')
+    shadeApi('xyz.qalcyo.json:JSON+:2.12:serialization')
+    shadeApi('xyz.qalcyo.json:JSON+:2.12:utilities')
     shadeApi('xyz.qalcyo.mango:Mango:1.7')
 
     shade('org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.1-native-mt')

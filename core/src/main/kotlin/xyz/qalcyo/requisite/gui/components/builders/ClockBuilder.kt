@@ -16,14 +16,23 @@
  * along with Requisite. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package xyz.qalcyo.requisite.gui.components
+package xyz.qalcyo.requisite.gui.components.builders
 
-import xyz.qalcyo.requisite.gui.components.builders.ButtonBuilder
-import xyz.qalcyo.requisite.gui.components.builders.ClockBuilder
-import xyz.qalcyo.requisite.gui.components.builders.ConfirmationMenuBuilder
+import gg.essential.elementa.UIComponent
+import xyz.qalcyo.requisite.core.data.ColourRGB
+import xyz.qalcyo.requisite.gui.components.IComponentFactory
 
-class ComponentFactory : IComponentFactory {
-    override fun build(builder: ButtonBuilder) = Button(builder)
-    override fun build(builder: ConfirmationMenuBuilder) = ConfirmationMenu(builder)
-    override fun build(builder: ClockBuilder) = Clock(builder)
+class ClockBuilder(
+    var colour: ColourRGB,
+
+    var timeZone: String = "GMT",
+    var format: String = "mm:ss",
+
+    val prefix: String = "",
+    val suffix: String = "",
+
+    var textShadow: Boolean = false,
+    var textShadowColour: ColourRGB? = null
+) {
+    fun build(factory: IComponentFactory): UIComponent = factory.build(this)
 }

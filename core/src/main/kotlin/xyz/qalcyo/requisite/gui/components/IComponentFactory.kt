@@ -20,9 +20,11 @@ package xyz.qalcyo.requisite.gui.components
 
 import gg.essential.elementa.UIComponent
 import xyz.qalcyo.requisite.gui.components.builders.ButtonBuilder
+import xyz.qalcyo.requisite.gui.components.builders.ClockBuilder
 import xyz.qalcyo.requisite.gui.components.builders.ConfirmationMenuBuilder
 
 interface IComponentFactory {
     fun build(builder: ButtonBuilder): UIComponent
     fun build(builder: ConfirmationMenuBuilder): UIComponent
+    fun build(builder: ClockBuilder): UIComponent
 }

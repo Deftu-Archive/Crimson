@@ -97,7 +97,7 @@ public class Requisite implements IRequisite {
         modIntegration = new ModIntegration(this);
         commandRegistry = new CommandRegistry(this, new CommandHelper());
         keyBindRegistry = new KeyBindRegistry(this);
-        this.componentFactory = new ComponentFactory();
+        componentFactory = new ComponentFactory();
         internalEventManager = new RequisiteEventManager(this);
         internalEventListener = new RequisiteEventListener(this);
 
@@ -219,12 +219,6 @@ public class Requisite implements IRequisite {
 
     public GlHelper getGlHelper() {
         return glHelper;
-    }
-
-    public ModMetadata getMetadata() {
-        return ModMetadata.from(name(), version())
-                .setCommand("/requisite")
-                .setConfigurationMenu(new RequisiteMenu(this));
     }
 
     public static Requisite getInstance() {

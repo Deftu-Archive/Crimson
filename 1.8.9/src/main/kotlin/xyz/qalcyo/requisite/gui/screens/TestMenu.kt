@@ -20,9 +20,13 @@ package xyz.qalcyo.requisite.gui.screens
 
 import gg.essential.elementa.WindowScreen
 import gg.essential.elementa.dsl.*
+import xyz.qalcyo.mango.data.Colour
 import xyz.qalcyo.requisite.Requisite
+import xyz.qalcyo.requisite.core.data.ColourRGB
 import xyz.qalcyo.requisite.gui.components.builders.ButtonBuilder
+import xyz.qalcyo.requisite.gui.components.builders.ClockBuilder
 import xyz.qalcyo.requisite.gui.components.builders.ConfirmationMenuBuilder
+import xyz.qalcyo.requisite.kotlin.dsl.*
 
 class TestMenu : WindowScreen(drawDefaultBackground = false) {
 
@@ -48,6 +52,17 @@ class TestMenu : WindowScreen(drawDefaultBackground = false) {
             y = 20.pixels()
             width = 320.pixels()
             height = 240.pixels()
+        } childOf window
+
+        val clock = ClockBuilder(
+            ColourRGB(Colour.WHITE.asColor()),
+            format = "HH:mm:ss",
+            prefix = "Time: "
+        ).build(Requisite.getInstance().componentFactory).constrain {
+            x = 4.pixels()
+            y = 4.pixels(true)
+            width = 100.pixels()
+            height = 20.pixels()
         } childOf window
     }
 

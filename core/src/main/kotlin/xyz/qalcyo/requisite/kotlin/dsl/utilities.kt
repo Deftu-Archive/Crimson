@@ -20,6 +20,7 @@ package xyz.qalcyo.requisite.kotlin.dsl
 
 import xyz.qalcyo.json.entities.JsonElement
 import xyz.qalcyo.json.util.JsonHelper
+import xyz.qalcyo.mango.data.Colour
 import xyz.qalcyo.requisite.core.data.ColourRGB
 import java.awt.Color
 import java.util.*
@@ -34,9 +35,9 @@ fun Number.isZero(): Boolean = this.toInt() == 0
 fun Number.percentage(min: Int, max: Int): Int = (this.toInt() - min) / (max - min)
 fun Number.isBetween(min: Int, max: Int): Boolean = this.toInt() in (min + 1) until max
 
-/* java.awt.Color */
-fun Color.toColourRGB(): ColourRGB =
-    ColourRGB(red, green, blue, alpha)
+/* Colours */
+fun Color.toColourRGB(): ColourRGB = ColourRGB(red, green, blue, alpha)
+fun Colour.toColourRGB(): ColourRGB = ColourRGB(this.red, this.green, this.blue, this.alpha)
 
-/* xyz.matthewtgm.json.entities.JsonElement */
+/* xyz.qalcyo.json.entities.JsonElement */
 fun JsonElement.prettify(): String = JsonHelper.makePretty(this)
