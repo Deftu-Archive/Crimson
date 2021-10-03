@@ -30,6 +30,8 @@ class InteractableText @JvmOverloads constructor(
     hoverUnderline: Boolean = true,
     action: InteractableText.() -> Unit = {},
 
+    color: Color = Color.WHITE,
+
     shadow: Boolean = true,
     shadowColour: Color? = null
 ) : UIText(
@@ -38,7 +40,7 @@ class InteractableText @JvmOverloads constructor(
     shadowColour
 ) {
 
-    private val underline = UIBlock(getColor()).constrain {
+    private val underline = UIBlock(color).constrain {
         x = CenterConstraint()
         y = 0.pixels(true)
         width = 0.pixels()
@@ -46,6 +48,11 @@ class InteractableText @JvmOverloads constructor(
     } childOf this
 
     init {
+        setColor(color)
+        if (!hoverUnderline) {
+            underline.hide(true)
+        }
+
         onMouseEnter {
             if (hoverUnderline) {
                 underline.animate {
