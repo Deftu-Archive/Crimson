@@ -38,7 +38,7 @@ public class MinecraftMixin {
     @Inject(method = "startGame", at = @At("RETURN"))
     private void onGameStarted(CallbackInfo ci) {
         if (Requisite.getInstance().finish(mcDataDir)) {
-            Requisite.getInstance().getLogger().info("Initialized Requisite.");
+            Requisite.getInstance().getLogger().info("Initialized Requisite successfully.");
         }
     }
 

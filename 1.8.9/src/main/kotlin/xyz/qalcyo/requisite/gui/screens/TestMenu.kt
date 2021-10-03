@@ -19,28 +19,7 @@
 package xyz.qalcyo.requisite.gui.screens
 
 import gg.essential.elementa.WindowScreen
-import gg.essential.elementa.constraints.CenterConstraint
-import gg.essential.elementa.dsl.*
-import xyz.qalcyo.mango.data.Colour
-import xyz.qalcyo.requisite.Requisite
-import xyz.qalcyo.requisite.core.data.ColourRGB
-import xyz.qalcyo.requisite.gui.components.InteractableText
-import xyz.qalcyo.requisite.gui.components.builders.ButtonBuilder
-import xyz.qalcyo.requisite.gui.components.builders.ClockBuilder
-import xyz.qalcyo.requisite.gui.components.builders.ConfirmationMenuBuilder
-import xyz.qalcyo.requisite.kotlin.dsl.*
 
-class TestMenu : WindowScreen(drawDefaultBackground = false) {
-
-    init {
-        val text = InteractableText("Interact with me!", true, {
-            Requisite.getInstance().chatHelper.send("Hello!")
-        }).constrain {
-            x = CenterConstraint()
-            y = CenterConstraint() + 30.pixels()
-            width = 100.pixels()
-            height = 12.pixels()
-        } childOf window
-    }
+class TestMenu : WindowScreen() {
 
 }

@@ -19,6 +19,7 @@
 package xyz.qalcyo.requisite.core;
 
 import org.apache.logging.log4j.Logger;
+import xyz.qalcyo.mango.Strings;
 import xyz.qalcyo.requisite.core.files.ConfigurationManager;
 import xyz.qalcyo.requisite.core.mods.IMod;
 import xyz.qalcyo.requisite.core.keybinds.KeyBindRegistry;
@@ -249,10 +250,18 @@ public interface IRequisite extends IMod {
     }
 
     /**
+     * @param suffix The suffix to add after the Requisite text.
+     * @return Requisite's prefix for chat messages.
+     */
+    default String getChatPrefix(String suffix) {
+        return ChatColour.GRAY + "[" + getJavaArguments().getChatPrefixColour() + name() + (Strings.isNullOrEmpty(suffix) ? "" : " " + suffix) + ChatColour.GRAY + "]";
+    }
+
+    /**
      * @return Requisite's prefix for chat messages.
      */
     default String getChatPrefix() {
-        return ChatColour.GRAY + "[" + getJavaArguments().getChatPrefixColour() + name() + ChatColour.GRAY + "]";
+        return getChatPrefix(null);
     }
 
     /**

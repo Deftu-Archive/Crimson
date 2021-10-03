@@ -67,6 +67,7 @@ dependencies {
 
     /* Libraries used globally in all Minecraft versions that Requisite takes advantage of. */
     implementation('net.minecraft:launchwrapper:1.12')
+    implementation('com.mojang:authlib:1.5.21')
 
     implementation('com.google.guava:guava:17.0')
 

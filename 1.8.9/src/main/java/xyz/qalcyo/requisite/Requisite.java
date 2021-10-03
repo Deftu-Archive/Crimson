@@ -155,7 +155,7 @@ public class Requisite implements IRequisite {
         return keyBindRegistry;
     }
 
-    public IComponentFactory getComponentFactory() {
+    public ComponentFactory getComponentFactory() {
         return componentFactory;
     }
 

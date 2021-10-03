@@ -38,7 +38,7 @@ public class SocketHelper implements ISocketHelper {
     public void chat(String message) {
         ChatHelper chatHelper = Requisite.getInstance().getChatHelper();
         if (chatHelper != null) {
-            chatHelper.send(message);
+            chatHelper.send(Requisite.getInstance().getChatPrefix("WebSocket"), message);
         }
     }
 
