@@ -29,7 +29,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import xyz.qalcyo.requisite.Requisite;
 
 @Mixin({GuiChat.class})
-public abstract class GuiChatMixin {
+public class GuiChatMixin {
 
     @Unique private String[] concatenatedResponse;
 

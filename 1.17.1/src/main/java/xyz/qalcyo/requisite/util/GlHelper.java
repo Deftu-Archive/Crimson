@@ -21,8 +21,9 @@ package xyz.qalcyo.requisite.util;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.util.Window;
+import xyz.qalcyo.requisite.core.util.IGlHelper;
 
-public class GlHelper {
+public class GlHelper implements IGlHelper {
 
     public void startScissorBox(int x, int y, int width, int height) {
         totalScissor(x, y, width, height);

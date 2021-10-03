@@ -6,7 +6,6 @@
   "target":  "@env(CLIENT)",
   "mixins": [
     "client.MinecraftClientMixin",
-    "gui.InGameHudMixin",
-    "FontRendererMixin"
+    "gui.InGameHudMixin"
   ]
 }
