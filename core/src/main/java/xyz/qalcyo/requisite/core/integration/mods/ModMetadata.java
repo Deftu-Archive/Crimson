@@ -21,7 +21,7 @@ package xyz.qalcyo.requisite.core.integration.mods;
 public class ModMetadata {
 
     private final String name, version;
-    private IModConfigurationMenu configurationMenu;
+    private Class<? extends IModConfigurationMenu> configurationMenu;
     private String command;
 
     ModMetadata(String name, String version) {
@@ -37,7 +37,7 @@ public class ModMetadata {
         return version;
     }
 
-    public IModConfigurationMenu getConfigurationMenu() {
+    public Class<? extends IModConfigurationMenu> getConfigurationMenu() {
         return configurationMenu;
     }
 
@@ -52,7 +52,7 @@ public class ModMetadata {
         return this;
     }
 
-    public ModMetadata setConfigurationMenu(IModConfigurationMenu configurationMenu) {
+    public ModMetadata setConfigurationMenu(Class<? extends IModConfigurationMenu> configurationMenu) {
         this.configurationMenu = configurationMenu;
         return this;
     }

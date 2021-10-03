@@ -33,9 +33,9 @@ import xyz.qalcyo.requisite.core.networking.RequisiteClientSocket;
 import xyz.qalcyo.requisite.core.util.ChatColour;
 import xyz.qalcyo.requisite.core.util.UniversalLogger;
 import xyz.qalcyo.requisite.gui.components.factory.ComponentFactory;
-import xyz.qalcyo.requisite.gui.components.factory.IComponentFactory;
+import xyz.qalcyo.requisite.gui.screens.RequisiteMenu;
 import xyz.qalcyo.requisite.gui.screens.TestMenu;
-import xyz.qalcyo.requisite.integration.ModIntegration;
+import xyz.qalcyo.requisite.integration.mods.ModIntegration;
 import xyz.qalcyo.requisite.networking.SocketHelper;
 import xyz.qalcyo.requisite.notifications.Notifications;
 import xyz.qalcyo.requisite.rendering.EnhancedFontRenderer;
@@ -124,6 +124,7 @@ public class Requisite implements IRequisite {
             }
         });
 
+        getMetadata().setConfigurationMenu(RequisiteMenu.class);
         return initialized = true;
     }
 
@@ -168,7 +169,11 @@ public class Requisite implements IRequisite {
     }
 
     public void openMenu() {
-        guiHelper.open(new TestMenu());
+        guiHelper.open(createMainMenu());
+    }
+
+    public RequisiteMenu createMainMenu() {
+        return new RequisiteMenu();
     }
 
     public EnhancedFontRenderer getEnhancedFontRenderer() {

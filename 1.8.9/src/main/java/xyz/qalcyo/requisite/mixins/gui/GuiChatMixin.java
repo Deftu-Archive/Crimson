@@ -43,6 +43,8 @@ public class GuiChatMixin {
         String[] complete = Requisite.getInstance().getCommandRegistry().getCachedAutoCompletion();
         if (complete != null) {
             concatenatedResponse = ObjectArrays.concat(complete, p_146406_1_, String.class);
+        } else {
+            concatenatedResponse = p_146406_1_;
         }
     }
 

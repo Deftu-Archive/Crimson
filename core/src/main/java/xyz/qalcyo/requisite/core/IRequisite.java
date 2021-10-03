@@ -22,6 +22,7 @@ import org.apache.logging.log4j.Logger;
 import xyz.qalcyo.mango.Strings;
 import xyz.qalcyo.requisite.core.files.ConfigurationManager;
 import xyz.qalcyo.requisite.core.integration.mods.IMod;
+import xyz.qalcyo.requisite.core.integration.mods.IModConfigurationMenu;
 import xyz.qalcyo.requisite.core.keybinds.KeyBindRegistry;
 import xyz.qalcyo.requisite.core.integration.mods.ModMetadata;
 import xyz.qalcyo.requisite.core.util.*;
@@ -37,7 +38,6 @@ import xyz.qalcyo.requisite.core.rendering.IEnhancedFontRenderer;
 import xyz.qalcyo.json.entities.JsonObject;
 import xyz.qalcyo.json.util.JsonApiHelper;
 import xyz.qalcyo.requisite.gui.components.factory.IComponentFactory;
-import xyz.qalcyo.requisite.gui.screens.RequisiteMenu;
 import xyz.qalcyo.simpleeventbus.SimpleEventBus;
 
 import java.io.File;
@@ -165,6 +165,12 @@ public interface IRequisite extends IMod {
      * Opens Requisite's main menu, providing access to most Requisite configurations and services.
      */
     void openMenu();
+    /**
+     * Creates an instance of Requisite's main menu.
+     *
+     * @return Requisite's main menu.
+     */
+    IModConfigurationMenu createMainMenu();
 
     /**
      * Provides an instance of Requisite's enhanced font renderer utility, which gives you more options for rendering text to the screen.
@@ -290,8 +296,7 @@ public interface IRequisite extends IMod {
      */
     default ModMetadata getMetadata() {
         return ModMetadata.from(name(), version())
-                .setCommand("/requisite")
-                .setConfigurationMenu(new RequisiteMenu(this));
+                .setCommand("/requisite");
     }
 
 }

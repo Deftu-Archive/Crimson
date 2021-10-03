@@ -21,6 +21,7 @@ package xyz.qalcyo.requisite.core.integration.mods;
 import java.util.List;
 
 public interface IModIntegration {
+    void openMenu();
     void registerIntegratedMod(IMod mod);
     List<IMod> getIntegratedMods();
 }

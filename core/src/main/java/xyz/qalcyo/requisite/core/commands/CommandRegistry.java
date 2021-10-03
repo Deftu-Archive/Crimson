@@ -129,22 +129,27 @@ public class CommandRegistry {
             CommandData data = command.data();
 
             if (data.has(name)) {
-                process(command, args);
+                if (process(command, args)) {
+                    return -1;
+                }
             }
         }
 
         return 0;
     }
 
-    private void process(ICommand command, String[] args) {
+    private boolean process(ICommand command, String[] args) {
         try {
             command.execute(Arrays.asList(args));
+            return true;
         } catch (IncorrectUsageException incorrectUsageException) {
             requisite.getChatHelper().send(incorrectUsageException.toString());
             incorrectUsageException.printStackTrace();
         } catch (CommandException genericException) {
             genericException.printStackTrace();
         }
+
+        return false;
     }
 
     public void processAutoCompletion(String input) {
@@ -208,7 +213,7 @@ public class CommandRegistry {
     }
 
     private void onChatMessageSent(SendChatMessageEvent event) {
-        if (execute(event.message) == 0) {
+        if (execute(event.message) == -1) {
             event.cancel();
         }
     }

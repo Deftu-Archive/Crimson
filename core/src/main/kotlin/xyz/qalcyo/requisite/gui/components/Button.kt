@@ -66,4 +66,11 @@ class Button(
 
     fun setText(input: String) = text.setText(input)
 
+    companion object {
+        val DEFAULT_WIDTH = 200
+        val DEFAULT_WIDTH_PIXELS = DEFAULT_WIDTH.pixels()
+        val DEFAULT_HEIGHT = 20
+        val DEFAULT_HEIGHT_PIXELS = DEFAULT_HEIGHT.pixels()
+    }
+
 }

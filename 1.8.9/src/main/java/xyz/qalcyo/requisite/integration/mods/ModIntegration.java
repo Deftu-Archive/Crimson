@@ -16,8 +16,9 @@
  * along with Requisite. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package xyz.qalcyo.requisite.integration;
+package xyz.qalcyo.requisite.integration.mods;
 
+import xyz.qalcyo.requisite.Requisite;
 import xyz.qalcyo.requisite.core.IRequisite;
 import xyz.qalcyo.requisite.core.integration.mods.IMod;
 import xyz.qalcyo.requisite.core.integration.mods.IModIntegration;
@@ -32,6 +33,10 @@ public class ModIntegration implements IModIntegration {
 
     public ModIntegration(IRequisite requisite) {
         this.requisite = requisite;
+    }
+
+    public void openMenu() {
+        Requisite.getInstance().getChatHelper().send("Test!");
     }
 
     public void registerIntegratedMod(IMod mod) {

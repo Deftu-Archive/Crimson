@@ -63,7 +63,7 @@ dependencies {
     /* Dependencies for cutting other mods' file sizes. */
     shade('com.github.marcoacierno:pastebin-java-api:v0.2.1')
     shade('com.squareup.okhttp3:okhttp:4.9.1')
-    shade('org.kohsuke:github-api:1.132')
+    shade('org.kohsuke:github-api:1.133')
 
     /* Libraries used globally in all Minecraft versions that Requisite takes advantage of. */
     implementation('net.minecraft:launchwrapper:1.12')
