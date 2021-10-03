@@ -45,7 +45,19 @@ import java.util.Base64;
 
 public interface IRequisite extends IMod {
 
+    /**
+     * Initializes all of Requisite's core features for the version requested.
+     *
+     * @param gameDir The game directory of this version.
+     * @return Whether initialization was completed successfully or not.
+     */
     boolean initialize(File gameDir);
+    /**
+     * Initializes Requisite, then completes it's own actions.
+     *
+     * @param gameDir The game directory of this version.
+     * @return Whether initialization was completed successfully or not.
+     */
     default boolean finish(File gameDir) {
         boolean initial = initialize(gameDir);
         getConfigurationManager().addConfigurable(getPrivacyConfigurations());
@@ -53,34 +65,123 @@ public interface IRequisite extends IMod {
         return initial;
     }
 
+    /**
+     * Provides an instance of Requisite's Log4J logger.
+     *
+     * @return Requisite's logger.
+     */
     default Logger getLogger() {
         return RequisiteDefaultImplementations.logger;
     }
+    /**
+     * Provides an instance of Requisite's JVM argument parser.
+     *
+     * @return Requisite's JVM argument parser.
+     */
     default RequisiteJavaArguments getJavaArguments() {
         return RequisiteDefaultImplementations.javaArguments;
     }
+    /**
+     * Provides an instance of Requisite's {@link SimpleEventBus}.
+     *
+     * @return Requisite's event bus.
+     */
     default SimpleEventBus getEventBus() {
         return RequisiteDefaultImplementations.eventBus;
     }
+
+    /**
+     * Provides an instance of Requisite's file and directory manager.
+     *
+     * @return Requisite's file and directory manager.
+     */
     FileManager getFileManager();
+    /**
+     * Provides an instance of Requisite's internal configuration manager.
+     *
+     * @return Requisite's internal configuration manager.
+     */
     ConfigurationManager getConfigurationManager();
+    /**
+     * Provides an instance of Requisite's notifications service.
+     *
+     * @return Requisite's notifications service.
+     */
     INotifications getNotifications();
+    /**
+     * Provides an instance of Requisite's internal websocket.
+     *
+     * @return Requisite's internal websocket.
+     */
     RequisiteClientSocket getRequisiteSocket();
+    /**
+     * Provides an instance of Requisite's mod integration API.
+     *
+     * @return Requisite's mod integration API.
+     */
     IModIntegration getModIntegration();
+    /**
+     * Provides an instance of Requisite's custom command registry.
+     *
+     * @return Requisite's command registry.
+     */
     CommandRegistry getCommandRegistry();
+    /**
+     * Provides an instance for Requisite's KeyBind API.
+     *
+     * @return Requisite's KeyBind API.
+     */
     KeyBindRegistry getKeyBindRegistry();
+    /**
+     * Provides an instance of Requisite's custom GUI component factory.
+     *
+     * @return Requisite's custom GUI component factory.
+     */
     IComponentFactory getComponentFactory();
+    /**
+     * Provides an instance of Requisite's internal event manager.
+     *
+     * @return Requisite's internal event manager.
+     */
     RequisiteEventManager getInternalEventManager();
+    /**
+     * Provides an instance of Requisite's internal event listener.
+     *
+     * @return Requisite's internal event listener.
+     */
     IEventListener getInternalEventListener();
 
+    /**
+     * Provides an instance of Requisite's privacy configurations.
+     *
+     * @return Requisite's privacy configurations.
+     */
     default PrivacyConfigurations getPrivacyConfigurations() {
         return RequisiteDefaultImplementations.privacyConfigurations;
     }
 
+    /**
+     * Opens Requisite's main menu, providing access to most Requisite configurations and services.
+     */
     void openMenu();
 
+    /**
+     * Provides an instance of Requisite's enhanced font renderer utility, which gives you more options for rendering text to the screen.
+     *
+     * @return Requisite's enhanced font renderer utility.
+     */
     IEnhancedFontRenderer getEnhancedFontRenderer();
+    /**
+     * Provides an instance of Requisite's GUI utility, allowing you to open GUIs easily.
+     *
+     * @return Requisite's GUI utility.
+     */
     IGuiHelper<?> getGuiHelper();
+    /**
+     * Provides an instance of Requisite's player utility, giving you access to some of the player's data.
+     *
+     * @return Requisite's player utility.
+     */
     IPlayerHelper getPlayerHelper();
     IChatHelper getChatHelper();
     default ColourHelper getColourHelper() {
@@ -123,6 +224,12 @@ public interface IRequisite extends IMod {
     IGlHelper getGlHelper();
 
     /* Default. */
+
+    /**
+     * Fetches and provides Requisite's websocket URI.
+     *
+     * @return Requisite's websocket URI.
+     */
     default URI fetchSocketUri() {
         if (getJavaArguments().isSocketDebug()) {
             return URI.create("ws://localhost:8080/");
@@ -141,19 +248,37 @@ public interface IRequisite extends IMod {
         return URI.create(encoded);
     }
 
+    /**
+     * @return Requisite's prefix for chat messages.
+     */
     default String getChatPrefix() {
         return ChatColour.GRAY + "[" + getJavaArguments().getChatPrefixColour() + name() + ChatColour.GRAY + "]";
     }
+
+    /**
+     * @return Requisite's name.
+     */
     default String name() {
         return RequisiteInfo.NAME;
     }
+    /**
+     * @return Requisite's current version.
+     */
     default String version() {
         return RequisiteInfo.VER;
     }
+    /**
+     * @return Requisite's ID for mod loader purposes.
+     */
     default String id() {
         return RequisiteInfo.ID;
     }
 
+    /**
+     * Provides Requisite's mod integration API it's own metadata.
+     *
+     * @return Requisite's own metadata.
+     */
     default ModMetadata getMetadata() {
         return ModMetadata.from(name(), version())
                 .setCommand("/requisite")
