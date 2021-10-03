@@ -28,7 +28,7 @@ public class ClipboardHelper {
 
     /**
      * @return The string currently copied to the clipboard.
-     * @author MatthewTGM
+     * @author Deftu
      */
     public String getClipboardString() {
         try {
@@ -45,7 +45,7 @@ public class ClipboardHelper {
     /**
      * @param input The string to set the clipboard's content to.
      * @return Whether the process was successful.
-     * @author MatthewTGM
+     * @author Deftu
      */
     public boolean setClipboardString(String input) {
         try {
@@ -60,7 +60,7 @@ public class ClipboardHelper {
 
     /**
      * @return The system clipboard.
-     * @author MatthewTGM
+     * @author Deftu
      */
     public Clipboard getClipboard() {
         return Toolkit.getDefaultToolkit().getSystemClipboard();

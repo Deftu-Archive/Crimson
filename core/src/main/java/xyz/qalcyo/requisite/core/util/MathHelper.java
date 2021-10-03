@@ -19,31 +19,49 @@
 package xyz.qalcyo.requisite.core.util;
 
 public class MathHelper {
-
+    /**
+     * Clamps the provided value between 0.0 and 1.0
+     * @return The clamped value.
+     */
     public float clamp01(float value) {
         if ((double)value < 0.0)
             return 0.0f;
         return (double)value > 1.0 ? 1f : value;
     }
 
+    /**
+     * Clamps the provided value between params min and max.
+     * @return The clamped value.
+     */
     public float clamp(float val, float min, float max) {
         if (val > max) val = max;
         else if (val < min) val = min;
         return val;
     }
 
+    /**
+     * Clamps the provided value between params min and max.
+     * @return The clamped value.
+     */
     public int clamp_int(int num, int min, int max) {
         return num < min ? min : (Math.min(num, max));
     }
 
+    /**
+     * Clamps the provided value between params min and max.
+     * @return The clamped value.
+     */
     public long clamp_long(long num, long min, long max) {
         return num < min ? min : (Math.min(num, max));
     }
 
+    /**
+     * Lerps between params start and end at the rate of param interpolation.
+     * @return The clamped value.
+     */
     public float lerp(float start, float end, float interpolation) {
         return start + (end - start) * clamp01(interpolation);
     }
-
     public float percentageOf(float val, float min, float max) {
         return (val - min) / (max - min);
     }
@@ -52,6 +70,9 @@ public class MathHelper {
         return (val - min) / (max - min);
     }
 
+    /**
+     * @return If param val is between params min and max
+     */
     public boolean isBetween(int val, int min, int max) {
         return (val > min) && (val < max);
     }

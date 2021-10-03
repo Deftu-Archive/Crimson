@@ -22,11 +22,18 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 public class LoggingHelper {
-
+    /**
+     * Creates a Logger instance from the given parameters.
+     * @return The Logger instance.
+     */
     public Logger create(String prefix, String name) {
         return LogManager.getLogger(prefix + " (" + name + ")");
     }
 
+    /**
+     * Creates a Logger instance from the given parameter.
+     * @return The Logger instance.
+     */
     public Logger create(String name) {
         return LogManager.getLogger(name);
     }

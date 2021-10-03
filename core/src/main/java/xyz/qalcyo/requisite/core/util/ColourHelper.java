@@ -18,24 +18,33 @@
 
 package xyz.qalcyo.requisite.core.util;
 
+import xyz.qalcyo.requisite.core.data.ColourRGB;
+
 import java.awt.*;
 
 public class ColourHelper {
 
     /**
      * @return A changing colour based on the users' computer time. Simulates a "chroma" colour.
-     * @author MatthewTGM
+     * @author Deftu
      */
     public int timeBasedChroma() {
         long l = System.currentTimeMillis();
         return Color.HSBtoRGB(l % 2000L / 2000.0f, 0.8f, 0.8f);
     }
 
-    public Color getChroma(double x, double y) {
+    /**
+     * @return A ColourRGB instance based on the users' computer time and the positions provided, which when used multiple times can simulate a "chroma" colour.
+     * @author Unknown
+     */
+    public ColourRGB getChroma(double x, double y) {
         float v = 2000.0f;
-        return new Color(Color.HSBtoRGB((float)((System.currentTimeMillis() - x * 10.0 * 1.0 - y * 10.0 * 1.0) % v) / v, 0.8f, 0.8f));
+        return new ColourRGB(Color.HSBtoRGB((float)((System.currentTimeMillis() - x * 10.0 * 1.0 - y * 10.0 * 1.0) % v) / v, 0.8f, 0.8f));
     }
 
+    /**
+     * @return An integer representing the alpha value of the colour's RGB value given.
+     */
     public int getAlpha(int colour) {
         return (colour >> 24 & 255);
     }

@@ -31,32 +31,53 @@ public final class RequisiteEventManager {
         this.requisite = requisite;
     }
 
+    /**
+     * Handles HUD rendering.
+     */
     public void handleHudRender(float partialTicks) {
         requisite.getEventBus().call(new RenderHudEvent(partialTicks));
     }
 
+    /**
+     * Handles client ticks.
+     */
     public void handleTick() {
         requisite.getEventBus().call(new TickEvent());
     }
 
+    /**
+     * Handles render ticks.
+     */
     public void handleRenderTick(float partialTicks) {
         requisite.getEventBus().call(new RenderTickEvent(partialTicks));
     }
 
+    /**
+     * Handles chat messages being sent.
+     */
     public Pair<String, Boolean> handleChatMessageSent(String message) {
         SendChatMessageEvent event = new SendChatMessageEvent(message);
         requisite.getEventBus().call(event);
         return new ImmutablePair<>(event.message, event.isCancelled());
     }
 
+    /**
+     * Handles chat messages being received.
+     */
     public boolean handleChatMessageReceived(String message, byte type) {
         return parseCancellable(new ChatMessageReceivedEvent(message, type));
     }
 
+    /**
+     * Handles key inputs.
+     */
     public boolean handleKeyInput(int keyCode, boolean down, boolean repeated) {
         return parseCancellable(new KeyInputEvent(keyCode, down, repeated));
     }
 
+    /**
+     * Handles world loading.
+     */
     public void handleWorldLoad() {
         requisite.getEventBus().call(new WorldLoadEvent());
     }

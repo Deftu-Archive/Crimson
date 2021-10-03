@@ -30,42 +30,72 @@ public class UniversalLogger {
         this.requisite = requisite;
     }
 
+    /**
+     * Logs an info message via Requisite's Logger instance.
+     */
     public void info(String str) {
         create().info(str);
     }
 
+    /**
+     * Logs a warn message via Requisite's Logger instance.
+     */
     public void warn(String str) {
         create().warn(str);
     }
 
+    /**
+     * Logs an error message via Requisite's Logger instance.
+     */
     public void error(String str) {
         create().error(str);
     }
 
+    /**
+     * Logs an error message that includes a stack trace via Requisite's Logger instance.
+     */
     public void error(String str, Throwable throwable) {
         create().error(str, throwable);
     }
 
+    /**
+     * Logs a debug message via Requisite's Logger instance.
+     */
     public void debug(String str) {
         create().debug(str);
     }
 
+    /**
+     * Logs a fatal error message via Requisite's Logger instance.
+     */
     public void fatal(String str) {
         create().fatal(str);
     }
 
+    /**
+     * Logs a fatal error message that includes a stack trace via Requisite's Logger instance.
+     */
     public void fatal(String str, Throwable throwable) {
         create().fatal(str, throwable);
     }
 
+    /**
+     * Logs a trace message via Requisite's Logger instance.
+     */
     public void trace(String str) {
         create().trace(str);
     }
 
+    /**
+     * Logs a trace message that includes a stack trace via Requisite's Logger instance.
+     */
     public void trace(String str, Throwable throwable) {
         create().trace(str, throwable);
     }
 
+    /**
+     * Logs a Throwable as an error message.
+     */
     public void catching(Throwable throwable) {
         create().catching(throwable);
     }

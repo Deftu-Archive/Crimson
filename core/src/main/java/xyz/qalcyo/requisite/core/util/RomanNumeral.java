@@ -45,6 +45,10 @@ public final class RomanNumeral {
 
     private final Map<Integer, String> numeralCache = new HashMap<>();
 
+    /**
+     * Either returns the cached roman numeral version of a number or gets the roman numeral, caches it, and returns it.
+     * @return The roman numeral value of the number.
+     */
     public String getCached(int number) {
         if (numeralCache.containsKey(number))
             return numeralCache.get(number);
@@ -54,6 +58,9 @@ public final class RomanNumeral {
         return roman;
     }
 
+    /**
+     * @return The roman numeral value of the number.
+     */
     public String toRoman(int number) {
         int l = map.floorKey(number);
         if (number == l)

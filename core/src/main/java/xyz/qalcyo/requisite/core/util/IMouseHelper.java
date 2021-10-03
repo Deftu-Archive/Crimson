@@ -19,9 +19,19 @@
 package xyz.qalcyo.requisite.core.util;
 
 public interface IMouseHelper {
-
+    /**
+     * @return The current X position of the mouse.
+     */
     double getMouseX();
+
+    /**
+     * @return The current Y position of the mouse.
+     */
     double getMouseY();
+
+    /**
+     * @return Whether any mouse button is down.
+     */
     boolean isMouseButtonDown();
 
 }

@@ -27,6 +27,9 @@ public class RequisiteLauncher {
 
     private static boolean initialized = false;
 
+    /**
+     * Initializes Requisite's Mixin configuration.
+     */
     public static void initialize() {
         if (initialized)
             return;
@@ -37,6 +40,9 @@ public class RequisiteLauncher {
         logger.info("Successfully added Requisite mixins config.");
     }
 
+    /**
+     * @return Whether Requisite's Mixin configuration has been initialized.
+     */
     public static boolean isInitialized() {
         return initialized;
     }
