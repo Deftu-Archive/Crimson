@@ -19,9 +19,9 @@
 package xyz.qalcyo.requisite.integration;
 
 import xyz.qalcyo.requisite.core.IRequisite;
-import xyz.qalcyo.requisite.core.mods.IMod;
-import xyz.qalcyo.requisite.core.mods.IModIntegration;
-import xyz.qalcyo.requisite.core.mods.ModMetadata;
+import xyz.qalcyo.requisite.core.integration.mods.IMod;
+import xyz.qalcyo.requisite.core.integration.mods.IModIntegration;
+import xyz.qalcyo.requisite.core.integration.mods.ModMetadata;
 
 import java.util.ArrayList;
 import java.util.List;

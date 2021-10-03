@@ -16,8 +16,11 @@
  * along with Requisite. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package xyz.qalcyo.requisite.core.mods;
+package xyz.qalcyo.requisite.core.integration.mods;
 
-public interface IMod {
-    ModMetadata getMetadata();
+import java.util.List;
+
+public interface IModIntegration {
+    void registerIntegratedMod(IMod mod);
+    List<IMod> getIntegratedMods();
 }

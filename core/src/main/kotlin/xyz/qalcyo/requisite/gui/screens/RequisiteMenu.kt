@@ -19,7 +19,7 @@
 package xyz.qalcyo.requisite.gui.screens
 
 import xyz.qalcyo.requisite.core.IRequisite
-import xyz.qalcyo.requisite.core.mods.IModConfigurationMenu
+import xyz.qalcyo.requisite.core.integration.mods.IModConfigurationMenu
 
 class RequisiteMenu(
     val requisite: IRequisite
