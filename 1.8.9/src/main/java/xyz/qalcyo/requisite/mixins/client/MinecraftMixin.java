@@ -39,6 +39,8 @@ public class MinecraftMixin {
     private void onGameStarted(CallbackInfo ci) {
         if (Requisite.getInstance().finish(mcDataDir)) {
             Requisite.getInstance().getLogger().info("Initialized Requisite successfully.");
+        } else {
+            throw new IllegalStateException("Failed to initialize Requisite! PLEASE report this!");
         }
     }
 

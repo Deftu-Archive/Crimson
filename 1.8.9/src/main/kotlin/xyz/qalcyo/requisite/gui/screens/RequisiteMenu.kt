@@ -66,7 +66,7 @@ class RequisiteMenu :
             restorePreviousScreen()
         }, "Close").build(Requisite.getInstance().componentFactory).constrain {
             x = CenterConstraint()
-            y = CenterConstraint() + SiblingConstraint()
+            y = CenterConstraint()
             width = Button.DEFAULT_WIDTH_PIXELS
             height = Button.DEFAULT_HEIGHT_PIXELS
         } childOf buttonContainer
@@ -75,10 +75,10 @@ class RequisiteMenu :
             Requisite.getInstance().modIntegration.openMenu()
         }, "Mods").build(Requisite.getInstance().componentFactory).constrain {
             x = CenterConstraint()
-            y = CenterConstraint()
-            width = Button.DEFAULT_WIDTH_PIXELS
+            y = CenterConstraint() - SiblingConstraint()
+            width = 100.pixels()
             height = Button.DEFAULT_HEIGHT_PIXELS
-        }
+        } childOf buttonContainer
     }
 
     override fun open() = Requisite.getInstance().openMenu()
