@@ -20,6 +20,8 @@ package xyz.qalcyo.requisite.core;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import xyz.qalcyo.requisite.core.integration.hypixel.HypixelHelper;
+import xyz.qalcyo.requisite.core.keybinds.KeyBindRegistry;
 import xyz.qalcyo.requisite.core.util.*;
 import xyz.qalcyo.requisite.core.files.configs.PrivacyConfigurations;
 import xyz.qalcyo.simpleeventbus.SimpleEventBus;
@@ -28,21 +30,25 @@ class RequisiteDefaultImplementations {
 
     static RequisiteAPI INSTANCE;
 
-    static final Logger logger = LogManager.getLogger("Requisite");
-    static final RequisiteJavaArguments javaArguments = new RequisiteJavaArguments();
-    static final SimpleEventBus eventBus = new SimpleEventBus();
+    static final Logger LOGGER = LogManager.getLogger("Requisite");
+    static final RequisiteJavaArguments JAVA_ARGUMENTS = new RequisiteJavaArguments();
+    static final SimpleEventBus EVENT_BUS = new SimpleEventBus();
 
-    static final PrivacyConfigurations privacyConfigurations = new PrivacyConfigurations();
+    static final KeyBindRegistry KEY_BIND_REGISTRY = new KeyBindRegistry();
 
-    static final ColourHelper colourHelper = new ColourHelper();
-    static final LoggingHelper loggingHelper = new LoggingHelper();
-    static final ClipboardHelper clipboardHelper = new ClipboardHelper();
-    static final DateHelper dateHelper = new DateHelper();
-    static final EasingHelper easingHelper = new EasingHelper();
-    static final MathHelper mathHelper = new MathHelper();
-    static final ReflectionHelper reflectionHelper = new ReflectionHelper();
-    static final RomanNumeral romanNumerals = new RomanNumeral();
-    static final StringHelper stringHelper = new StringHelper();
-    static final MojangAPI mojangApi = new MojangAPI();
+    static final PrivacyConfigurations PRIVACY_CONFIGURATIONS = new PrivacyConfigurations();
+
+    static final ColourHelper COLOUR_HELPER = new ColourHelper();
+    static final LoggingHelper LOGGING_HELPER = new LoggingHelper();
+    static final UniversalLogger UNIVERSAL_LOGGER = new UniversalLogger();
+    static final ClipboardHelper CLIPBOARD_HELPER = new ClipboardHelper();
+    static final DateHelper DATE_HELPER = new DateHelper();
+    static final EasingHelper EASING_HELPER = new EasingHelper();
+    static final MathHelper MATH_HELPER = new MathHelper();
+    static final ReflectionHelper REFLECTION_HELPER = new ReflectionHelper();
+    static final RomanNumeral ROMAN_NUMERAL = new RomanNumeral();
+    static final HypixelHelper HYPIXEL_HELPER = new HypixelHelper();
+    static final StringHelper STRING_HELPER = new StringHelper();
+    static final MojangAPI MOJANG_API = new MojangAPI();
 
 }

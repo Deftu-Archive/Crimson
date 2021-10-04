@@ -72,7 +72,7 @@ public interface RequisiteAPI extends IMod {
      * @return Requisite's logger.
      */
     default Logger getLogger() {
-        return RequisiteDefaultImplementations.logger;
+        return RequisiteDefaultImplementations.LOGGER;
     }
     /**
      * Provides an instance of Requisite's JVM argument parser.
@@ -80,7 +80,7 @@ public interface RequisiteAPI extends IMod {
      * @return Requisite's JVM argument parser.
      */
     default RequisiteJavaArguments getJavaArguments() {
-        return RequisiteDefaultImplementations.javaArguments;
+        return RequisiteDefaultImplementations.JAVA_ARGUMENTS;
     }
     /**
      * Provides an instance of Requisite's {@link SimpleEventBus}.
@@ -88,7 +88,7 @@ public interface RequisiteAPI extends IMod {
      * @return Requisite's event bus.
      */
     default SimpleEventBus getEventBus() {
-        return RequisiteDefaultImplementations.eventBus;
+        return RequisiteDefaultImplementations.EVENT_BUS;
     }
 
     /**
@@ -132,7 +132,9 @@ public interface RequisiteAPI extends IMod {
      *
      * @return Requisite's KeyBind API.
      */
-    KeyBindRegistry getKeyBindRegistry();
+    default KeyBindRegistry getKeyBindRegistry() {
+        return RequisiteDefaultImplementations.KEY_BIND_REGISTRY;
+    }
     /**
      * Provides an instance of Requisite's custom GUI component factory.
      *
@@ -158,7 +160,7 @@ public interface RequisiteAPI extends IMod {
      * @return Requisite's privacy configurations.
      */
     default PrivacyConfigurations getPrivacyConfigurations() {
-        return RequisiteDefaultImplementations.privacyConfigurations;
+        return RequisiteDefaultImplementations.PRIVACY_CONFIGURATIONS;
     }
 
     /**
@@ -192,41 +194,45 @@ public interface RequisiteAPI extends IMod {
     IPlayerHelper getPlayerHelper();
     IChatHelper getChatHelper();
     default ColourHelper getColourHelper() {
-        return RequisiteDefaultImplementations.colourHelper;
+        return RequisiteDefaultImplementations.COLOUR_HELPER;
     }
     default LoggingHelper getLoggingHelper() {
-        return RequisiteDefaultImplementations.loggingHelper;
+        return RequisiteDefaultImplementations.LOGGING_HELPER;
     }
-    UniversalLogger getUniversalLogger();
+    default UniversalLogger getUniversalLogger() {
+        return RequisiteDefaultImplementations.UNIVERSAL_LOGGER;
+    }
     default ClipboardHelper getClipboardHelper() {
-        return RequisiteDefaultImplementations.clipboardHelper;
+        return RequisiteDefaultImplementations.CLIPBOARD_HELPER;
     }
     default DateHelper getDateHelper() {
-        return RequisiteDefaultImplementations.dateHelper;
+        return RequisiteDefaultImplementations.DATE_HELPER;
     }
     default EasingHelper getEasingHelper() {
-        return RequisiteDefaultImplementations.easingHelper;
+        return RequisiteDefaultImplementations.EASING_HELPER;
     }
     default MathHelper getMathHelper() {
-        return RequisiteDefaultImplementations.mathHelper;
+        return RequisiteDefaultImplementations.MATH_HELPER;
     }
     IMouseHelper getMouseHelper();
     default ReflectionHelper getReflectionHelper() {
-        return RequisiteDefaultImplementations.reflectionHelper;
+        return RequisiteDefaultImplementations.REFLECTION_HELPER;
     }
     IPositionHelper getPositionHelper();
     default RomanNumeral getRomanNumerals() {
-        return RequisiteDefaultImplementations.romanNumerals;
+        return RequisiteDefaultImplementations.ROMAN_NUMERAL;
     }
-    HypixelHelper getHypixelHelper();
+    default HypixelHelper getHypixelHelper() {
+        return RequisiteDefaultImplementations.HYPIXEL_HELPER;
+    }
     IRenderHelper getRenderHelper();
     default StringHelper getStringHelper() {
-        return RequisiteDefaultImplementations.stringHelper;
+        return RequisiteDefaultImplementations.STRING_HELPER;
     }
     IMessageQueue getMessageQueue();
     IServerHelper getServerHelper();
     default MojangAPI getMojangApi() {
-        return RequisiteDefaultImplementations.mojangApi;
+        return RequisiteDefaultImplementations.MOJANG_API;
     }
     IGlHelper getGlHelper();
 

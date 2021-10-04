@@ -31,8 +31,8 @@ public class KeyBindRegistry {
     private final KeyBindConfigurations configurations;
     private final List<KeyBind> keyBinds;
 
-    public KeyBindRegistry(RequisiteAPI requisite) {
-        this.requisite = requisite;
+    public KeyBindRegistry() {
+        this.requisite = RequisiteAPI.retrieveInstance();
 
         requisite.getConfigurationManager().addConfigurable(this.configurations = new KeyBindConfigurations());
         this.keyBinds = Lists.newArrayList();

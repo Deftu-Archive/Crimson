@@ -26,8 +26,8 @@ public class UniversalLogger {
 
     private final RequisiteAPI requisite;
 
-    public UniversalLogger(RequisiteAPI requisite) {
-        this.requisite = requisite;
+    public UniversalLogger() {
+        this.requisite = RequisiteAPI.retrieveInstance();
     }
 
     /**

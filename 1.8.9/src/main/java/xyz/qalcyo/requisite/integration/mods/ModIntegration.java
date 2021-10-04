@@ -30,8 +30,8 @@ public class ModIntegration implements IModIntegration {
     private final RequisiteAPI requisite;
     private final List<IMod> integratedMods = new ArrayList<>();
 
-    public ModIntegration(RequisiteAPI requisite) {
-        this.requisite = requisite;
+    public ModIntegration() {
+        this.requisite = RequisiteAPI.retrieveInstance();
     }
 
     public void openMenu() {

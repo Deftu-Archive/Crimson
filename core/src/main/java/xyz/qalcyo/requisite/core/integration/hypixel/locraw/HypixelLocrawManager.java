@@ -39,8 +39,8 @@ public class HypixelLocrawManager {
     private HypixelLocraw locraw;
     private boolean allowCancel;
 
-    public HypixelLocrawManager(RequisiteAPI requisite, HypixelHelper hypixelManager) {
-        this.requisite = requisite;
+    public HypixelLocrawManager(HypixelHelper hypixelManager) {
+        this.requisite = RequisiteAPI.retrieveInstance();
         this.hypixelManager = hypixelManager;
         requisite.getEventBus().register(WorldLoadEvent.class, this::onWorldLoad);
         requisite.getEventBus().register(ChatMessageReceivedEvent.class, this::onChatMessageReceived);

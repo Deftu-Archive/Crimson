@@ -43,8 +43,8 @@ public class CommandRegistry {
 
     private String[] cachedAutoCompletion;
 
-    public CommandRegistry(RequisiteAPI requisite, ICommandHelper commandHelper) {
-        this.requisite = requisite;
+    public CommandRegistry(ICommandHelper commandHelper) {
+        this.requisite = RequisiteAPI.retrieveInstance();
         this.commandHelper = commandHelper;
         this.commands = Lists.newArrayList();
 

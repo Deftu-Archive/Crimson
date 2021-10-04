@@ -20,6 +20,7 @@ package xyz.qalcyo.requisite.util;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiScreen;
+import xyz.qalcyo.requisite.Requisite;
 import xyz.qalcyo.requisite.core.RequisiteAPI;
 import xyz.qalcyo.requisite.core.events.TickEvent;
 import xyz.qalcyo.requisite.core.util.IGuiHelper;
@@ -28,8 +29,8 @@ public class GuiHelper implements IGuiHelper<GuiScreen> {
 
     private GuiScreen awaitingDisplay = new GuiNull();
 
-    public GuiHelper(RequisiteAPI requisite) {
-        requisite.getEventBus().register(TickEvent.class, this::onClientTick);
+    public GuiHelper() {
+        Requisite.getInstance().getEventBus().register(TickEvent.class, this::onClientTick);
     }
 
     public void open(GuiScreen screen) {

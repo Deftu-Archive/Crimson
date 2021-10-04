@@ -34,9 +34,9 @@ public class HypixelHelper {
     private final HypixelLocrawManager locrawManager;
     private final HypixelAPI api = new HypixelAPI();
 
-    public HypixelHelper(RequisiteAPI requisite) {
-        this.requisite = requisite;
-        locrawManager = new HypixelLocrawManager(requisite, this);
+    public HypixelHelper() {
+        this.requisite = RequisiteAPI.retrieveInstance();
+        locrawManager = new HypixelLocrawManager(this);
     }
 
     public HypixelLocrawManager getLocrawManager() {

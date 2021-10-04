@@ -64,7 +64,6 @@ public class Requisite implements RequisiteAPI {
     private RequisiteClientSocket requisiteSocket;
     private ModIntegration modIntegration;
     private CommandRegistry commandRegistry;
-    private KeyBindRegistry keyBindRegistry;
     private ComponentFactory componentFactory;
     private RequisiteEventManager internalEventManager;
     private RequisiteEventListener internalEventListener;
@@ -74,10 +73,8 @@ public class Requisite implements RequisiteAPI {
     private GuiHelper guiHelper;
     private PlayerHelper playerHelper;
     private ChatHelper chatHelper;
-    private UniversalLogger universalLogger;
     private MouseHelper mouseHelper;
     private PositionHelper positionHelper;
-    private HypixelHelper hypixelHelper;
     private RenderHelper renderHelper;
     private MessageQueue messageQueue;
     private ServerHelper serverHelper;
@@ -94,39 +91,36 @@ public class Requisite implements RequisiteAPI {
         configurationManager = new ConfigurationManager("config", fileManager.getRequisiteDirectory(fileManager.getQalcyoDirectory(fileManager.getConfigDirectory(gameDir))));
         notifications = new Notifications(this);
         boolean socketConnected = (requisiteSocket = new RequisiteClientSocket(this, new SocketHelper())).awaitConnect();
-        modIntegration = new ModIntegration(this);
-        commandRegistry = new CommandRegistry(this, new CommandHelper());
-        keyBindRegistry = new KeyBindRegistry(this);
+        modIntegration = new ModIntegration();
+        commandRegistry = new CommandRegistry(new CommandHelper());
         componentFactory = new ComponentFactory();
         internalEventManager = new RequisiteEventManager(this);
         internalEventListener = new RequisiteEventListener(this);
 
         /* Initialize utilities. */
         Multithreading.runAsync(() -> {
-            enhancedFontRenderer = new EnhancedFontRenderer(this);
-            guiHelper = new GuiHelper(this);
+            enhancedFontRenderer = new EnhancedFontRenderer();
+            guiHelper = new GuiHelper();
             playerHelper = new PlayerHelper();
             chatHelper = new ChatHelper();
-            universalLogger = new UniversalLogger(this);
             mouseHelper = new MouseHelper();
             positionHelper = new PositionHelper();
-            hypixelHelper = new HypixelHelper(this);
             renderHelper = new RenderHelper();
             messageQueue = new MessageQueue(this);
             serverHelper = new ServerHelper();
             glHelper = new GlHelper();
-
-            if (!socketConnected) {
-                notifications.push("Error!", "Failed to connect to Requisite WebSocket. " + ChatColour.BOLD + "Click to attempt a reconnect.", notification -> {
-                    if (!requisiteSocket.awaitReconnect()) {
-                        notifications.push(notification.clone());
-                        notification.close();
-                    }
-                });
-            }
         });
 
-        keyBindRegistry.register(KeyBinds.menu("Debug", "Requisite", Keyboard.KEY_RCONTROL, new TestMenu()));
+        if (!socketConnected) {
+            notifications.push("Error!", "Failed to connect to Requisite WebSocket. " + ChatColour.BOLD + "Click to attempt a reconnect.", notification -> {
+                if (!requisiteSocket.awaitReconnect()) {
+                    notifications.push(notification.clone());
+                    notification.close();
+                }
+            });
+        }
+
+        getKeyBindRegistry().register(KeyBinds.menu("Debug", "Requisite", Keyboard.KEY_RCONTROL, new TestMenu()));
 
         getMetadata().setConfigurationMenu(RequisiteMenu.class);
         return initialized = true;
@@ -154,10 +148,6 @@ public class Requisite implements RequisiteAPI {
 
     public CommandRegistry getCommandRegistry() {
         return commandRegistry;
-    }
-
-    public KeyBindRegistry getKeyBindRegistry() {
-        return keyBindRegistry;
     }
 
     public ComponentFactory getComponentFactory() {
@@ -196,20 +186,12 @@ public class Requisite implements RequisiteAPI {
         return chatHelper;
     }
 
-    public UniversalLogger getUniversalLogger() {
-        return universalLogger;
-    }
-
     public MouseHelper getMouseHelper() {
         return mouseHelper;
     }
 
     public PositionHelper getPositionHelper() {
         return positionHelper;
-    }
-
-    public HypixelHelper getHypixelHelper() {
-        return hypixelHelper;
     }
 
     public RenderHelper getRenderHelper() {
