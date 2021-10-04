@@ -22,7 +22,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
-import xyz.qalcyo.requisite.core.IRequisite;
+import xyz.qalcyo.requisite.core.RequisiteAPI;
 import xyz.qalcyo.requisite.core.util.messages.IMessageQueue;
 import xyz.qalcyo.requisite.core.util.messages.MessageQueueEntry;
 
@@ -31,12 +31,12 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 
 public class MessageQueue implements IMessageQueue {
 
-    private final IRequisite requisite;
+    private final RequisiteAPI requisite;
 
     protected final Queue<MessageQueueEntry> queue = new ConcurrentLinkedQueue<>();
     private long tickCounter;
 
-    public MessageQueue(IRequisite requisite) {
+    public MessageQueue(RequisiteAPI requisite) {
         this.requisite = requisite;
         MinecraftForge.EVENT_BUS.register(this);
     }

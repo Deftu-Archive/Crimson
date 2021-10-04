@@ -18,7 +18,7 @@
 
 package xyz.qalcyo.requisite.core.keybinds;
 
-import xyz.qalcyo.requisite.core.IRequisite;
+import xyz.qalcyo.requisite.core.RequisiteAPI;
 
 public class KeyBinds {
 
@@ -39,7 +39,7 @@ public class KeyBinds {
     }
 
     public static <T> KeyBind menu(String name, String category, int key, T menu) {
-        return from(name, category, key, () -> IRequisite.retrieveInstance().getGuiHelper().forceOpen(menu));
+        return from(name, category, key, () -> RequisiteAPI.retrieveInstance().getGuiHelper().forceOpen(menu));
     }
 
 }

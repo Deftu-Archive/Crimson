@@ -25,9 +25,9 @@ import xyz.qalcyo.simpleeventbus.Event;
 
 public final class RequisiteEventManager {
 
-    private final IRequisite requisite;
+    private final RequisiteAPI requisite;
 
-    public RequisiteEventManager(IRequisite requisite) {
+    public RequisiteEventManager(RequisiteAPI requisite) {
         this.requisite = requisite;
     }
 

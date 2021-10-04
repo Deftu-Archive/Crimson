@@ -18,7 +18,7 @@
 
 package xyz.qalcyo.requisite.integration;
 
-import xyz.qalcyo.requisite.core.IRequisite;
+import xyz.qalcyo.requisite.core.RequisiteAPI;
 import xyz.qalcyo.requisite.core.integration.mods.IMod;
 import xyz.qalcyo.requisite.core.integration.mods.IModIntegration;
 import xyz.qalcyo.requisite.core.integration.mods.ModMetadata;
@@ -28,10 +28,10 @@ import java.util.List;
 
 public class ModIntegration implements IModIntegration {
 
-    private final IRequisite requisite;
+    private final RequisiteAPI requisite;
     private final List<IMod> integratedMods = new ArrayList<>();
 
-    public ModIntegration(IRequisite requisite) {
+    public ModIntegration(RequisiteAPI requisite) {
         this.requisite = requisite;
     }
 

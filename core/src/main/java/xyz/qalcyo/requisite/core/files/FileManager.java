@@ -18,15 +18,15 @@
 
 package xyz.qalcyo.requisite.core.files;
 
-import xyz.qalcyo.requisite.core.IRequisite;
+import xyz.qalcyo.requisite.core.RequisiteAPI;
 
 import java.io.File;
 
 public class FileManager {
 
-    private final IRequisite requisite;
+    private final RequisiteAPI requisite;
 
-    public FileManager(IRequisite requisite) {
+    public FileManager(RequisiteAPI requisite) {
         this.requisite = requisite;
     }
 

@@ -22,7 +22,7 @@ import xyz.qalcyo.mango.Lists;
 import xyz.qalcyo.mango.Objects;
 import xyz.qalcyo.mango.collections.Pair;
 import xyz.qalcyo.mango.collections.impl.ImmutablePair;
-import xyz.qalcyo.requisite.core.IRequisite;
+import xyz.qalcyo.requisite.core.RequisiteAPI;
 import xyz.qalcyo.requisite.core.commands.annotations.Command;
 import xyz.qalcyo.requisite.core.commands.exceptions.CommandException;
 import xyz.qalcyo.requisite.core.commands.exceptions.IncorrectUsageException;
@@ -37,13 +37,13 @@ import java.util.List;
 
 public class CommandRegistry {
 
-    private final IRequisite requisite;
+    private final RequisiteAPI requisite;
     private final ICommandHelper commandHelper;
     private final List<ICommand> commands;
 
     private String[] cachedAutoCompletion;
 
-    public CommandRegistry(IRequisite requisite, ICommandHelper commandHelper) {
+    public CommandRegistry(RequisiteAPI requisite, ICommandHelper commandHelper) {
         this.requisite = requisite;
         this.commandHelper = commandHelper;
         this.commands = Lists.newArrayList();

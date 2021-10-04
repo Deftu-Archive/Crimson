@@ -21,14 +21,14 @@ package xyz.qalcyo.requisite.rendering;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.renderer.GlStateManager;
-import xyz.qalcyo.requisite.core.IRequisite;
+import xyz.qalcyo.requisite.core.RequisiteAPI;
 import xyz.qalcyo.requisite.core.rendering.IEnhancedFontRenderer;
 
 public class EnhancedFontRenderer implements IEnhancedFontRenderer {
 
-    private final IRequisite requisite;
+    private final RequisiteAPI requisite;
 
-    public EnhancedFontRenderer(IRequisite requisite) {
+    public EnhancedFontRenderer(RequisiteAPI requisite) {
         this.requisite = requisite;
     }
 

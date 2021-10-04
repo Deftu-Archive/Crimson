@@ -21,7 +21,6 @@ package xyz.qalcyo.requisite.core.data;
 import xyz.qalcyo.json.entities.JsonObject;
 import xyz.qalcyo.json.util.JsonApiHelper;
 import xyz.qalcyo.mango.Multithreading;
-import xyz.qalcyo.requisite.core.IRequisite;
 
 import java.util.concurrent.TimeUnit;
 import java.util.function.BiConsumer;

@@ -22,16 +22,14 @@ import net.minecraftforge.fml.common.Mod;
 import org.lwjgl.input.Keyboard;
 import xyz.qalcyo.mango.Multithreading;
 import xyz.qalcyo.requisite.commands.CommandHelper;
-import xyz.qalcyo.requisite.core.IRequisite;
+import xyz.qalcyo.requisite.core.RequisiteAPI;
 import xyz.qalcyo.requisite.core.RequisiteEventManager;
 import xyz.qalcyo.requisite.core.RequisiteInfo;
 import xyz.qalcyo.requisite.core.commands.CommandRegistry;
 import xyz.qalcyo.requisite.core.files.ConfigurationManager;
 import xyz.qalcyo.requisite.core.files.FileManager;
 import xyz.qalcyo.requisite.core.integration.hypixel.HypixelHelper;
-import xyz.qalcyo.requisite.core.keybinds.KeyBind;
 import xyz.qalcyo.requisite.core.keybinds.KeyBindRegistry;
-import xyz.qalcyo.requisite.core.keybinds.KeyBindState;
 import xyz.qalcyo.requisite.core.keybinds.KeyBinds;
 import xyz.qalcyo.requisite.core.networking.RequisiteClientSocket;
 import xyz.qalcyo.requisite.core.util.ChatColour;
@@ -53,7 +51,7 @@ import java.io.File;
         modid = RequisiteInfo.ID,
         acceptedMinecraftVersions = "[1.8.9]"
 )
-public class Requisite implements IRequisite {
+public class Requisite implements RequisiteAPI {
 
     /* Constants. */
     private static final Requisite INSTANCE = new Requisite();

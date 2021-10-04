@@ -22,15 +22,15 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.text.LiteralText;
-import xyz.qalcyo.requisite.core.IRequisite;
+import xyz.qalcyo.requisite.core.RequisiteAPI;
 import xyz.qalcyo.requisite.core.rendering.IEnhancedFontRenderer;
 
 public class EnhancedFontRenderer implements IEnhancedFontRenderer {
 
-    private final IRequisite requisite;
+    private final RequisiteAPI requisite;
     private final TextRenderer textRenderer;
 
-    public EnhancedFontRenderer(IRequisite requisite) {
+    public EnhancedFontRenderer(RequisiteAPI requisite) {
         this.requisite = requisite;
         this.textRenderer = MinecraftClient.getInstance().textRenderer;
     }

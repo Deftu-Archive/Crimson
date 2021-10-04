@@ -22,7 +22,7 @@ import net.minecraft.client.network.AbstractClientPlayerEntity;
 import xyz.qalcyo.mango.exceptions.UnfinishedApiException;
 import xyz.qalcyo.requisite.commands.CommandHelper;
 import xyz.qalcyo.requisite.core.IEventListener;
-import xyz.qalcyo.requisite.core.IRequisite;
+import xyz.qalcyo.requisite.core.RequisiteAPI;
 import xyz.qalcyo.requisite.core.RequisiteEventManager;
 import xyz.qalcyo.requisite.core.commands.CommandRegistry;
 import xyz.qalcyo.requisite.core.cosmetics.CosmeticManager;
@@ -41,7 +41,7 @@ import xyz.qalcyo.requisite.util.*;
 
 import java.io.File;
 
-public class Requisite implements IRequisite {
+public class Requisite implements RequisiteAPI {
 
     /* Constants. */
     private static final Requisite INSTANCE = new Requisite();

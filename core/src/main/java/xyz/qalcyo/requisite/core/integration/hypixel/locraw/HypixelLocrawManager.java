@@ -23,7 +23,7 @@ import xyz.qalcyo.json.entities.JsonObject;
 import xyz.qalcyo.json.parser.JsonParser;
 import xyz.qalcyo.json.util.JsonHelper;
 import xyz.qalcyo.mango.Multithreading;
-import xyz.qalcyo.requisite.core.IRequisite;
+import xyz.qalcyo.requisite.core.RequisiteAPI;
 import xyz.qalcyo.requisite.core.events.ChatMessageReceivedEvent;
 import xyz.qalcyo.requisite.core.events.WorldLoadEvent;
 import xyz.qalcyo.requisite.core.integration.hypixel.HypixelHelper;
@@ -33,13 +33,13 @@ import java.util.concurrent.TimeUnit;
 
 public class HypixelLocrawManager {
 
-    private final IRequisite requisite;
+    private final RequisiteAPI requisite;
     private final HypixelHelper hypixelManager;
 
     private HypixelLocraw locraw;
     private boolean allowCancel;
 
-    public HypixelLocrawManager(IRequisite requisite, HypixelHelper hypixelManager) {
+    public HypixelLocrawManager(RequisiteAPI requisite, HypixelHelper hypixelManager) {
         this.requisite = requisite;
         this.hypixelManager = hypixelManager;
         requisite.getEventBus().register(WorldLoadEvent.class, this::onWorldLoad);

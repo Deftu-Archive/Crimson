@@ -18,7 +18,7 @@
 
 package xyz.qalcyo.requisite.core.commands.impl;
 
-import xyz.qalcyo.requisite.core.IRequisite;
+import xyz.qalcyo.requisite.core.RequisiteAPI;
 import xyz.qalcyo.requisite.core.commands.annotations.Command;
 import xyz.qalcyo.requisite.core.data.ColourRGB;
 import xyz.qalcyo.requisite.core.notifications.NotificationColour;
@@ -29,9 +29,9 @@ import xyz.qalcyo.requisite.core.notifications.NotificationColour;
 )
 public class RequisiteTestCommand {
 
-    private final IRequisite requisite;
+    private final RequisiteAPI requisite;
 
-    public RequisiteTestCommand(IRequisite requisite) {
+    public RequisiteTestCommand(RequisiteAPI requisite) {
         this.requisite = requisite;
     }
 

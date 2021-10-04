@@ -27,7 +27,7 @@ import xyz.qalcyo.json.entities.JsonElement;
 import xyz.qalcyo.json.entities.JsonObject;
 import xyz.qalcyo.json.parser.JsonParser;
 import xyz.qalcyo.mango.Maps;
-import xyz.qalcyo.requisite.core.IRequisite;
+import xyz.qalcyo.requisite.core.RequisiteAPI;
 import xyz.qalcyo.requisite.core.util.ChatColour;
 
 import java.nio.ByteBuffer;
@@ -37,7 +37,7 @@ import java.util.Map;
 
 public class RequisiteClientSocket extends WebSocketClient {
 
-    private final IRequisite requisite;
+    private final RequisiteAPI requisite;
     private final Logger logger;
     private final ISocketHelper helper;
 
@@ -45,7 +45,7 @@ public class RequisiteClientSocket extends WebSocketClient {
 
     private boolean createNotification;
 
-    public RequisiteClientSocket(IRequisite requisite, ISocketHelper helper) {
+    public RequisiteClientSocket(RequisiteAPI requisite, ISocketHelper helper) {
         super(requisite.fetchSocketUri(), new Draft_6455());
         this.requisite = requisite;
         this.logger = LogManager.getLogger("RequisiteClientSocket");
@@ -201,7 +201,7 @@ public class RequisiteClientSocket extends WebSocketClient {
     private void initialize() {
     }
 
-    public IRequisite getRequisite() {
+    public RequisiteAPI getRequisite() {
         return requisite;
     }
 

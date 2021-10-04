@@ -19,7 +19,7 @@
 package xyz.qalcyo.requisite.util;
 
 import net.minecraft.client.MinecraftClient;
-import xyz.qalcyo.requisite.core.IRequisite;
+import xyz.qalcyo.requisite.core.RequisiteAPI;
 import xyz.qalcyo.requisite.core.events.TickEvent;
 import xyz.qalcyo.requisite.core.util.messages.IMessageQueue;
 import xyz.qalcyo.requisite.core.util.messages.MessageQueueEntry;
@@ -29,12 +29,12 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 
 public class MessageQueue implements IMessageQueue {
 
-    private final IRequisite requisite;
+    private final RequisiteAPI requisite;
 
     protected final Queue<MessageQueueEntry> queue = new ConcurrentLinkedQueue<>();
     private long tickCounter;
 
-    public MessageQueue(IRequisite requisite) {
+    public MessageQueue(RequisiteAPI requisite) {
         this.requisite = requisite;
         requisite.getEventBus().register(TickEvent.class, this::onClientTick);
     }
