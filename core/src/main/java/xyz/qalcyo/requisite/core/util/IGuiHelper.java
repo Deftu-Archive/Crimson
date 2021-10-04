@@ -19,6 +19,13 @@
 package xyz.qalcyo.requisite.core.util;
 
 public interface IGuiHelper<T> {
+    /**
+     * Opens the GUI given synchronously, avoiding mouse glitches.
+     */
     void open(T gui);
+
+    /**
+     * @return The current GUI waiting to be opened.
+     */
     T getAwaiting();
 }

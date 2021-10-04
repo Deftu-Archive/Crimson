@@ -21,6 +21,13 @@ package xyz.qalcyo.requisite.core.util;
 import java.util.UUID;
 
 public interface IPlayerHelper {
+    /**
+     * @return Whether the current player is present.
+     */
     boolean isPlayerPresent();
+
+    /**
+     * @return The UUID of the current player.
+     */
     UUID getUuid();
 }

@@ -36,7 +36,7 @@ public class DateHelper {
     /**
      * @return Whether the current month is within the spectrum of pride month or not.
      */
-    public boolean isLgbtqPrideMonth() {
+    public boolean isPrideMonth() {
         return Calendar.getInstance().get(Calendar.MONTH) == Calendar.JUNE;
     }
 

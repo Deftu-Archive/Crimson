@@ -23,10 +23,17 @@ public class StringHelper {
 
     private final Pattern formattingCodePattern = Pattern.compile("(?i)\\u00A7[0-9A-FK-OR]");
 
+    /**
+     * Removes formatting codes from a string and returns it.
+     * @return The string provided without formatting codes.
+     */
     public String removeFormattingCodes(String input) {
         return formattingCodePattern.matcher(input).replaceAll("");
     }
 
+    /**
+     * @return The pattern for formatting codes.
+     */
     public Pattern getFormattingCodePattern() {
         return formattingCodePattern;
     }

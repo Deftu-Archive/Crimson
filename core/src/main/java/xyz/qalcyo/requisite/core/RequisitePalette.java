@@ -30,18 +30,38 @@ public class RequisitePalette {
     private static final ColourRGB success = new ColourRGB(43, 181, 66);
     private static final ColourRGB fail = new ColourRGB(181, 43, 43);
 
+    /**
+     * Provides a ColourRGB instance of Qalcyo's theme colour.
+     *
+     * @return Qalcyo's theme colour
+     */
     public static ColourRGB getMain() {
         return main;
     }
 
+    /**
+     * Provides a ColourRGB instance of Qalcyo's background colour.
+     *
+     * @return Qalcyo's background colour
+     */
     public static ColourRGB getComponentContent() {
         return componentContent;
     }
 
+    /**
+     * Provides a ColourRGB instance of the colour Qalcyo uses to indicate success.
+     *
+     * @return Qalcyo's "success" colour
+     */
     public static ColourRGB getSuccess() {
         return success;
     }
 
+    /**
+     * Provides a ColourRGB instance of the colour Qalcyo uses to indicate failure.
+     *
+     * @return Qalcyo's "failure" colour
+     */
     public static ColourRGB getFail() {
         return fail;
     }

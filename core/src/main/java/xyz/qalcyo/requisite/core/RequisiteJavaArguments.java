@@ -32,18 +32,30 @@ public class RequisiteJavaArguments {
 
     private final ChatColour chatPrefixColour = retrieveChatPrefixColour();
 
+    /**
+     * @return Whether the Requisite socket is in debug mode.
+     */
     public boolean isSocketDebug() {
         return socketDebug;
     }
 
+    /**
+     * @return Requisite's Socket URI.
+     */
     public String getSocketUri() {
         return socketUri;
     }
 
+    /**
+     * @return Requisite's Socket URL.
+     */
     public String getSocketUrl() {
         return socketUrl;
     }
 
+    /**
+     * @return Requisite's chat prefix colour, provided as a ChatColour instance.
+     */
     public ChatColour getChatPrefixColour() {
         return chatPrefixColour;
     }

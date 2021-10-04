@@ -71,8 +71,11 @@ public class ReflectionHelper {
             e.printStackTrace();
             return null;
         }
-    }
 
+    }
+    /**
+     * @return The method annotated with the provided annotation requested in the class provided.
+     */
     public Method getAnnotatedMethod(Class<?> clazz, String name, Class<? extends Annotation> annotationClass, Class<?>... paramTypes) {
         try {
             Method method = getMethod(clazz, name, paramTypes);

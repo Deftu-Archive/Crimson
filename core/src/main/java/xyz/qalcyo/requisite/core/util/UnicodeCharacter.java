@@ -55,6 +55,9 @@ public enum UnicodeCharacter {
         this.asString = asString;
     }
 
+    /**
+     * @return The string value of the instance.
+     */
     @Override
     public String toString() {
         return asString;

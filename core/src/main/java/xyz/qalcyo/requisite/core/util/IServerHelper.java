@@ -19,9 +19,22 @@
 package xyz.qalcyo.requisite.core.util;
 
 public interface IServerHelper {
+    /**
+     * Joins the server with the IP address provided and the port provided.
+     */
     void join(String ip, int port);
+    /**
+     * Joins the server with the IP address provided.
+     */
     void join(String ip);
 
+    /**
+     * @return The server brand of the current server.
+     */
     String getBrand();
+
+    /**
+     * @return Whether the player is in singleplayer.
+     */
     boolean isSingleplayer();
 }
