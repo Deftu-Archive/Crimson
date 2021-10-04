@@ -19,19 +19,19 @@
 package xyz.qalcyo.requisite.core.keybinds;
 
 import xyz.qalcyo.mango.Lists;
-import xyz.qalcyo.requisite.core.IRequisite;
+import xyz.qalcyo.requisite.core.RequisiteAPI;
 import xyz.qalcyo.requisite.core.events.KeyInputEvent;
 
 import java.util.List;
 
 public class KeyBindRegistry {
 
-    private final IRequisite requisite;
+    private final RequisiteAPI requisite;
 
     private final KeyBindConfigurations configurations;
     private final List<KeyBind> keyBinds;
 
-    public KeyBindRegistry(IRequisite requisite) {
+    public KeyBindRegistry(RequisiteAPI requisite) {
         this.requisite = requisite;
 
         requisite.getConfigurationManager().addConfigurable(this.configurations = new KeyBindConfigurations());

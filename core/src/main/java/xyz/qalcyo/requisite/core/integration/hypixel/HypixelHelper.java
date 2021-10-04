@@ -18,7 +18,7 @@
 
 package xyz.qalcyo.requisite.core.integration.hypixel;
 
-import xyz.qalcyo.requisite.core.IRequisite;
+import xyz.qalcyo.requisite.core.RequisiteAPI;
 import xyz.qalcyo.requisite.core.integration.hypixel.api.HypixelAPI;
 import xyz.qalcyo.requisite.core.integration.hypixel.locraw.HypixelLocrawManager;
 
@@ -29,12 +29,12 @@ public class HypixelHelper {
 
     private static final Pattern SERVER_BRAND_PATTERN = Pattern.compile("(.+) <- (?:.+)");
 
-    private final IRequisite requisite;
+    private final RequisiteAPI requisite;
 
     private final HypixelLocrawManager locrawManager;
     private final HypixelAPI api = new HypixelAPI();
 
-    public HypixelHelper(IRequisite requisite) {
+    public HypixelHelper(RequisiteAPI requisite) {
         this.requisite = requisite;
         locrawManager = new HypixelLocrawManager(requisite, this);
     }

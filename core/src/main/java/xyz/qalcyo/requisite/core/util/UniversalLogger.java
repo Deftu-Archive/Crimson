@@ -20,13 +20,13 @@ package xyz.qalcyo.requisite.core.util;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import xyz.qalcyo.requisite.core.IRequisite;
+import xyz.qalcyo.requisite.core.RequisiteAPI;
 
 public class UniversalLogger {
 
-    private final IRequisite requisite;
+    private final RequisiteAPI requisite;
 
-    public UniversalLogger(IRequisite requisite) {
+    public UniversalLogger(RequisiteAPI requisite) {
         this.requisite = requisite;
     }
 

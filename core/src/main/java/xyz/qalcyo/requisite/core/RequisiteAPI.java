@@ -44,7 +44,7 @@ import java.io.File;
 import java.net.URI;
 import java.util.Base64;
 
-public interface IRequisite extends IMod {
+public interface RequisiteAPI extends IMod {
 
     /**
      * Initializes all of Requisite's core features for the version requested.
@@ -299,11 +299,11 @@ public interface IRequisite extends IMod {
                 .setCommand("/requisite");
     }
 
-    static IRequisite retrieveInstance() {
+    static RequisiteAPI retrieveInstance() {
         try {
-            IRequisite cached = RequisiteDefaultImplementations.INSTANCE;
+            RequisiteAPI cached = RequisiteDefaultImplementations.INSTANCE;
             if (cached == null)
-                return RequisiteDefaultImplementations.INSTANCE = (IRequisite) Class.forName("xyz.qalcyo.requisite.Requisite").getDeclaredMethod("getInstance").invoke(null);
+                return RequisiteDefaultImplementations.INSTANCE = (RequisiteAPI) Class.forName("xyz.qalcyo.requisite.Requisite").getDeclaredMethod("getInstance").invoke(null);
             return cached;
         } catch (Exception e) {
             e.printStackTrace();

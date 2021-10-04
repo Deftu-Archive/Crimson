@@ -27,13 +27,13 @@ import net.minecraftforge.fml.common.gameevent.InputEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 import org.lwjgl.input.Keyboard;
 import xyz.qalcyo.requisite.core.IEventListener;
-import xyz.qalcyo.requisite.core.IRequisite;
+import xyz.qalcyo.requisite.core.RequisiteAPI;
 
 public class RequisiteEventListener implements IEventListener {
 
-    private final IRequisite requisite;
+    private final RequisiteAPI requisite;
 
-    public RequisiteEventListener(IRequisite requisite) {
+    public RequisiteEventListener(RequisiteAPI requisite) {
         this.requisite = requisite;
         MinecraftForge.EVENT_BUS.register(this);
     }

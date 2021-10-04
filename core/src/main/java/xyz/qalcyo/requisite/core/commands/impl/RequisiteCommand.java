@@ -18,7 +18,7 @@
 
 package xyz.qalcyo.requisite.core.commands.impl;
 
-import xyz.qalcyo.requisite.core.IRequisite;
+import xyz.qalcyo.requisite.core.RequisiteAPI;
 import xyz.qalcyo.requisite.core.commands.annotations.Command;
 
 @Command(
@@ -27,9 +27,9 @@ import xyz.qalcyo.requisite.core.commands.annotations.Command;
 )
 public class RequisiteCommand {
 
-    private final IRequisite requisite;
+    private final RequisiteAPI requisite;
 
-    public RequisiteCommand(IRequisite requisite) {
+    public RequisiteCommand(RequisiteAPI requisite) {
         this.requisite = requisite;
     }
 
