@@ -60,7 +60,7 @@ class Button(
                 (border.effects[0] as OutlineEffect)::color.animate(Animations.OUT_EXP, 1f, Color(0, 0, 0, 0))
             }
         }.onMouseClick {
-            builder.action.invoke(this as Button)
+            builder.action.invoke(this@Button)
         }
     }
 

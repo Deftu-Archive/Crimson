@@ -22,7 +22,6 @@ import gg.essential.elementa.WindowScreen
 import gg.essential.elementa.components.UIContainer
 import gg.essential.elementa.constraints.CenterConstraint
 import gg.essential.elementa.constraints.ChildBasedSizeConstraint
-import gg.essential.elementa.constraints.SiblingConstraint
 import gg.essential.elementa.dsl.*
 import xyz.qalcyo.requisite.Requisite
 import xyz.qalcyo.requisite.core.integration.mods.IMod
@@ -46,7 +45,7 @@ class RequisiteMenu :
             height = ChildBasedSizeConstraint()
         } childOf window
 
-        val branding = InteractableText(Requisite.getInstance().name() + " v" + Requisite.getInstance().version(), true, {
+        val branding = InteractableText(Requisite.getInstance().name() + " v" + Requisite.getInstance().version(), true, InteractableText.Alignment.LEFT, {
             open()
         }).constrain {
             x = 2.pixels()
@@ -68,15 +67,6 @@ class RequisiteMenu :
             x = CenterConstraint()
             y = CenterConstraint()
             width = Button.DEFAULT_WIDTH_PIXELS
-            height = Button.DEFAULT_HEIGHT_PIXELS
-        } childOf buttonContainer
-
-        val modInteg = ButtonBuilder({
-            Requisite.getInstance().modIntegration.openMenu()
-        }, "Mods").build(Requisite.getInstance().componentFactory).constrain {
-            x = CenterConstraint()
-            y = CenterConstraint() - SiblingConstraint()
-            width = 100.pixels()
             height = Button.DEFAULT_HEIGHT_PIXELS
         } childOf buttonContainer
     }

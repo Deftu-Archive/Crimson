@@ -28,6 +28,7 @@ import java.awt.Color
 class InteractableText @JvmOverloads constructor(
     text: String = "",
     hoverUnderline: Boolean = true,
+    hoverUnlineAlignment: Alignment = Alignment.CENTER,
     action: InteractableText.() -> Unit = {},
 
     color: Color = Color.WHITE,
@@ -41,7 +42,7 @@ class InteractableText @JvmOverloads constructor(
 ) {
 
     private val underline = UIBlock(color).constrain {
-        x = CenterConstraint()
+        x = if (hoverUnlineAlignment == Alignment.CENTER) CenterConstraint() else 0.pixels(hoverUnlineAlignment == Alignment.RIGHT)
         y = 0.pixels(true)
         width = 0.pixels()
         height = 1.pixel()
@@ -68,6 +69,12 @@ class InteractableText @JvmOverloads constructor(
         }.onMouseClick {
             action.invoke(this@InteractableText)
         }
+    }
+
+    enum class Alignment {
+        LEFT,
+        CENTER,
+        RIGHT
     }
 
 }
