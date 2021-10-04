@@ -34,6 +34,14 @@ public class DateHelper {
     }
 
     /**
+     * @return Whether the current month and day is within the spectrum of the standard holiday season.
+     */
+    public boolean isHolidaySeason() {
+        Calendar calendar = Calendar.getInstance();
+        return calendar.get(Calendar.MONTH) == Calendar.DECEMBER && calendar.get(Calendar.DAY_OF_MONTH) > 4;
+    }
+
+    /**
      * @return Whether the current month is within the spectrum of pride month or not.
      */
     public boolean isPrideMonth() {

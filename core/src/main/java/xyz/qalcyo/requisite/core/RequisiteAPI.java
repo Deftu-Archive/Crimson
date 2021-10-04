@@ -192,48 +192,143 @@ public interface RequisiteAPI extends IMod {
      * @return Requisite's player utility.
      */
     IPlayerHelper getPlayerHelper();
+    /**
+     * Provides an instance of Requisite's chat utility, giving you easy access to the in-game chat.
+     *
+     * @return Requisite's chat utility.
+     */
     IChatHelper getChatHelper();
+    /**
+     * Provides an instance of Requisite's colour utility, adding more colour to your mod.
+     *
+     * @return Requisite's colour utility.
+     */
     default ColourHelper getColourHelper() {
         return RequisiteDefaultImplementations.COLOUR_HELPER;
     }
+    /**
+     * Provides an instance of Requisite's logging utility, debugging!
+     *
+     * @return Requisite's logging utility.
+     */
     default LoggingHelper getLoggingHelper() {
         return RequisiteDefaultImplementations.LOGGING_HELPER;
     }
+    /**
+     * Provides an instance of Requisite's universal logger, allowing you to create a logger specifically for the class it's used in.
+     *
+     * @return Requisite's universal logger.
+     */
     default UniversalLogger getUniversalLogger() {
         return RequisiteDefaultImplementations.UNIVERSAL_LOGGER;
     }
+    /**
+     * Provides an instance of Requisite's clipboard utility, giving you access to the contents of the user's clipboard.
+     *
+     * @return Requisite's clipboard utility.
+     */
     default ClipboardHelper getClipboardHelper() {
         return RequisiteDefaultImplementations.CLIPBOARD_HELPER;
     }
+    /**
+     * Provides an instance of Requisite's date utility, letting you check for special events.
+     *
+     * @return Requisite's date helper.
+     */
     default DateHelper getDateHelper() {
         return RequisiteDefaultImplementations.DATE_HELPER;
     }
+    /**
+     * Provides an instance of Requisite's easing utility.
+     *
+     * @return Requisite's easing utility.
+     */
     default EasingHelper getEasingHelper() {
         return RequisiteDefaultImplementations.EASING_HELPER;
     }
+    /**
+     * Provides an instance of Requisite's math utility, making your calculations easier.
+     *
+     * @return Requisite's math utility.
+     */
     default MathHelper getMathHelper() {
         return RequisiteDefaultImplementations.MATH_HELPER;
     }
+    /**
+     * Provides an instance of Requisite's mouse utility, allowing you to interact with the mouse easily.
+     *
+     * @return Requisite's mouse utility.
+     */
     IMouseHelper getMouseHelper();
+    /**
+     * Provides an instance of Requisite's reflection utility. This makes it easier to interact with Java's reflection API.
+     *
+     * @return Requisite's reflection utility.
+     */
     default ReflectionHelper getReflectionHelper() {
         return RequisiteDefaultImplementations.REFLECTION_HELPER;
     }
+    /**
+     * Provides an instance of Requisite's position helper.
+     *
+     * @return Requisite's position helper.
+     */
     IPositionHelper getPositionHelper();
+    /**
+     * Provides an instance of Requisite's roman numeral cache.
+     *
+     * @return Requisite's roman numeral cache.
+     */
     default RomanNumeral getRomanNumerals() {
         return RequisiteDefaultImplementations.ROMAN_NUMERAL;
     }
+    /**
+     * Provides an instance of Requisite's Hypixel server utility.
+     *
+     * @return Requisite's Hypixel utility.
+     */
     default HypixelHelper getHypixelHelper() {
         return RequisiteDefaultImplementations.HYPIXEL_HELPER;
     }
+    /**
+     * Provides an instance of Requisite's rendering utility.
+     *
+     * @return Requisite's rendering helper.
+     */
     IRenderHelper getRenderHelper();
+    /**
+     * Provides an instance of Requisite's string utility.
+     *
+     * @return Requisite's string utility.
+     */
     default StringHelper getStringHelper() {
         return RequisiteDefaultImplementations.STRING_HELPER;
     }
+    /**
+     * Provides an instance of Requisite's in-game chat message queue. This sends messages as the player.
+     *
+     * @return Requisite's in-game chat message queue.
+     */
     IMessageQueue getMessageQueue();
+    /**
+     * Provides an instance of Requisite's server utility.
+     *
+     * @return Requisite's server utility.
+     */
     IServerHelper getServerHelper();
+    /**
+     * Provides an instance of Requisite's Mojang API utility.
+     *
+     * @return Requisite's Mojang API utility.
+     */
     default MojangAPI getMojangApi() {
         return RequisiteDefaultImplementations.MOJANG_API;
     }
+    /**
+     * Provides an instance of Requisite's OpenGL utility.
+     *
+     * @return Requisite's OpenGL utility.
+     */
     IGlHelper getGlHelper();
 
     /* Default. */
@@ -305,6 +400,11 @@ public interface RequisiteAPI extends IMod {
                 .setCommand("/requisite");
     }
 
+    /**
+     * Retrieves a cached instance of Requisite.
+     *
+     * @return An instance of Requisite.
+     */
     static RequisiteAPI retrieveInstance() {
         try {
             RequisiteAPI cached = RequisiteDefaultImplementations.INSTANCE;
