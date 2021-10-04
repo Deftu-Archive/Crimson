@@ -299,4 +299,16 @@ public interface IRequisite extends IMod {
                 .setCommand("/requisite");
     }
 
+    static IRequisite retrieveInstance() {
+        try {
+            IRequisite cached = RequisiteDefaultImplementations.INSTANCE;
+            if (cached == null)
+                return RequisiteDefaultImplementations.INSTANCE = (IRequisite) Class.forName("xyz.qalcyo.requisite.Requisite").getDeclaredMethod("getInstance").invoke(null);
+            return cached;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
 }

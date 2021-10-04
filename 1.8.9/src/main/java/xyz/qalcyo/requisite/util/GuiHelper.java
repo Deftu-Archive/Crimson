@@ -36,6 +36,10 @@ public class GuiHelper implements IGuiHelper<GuiScreen> {
         awaitingDisplay = screen;
     }
 
+    public boolean isGuiPresent() {
+        return Minecraft.getMinecraft().currentScreen != null;
+    }
+
     public GuiScreen getAwaiting() {
         return awaitingDisplay;
     }

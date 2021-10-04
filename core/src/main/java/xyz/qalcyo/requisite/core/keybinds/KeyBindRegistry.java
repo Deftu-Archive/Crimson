@@ -26,10 +26,14 @@ import java.util.List;
 
 public class KeyBindRegistry {
 
+    private final IRequisite requisite;
+
     private final KeyBindConfigurations configurations;
     private final List<KeyBind> keyBinds;
 
     public KeyBindRegistry(IRequisite requisite) {
+        this.requisite = requisite;
+
         requisite.getConfigurationManager().addConfigurable(this.configurations = new KeyBindConfigurations());
         this.keyBinds = Lists.newArrayList();
 
@@ -51,9 +55,11 @@ public class KeyBindRegistry {
     }
 
     private void onKeyInput(KeyInputEvent event) {
-        for (KeyBind keyBind : keyBinds) {
-            if (configurations.isAvailable(keyBind) && keyBind.getKey() == event.keyCode) {
-                keyBind.handle(event.down ? KeyBindState.PRESS : KeyBindState.RELEASE);
+        if (!requisite.getGuiHelper().isGuiPresent()) {
+            for (KeyBind keyBind : keyBinds) {
+                if (configurations.isAvailable(keyBind) && keyBind.getKey() == event.keyCode) {
+                    keyBind.handle(event.down ? KeyBindState.PRESS : KeyBindState.RELEASE);
+                }
             }
         }
     }

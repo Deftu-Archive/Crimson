@@ -24,7 +24,8 @@ import xyz.qalcyo.requisite.gui.components.factory.IComponentFactory
 
 class ButtonBuilder(
     var action: Button.() -> Unit,
-    var text: String
+    var text: String,
+    var toggled: Boolean = true
 ) {
     fun build(factory: IComponentFactory): UIComponent = factory.build(this)
 }

@@ -25,6 +25,18 @@ public interface IGuiHelper<T> {
     void open(T gui);
 
     /**
+     * Forces a GUI to open synchronously, ignoring type safety.
+     */
+    default void forceOpen(Object gui) {
+        open((T) gui);
+    }
+
+    /**
+     * @return Whether a menu is currently open or not.
+     */
+    boolean isGuiPresent();
+
+    /**
      * @return The current GUI waiting to be opened.
      */
     T getAwaiting();
