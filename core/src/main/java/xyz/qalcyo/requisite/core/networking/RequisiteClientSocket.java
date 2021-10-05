@@ -46,7 +46,7 @@ public class RequisiteClientSocket extends WebSocketClient {
     private boolean createNotification;
 
     public RequisiteClientSocket(RequisiteAPI requisite, ISocketHelper helper) {
-        super(requisite.fetchSocketUri(), new Draft_6455());
+        super(requisite.retrieveSocketUri(), new Draft_6455());
         this.requisite = requisite;
         this.logger = LogManager.getLogger("RequisiteClientSocket");
         this.helper = helper;

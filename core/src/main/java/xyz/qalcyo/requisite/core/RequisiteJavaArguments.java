@@ -28,7 +28,7 @@ public class RequisiteJavaArguments {
 
     private final boolean socketDebug = retrieveSocketDebug();
     private final String socketUri = System.getProperty("requisite.socket.uri", null);
-    private final String socketUrl = System.getProperty("requisite.socket.url", "https://raw.githubusercontent.com/Qalcyo/RequisiteData/main/websocket.json");
+    private final String metaUrl = System.getProperty("requisite.meta.url", "https://raw.githubusercontent.com/Qalcyo/Requisite/rewrite/data/meta.json");
 
     private final ChatColour chatPrefixColour = retrieveChatPrefixColour();
 
@@ -49,8 +49,8 @@ public class RequisiteJavaArguments {
     /**
      * @return Requisite's Socket URL.
      */
-    public String getSocketUrl() {
-        return socketUrl;
+    public String getMetaUrl() {
+        return metaUrl;
     }
 
     /**

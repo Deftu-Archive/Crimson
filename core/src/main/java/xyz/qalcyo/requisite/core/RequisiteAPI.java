@@ -35,14 +35,12 @@ import xyz.qalcyo.requisite.core.integration.mods.IModIntegration;
 import xyz.qalcyo.requisite.core.networking.RequisiteClientSocket;
 import xyz.qalcyo.requisite.core.notifications.INotifications;
 import xyz.qalcyo.requisite.core.rendering.IEnhancedFontRenderer;
-import xyz.qalcyo.json.entities.JsonObject;
 import xyz.qalcyo.json.util.JsonApiHelper;
 import xyz.qalcyo.requisite.gui.components.factory.IComponentFactory;
 import xyz.qalcyo.simpleeventbus.SimpleEventBus;
 
 import java.io.File;
 import java.net.URI;
-import java.util.Base64;
 
 public interface RequisiteAPI extends IMod {
 
@@ -330,22 +328,12 @@ public interface RequisiteAPI extends IMod {
      *
      * @return Requisite's websocket URI.
      */
-    default URI fetchSocketUri() {
-        if (getJavaArguments().isSocketDebug()) {
+    default URI retrieveSocketUri() {
+        if (getJavaArguments().isSocketDebug())
             return URI.create("ws://localhost:8080/");
-        }
-
-        if (getJavaArguments().getSocketUri() != null) {
+        if (getJavaArguments().getSocketUri() != null)
             return URI.create(getJavaArguments().getSocketUri());
-        }
-
-        JsonObject object = JsonApiHelper.getJsonObject(getJavaArguments().getSocketUrl());
-        String encoded = object.getAsString("uri");
-        for (int i = 0; i < object.getAsInt("loop"); i++) {
-            encoded = new String(Base64.getDecoder().decode(encoded));
-        }
-
-        return URI.create(encoded);
+        return URI.create(JsonApiHelper.getJsonObject(getJavaArguments().getMetaUrl()).getAsString("socket"));
     }
 
     /**
