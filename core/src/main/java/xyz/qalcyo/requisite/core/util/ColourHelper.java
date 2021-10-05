@@ -30,7 +30,7 @@ public class ColourHelper {
      */
     public int timeBasedChroma() {
         long l = System.currentTimeMillis();
-        return Color.HSBtoRGB(l % 2000L / 2000.0f, 0.8f, 0.8f);
+        return Color.HSBtoRGB(l % 2000L / 2000.0f, 1.0f, 1.0f);
     }
 
     /**
@@ -39,7 +39,7 @@ public class ColourHelper {
      */
     public ColourRGB getChroma(double x, double y) {
         float v = 2000.0f;
-        return new ColourRGB(Color.HSBtoRGB((float)((System.currentTimeMillis() - x * 10.0 * 1.0 - y * 10.0 * 1.0) % v) / v, 0.8f, 0.8f));
+        return new ColourRGB(Color.HSBtoRGB((float)((System.currentTimeMillis() - x * 10.0 * 1.0 - y * 10.0 * 1.0) % v) / v, 1.0f, 1.0f));
     }
 
     /**
