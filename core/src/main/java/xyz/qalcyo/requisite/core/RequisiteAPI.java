@@ -128,7 +128,7 @@ public interface RequisiteAPI extends IMod {
      */
     CommandRegistry getCommandRegistry();
     /**
-     * Provides an instance for Requisite's KeyBind API.
+     * Provides an instance of Requisite's KeyBind API.
      *
      * @return Requisite's KeyBind API.
      */
@@ -316,14 +316,6 @@ public interface RequisiteAPI extends IMod {
      * @return Requisite's server utility.
      */
     IServerHelper getServerHelper();
-    /**
-     * Provides an instance of Requisite's Mojang API utility.
-     *
-     * @return Requisite's Mojang API utility.
-     */
-    default MojangAPI getMojangApi() {
-        return RequisiteDefaultImplementations.MOJANG_API;
-    }
     /**
      * Provides an instance of Requisite's OpenGL utility.
      *

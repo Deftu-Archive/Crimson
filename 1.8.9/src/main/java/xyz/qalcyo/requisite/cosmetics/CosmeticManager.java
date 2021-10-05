@@ -16,23 +16,14 @@
  * along with Requisite. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package xyz.qalcyo.requisite.core.util;
+package xyz.qalcyo.requisite.cosmetics;
 
-import java.util.UUID;
+import xyz.qalcyo.mango.Lists;
 
-public interface IPlayerHelper {
-    /**
-     * @return Whether the current player is present.
-     */
-    boolean isPlayerPresent();
+import java.util.List;
 
-    /**
-     * @return The display name of the current player.
-     */
-    String getUsername();
+public class CosmeticManager {
 
-    /**
-     * @return The UUID of the current player.
-     */
-    UUID getUuid();
+    private final List<BaseCosmetic> cosmetics = Lists.newArrayList();
+
 }

@@ -19,6 +19,7 @@
 package xyz.qalcyo.requisite.kotlin.dsl
 
 import xyz.qalcyo.json.entities.JsonElement
+import xyz.qalcyo.json.kotlin.jsonObject
 import xyz.qalcyo.json.util.JsonHelper
 import xyz.qalcyo.mango.data.Colour
 import xyz.qalcyo.requisite.core.data.ColourRGB

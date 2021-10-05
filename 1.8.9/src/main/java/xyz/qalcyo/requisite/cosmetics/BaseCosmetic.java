@@ -16,23 +16,8 @@
  * along with Requisite. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package xyz.qalcyo.requisite.core.util;
+package xyz.qalcyo.requisite.cosmetics;
 
-import xyz.qalcyo.json.entities.JsonObject;
-import xyz.qalcyo.json.util.JsonApiHelper;
-
-public class MojangAPI {
-
-    /**
-     * @param username The username of the player to fetch
-     * @return The UUID of the player.
-     * @author Unknown
-     */
-    public String fetchUuid(String username) {
-        JsonObject response = JsonApiHelper.getJsonObject("https://api.mojang.com/users/profiles/minecraft/" + username);
-        if (response == null)
-            return null;
-        return response.getAsString("id");
-    }
+public class BaseCosmetic {
 
 }

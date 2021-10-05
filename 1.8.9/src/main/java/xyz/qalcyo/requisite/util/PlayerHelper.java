@@ -29,6 +29,10 @@ public class PlayerHelper implements IPlayerHelper {
         return Minecraft.getMinecraft().thePlayer != null;
     }
 
+    public String getUsername() {
+        return Minecraft.getMinecraft().getSession().getUsername();
+    }
+
     public UUID getUuid() {
         return Minecraft.getMinecraft().getSession().getProfile().getId();
     }

@@ -18,6 +18,8 @@
 
 package xyz.qalcyo.requisite.core.notifications;
 
+import xyz.qalcyo.requisite.core.RequisiteAPI;
+
 import java.util.function.Consumer;
 
 public class Notification {
@@ -69,6 +71,10 @@ public class Notification {
 
     public Notification clone() {
         return new Notification(title, description, colour, duration, clickListener);
+    }
+
+    public void repush() {
+        RequisiteAPI.retrieveInstance().getNotifications().push(clone());
     }
 
     public void close() {

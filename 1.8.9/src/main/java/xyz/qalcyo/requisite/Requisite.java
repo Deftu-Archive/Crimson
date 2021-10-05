@@ -28,12 +28,9 @@ import xyz.qalcyo.requisite.core.RequisiteInfo;
 import xyz.qalcyo.requisite.core.commands.CommandRegistry;
 import xyz.qalcyo.requisite.core.files.ConfigurationManager;
 import xyz.qalcyo.requisite.core.files.FileManager;
-import xyz.qalcyo.requisite.core.integration.hypixel.HypixelHelper;
-import xyz.qalcyo.requisite.core.keybinds.KeyBindRegistry;
 import xyz.qalcyo.requisite.core.keybinds.KeyBinds;
 import xyz.qalcyo.requisite.core.networking.RequisiteClientSocket;
 import xyz.qalcyo.requisite.core.util.ChatColour;
-import xyz.qalcyo.requisite.core.util.UniversalLogger;
 import xyz.qalcyo.requisite.gui.components.factory.ComponentFactory;
 import xyz.qalcyo.requisite.gui.screens.RequisiteMenu;
 import xyz.qalcyo.requisite.gui.screens.TestMenu;
@@ -114,7 +111,7 @@ public class Requisite implements RequisiteAPI {
         if (!socketConnected) {
             notifications.push("Error!", "Failed to connect to Requisite WebSocket. " + ChatColour.BOLD + "Click to attempt a reconnect.", notification -> {
                 if (!requisiteSocket.awaitReconnect()) {
-                    notifications.push(notification.clone());
+                    notification.repush();
                     notification.close();
                 }
             });

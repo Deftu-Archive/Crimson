@@ -49,6 +49,5 @@ class RequisiteDefaultImplementations {
     static final RomanNumeral ROMAN_NUMERAL = new RomanNumeral();
     static final HypixelHelper HYPIXEL_HELPER = new HypixelHelper();
     static final StringHelper STRING_HELPER = new StringHelper();
-    static final MojangAPI MOJANG_API = new MojangAPI();
 
 }
