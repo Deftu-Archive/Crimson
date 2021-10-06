@@ -27,6 +27,7 @@ import xyz.qalcyo.json.entities.JsonElement;
 import xyz.qalcyo.json.entities.JsonObject;
 import xyz.qalcyo.json.parser.JsonParser;
 import xyz.qalcyo.mango.Maps;
+import xyz.qalcyo.mango.Multithreading;
 import xyz.qalcyo.requisite.core.RequisiteAPI;
 import xyz.qalcyo.requisite.core.util.ChatColour;
 
@@ -34,6 +35,7 @@ import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 public class RequisiteClientSocket extends WebSocketClient {
 
@@ -119,7 +121,7 @@ public class RequisiteClientSocket extends WebSocketClient {
      */
     public void onClose(int code, String reason, boolean remote) {
         logger.error(String.format("Closed connection with Requisite's server websocket. (code=%s | reason=%s)", code, reason));
-
+        Multithreading.schedule(() -> awaitReconnect(true), 15, TimeUnit.SECONDS);
         if (createNotification) {
             requisite.getNotifications().push("Error!", "Connection to Requisite WebSocket closed. " + ChatColour.BOLD + "Click to attempt a reconnect.", notification -> {
                 boolean socketReconnected = awaitReconnect(true);
@@ -185,7 +187,7 @@ public class RequisiteClientSocket extends WebSocketClient {
         try {
             packet.send(this, packet.getData());
             if (isOpen()) {
-                send(packet.jsonify().getAsString());
+                send(packet.jsonify().getAsString().getBytes(StandardCharsets.UTF_8));
             } else {
                 logger.error("Tried to send " + packet.getType() + " but connection wasn't open!");
             }
@@ -199,6 +201,10 @@ public class RequisiteClientSocket extends WebSocketClient {
      * Initializes packets.
      */
     private void initialize() {
+    }
+
+    public void register(String id, Class<? extends BasePacket> clazz) {
+        packetRegistry.put(id, clazz);
     }
 
     public RequisiteAPI getRequisite() {

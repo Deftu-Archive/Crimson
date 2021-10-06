@@ -28,19 +28,23 @@ import xyz.qalcyo.requisite.core.RequisiteInfo;
 import xyz.qalcyo.requisite.core.commands.CommandRegistry;
 import xyz.qalcyo.requisite.core.files.ConfigurationManager;
 import xyz.qalcyo.requisite.core.files.FileManager;
+import xyz.qalcyo.requisite.core.keybinds.KeyBindRegistry;
 import xyz.qalcyo.requisite.core.keybinds.KeyBinds;
 import xyz.qalcyo.requisite.core.networking.RequisiteClientSocket;
 import xyz.qalcyo.requisite.core.util.ChatColour;
+import xyz.qalcyo.requisite.cosmetics.CosmeticManager;
+import xyz.qalcyo.requisite.cosmetics.PlayerCosmeticHolder;
 import xyz.qalcyo.requisite.gui.components.factory.ComponentFactory;
 import xyz.qalcyo.requisite.gui.screens.RequisiteMenu;
-import xyz.qalcyo.requisite.gui.screens.TestMenu;
 import xyz.qalcyo.requisite.integration.mods.ModIntegration;
 import xyz.qalcyo.requisite.networking.SocketHelper;
+import xyz.qalcyo.requisite.networking.packets.cosmetics.CosmeticRetrievePacket;
 import xyz.qalcyo.requisite.notifications.Notifications;
 import xyz.qalcyo.requisite.rendering.EnhancedFontRenderer;
 import xyz.qalcyo.requisite.util.*;
 
 import java.io.File;
+import java.util.Map;
 
 @Mod(
         name = RequisiteInfo.NAME,
@@ -61,9 +65,12 @@ public class Requisite implements RequisiteAPI {
     private RequisiteClientSocket requisiteSocket;
     private ModIntegration modIntegration;
     private CommandRegistry commandRegistry;
+    private KeyBindRegistry keyBindRegistry;
     private ComponentFactory componentFactory;
     private RequisiteEventManager internalEventManager;
     private RequisiteEventListener internalEventListener;
+
+    private CosmeticManager cosmeticManager;
 
     /* Utilities. */
     private EnhancedFontRenderer enhancedFontRenderer;
@@ -75,8 +82,6 @@ public class Requisite implements RequisiteAPI {
     private RenderHelper renderHelper;
     private MessageQueue messageQueue;
     private ServerHelper serverHelper;
-
-    /* Version-dependant utilities. */
     private GlHelper glHelper;
 
     public boolean initialize(File gameDir) {
@@ -88,11 +93,15 @@ public class Requisite implements RequisiteAPI {
         configurationManager = new ConfigurationManager("config", fileManager.getRequisiteDirectory(fileManager.getQalcyoDirectory(fileManager.getConfigDirectory(gameDir))));
         notifications = new Notifications(this);
         boolean socketConnected = (requisiteSocket = new RequisiteClientSocket(this, new SocketHelper())).awaitConnect();
+        requisiteSocket.register("COSMETIC_RETRIEVE", CosmeticRetrievePacket.class);
         modIntegration = new ModIntegration();
         commandRegistry = new CommandRegistry(new CommandHelper());
+        keyBindRegistry = new KeyBindRegistry(this);
         componentFactory = new ComponentFactory();
-        internalEventManager = new RequisiteEventManager(this);
+        internalEventManager = new RequisiteEventManager();
         internalEventListener = new RequisiteEventListener(this);
+
+        cosmeticManager = new CosmeticManager();
 
         /* Initialize utilities. */
         Multithreading.runAsync(() -> {
@@ -106,18 +115,26 @@ public class Requisite implements RequisiteAPI {
             messageQueue = new MessageQueue(this);
             serverHelper = new ServerHelper();
             glHelper = new GlHelper();
+
+            if (!socketConnected) {
+                notifications.push("Error!", "Failed to connect to Requisite WebSocket. " + ChatColour.BOLD + "Click to attempt a reconnect.", notification -> {
+                    if (!requisiteSocket.awaitReconnect()) {
+                        notification.repush();
+                        notification.close();
+                    }
+                });
+            }
+
+            cosmeticManager.start();
         });
 
-        if (!socketConnected) {
-            notifications.push("Error!", "Failed to connect to Requisite WebSocket. " + ChatColour.BOLD + "Click to attempt a reconnect.", notification -> {
-                if (!requisiteSocket.awaitReconnect()) {
-                    notification.repush();
-                    notification.close();
-                }
-            });
-        }
-
-        getKeyBindRegistry().register(KeyBinds.menu("Debug", "Requisite", Keyboard.KEY_RCONTROL, new TestMenu()));
+        getKeyBindRegistry().register(KeyBinds.from("Debug", "Requisite", Keyboard.KEY_RCONTROL, () -> {
+            StringBuilder str = new StringBuilder();
+            for (Map.Entry<String, PlayerCosmeticHolder> entry : cosmeticManager.getPlayerData().entrySet()) {
+                str.append(entry.getKey()).append(" - ").append(entry.getValue().getOwned()).append(" | ").append(entry.getValue().getEnabled()).append("\n\n");
+            }
+            chatHelper.send(str.toString());
+        }));
 
         getMetadata().setConfigurationMenu(RequisiteMenu.class);
         return initialized = true;
@@ -147,6 +164,10 @@ public class Requisite implements RequisiteAPI {
         return commandRegistry;
     }
 
+    public KeyBindRegistry getKeyBindRegistry() {
+        return keyBindRegistry;
+    }
+
     public ComponentFactory getComponentFactory() {
         return componentFactory;
     }
@@ -157,6 +178,10 @@ public class Requisite implements RequisiteAPI {
 
     public RequisiteEventListener getInternalEventListener() {
         return internalEventListener;
+    }
+
+    public CosmeticManager getCosmeticManager() {
+        return cosmeticManager;
     }
 
     public void openMenu() {

@@ -18,6 +18,42 @@
 
 package xyz.qalcyo.requisite.cosmetics;
 
-public class BaseCosmetic {
+import net.minecraft.client.entity.AbstractClientPlayer;
+
+public abstract class BaseCosmetic {
+
+    private final String name, id;
+    private final CosmeticSlot slot;
+
+    public BaseCosmetic(String name, String id, CosmeticSlot slot) {
+        this.name = name;
+        this.id = id.toUpperCase().replace(' ', '_');
+        this.slot = slot;
+    }
+
+    public BaseCosmetic(String name, CosmeticSlot slot) {
+        this(name, name.toUpperCase().replace(' ', '_'), slot);
+    }
+
+    public abstract void render(AbstractClientPlayer player, float limbSwing, float limbSwingAmount, float partialTicks, float tickAge, float netHeadYaw, float netHeadPitch, float scale);
+    public void tick(TickState state) {
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public CosmeticSlot getSlot() {
+        return slot;
+    }
+
+    public static enum TickState {
+        CLIENT,
+        RENDER
+    }
 
 }

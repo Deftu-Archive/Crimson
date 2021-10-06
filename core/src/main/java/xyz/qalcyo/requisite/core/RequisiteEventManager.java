@@ -27,8 +27,8 @@ public final class RequisiteEventManager {
 
     private final RequisiteAPI requisite;
 
-    public RequisiteEventManager(RequisiteAPI requisite) {
-        this.requisite = requisite;
+    public RequisiteEventManager() {
+        this.requisite = RequisiteAPI.retrieveInstance();
     }
 
     /**
@@ -82,6 +82,12 @@ public final class RequisiteEventManager {
         requisite.getEventBus().call(new WorldLoadEvent());
     }
 
+    /**
+     * Calls and returns the value of an event's cancel status.
+     *
+     * @param event The event to parse.
+     * @return Whether the event is cancellable and is cancelled or not.
+     */
     private boolean parseCancellable(Event event) {
         requisite.getEventBus().call(event);
         return event.isCancellable() && event.isCancelled();

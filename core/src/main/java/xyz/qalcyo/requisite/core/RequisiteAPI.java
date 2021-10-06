@@ -21,6 +21,7 @@ package xyz.qalcyo.requisite.core;
 import org.apache.logging.log4j.Logger;
 import xyz.qalcyo.mango.Strings;
 import xyz.qalcyo.requisite.core.files.ConfigurationManager;
+import xyz.qalcyo.requisite.core.files.configs.CosmeticConfigurations;
 import xyz.qalcyo.requisite.core.integration.mods.IMod;
 import xyz.qalcyo.requisite.core.integration.mods.IModConfigurationMenu;
 import xyz.qalcyo.requisite.core.keybinds.KeyBindRegistry;
@@ -60,6 +61,7 @@ public interface RequisiteAPI extends IMod {
     default boolean finish(File gameDir) {
         boolean initial = initialize(gameDir);
         getConfigurationManager().addConfigurable(getPrivacyConfigurations());
+        getConfigurationManager().addConfigurable(getCosmeticConfigurations());
         getModIntegration().registerIntegratedMod(this);
         return initial;
     }
@@ -130,9 +132,7 @@ public interface RequisiteAPI extends IMod {
      *
      * @return Requisite's KeyBind API.
      */
-    default KeyBindRegistry getKeyBindRegistry() {
-        return RequisiteDefaultImplementations.KEY_BIND_REGISTRY;
-    }
+    KeyBindRegistry getKeyBindRegistry();
     /**
      * Provides an instance of Requisite's custom GUI component factory.
      *
@@ -144,8 +144,8 @@ public interface RequisiteAPI extends IMod {
      *
      * @return Requisite's internal event manager.
      */
-    RequisiteEventManager getInternalEventManager();
-    /**
+     RequisiteEventManager getInternalEventManager();
+     /**
      * Provides an instance of Requisite's internal event listener.
      *
      * @return Requisite's internal event listener.
@@ -160,6 +160,14 @@ public interface RequisiteAPI extends IMod {
     default PrivacyConfigurations getPrivacyConfigurations() {
         return RequisiteDefaultImplementations.PRIVACY_CONFIGURATIONS;
     }
+    /**
+     * Provides an instance of Requisite's cosmetic configurations.
+     *
+     * @return Requisite's cosmetic configurations.
+     */
+    default CosmeticConfigurations getCosmeticConfigurations() {
+        return RequisiteDefaultImplementations.COSMETIC_CONFIGURATIONS;
+    }
 
     /**
      * Opens Requisite's main menu, providing access to most Requisite configurations and services.
@@ -172,6 +180,14 @@ public interface RequisiteAPI extends IMod {
      */
     IModConfigurationMenu createMainMenu();
 
+    /**
+     * Provides an instance of Requisite's mod utility.
+     *
+     * @return Requisite's mod utility.
+     */
+    default ModHelper getModHelper() {
+        return RequisiteDefaultImplementations.MOD_HELPER;
+    }
     /**
      * Provides an instance of Requisite's enhanced font renderer utility, which gives you more options for rendering text to the screen.
      *

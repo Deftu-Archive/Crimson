@@ -104,5 +104,13 @@ allprojects {
         exclude('**/*.kotlin_builtins')
     }
 
+    task moveResources {
+        doLast {
+            ant.move file: "${buildDir}/resources/main",
+                    todir: "${buildDir}/classes/java"
+        }
+    }
+
+    classes.dependsOn(moveResources)
     jar.finalizedBy(shadowJar)
 }

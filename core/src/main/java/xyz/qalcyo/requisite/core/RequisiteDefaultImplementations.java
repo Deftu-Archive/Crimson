@@ -20,8 +20,8 @@ package xyz.qalcyo.requisite.core;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import xyz.qalcyo.requisite.core.files.configs.CosmeticConfigurations;
 import xyz.qalcyo.requisite.core.integration.hypixel.HypixelHelper;
-import xyz.qalcyo.requisite.core.keybinds.KeyBindRegistry;
 import xyz.qalcyo.requisite.core.util.*;
 import xyz.qalcyo.requisite.core.files.configs.PrivacyConfigurations;
 import xyz.qalcyo.simpleeventbus.SimpleEventBus;
@@ -34,10 +34,10 @@ class RequisiteDefaultImplementations {
     static final RequisiteJavaArguments JAVA_ARGUMENTS = new RequisiteJavaArguments();
     static final SimpleEventBus EVENT_BUS = new SimpleEventBus();
 
-    static final KeyBindRegistry KEY_BIND_REGISTRY = new KeyBindRegistry();
-
     static final PrivacyConfigurations PRIVACY_CONFIGURATIONS = new PrivacyConfigurations();
+    static final CosmeticConfigurations COSMETIC_CONFIGURATIONS = new CosmeticConfigurations();
 
+    static final ModHelper MOD_HELPER = new ModHelper();
     static final ColourHelper COLOUR_HELPER = new ColourHelper();
     static final LoggingHelper LOGGING_HELPER = new LoggingHelper();
     static final UniversalLogger UNIVERSAL_LOGGER = new UniversalLogger();
