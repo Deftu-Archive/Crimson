@@ -18,6 +18,9 @@
 
 package xyz.qalcyo.requisite.core.util.messages;
 
+/**
+ * Holds data for {@link IMessageQueue} entries.
+ */
 public class MessageQueueEntry {
 
     private static final int DEFAULT_DELAY = 20;
