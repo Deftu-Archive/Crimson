@@ -28,8 +28,11 @@ import xyz.qalcyo.requisite.core.transformers.hooks.GuiMixinHook
 import xyz.qalcyo.requisite.gui.components.InteractableText
 import java.net.URI
 
-class GuiMainMenuHook(instance: GuiMainMenu) : GuiMixinHook<GuiMainMenu>(instance) {
-
+class GuiMainMenuHook(
+    instance: GuiMainMenu
+) : GuiMixinHook<GuiMainMenu>(
+    instance
+) {
     init {
         val brandingText = InteractableText("${Requisite.getInstance().name()} v${Requisite.getInstance().version()}", true, InteractableText.Alignment.CENTER, {
             UDesktop.browse(URI.create("https://discord.gg/BJzuuc398G"))
@@ -38,14 +41,4 @@ class GuiMainMenuHook(instance: GuiMainMenu) : GuiMixinHook<GuiMainMenu>(instanc
             y = 2.pixels(true)
         } childOf window
     }
-
-    fun initialize() =
-        window.onWindowResize()
-
-    fun draw(mouseX: Int, mouseY: Int, partialTicks: Float) =
-        window.draw(UMatrixStack.Compat.get())
-
-    fun mouseClicked(mouseX: Int, mouseY: Int, mouseButton: Int) =
-        window.mouseClick(mouseX.toDouble(), mouseY.toDouble(), mouseButton)
-
 }

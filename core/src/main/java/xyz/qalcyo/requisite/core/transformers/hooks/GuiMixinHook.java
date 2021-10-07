@@ -20,6 +20,7 @@ package xyz.qalcyo.requisite.core.transformers.hooks;
 
 import gg.essential.elementa.ElementaVersion;
 import gg.essential.elementa.components.Window;
+import gg.essential.universal.UMatrixStack;
 
 public abstract class GuiMixinHook<T> extends MixinHook<T> {
 
@@ -32,6 +33,26 @@ public abstract class GuiMixinHook<T> extends MixinHook<T> {
 
     public GuiMixinHook(T instance) {
         this(instance, new Window(ElementaVersion.V1, 144));
+    }
+
+    public void initialize() {
+        window.onWindowResize();
+    }
+
+    public void draw(int mouseX, int mouseY, float partialTicks) {
+        window.draw(UMatrixStack.Compat.INSTANCE.get());
+    }
+
+    public void mouseClicked(int mouseX, int mouseY, int mouseButton) {
+        window.mouseClick(mouseX, mouseY, mouseButton);
+    }
+
+    public void mouseReleased(int mouseX, int mouseY, int mouseButton) {
+        window.mouseRelease();
+    }
+
+    public void mouseDrag() {
+        window.mouseMove(window);
     }
 
     public Window getWindow() {

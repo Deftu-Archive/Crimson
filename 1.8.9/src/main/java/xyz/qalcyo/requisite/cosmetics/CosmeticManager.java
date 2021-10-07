@@ -38,8 +38,8 @@ import java.util.Map;
 
 public class CosmeticManager {
 
-    private final List<BaseCosmetic> cosmetics = Lists.newArrayList();
-    private final List<String> checkCache = Lists.newArrayList();
+    private final List<BaseCosmetic> cosmetics = Lists.newCopyOnWriteArrayList();
+    private final List<String> checkCache = Lists.newCopyOnWriteArrayList();
     private final Map<String, PlayerCosmeticHolder> playerData = Maps.newHashMap();
 
     public void start() {
