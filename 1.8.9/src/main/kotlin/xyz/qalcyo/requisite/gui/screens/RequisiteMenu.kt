@@ -18,11 +18,16 @@
 
 package xyz.qalcyo.requisite.gui.screens
 
+import gg.essential.elementa.ElementaVersion
 import gg.essential.elementa.WindowScreen
 import gg.essential.elementa.components.UIContainer
+import gg.essential.elementa.components.Window
+import gg.essential.elementa.components.inspector.Inspector
 import gg.essential.elementa.constraints.CenterConstraint
 import gg.essential.elementa.constraints.ChildBasedSizeConstraint
+import gg.essential.elementa.constraints.SiblingConstraint
 import gg.essential.elementa.dsl.*
+import gg.essential.universal.UMatrixStack
 import xyz.qalcyo.requisite.Requisite
 import xyz.qalcyo.requisite.core.integration.mods.IMod
 import xyz.qalcyo.requisite.core.integration.mods.IModConfigurationMenu
@@ -36,6 +41,7 @@ import xyz.qalcyo.requisite.gui.components.builders.ButtonBuilder
 class RequisiteMenu :
     IModConfigurationMenu,
     WindowScreen(
+        version = ElementaVersion.V1,
         restoreCurrentGuiOnClose = true
     ) {
 
@@ -69,6 +75,15 @@ class RequisiteMenu :
         }, "Close").build(Requisite.getInstance().componentFactory).constrain {
             x = CenterConstraint()
             y = CenterConstraint()
+            width = Button.DEFAULT_WIDTH_PIXELS
+            height = Button.DEFAULT_HEIGHT_PIXELS
+        } childOf buttonContainer
+
+        val cosmetics = ButtonBuilder({
+            displayScreen(CosmeticMenu())
+        }, "Cosmetics").build(Requisite.getInstance().componentFactory).constrain {
+            x = CenterConstraint()
+            y = SiblingConstraint(2f, true)
             width = Button.DEFAULT_WIDTH_PIXELS
             height = Button.DEFAULT_HEIGHT_PIXELS
         } childOf buttonContainer

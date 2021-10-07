@@ -16,14 +16,18 @@
  * along with Requisite. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package xyz.qalcyo.requisite.gui.components.factory
+package xyz.qalcyo.requisite.gui.screens
 
-import xyz.qalcyo.requisite.gui.components.Button
-import xyz.qalcyo.requisite.gui.components.Clock
-import xyz.qalcyo.requisite.gui.components.ConfirmationMenu
-import xyz.qalcyo.requisite.gui.components.builders.ButtonBuilder
-import xyz.qalcyo.requisite.gui.components.builders.ClockBuilder
-import xyz.qalcyo.requisite.gui.components.builders.ConfirmationMenuBuilder
+import gg.essential.elementa.ElementaVersion
+import gg.essential.elementa.WindowScreen
 
-class ComponentFactory : IComponentFactory {
+class CosmeticMenu : WindowScreen(
+    version = ElementaVersion.V1,
+    restoreCurrentGuiOnClose = true
+) {
+
+    init {
+
+    }
+
 }

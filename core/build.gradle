@@ -45,7 +45,7 @@ dependencies {
 
     shadeApi('org.java-websocket:Java-WebSocket:1.5.2')
 
-    implementation('gg.essential:elementa-1.8.9-forge:359+next') {
+    implementation('gg.essential:elementa-1.8.9-forge:385') {
         exclude module: 'kotlin-stdlib-jdk8'
         exclude module: 'kotlin-reflect'
         exclude module: 'minecraft'
