@@ -62,18 +62,30 @@ public enum ChatColour {
         return code;
     }
 
+    /**
+     * @return  the String value of the ChatColour.
+     */
     public String toString() {
         return toString;
     }
 
+    /**
+     * @return Whether the ChatColour represents a format change.
+     */
     public boolean isFormat() {
         return isFormat;
     }
 
+    /**
+     * @return Whether the ChatColour represents a colour change.
+     */
     public boolean isColor() {
         return !isFormat && this != ChatColour.RESET;
     }
 
+    /**
+     * @return A translated value of the input based on param altColorChar.
+     */
     public static String translateAlternateColorCodes(char altColorChar, String input) {
         final char[] b = input.toCharArray();
         for (int i = 0; i < b.length - 1; ++i) {
@@ -85,6 +97,9 @@ public enum ChatColour {
         return new String(b);
     }
 
+    /**
+     * @return A ChatColour instance from the String provided.
+     */
     public static ChatColour fromInput(String input) {
         for (ChatColour value : values()) {
             if (value.name().equalsIgnoreCase(input)) {
@@ -95,6 +110,9 @@ public enum ChatColour {
         return null;
     }
 
+    /**
+     * @return Whether the ChatColour is present in the String provided or not.
+     */
     public static boolean isPresent(String input) {
         return fromInput(input) != null;
     }

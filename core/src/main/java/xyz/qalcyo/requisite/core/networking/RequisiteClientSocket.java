@@ -65,8 +65,6 @@ public class RequisiteClientSocket extends WebSocketClient {
 
     /**
      * Connects to the websocket with an await fashion, not allowing the current thread to continue until the websocket has connected or failed.
-     *
-     * @param failedConnection Whether this was the product of a failed connection or not.
      * @return Whether the socket was able to connect or not.
      */
     public boolean awaitConnect() {
