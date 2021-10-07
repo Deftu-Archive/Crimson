@@ -20,6 +20,9 @@ package xyz.qalcyo.requisite.core;
 
 import xyz.qalcyo.requisite.core.data.ColourRGB;
 
+/**
+ * Provides mods and internal Requisite menus access to it's colour palette.
+ */
 public class RequisitePalette {
 
     private static final ColourRGB main = new ColourRGB(40, 157, 140);
