@@ -36,7 +36,7 @@ public class GuiMainMenuMixin {
         requisiteHook.initialize();
     }
 
-    @Inject(method = "drawScreen", at = @At("HEAD"))
+    @Inject(method = "drawScreen", at = @At("TAIL"))
     private void onScreenDrawn(int mouseX, int mouseY, float partialTicks, CallbackInfo ci) {
         requisiteHook.draw(mouseX, mouseY, partialTicks);
     }
