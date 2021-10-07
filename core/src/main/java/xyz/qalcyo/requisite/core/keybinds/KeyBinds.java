@@ -20,6 +20,10 @@ package xyz.qalcyo.requisite.core.keybinds;
 
 import xyz.qalcyo.requisite.core.RequisiteAPI;
 
+/**
+ * Class that provides easy access to instances of the
+ * {@link KeyBind} class.
+ */
 public class KeyBinds {
 
     /**

@@ -24,6 +24,9 @@ import xyz.qalcyo.requisite.core.events.KeyInputEvent;
 
 import java.util.List;
 
+/**
+ * Core of the Requisite KeyBind API.
+ */
 public class KeyBindRegistry {
 
     private final RequisiteAPI requisite;
@@ -40,20 +43,41 @@ public class KeyBindRegistry {
         requisite.getEventBus().register(KeyInputEvent.class, this::onKeyInput);
     }
 
+    /**
+     * Registers a new {@link KeyBind} with Requisite's KeyBind API.
+     *
+     * @param keyBind The new {@link KeyBind} to register.
+     */
     public void register(KeyBind keyBind) {
         configurations.load(keyBind);
         configurations.save(keyBind);
         keyBinds.add(keyBind);
     }
 
+    /**
+     * Unregisters a {@link KeyBind} from Requisite's KeyBind API.
+     *
+     * @param name The name of the {@link KeyBind} to unregister.
+     * @param category The category this keybind falls under.
+     */
     public void unregister(String name, String category) {
         keyBinds.stream().filter(keyBind -> keyBind.getName().equals(name) && keyBind.getCategory().equals(category)).findFirst().ifPresent(keyBinds::remove);
     }
 
+    /**
+     * Unregisters a {@link KeyBind} from Requisite's KeyBind API.
+     *
+     * @param keyBind The {@link KeyBind} to unregister.
+     */
     public void unregister(KeyBind keyBind) {
         unregister(keyBind.getName(), keyBind.getCategory());
     }
 
+    /**
+     * Parses key input to Requisite's KeyBind API.
+     *
+     * @param event The event called on key input.
+     */
     private void onKeyInput(KeyInputEvent event) {
         if (!requisite.getGuiHelper().isGuiPresent()) {
             for (KeyBind keyBind : keyBinds) {
