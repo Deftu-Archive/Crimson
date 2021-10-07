@@ -21,13 +21,15 @@ package xyz.qalcyo.requisite.gui.screens
 import gg.essential.elementa.ElementaVersion
 import gg.essential.elementa.WindowScreen
 
+/**
+ * Cosmetic studio for handling Requisite cosmetics.
+ */
 class CosmeticMenu : WindowScreen(
     version = ElementaVersion.V1,
     restoreCurrentGuiOnClose = true
 ) {
 
     init {
-
     }
 
 }

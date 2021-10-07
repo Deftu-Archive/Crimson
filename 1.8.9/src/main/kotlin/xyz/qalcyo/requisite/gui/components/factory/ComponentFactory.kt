@@ -18,12 +18,5 @@
 
 package xyz.qalcyo.requisite.gui.components.factory
 
-import xyz.qalcyo.requisite.gui.components.Button
-import xyz.qalcyo.requisite.gui.components.Clock
-import xyz.qalcyo.requisite.gui.components.ConfirmationMenu
-import xyz.qalcyo.requisite.gui.components.builders.ButtonBuilder
-import xyz.qalcyo.requisite.gui.components.builders.ClockBuilder
-import xyz.qalcyo.requisite.gui.components.builders.ConfirmationMenuBuilder
-
 class ComponentFactory : IComponentFactory {
 }
