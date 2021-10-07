@@ -18,6 +18,9 @@
 
 package xyz.qalcyo.requisite.core.keybinds;
 
+/**
+ * Main class for Requisite's {@link KeyBind} API handling.
+ */
 public abstract class KeyBind {
 
     private final String name, category;
@@ -29,6 +32,11 @@ public abstract class KeyBind {
         this.key = key;
     }
 
+    /**
+     * Handles key presses with the state.
+     *
+     * @param state The state of the key during this input.
+     */
     public abstract void handle(KeyBindState state);
 
     public String getName() {
