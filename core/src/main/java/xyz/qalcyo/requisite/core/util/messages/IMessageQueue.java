@@ -19,8 +19,25 @@
 package xyz.qalcyo.requisite.core.util.messages;
 
 public interface IMessageQueue {
+    /**
+     * Queues a message to be sent as the player.
+     *
+     * @param message The message to send.
+     * @param delay The delay to wait before sending the message.
+     */
     void queue(String message, int delay);
+
+    /**
+     * Queues a message to be sent as the player.
+     *
+     * @param message The message to send.
+     */
     void queue(String message);
 
+    /**
+     * Sends the latest entry in the message queue.
+     *
+     * @param entry The entry to send.
+     */
     void run(MessageQueueEntry entry);
 }
