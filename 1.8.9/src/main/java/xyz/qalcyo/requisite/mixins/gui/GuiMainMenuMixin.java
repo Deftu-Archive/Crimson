@@ -24,7 +24,7 @@ import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import xyz.qalcyo.requisite.mixins.hooks.impl.GuiMainMenuHook;
+import xyz.qalcyo.requisite.transformers.hooks.impl.GuiMainMenuHook;
 
 @Mixin({GuiMainMenu.class})
 public class GuiMainMenuMixin {

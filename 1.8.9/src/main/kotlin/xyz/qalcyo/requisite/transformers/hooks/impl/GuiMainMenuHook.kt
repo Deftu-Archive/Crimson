@@ -16,7 +16,7 @@
  * along with Requisite. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package xyz.qalcyo.requisite.mixins.hooks.impl
+package xyz.qalcyo.requisite.transformers.hooks.impl
 
 import gg.essential.elementa.ElementaVersion
 import gg.essential.elementa.components.Window
@@ -25,7 +25,7 @@ import gg.essential.universal.UDesktop
 import gg.essential.universal.UMatrixStack
 import net.minecraft.client.gui.GuiMainMenu
 import xyz.qalcyo.requisite.Requisite
-import xyz.qalcyo.requisite.core.mixins.hooks.MixinHook
+import xyz.qalcyo.requisite.core.transformers.hooks.MixinHook
 import xyz.qalcyo.requisite.gui.components.InteractableText
 import java.net.URI
 

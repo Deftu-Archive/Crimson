@@ -16,7 +16,7 @@
  * along with Requisite. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package xyz.qalcyo.requisite.core.mixins.hooks;
+package xyz.qalcyo.requisite.core.transformers.hooks;
 
 public abstract class MixinHook<T> {
 
