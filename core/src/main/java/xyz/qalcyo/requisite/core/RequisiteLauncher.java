@@ -23,6 +23,9 @@ import org.apache.logging.log4j.Logger;
 import org.spongepowered.asm.launch.MixinBootstrap;
 import org.spongepowered.asm.mixin.Mixins;
 
+/**
+ * Launches Requisite at game start using it's launchwrapper.
+ */
 public class RequisiteLauncher {
 
     private static boolean initialized = false;
