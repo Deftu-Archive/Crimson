@@ -26,6 +26,9 @@ import xyz.qalcyo.requisite.core.util.*;
 import xyz.qalcyo.requisite.core.files.configs.PrivacyConfigurations;
 import xyz.qalcyo.simpleeventbus.SimpleEventBus;
 
+/**
+ * Holds default implmenetations of Requisite classes.
+ */
 class RequisiteDefaultImplementations {
 
     static RequisiteAPI INSTANCE;
