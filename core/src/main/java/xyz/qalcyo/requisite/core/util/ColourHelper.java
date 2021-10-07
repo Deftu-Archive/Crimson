@@ -26,7 +26,6 @@ public class ColourHelper {
 
     /**
      * @return A changing colour based on the users' computer time. Simulates a "chroma" colour.
-     * @author Deftu
      */
     public int timeBasedChroma() {
         long l = System.currentTimeMillis();
@@ -35,7 +34,6 @@ public class ColourHelper {
 
     /**
      * @return A ColourRGB instance based on the users' computer time and the positions provided, which when used multiple times can simulate a "chroma" colour.
-     * @author Unknown
      */
     public ColourRGB getChroma(double x, double y) {
         float v = 2000.0f;
