@@ -18,5 +18,8 @@
 
 package xyz.qalcyo.requisite.core;
 
+/**
+ * Provides a base class so the {@link RequisiteAPI} class can determine internal event listeners.
+ */
 public interface IEventListener {
 }
