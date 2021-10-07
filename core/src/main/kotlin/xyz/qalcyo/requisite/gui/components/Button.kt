@@ -27,6 +27,9 @@ import xyz.qalcyo.requisite.core.*
 import xyz.qalcyo.requisite.gui.components.builders.*
 import java.awt.Color
 
+/**
+ * An Elementa UIContainer which represents and acts like a button.
+ */
 class Button(
     private val builder: ButtonBuilder
 ) : UIContainer() {

@@ -27,6 +27,10 @@ import xyz.qalcyo.requisite.Requisite
 import xyz.qalcyo.requisite.gui.components.Button
 import xyz.qalcyo.requisite.gui.components.builders.ButtonBuilder
 
+/**
+ * A test menu.
+ * Will this be removed? Who knows.
+ */
 class TestMenu : WindowScreen() {
 
     init {

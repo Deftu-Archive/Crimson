@@ -22,6 +22,9 @@ import gg.essential.elementa.UIComponent
 import xyz.qalcyo.requisite.core.data.ColourRGB
 import xyz.qalcyo.requisite.gui.components.factory.IComponentFactory
 
+/**
+ * A builder which makes it easier to make Clock instances.
+ */
 class ClockBuilder(
     var colour: ColourRGB,
 

@@ -22,6 +22,9 @@ import gg.essential.elementa.UIComponent
 import xyz.qalcyo.requisite.gui.components.Button
 import xyz.qalcyo.requisite.gui.components.factory.IComponentFactory
 
+/**
+ * A builder which makes it easier to make Button instances.
+ */
 class ButtonBuilder(
     var action: Button.() -> Unit,
     var text: String,

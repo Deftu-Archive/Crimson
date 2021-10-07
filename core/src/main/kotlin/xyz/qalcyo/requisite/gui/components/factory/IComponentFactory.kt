@@ -25,8 +25,22 @@ import xyz.qalcyo.requisite.gui.components.builders.ButtonBuilder
 import xyz.qalcyo.requisite.gui.components.builders.ClockBuilder
 import xyz.qalcyo.requisite.gui.components.builders.ConfirmationMenuBuilder
 
+/**
+ * A class which provides an easy way to build Requisite GUI Components.
+ */
 interface IComponentFactory {
+    /**
+     * Builds a Button.
+     */
     fun build(builder: ButtonBuilder) = Button(builder)
+
+    /**
+     * Builds a ConfirmationMenu.
+     */
     fun build(builder: ConfirmationMenuBuilder) = ConfirmationMenu(builder)
+
+    /**
+     * Builds a Clock.
+     */
     fun build(builder: ClockBuilder) = Clock(builder)
 }

@@ -27,6 +27,10 @@ import gg.essential.elementa.utils.withAlpha
 import xyz.qalcyo.requisite.core.RequisitePalette
 import xyz.qalcyo.requisite.gui.components.builders.*
 
+/**
+ * An Elementa UIContainer meant for users to choose between a Yes or No question, and
+ * for something to happen based on the decision.
+ */
 class ConfirmationMenu(
     private val builder: ConfirmationMenuBuilder
 ) : UIContainer() {

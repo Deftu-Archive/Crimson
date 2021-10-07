@@ -30,6 +30,9 @@ import xyz.qalcyo.requisite.gui.components.Button
 import xyz.qalcyo.requisite.gui.components.InteractableText
 import xyz.qalcyo.requisite.gui.components.builders.ButtonBuilder
 
+/**
+ * The Requisite Menu GUI, which allows the user to easily access Requisite (and mods that are integrated into it) settings.
+ */
 class RequisiteMenu :
     IModConfigurationMenu,
     WindowScreen(

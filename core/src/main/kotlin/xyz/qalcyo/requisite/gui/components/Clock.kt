@@ -30,6 +30,9 @@ import java.time.OffsetDateTime
 import java.time.format.DateTimeFormatter
 import java.util.*
 
+/**
+ * An Elementa UIComponent that displays a virtual clock.
+ */
 class Clock(
     private val builder: ClockBuilder
 ) : UIComponent() {

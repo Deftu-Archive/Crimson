@@ -25,6 +25,10 @@ import gg.essential.elementa.constraints.animation.Animations
 import gg.essential.elementa.dsl.*
 import java.awt.Color
 
+/**
+ * An Elementa UIText which provides more customization towards
+ * interaction.
+ */
 class InteractableText @JvmOverloads constructor(
     text: String = "",
     hoverUnderline: Boolean = true,
