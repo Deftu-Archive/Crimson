@@ -84,7 +84,7 @@ public enum ChatColour {
     }
 
     /**
-     * @return A translated value of the input based on param altColorChar.
+     * @return A translated value of the input based on {@code altColorChar}.
      */
     public static String translateAlternateColorCodes(char altColorChar, String input) {
         final char[] b = input.toCharArray();
