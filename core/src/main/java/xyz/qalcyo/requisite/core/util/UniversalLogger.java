@@ -20,6 +20,7 @@ package xyz.qalcyo.requisite.core.util;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import xyz.qalcyo.mango.Classes;
 import xyz.qalcyo.requisite.core.RequisiteAPI;
 
 public class UniversalLogger {
@@ -101,21 +102,10 @@ public class UniversalLogger {
     }
 
     public Logger create() {
-        String callerClassName = callerClassName();
+        String callerClassName = Classes.callerClassSimpleName();
         if (callerClassName == null || callerClassName.isEmpty())
             return LogManager.getLogger();
         return requisite.getLoggingHelper().create(callerClassName);
-    }
-
-    private String callerClassName() {
-        StackTraceElement[] stElements = Thread.currentThread().getStackTrace();
-        for (StackTraceElement element : stElements) {
-            if (!element.getClassName().equals(getClass().getName()) && element.getClassName().indexOf("java.lang.Thread") != 0) {
-                String className = element.getClassName();
-                return className.substring(className.lastIndexOf(".") + 1);
-            }
-        }
-        return null;
     }
 
 }
