@@ -23,8 +23,8 @@ import xyz.qalcyo.requisite.core.RequisiteAPI;
 public class KeyBinds {
 
     /**
-     * Creates and returns a Keybind instance from the parameters given.
-     * @return a Keybind instance.
+     * Creates and returns a {@link KeyBind} instance from the parameters given.
+     * @return a {@link KeyBind} instance.
      */
     public static KeyBind from(String name, String category, int key, Runnable press, Runnable release) {
         return new KeyBind(name, category, key) {
@@ -39,16 +39,16 @@ public class KeyBinds {
     }
 
     /**
-     * Creates and returns a Keybind instance from the parameters given.
-     * @return a Keybind instance.
+     * Creates and returns a {@link KeyBind} instance from the parameters given.
+     * @return a {@link KeyBind} instance.
      */
     public static KeyBind from(String name, String category, int key, Runnable press) {
         return from(name, category, key, press, () -> {});
     }
 
     /**
-     * Creates and returns a Keybind instance from the parameters given.
-     * @return a Keybind instance.
+     * Creates and returns a {@link KeyBind} instance from the parameters given.
+     * @return a {@link KeyBind} instance.
      */
     public static <T> KeyBind menu(String name, String category, int key, T menu) {
         return from(name, category, key, () -> RequisiteAPI.retrieveInstance().getGuiHelper().forceOpen(menu));
