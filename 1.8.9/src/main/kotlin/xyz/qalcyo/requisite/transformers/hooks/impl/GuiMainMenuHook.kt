@@ -43,6 +43,9 @@ class GuiMainMenuHook(instance: GuiMainMenu) : MixinHook<GuiMainMenu>(instance) 
         } childOf window
     }
 
+    fun initialize() =
+        window.onWindowResize()
+
     fun draw(mouseX: Int, mouseY: Int, partialTicks: Float) =
         window.draw(UMatrixStack.Compat.get())
 
