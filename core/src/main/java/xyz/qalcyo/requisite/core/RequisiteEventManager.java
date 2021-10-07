@@ -23,6 +23,9 @@ import xyz.qalcyo.mango.collections.Pair;
 import xyz.qalcyo.mango.collections.impl.ImmutablePair;
 import xyz.qalcyo.simpleeventbus.Event;
 
+/**
+ * Adds access to event handling easily.
+ */
 public final class RequisiteEventManager {
 
     private final RequisiteAPI requisite;
