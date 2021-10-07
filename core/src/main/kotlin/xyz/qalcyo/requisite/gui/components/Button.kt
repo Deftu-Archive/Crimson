@@ -87,6 +87,9 @@ class Button(
         val DEFAULT_HEIGHT = 20
         val DEFAULT_HEIGHT_PIXELS = DEFAULT_HEIGHT.pixels()
 
+        val DEFAULT_WIDTH_SMALL = 100
+        val DEFAULT_WIDTH_SMALL_PIXELS = DEFAULT_WIDTH_SMALL.pixels()
+
         val DISABLED_COLOUR = Color(100, 100, 100)
     }
 

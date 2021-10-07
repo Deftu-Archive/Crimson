@@ -36,7 +36,7 @@ import xyz.qalcyo.requisite.gui.components.InteractableText
 import xyz.qalcyo.requisite.gui.components.builders.ButtonBuilder
 
 /**
- * The Requisite Menu GUI, which allows the user to easily access Requisite (and mods that are integrated into it) settings.
+ * The Requisite menu GUI, which allows the user to easily access Requisite (and mods that are integrated into it) settings.
  */
 class RequisiteMenu :
     IModConfigurationMenu,
@@ -46,7 +46,11 @@ class RequisiteMenu :
     ) {
 
     init {
-        /* Branding. */
+        createBranding()
+        createButtons()
+    }
+
+    private fun createBranding() {
         val brandingContainer = UIContainer().constrain {
             x = 2.pixels()
             y = 2.pixels(true)
@@ -60,14 +64,14 @@ class RequisiteMenu :
             x = 2.pixels()
             y = 2.pixels(true)
         } childOf brandingContainer
+    }
 
-
-        /* Buttons. */
+    private fun createButtons() {
         val buttonContainer = UIContainer().constrain {
             x = CenterConstraint()
             y = CenterConstraint()
-            width = ChildBasedSizeConstraint()
-            height = ChildBasedSizeConstraint()
+            width = ChildBasedSizeConstraint(2f)
+            height = ChildBasedSizeConstraint(2f)
         } childOf window
 
         val close = ButtonBuilder({
