@@ -18,6 +18,9 @@
 
 package xyz.qalcyo.requisite.core.keybinds;
 
+/**
+ * Provides a state for Requisite's {@link KeyBind} handle method.
+ */
 public enum KeyBindState {
     PRESS,
     RELEASE
