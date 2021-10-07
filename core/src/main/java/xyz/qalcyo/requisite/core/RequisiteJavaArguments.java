@@ -22,6 +22,9 @@ import xyz.qalcyo.requisite.core.util.ChatColour;
 
 import java.util.regex.Pattern;
 
+/**
+ * Adds easy access to Requisite's JVM arguments.
+ */
 public class RequisiteJavaArguments {
 
     private static final Pattern booleanPattern = Pattern.compile("true|false", Pattern.CASE_INSENSITIVE);
@@ -60,6 +63,9 @@ public class RequisiteJavaArguments {
         return chatPrefixColour;
     }
 
+    /**
+     * @return Requisite's socket debug state.
+     */
     private static boolean retrieveSocketDebug() {
         String property = System.getProperty("requisite.socket.debug", "false");
         if (!booleanPattern.matcher(property).matches())
@@ -67,6 +73,9 @@ public class RequisiteJavaArguments {
         return Boolean.parseBoolean(property);
     }
 
+    /**
+     * @return Requisite's chat prefix colour.
+     */
     private static ChatColour retrieveChatPrefixColour() {
         String property = System.getProperty("requisite.chat.prefix", "GOLD");
         if (!ChatColour.isPresent(property))
