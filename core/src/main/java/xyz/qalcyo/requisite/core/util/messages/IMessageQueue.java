@@ -18,6 +18,9 @@
 
 package xyz.qalcyo.requisite.core.util.messages;
 
+/**
+ * Allows mods to send messages as the player without dealing with chat cooldowns.
+ */
 public interface IMessageQueue {
     /**
      * Queues a message to be sent as the player.
