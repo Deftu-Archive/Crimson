@@ -36,55 +36,422 @@ public interface IEnhancedFontRenderer {
      */
     int getWidth(char input);
 
+    /**
+     * @return A trimmed version of the input param based on the width given.
+     */
     CharSequence trim(CharSequence input, int width, boolean reverse);
+
+    /**
+     * @return A trimmed version of the input param based on the width given.
+     */
     CharSequence trim(CharSequence input, int width);
 
+    /**
+     * Draws a String based on the parameters given.
+     *
+     * @param text   The string to render.
+     * @param x      The X position of where to draw the text.
+     * @param y      The Y position of where to draw the text.
+     * @param colour The colour of the text drawn.
+     * @param shadow Whether to display a text shadow.
+     */
     void drawText(String text, float x, float y, int colour, boolean shadow);
+
+    /**
+     * Draws a String based on the parameters given.
+     *
+     * @param text   The string to render.
+     * @param x      The X position of where to draw the text.
+     * @param y      The Y position of where to draw the text.
+     * @param colour The colour of the text drawn.
+     */
     void drawText(String text, float x, float y, int colour);
+
+    /**
+     * Draws a String based on the parameters given.
+     *
+     * @param text The string to render.
+     * @param x    The X position of where to draw the text.
+     * @param y    The Y position of where to draw the text.
+     */
     void drawText(String text, float x, float y);
+
+    /**
+     * Draws a String based on the parameters given.
+     *
+     * @param text   The string to render.
+     * @param x      The X position of where to draw the text.
+     * @param y      The Y position of where to draw the text.
+     * @param colour The colour of the text drawn.
+     * @param shadow Whether to display a text shadow.
+     */
     void drawText(String text, double x, double y, int colour, boolean shadow);
+
+    /**
+     * Draws a String based on the parameters given.
+     *
+     * @param text   The string to render.
+     * @param x      The X position of where to draw the text.
+     * @param y      The Y position of where to draw the text.
+     * @param colour The colour of the text drawn.
+     */
     void drawText(String text, double x, double y, int colour);
+
+    /**
+     * Draws a String based on the parameters given.
+     *
+     * @param text The string to render.
+     * @param x    The X position of where to draw the text.
+     * @param y    The Y position of where to draw the text.
+     */
     void drawText(String text, double x, double y);
 
+    /**
+     * Draws centered text based on the parameters given.
+     *
+     * @param text   The string to render.
+     * @param x      The middle X position to draw the text.
+     * @param y      The middle Y position to draw the text.
+     * @param colour The colour of the text drawn.
+     * @param shadow Whether to display a text shadow.
+     */
     void drawCenteredText(String text, float x, float y, int colour, boolean shadow);
+
+    /**
+     * Draws centered text based on the parameters given.
+     *
+     * @param text   The string to render.
+     * @param x      The middle X position to draw the text.
+     * @param y      The middle Y position to draw the text.
+     * @param colour The colour of the text drawn.
+     */
     void drawCenteredText(String text, float x, float y, int colour);
+
+    /**
+     * Draws centered text based on the parameters given.
+     *
+     * @param text The string to render.
+     * @param x    The middle X position to draw the text.
+     * @param y    The middle Y position to draw the text.
+     */
     void drawCenteredText(String text, float x, float y);
+
+    /**
+     * Draws centered text based on the parameters given.
+     *
+     * @param text   The string to render.
+     * @param x      The middle X position to draw the text.
+     * @param y      The middle Y position to draw the text.
+     * @param colour The colour of the text drawn.
+     * @param shadow Whether to display a text shadow.
+     */
     void drawCenteredText(String text, double x, double y, int colour, boolean shadow);
+
+    /**
+     * Draws centered text based on the parameters given.
+     *
+     * @param text   The string to render.
+     * @param x      The middle X position to draw the text.
+     * @param y      The middle Y position to draw the text.
+     * @param colour The colour of the text drawn.
+     */
     void drawCenteredText(String text, double x, double y, int colour);
+
+    /**
+     * Draws centered text based on the parameters given.
+     *
+     * @param text The string to render.
+     * @param x    The middle X position to draw the text.
+     * @param y    The middle Y position to draw the text.
+     */
     void drawCenteredText(String text, double x, double y);
 
+    /**
+     * Draws scaled text based on the parameters given.
+     *
+     * @param text   The string to render.
+     * @param scale  The amount to scale the textt.
+     * @param x      The middle X position to draw the text.
+     * @param y      The middle Y position to draw the text.
+     * @param colour The colour of the text drawn.
+     * @param shadow Whether to display a text shadow.
+     */
     void drawScaledText(String text, float scale, float x, float y, int colour, boolean shadow);
+
+    /**
+     * Draws scaled text based on the parameters given.
+     *
+     * @param text   The string to render.
+     * @param scale  The amount to scale the textt.
+     * @param x      The middle X position to draw the text.
+     * @param y      The middle Y position to draw the text.
+     * @param colour The colour of the text drawn.
+     */
     void drawScaledText(String text, float scale, float x, float y, int colour);
+
+    /**
+     * Draws scaled text based on the parameters given.
+     *
+     * @param text  The string to render.
+     * @param scale The amount to scale the text.
+     * @param x     The middle X position to draw the text.
+     * @param y     The middle Y position to draw the text.
+     */
     void drawScaledText(String text, float scale, float x, float y);
+
+    /**
+     * Draws scaled text based on the parameters given.
+     *
+     * @param text   The string to render.
+     * @param scale  The amount to scale the textt.
+     * @param x      The middle X position to draw the text.
+     * @param y      The middle Y position to draw the text.
+     * @param colour The colour of the text drawn.
+     * @param shadow Whether to display a text shadow.
+     */
     void drawScaledText(String text, float scale, double x, double y, int colour, boolean shadow);
+
+    /**
+     * Draws scaled text based on the parameters given.
+     *
+     * @param text   The string to render.
+     * @param scale  The amount to scale the textt.
+     * @param x      The middle X position to draw the text.
+     * @param y      The middle Y position to draw the text.
+     * @param colour The colour of the text drawn.
+     */
     void drawScaledText(String text, float scale, double x, double y, int colour);
+
+    /**
+     * Draws scaled text based on the parameters given.
+     *
+     * @param text  The string to render.
+     * @param scale The amount to scale the text.
+     * @param x     The middle X position to draw the text.
+     * @param y     The middle Y position to draw the text.
+     */
     void drawScaledText(String text, float scale, double x, double y);
 
+    /**
+     * Draws text that changes colour to represent a "chroma" effect based on the parameters given.
+     *
+     * @param text   The string to render.
+     * @param x      The middle X position to draw the text.
+     * @param y      The middle Y position to draw the text.
+     * @param shadow Whether to display a text shadow.
+     */
     void drawChromaText(String text, float x, float y, boolean shadow);
+
+    /**
+     * Draws text that changes colour to represent a "chroma" effect based on the parameters given.
+     *
+     * @param text The string to render.
+     * @param x    The middle X position to draw the text.
+     * @param y    The middle Y position to draw the text.
+     */
     void drawChromaText(String text, float x, float y);
+
+    /**
+     * Draws text that changes colour to represent a "chroma" effect based on the parameters given.
+     *
+     * @param text   The string to render.
+     * @param x      The middle X position to draw the text.
+     * @param y      The middle Y position to draw the text.
+     * @param shadow Whether to display a text shadow.
+     */
     void drawChromaText(String text, double x, double y, boolean shadow);
+
+    /**
+     * Draws text that changes colour to represent a "chroma" effect based on the parameters given.
+     *
+     * @param text The string to render.
+     * @param x    The middle X position to draw the text.
+     * @param y    The middle Y position to draw the text.
+     */
     void drawChromaText(String text, double x, double y);
 
+    /**
+     * Draws centered and scaled text based on the parameters given.
+     *
+     * @param text   The string to render.
+     * @param scale  The amount to scale the textt.
+     * @param x      The middle X position to draw the text.
+     * @param y      The middle Y position to draw the text.
+     * @param colour The colour of the text drawn.
+     * @param shadow Whether to display a text shadow.
+     */
     void drawCenteredScaledText(String text, float scale, float x, float y, int colour, boolean shadow);
+
+    /**
+     * Draws centered and scaled text based on the parameters given.
+     *
+     * @param text   The string to render.
+     * @param scale  The amount to scale the text.
+     * @param x      The middle X position to draw the text.
+     * @param y      The middle Y position to draw the text.
+     * @param colour The colour of the text drawn.
+     */
     void drawCenteredScaledText(String text, float scale, float x, float y, int colour);
+
+    /**
+     * Draws centered and scaled text based on the parameters given.
+     *
+     * @param text The string to render.
+     * @param x    The middle X position to draw the text.
+     * @param y    The middle Y position to draw the text.
+     */
     void drawCenteredScaledText(String text, float scale, float x, float y);
+
+    /**
+     * Draws centered and scaled text based on the parameters given.
+     *
+     * @param text   The string to render.
+     * @param scale  The amount to scale the textt.
+     * @param x      The middle X position to draw the text.
+     * @param y      The middle Y position to draw the text.
+     * @param colour The colour of the text drawn.
+     * @param shadow Whether to display a text shadow.
+     */
     void drawCenteredScaledText(String text, float scale, double x, double y, int colour, boolean shadow);
+
+    /**
+     * Draws centered and scaled text based on the parameters given.
+     *
+     * @param text   The string to render.
+     * @param scale  The amount to scale the textt.
+     * @param x      The middle X position to draw the text.
+     * @param y      The middle Y position to draw the text.
+     * @param colour The colour of the text drawn.
+     */
     void drawCenteredScaledText(String text, float scale, double x, double y, int colour);
+
+    /**
+     * Draws centered and scaled text based on the parameters given.
+     *
+     * @param text  The string to render.
+     * @param scale The amount to scale the textt.
+     * @param x     The middle X position to draw the text.
+     * @param y     The middle Y position to draw the text.
+     */
     void drawCenteredScaledText(String text, float scale, double x, double y);
 
+    /**
+     * Draws centered text that changes colour to represent a "chroma" effect based on the parameters given.
+     *
+     * @param text   The string to render.
+     * @param x      The middle X position to draw the text.
+     * @param y      The middle Y position to draw the text.
+     * @param shadow Whether to display a text shadow.
+     */
     void drawCenteredChromaText(String text, float x, float y, boolean shadow);
+
+    /**
+     * Draws centered text that changes colour to represent a "chroma" effect based on the parameters given.
+     *
+     * @param text The string to render.
+     * @param x    The middle X position to draw the text.
+     * @param y    The middle Y position to draw the text.
+     */
     void drawCenteredChromaText(String text, float x, float y);
+
+    /**
+     * Draws centered text that changes colour to represent a "chroma" effect based on the parameters given.
+     *
+     * @param text   The string to render.
+     * @param x      The middle X position to draw the text.
+     * @param y      The middle Y position to draw the text.
+     * @param shadow Whether to display a text shadow.
+     */
     void drawCenteredChromaText(String text, double x, double y, boolean shadow);
+
+    /**
+     * Draws centered text that changes colour to represent a "chroma" effect based on the parameters given.
+     *
+     * @param text The string to render.
+     * @param x    The middle X position to draw the text.
+     * @param y    The middle Y position to draw the text.
+     */
     void drawCenteredChromaText(String text, double x, double y);
 
+    /**
+     * Draws centered text that changes colour to represent a "chroma" effect based on the parameters given.
+     *
+     * @param text   The string to render.
+     * @param x      The middle X position to draw the text.
+     * @param y      The middle Y position to draw the text.
+     * @param shadow Whether to display a text shadow.
+     */
     void drawScaledChromaText(String text, float scale, float x, float y, boolean shadow);
+
+    /**
+     * Draws centered text that changes colour to represent a "chroma" effect based on the parameters given.
+     *
+     * @param text The string to render.
+     * @param x    The middle X position to draw the text.
+     * @param y    The middle Y position to draw the text.
+     */
     void drawScaledChromaText(String text, float scale, float x, float y);
+
+    /**
+     * Draws scaled text that changes colour to represent a "chroma" effect based on the parameters given.
+     *
+     * @param text   The string to render.
+     * @param x      The middle X position to draw the text.
+     * @param y      The middle Y position to draw the text.
+     * @param shadow Whether to display a text shadow.
+     */
     void drawScaledChromaText(String text, float scale, double x, double y, boolean shadow);
+
+    /**
+     * Draws scaled text that changes colour to represent a "chroma" effect based on the parameters given.
+     *
+     * @param text  The string to render.
+     * @param scale The amount to scale the text.
+     * @param x     The middle X position to draw the text.
+     * @param y     The middle Y position to draw the text.
+     */
     void drawScaledChromaText(String text, float scale, double x, double y);
 
+    /**
+     * Draws centered and scaled text that changes colour to represent a "chroma" effect based on the parameters given.
+     *
+     * @param text   The string to render.
+     * @param scale  The amount to scale the text.
+     * @param x      The middle X position to draw the text.
+     * @param y      The middle Y position to draw the text.
+     * @param shadow Whether to display a text shadow.
+     */
     void drawCenteredScaledChromaText(String text, float scale, float x, float y, boolean shadow);
+
+    /**
+     * Draws centered and scaled text that changes colour to represent a "chroma" effect based on the parameters given.
+     *
+     * @param text  The string to render.
+     * @param scale The amount to scale the text.
+     * @param x     The middle X position to draw the text.
+     * @param y     The middle Y position to draw the text.
+     */
     void drawCenteredScaledChromaText(String text, float scale, float x, float y);
+
+    /**
+     * Draws centered and scaled text that changes colour to represent a "chroma" effect based on the parameters given.
+     *
+     * @param text   The string to render.
+     * @param scale  The amount to scale the text.
+     * @param x      The middle X position to draw the text.
+     * @param y      The middle Y position to draw the text.
+     * @param shadow Whether to display a text shadow.
+     */
     void drawCenteredScaledChromaText(String text, float scale, double x, double y, boolean shadow);
+
+    /**
+     * Draws centered and scaled text that changes colour to represent a "chroma" effect based on the parameters given.
+     *
+     * @param text  The string to render.
+     * @param scale The amount to scale the text.
+     * @param x     The middle X position to draw the text.
+     * @param y     The middle Y position to draw the text.
+     */
     void drawCenteredScaledChromaText(String text, float scale, double x, double y);
 
     /**
@@ -128,6 +495,9 @@ public interface IEnhancedFontRenderer {
         return output.toString();
     }
 
+    /**
+     * @return Return a centered version of the float based on input.
+     */
     default float makeCentered(CharSequence input, float f) {
         return f - getWidth(input) / 2;
     }

@@ -101,6 +101,10 @@ public class UniversalLogger {
         create().catching(throwable);
     }
 
+    /**
+     * Creates and returns a Logger instance based on the class it is called from.
+     * @return a Logger instance.
+     */
     public Logger create() {
         String callerClassName = Classes.callerClassSimpleName();
         if (callerClassName == null || callerClassName.isEmpty())

@@ -33,11 +33,28 @@ public interface IRenderHelper {
 
     */
 
+    /**
+     * Draw a rectangle based on the given parameters.
+     */
     void drawRect(int left, int top, int right, int bottom, int colour);
+
+    /**
+     * Draw a rectangle based on the given parameters.
+     */
     void drawRectEnhanced(int x, int y, int width, int height, int colour);
 
+    /**
+     * Draw a hollow rectangle based on the given parameters.
+     */
     void drawHollowRect(int x, int y, int width, int height, int thickness, int colour);
 
+    /**
+     * Draw a horizontal based on the given parameters.
+     */
     void drawHorizontalLine(int start, int end, int y, int thickness, int colour);
+
+    /**
+     * Draw a vertical line based on the given parameters.
+     */
     void drawVerticalLine(int x, int start, int end, int thickness, int colour);
 }
