@@ -403,9 +403,9 @@ public interface RequisiteAPI extends IMod {
      */
     static RequisiteAPI retrieveInstance() {
         try {
-            RequisiteAPI cached = RequisiteDefaultImplementations.INSTANCE;
+            RequisiteAPI cached = RequisiteConstants.getInstance();
             if (cached == null)
-                return RequisiteDefaultImplementations.INSTANCE = (RequisiteAPI) Class.forName("xyz.qalcyo.requisite.Requisite").getDeclaredMethod("getInstance").invoke(null);
+                return RequisiteConstants.INSTANCE = (RequisiteAPI) Class.forName("xyz.qalcyo.requisite.Requisite").getDeclaredMethod("getInstance").invoke(null);
             return cached;
         } catch (Exception e) {
             e.printStackTrace();

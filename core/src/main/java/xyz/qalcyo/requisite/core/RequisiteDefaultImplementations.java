@@ -31,8 +31,6 @@ import xyz.qalcyo.simpleeventbus.SimpleEventBus;
  */
 class RequisiteDefaultImplementations {
 
-    static RequisiteAPI INSTANCE;
-
     static final Logger LOGGER = LogManager.getLogger("Requisite");
     static final RequisiteJavaArguments JAVA_ARGUMENTS = new RequisiteJavaArguments();
     static final SimpleEventBus EVENT_BUS = new SimpleEventBus();
