@@ -22,6 +22,7 @@ import xyz.qalcyo.requisite.core.RequisiteAPI;
 import xyz.qalcyo.requisite.core.commands.annotations.Command;
 import xyz.qalcyo.requisite.core.data.ColourRGB;
 import xyz.qalcyo.requisite.core.notifications.NotificationColour;
+import xyz.qalcyo.requisite.core.util.ChatColour;
 
 @Command(
         name = "requisitetest",
@@ -50,6 +51,11 @@ public class RequisiteTestCommand {
                         new ColourRGB(255, 156, 132)
                 )
         );
+    }
+
+    @Command.Argument(name = "3")
+    public void three() {
+        requisite.getChatHelper().send("Your session ID is: " + ChatColour.BOLD + requisite.getRequisiteSocket().getSessionId());
     }
 
 }

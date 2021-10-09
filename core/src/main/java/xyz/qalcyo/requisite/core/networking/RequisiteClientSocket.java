@@ -29,12 +29,15 @@ import xyz.qalcyo.json.parser.JsonParser;
 import xyz.qalcyo.mango.Maps;
 import xyz.qalcyo.mango.Multithreading;
 import xyz.qalcyo.requisite.core.RequisiteAPI;
+import xyz.qalcyo.requisite.core.networking.packets.GreetingPacket;
+import xyz.qalcyo.requisite.core.networking.packets.KeepAlivePacket;
 import xyz.qalcyo.requisite.core.util.ChatColour;
 
 import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.Map;
+import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
 public class RequisiteClientSocket extends WebSocketClient {
@@ -45,7 +48,9 @@ public class RequisiteClientSocket extends WebSocketClient {
 
     private final Map<String, Class<? extends BasePacket>> packetRegistry;
 
-    private boolean createNotification;
+    private UUID sessionId;
+    private long lastKeepAlive;
+    private int failedConnectionCount;
 
     public RequisiteClientSocket(RequisiteAPI requisite, ISocketHelper helper) {
         super(requisite.retrieveSocketUri(), new Draft_6455());
@@ -58,7 +63,7 @@ public class RequisiteClientSocket extends WebSocketClient {
         /* Settings. */
         setTcpNoDelay(true);
         setReuseAddr(true);
-        setConnectionLostTimeout(120);
+        setConnectionLostTimeout(0);
 
         initialize();
     }
@@ -79,26 +84,15 @@ public class RequisiteClientSocket extends WebSocketClient {
     /**
      * Reconnects to the websocket with an await fashion, not allowing the current thread to continue until the websocket has connected or failed.
      *
-     * @param createNotification Whether this was the product of a failed connection or not.
      * @return Whether the socket was able to connect or not.
      */
-    public boolean awaitReconnect(boolean createNotification) {
+    public boolean awaitReconnect() {
         try {
-            this.createNotification = createNotification;
             return reconnectBlocking();
         } catch (Exception e) {
             e.printStackTrace();
             return false;
         }
-    }
-
-    /**
-     * Reconnects to the websocket with an await fashion, not allowing the current thread to continue until the websocket has connected or failed.
-     *
-     * @return Whether the socket was able to connect or not.
-     */
-    public boolean awaitReconnect() {
-        return awaitReconnect(false);
     }
 
     /**
@@ -108,6 +102,7 @@ public class RequisiteClientSocket extends WebSocketClient {
      */
     public void onOpen(ServerHandshake handshake) {
         logger.info(String.format("Opened connection with Requisite's server websocket. (code=%s | message=%s)", handshake.getHttpStatus(), handshake.getHttpStatusMessage()));
+        send(new GreetingPacket());
     }
 
     /**
@@ -118,18 +113,31 @@ public class RequisiteClientSocket extends WebSocketClient {
      * @param remote Whether this close was remote or not.
      */
     public void onClose(int code, String reason, boolean remote) {
-        logger.error(String.format("Closed connection with Requisite's server websocket. (code=%s | reason=%s)", code, reason));
-        Multithreading.schedule(() -> awaitReconnect(true), 15, TimeUnit.SECONDS);
-        if (createNotification) {
-            requisite.getNotifications().push("Error!", "Connection to Requisite WebSocket closed. " + ChatColour.BOLD + "Click to attempt a reconnect.", notification -> {
-                boolean socketReconnected = awaitReconnect(true);
-                if (!socketReconnected) {
-                    requisite.getNotifications().push(notification.clone());
-                    notification.close();
-                }
-            });
+        onClose(WebSocketClose.fromCode(code), reason, remote);
+    }
 
-            createNotification = false;
+    /**
+     * Called when the connection to the websocket's server is killed, ended or closed.
+     *
+     * @param code The close code.
+     * @param reason The reason for the close.
+     * @param remote Whether this close was remote or not.
+     */
+    private void onClose(WebSocketClose code, String reason, boolean remote) {
+        logger.error(String.format("Closed connection with Requisite's server socket. (code=%s | reason=%s)", code, reason));
+        if (code != WebSocketClose.NORMAL) {
+            failedConnectionCount++;
+            if (failedConnectionCount < 3 && requisite.getNotifications() != null) {
+                Multithreading.schedule(this::awaitReconnect, 15, TimeUnit.SECONDS);
+            } else {
+                if (requisite.getNotifications() != null) {
+                    requisite.getNotifications().push("Networking error!", "The connection to Requisite's network was disconnected abnormally. Click to attempt to reconnect.", instance -> {
+                        awaitReconnect();
+                    });
+                }
+            }
+        } else {
+            failedConnectionCount = 0;
         }
     }
 
@@ -181,6 +189,30 @@ public class RequisiteClientSocket extends WebSocketClient {
         helper.chat(Arrays.toString(ex.getStackTrace()));
     }
 
+    /**
+     * Closes the connection to the server.
+     *
+     * @param code The code to provide.
+     */
+    public void close(WebSocketClose code) {
+        close(code.getCode());
+    }
+
+    /**
+     * Closes the connection to the server.
+     *
+     * @param code The code to provide.
+     * @param message The message to provide with this closure.
+     */
+    public void close(WebSocketClose code, String message) {
+        close(code.getCode(), message);
+    }
+
+    /**
+     * Sends a new packet to the server.
+     *
+     * @param packet The packet to send.
+     */
     public void send(BasePacket packet) {
         try {
             packet.send(this, packet.getData());
@@ -199,10 +231,34 @@ public class RequisiteClientSocket extends WebSocketClient {
      * Initializes packets.
      */
     private void initialize() {
+        register("GREETING", GreetingPacket.class);
+        register("KEEP_ALIVE", KeepAlivePacket.class);
     }
 
+    /**
+     * Registers a new packet under the ID provided.
+     *
+     * @param id The ID of the new packet.
+     * @param clazz The class of the new packet.
+     */
     public void register(String id, Class<? extends BasePacket> clazz) {
         packetRegistry.put(id, clazz);
+    }
+
+    /**
+     * Updates this game session's ID.
+     *
+     * @param sessionId The new session ID for this session.
+     */
+    public void updateSessionId(UUID sessionId) {
+        this.sessionId = sessionId;
+    }
+
+    /**
+     * Updates the last keep alive.
+     */
+    public void updateKeepAlive() {
+        lastKeepAlive = System.currentTimeMillis();
     }
 
     public RequisiteAPI getRequisite() {
@@ -215,6 +271,18 @@ public class RequisiteClientSocket extends WebSocketClient {
 
     public ISocketHelper getHelper() {
         return helper;
+    }
+
+    public UUID getSessionId() {
+        return sessionId;
+    }
+
+    public long getLastKeepAlive() {
+        return lastKeepAlive;
+    }
+
+    public int getFailedConnectionCount() {
+        return failedConnectionCount;
     }
 
 }

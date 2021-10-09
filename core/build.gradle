@@ -44,6 +44,7 @@ dependencies {
     shade('org.jetbrains.kotlin:kotlin-stdlib-jdk8')
 
     shadeApi('org.java-websocket:Java-WebSocket:1.5.2')
+    shadeApi('com.github.ben-manes.caffeine:caffeine:3.0.4')
 
     implementation('gg.essential:elementa-1.8.9-forge:385') {
         exclude module: 'kotlin-stdlib-jdk8'
