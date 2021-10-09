@@ -82,8 +82,9 @@ public class Notification {
     }
 
     public void click() {
-        if (clickListener != null)
+        if (clickListener != null) {
             clickListener.accept(this);
+        }
     }
 
     public int getDuration() {

@@ -35,7 +35,6 @@ public class GreetingPacket extends BasePacket {
     }
 
     public void receive(RequisiteClientSocket socket, JsonObject packet, JsonObject data) {
-        System.out.println(data);
         if (!data.hasKey("id")) {
             socket.close(WebSocketClose.PROTOCOL_ERROR);
         } else {

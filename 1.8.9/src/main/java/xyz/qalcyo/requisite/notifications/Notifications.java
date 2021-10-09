@@ -25,6 +25,7 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 import xyz.qalcyo.requisite.Requisite;
+import xyz.qalcyo.requisite.core.RequisitePalette;
 import xyz.qalcyo.requisite.core.data.ColourRGB;
 import xyz.qalcyo.requisite.core.notifications.INotifications;
 import xyz.qalcyo.requisite.core.notifications.Notification;
@@ -56,11 +57,13 @@ public class Notifications implements INotifications {
 
         float y = 5;
         for (Notification notification : notifications) {
-            if (notifications.indexOf(notification) > 2)
+            if (notifications.indexOf(notification) > 2) {
                 continue;
+            }
 
-            if (notification.data.x < 1)
+            if (notification.data.x < 1) {
                 notification.data.x = scaledWidth;
+            }
 
             int duration = (notification.duration == -1 ? 4 : notification.duration);
 
@@ -74,8 +77,9 @@ public class Notifications implements INotifications {
             /* Size and positon. */
             float height = 18 + (textLines * Minecraft.getMinecraft().fontRendererObj.FONT_HEIGHT);
             float x = notification.data.x = requisite.getMathHelper().lerp(notification.data.x, scaledWidth - width - 5, ticks / 4);
-            if (notification.data.closing && notification.data.time < 0.75f)
+            if (notification.data.closing && notification.data.time < 0.75f) {
                 x = notification.data.x = requisite.getMathHelper().lerp(notification.data.x, scaledWidth + width, ticks / 4);
+            }
 
             /* Mouse handling. */
             float mouseX = (float) requisite.getMouseHelper().getMouseX();
@@ -89,9 +93,13 @@ public class Notifications implements INotifications {
 
             /* Rendering. */
             GlStateManager.pushMatrix();
-            ColourRGB backgroundColour = notification.colour == null || notification.colour.background == null ? NotificationColour.getDefaultBackground() : notification.colour.background.setA_builder(200);
+            if (notification.colour == null) {
+                notification.colour = NotificationColour.DEFAULT;
+            }
+
+            ColourRGB backgroundColour = notification.colour.background.setA_builder(200);
             requisite.getRenderHelper().drawRectEnhanced((int) x, (int) y, (int) width, (int) height, backgroundColour.getRGBA());
-            ColourRGB foregroundColour = notification.colour == null || notification.colour.foreground == null ? NotificationColour.getDefaultForeground() : notification.colour.foreground.setA_builder(200);
+            ColourRGB foregroundColour = notification.colour.foreground.setA_builder(200);
             requisite.getRenderHelper().drawHollowRect((int) x + 4, (int) y + 4, (int) width - 8, (int) height - 8, 1, foregroundColour.getRGBA());
 
             /* Text. */
@@ -115,12 +123,17 @@ public class Notifications implements INotifications {
             y += height + 5;
 
             /* Other handling things. */
-            if (notification.data.time >= duration)
+            if (notification.data.time >= duration) {
                 notification.data.closing = true;
-            if (!hovered)
+            }
+
+            if (!hovered) {
                 notification.data.time += (notification.data.closing ? -0.02 : 0.02) * (ticks * 3);
-            if (notification.data.closing && notification.data.time <= 0)
+            }
+
+            if (notification.data.closing && notification.data.time <= 0) {
                 notifications.remove(notification);
+            }
         }
     }
 

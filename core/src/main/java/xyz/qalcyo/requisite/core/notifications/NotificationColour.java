@@ -18,13 +18,16 @@
 
 package xyz.qalcyo.requisite.core.notifications;
 
+import xyz.qalcyo.requisite.core.RequisitePalette;
 import xyz.qalcyo.requisite.core.data.ColourRGB;
 
 public class NotificationColour {
 
     /* Constants. */
     private static final ColourRGB defaultBackground = new ColourRGB(0, 0, 0, 200);
-    private static final ColourRGB defaultForeground = new ColourRGB(255, 175, 0, 200);
+
+    public static final NotificationColour DEFAULT = new NotificationColour(defaultBackground, RequisitePalette.getMain());
+    public static final NotificationColour ALTERNATIVE = new NotificationColour(defaultBackground, new ColourRGB(255, 175, 0, 200));
 
     /* Data. */
     public final ColourRGB background;
@@ -37,10 +40,6 @@ public class NotificationColour {
 
     public static ColourRGB getDefaultBackground() {
         return defaultBackground;
-    }
-
-    public static ColourRGB getDefaultForeground() {
-        return defaultForeground;
     }
 
 }
