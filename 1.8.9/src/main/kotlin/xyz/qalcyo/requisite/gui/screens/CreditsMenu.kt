@@ -24,10 +24,7 @@ import gg.essential.elementa.components.ScrollComponent
 import gg.essential.elementa.components.UIBlock
 import gg.essential.elementa.components.UIContainer
 import gg.essential.elementa.components.UIText
-import gg.essential.elementa.constraints.CenterConstraint
-import gg.essential.elementa.constraints.ChildBasedRangeConstraint
-import gg.essential.elementa.constraints.RelativeConstraint
-import gg.essential.elementa.constraints.SiblingConstraint
+import gg.essential.elementa.constraints.*
 import gg.essential.elementa.dsl.*
 import gg.essential.universal.UDesktop
 import xyz.qalcyo.json.entities.JsonArray
@@ -62,7 +59,7 @@ class CreditsMenu : WindowScreen(
 
         val librariesContainer = UIContainer().constrain {
             width = RelativeConstraint()
-            height = ChildBasedRangeConstraint()
+            height = ChildBasedSizeConstraint()
         } childOf scrollable
         val librariesTitle = UIText("Libraries").constrain {
             x = CenterConstraint()
@@ -72,9 +69,9 @@ class CreditsMenu : WindowScreen(
         appendUsingSchema(librariesContainer, librariesArray)
 
         val codeAuthorsContainer = UIContainer().constrain {
-            y = SiblingConstraint(3f)
+            y = librariesContainer.getBottom().pixels() + 3.pixels()
             width = RelativeConstraint()
-            height = ChildBasedRangeConstraint()
+            height = ChildBasedSizeConstraint()
         } childOf scrollable
         val codeAuthorsTitle = UIText("Code authors").constrain {
             x = CenterConstraint()
