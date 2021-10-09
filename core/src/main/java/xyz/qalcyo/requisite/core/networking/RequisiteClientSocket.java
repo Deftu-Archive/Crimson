@@ -30,7 +30,6 @@ import xyz.qalcyo.mango.Maps;
 import xyz.qalcyo.mango.Multithreading;
 import xyz.qalcyo.requisite.core.RequisiteAPI;
 import xyz.qalcyo.requisite.core.networking.packets.GreetingPacket;
-import xyz.qalcyo.requisite.core.networking.packets.KeepAlivePacket;
 import xyz.qalcyo.requisite.core.util.ChatColour;
 
 import java.nio.ByteBuffer;
@@ -231,7 +230,6 @@ public class RequisiteClientSocket extends WebSocketClient {
      */
     private void initialize() {
         register("GREETING", GreetingPacket.class);
-        register("KEEP_ALIVE", KeepAlivePacket.class);
     }
 
     /**
