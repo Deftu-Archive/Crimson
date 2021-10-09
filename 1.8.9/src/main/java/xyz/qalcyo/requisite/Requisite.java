@@ -92,7 +92,7 @@ public class Requisite implements RequisiteAPI {
         fileManager = new FileManager(this);
         configurationManager = new ConfigurationManager("config", fileManager.getRequisiteDirectory(fileManager.getQalcyoDirectory(fileManager.getConfigDirectory(gameDir))));
         notifications = new Notifications(this);
-        boolean socketConnected = (requisiteSocket = new RequisiteClientSocket(this, new SocketHelper())).awaitConnect();
+        (requisiteSocket = new RequisiteClientSocket(this, new SocketHelper())).awaitConnect();
         requisiteSocket.register("COSMETIC_RETRIEVE", CosmeticRetrievePacket.class);
         modIntegration = new ModIntegration();
         commandRegistry = new CommandRegistry(new CommandHelper());
@@ -115,16 +115,6 @@ public class Requisite implements RequisiteAPI {
             messageQueue = new MessageQueue(this);
             serverHelper = new ServerHelper();
             glHelper = new GlHelper();
-
-            if (!socketConnected) {
-                notifications.push("Error!", "Failed to connect to Requisite WebSocket. " + ChatColour.BOLD + "Click to attempt a reconnect.", notification -> {
-                    if (!requisiteSocket.awaitReconnect()) {
-                        notification.repush();
-                        notification.close();
-                    }
-                });
-            }
-
             cosmeticManager.start();
         });
 
