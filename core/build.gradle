@@ -56,7 +56,6 @@ dependencies {
     }
 
     shadeApi('com.github.JnCrMx:discord-game-sdk4j:v0.5.4')
-    shadeApi('se.michaelthelin.spotify:spotify-web-api-java:6.5.4')
 
     implementation('org.spongepowered:mixin:0.7.11-SNAPSHOT')
 

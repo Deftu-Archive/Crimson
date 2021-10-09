@@ -18,15 +18,13 @@
 
 package xyz.qalcyo.requisite.transformers.hooks.impl
 
-import gg.essential.elementa.constraints.CenterConstraint
 import gg.essential.elementa.dsl.*
-import gg.essential.universal.UDesktop
-import gg.essential.universal.UMatrixStack
+import gg.essential.universal.UScreen
 import net.minecraft.client.gui.GuiMainMenu
 import xyz.qalcyo.requisite.Requisite
 import xyz.qalcyo.requisite.core.transformers.hooks.GuiMixinHook
 import xyz.qalcyo.requisite.gui.components.InteractableText
-import java.net.URI
+import xyz.qalcyo.requisite.gui.screens.CreditsMenu
 
 class GuiMainMenuHook(
     instance: GuiMainMenu
@@ -34,11 +32,11 @@ class GuiMainMenuHook(
     instance
 ) {
     init {
-        val brandingText = InteractableText("${Requisite.getInstance().name()} v${Requisite.getInstance().version()}", true, InteractableText.Alignment.CENTER, {
-            UDesktop.browse(URI.create("https://discord.gg/BJzuuc398G"))
+        val brandingText = InteractableText("${Requisite.getInstance().name()} v${Requisite.getInstance().version()}", true, InteractableText.Alignment.RIGHT, {
+            UScreen.displayScreen(CreditsMenu())
         }).constrain {
-            x = CenterConstraint()
-            y = 2.pixels(true)
+            x = 2.pixels(true)
+            y = 11.pixels(true)
         } childOf window
     }
 }

@@ -20,41 +20,44 @@ package xyz.qalcyo.requisite.gui.screens
 
 import gg.essential.elementa.ElementaVersion
 import gg.essential.elementa.WindowScreen
+import gg.essential.elementa.components.ScrollComponent
+import gg.essential.elementa.components.UIBlock
 import gg.essential.elementa.constraints.CenterConstraint
-import gg.essential.elementa.constraints.SiblingConstraint
-import gg.essential.elementa.dsl.childOf
-import gg.essential.elementa.dsl.constrain
+import gg.essential.elementa.constraints.RelativeConstraint
+import gg.essential.elementa.dsl.*
 import xyz.qalcyo.requisite.Requisite
+import xyz.qalcyo.requisite.core.RequisitePalette
 import xyz.qalcyo.requisite.gui.components.Button
 import xyz.qalcyo.requisite.gui.components.builders.ButtonBuilder
 
-/**
- * A test menu.
- * Will this be removed? Who knows.
- */
-class TestMenu : WindowScreen(
-    ElementaVersion.V1
+class CreditsMenu : WindowScreen(
+    ElementaVersion.V1,
+    restoreCurrentGuiOnClose = true
 ) {
-
     init {
-        val button = ButtonBuilder({
-            val toggle = toggle()
-            Requisite.getInstance().chatHelper.send("Toggled button to - $toggle")
-        }, "Test button").build(Requisite.getInstance().componentFactory).constrain {
-            x = CenterConstraint()
-            y = CenterConstraint()
-            width = Button.DEFAULT_WIDTH_PIXELS
-            height = Button.DEFAULT_HEIGHT_PIXELS
+        val scrollable = ScrollComponent().constrain {
+            x = 0.pixels()
+            y = 0.pixels()
+            width = RelativeConstraint()
+            height = 50.pixels(true)
+        } childOf window
+        scrollable.setVerticalScrollBarComponent(ScrollComponent.DefaultScrollBar(false), true)
+        scrollable.setEmptyText("I'm empty :(")
+
+        val divider = UIBlock(RequisitePalette.getComponentContent().asColor()).constrain {
+            x = 0.pixels()
+            y = 50.pixels(true)
+            width = RelativeConstraint()
+            height = 1.pixel()
         } childOf window
 
-        val reset = ButtonBuilder({
-            (button as Button).setToggled(true)
-        }, "Reset test button").build(Requisite.getInstance().componentFactory).constrain {
+        val backButton = ButtonBuilder({
+            restorePreviousScreen()
+        }, "Back").build(Requisite.getInstance().componentFactory).constrain {
             x = CenterConstraint()
-            y = SiblingConstraint()
-            width = Button.DEFAULT_WIDTH_PIXELS
+            y = 25.pixels(true)
+            width = Button.DEFAULT_WIDTH_SMALL_PIXELS
             height = Button.DEFAULT_HEIGHT_PIXELS
         } childOf window
     }
-
 }
