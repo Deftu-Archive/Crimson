@@ -49,7 +49,6 @@ public class RequisiteClientSocket extends WebSocketClient {
     private final Map<String, Class<? extends BasePacket>> packetRegistry;
 
     private UUID sessionId;
-    private long lastKeepAlive;
     private int failedConnectionCount;
 
     public RequisiteClientSocket(RequisiteAPI requisite, ISocketHelper helper) {
@@ -254,13 +253,6 @@ public class RequisiteClientSocket extends WebSocketClient {
         this.sessionId = sessionId;
     }
 
-    /**
-     * Updates the last keep alive.
-     */
-    public void updateKeepAlive() {
-        lastKeepAlive = System.currentTimeMillis();
-    }
-
     public RequisiteAPI getRequisite() {
         return requisite;
     }
@@ -275,10 +267,6 @@ public class RequisiteClientSocket extends WebSocketClient {
 
     public UUID getSessionId() {
         return sessionId;
-    }
-
-    public long getLastKeepAlive() {
-        return lastKeepAlive;
     }
 
     public int getFailedConnectionCount() {
