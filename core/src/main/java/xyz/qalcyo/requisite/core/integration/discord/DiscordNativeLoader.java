@@ -58,7 +58,7 @@ public class DiscordNativeLoader {
             try {
                 URL downloadUrl = new URL("https://dl-game-sdk.discordapp.net/3.1.0/discord_game_sdk.zip");
                 URLConnection con = downloadUrl.openConnection();
-                con.setRequestProperty("User-Agent", "HyCord");
+                con.setRequestProperty("User-Agent", "Requisite");
                 ZipInputStream zin = new ZipInputStream(con.getInputStream());
                 ZipEntry entry;
                 while ((entry = zin.getNextEntry()) != null) {
