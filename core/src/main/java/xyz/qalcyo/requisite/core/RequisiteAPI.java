@@ -18,6 +18,9 @@
 
 package xyz.qalcyo.requisite.core;
 
+import com.besaba.revonline.pastebinapi.impl.factory.PastebinFactory;
+import com.google.gson.Gson;
+import okhttp3.OkHttpClient;
 import org.apache.logging.log4j.Logger;
 import xyz.qalcyo.mango.Strings;
 import xyz.qalcyo.requisite.core.files.ConfigurationManager;
@@ -139,6 +142,22 @@ public interface RequisiteAPI extends IMod {
      * @return Requisite's custom GUI component factory.
      */
     IComponentFactory getComponentFactory();
+    /**
+     * Provides an instance of Requisite's HTTP client.
+     *
+     * @return Requisite's HTTP client.
+     */
+    default OkHttpClient getHttpClient() {
+        return RequisiteDefaultImplementations.HTTP_CLIENT;
+    }
+    /**
+     * Provides an instance of Requisite's Pastebin factory.
+     *
+     * @return Requisite's Pastebin factory.
+     */
+    default PastebinFactory getPastebinFactory() {
+        return RequisiteDefaultImplementations.PASTEBIN_FACTORY;
+    }
     /**
      * Provides an instance of Requisite's internal event manager.
      *

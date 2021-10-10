@@ -40,7 +40,7 @@ dependencies {
     shadeApi('xyz.qalcyo.json:JSON+:2.12:utilities')
     shadeApi('xyz.qalcyo.mango:Mango:1.7')
 
-    shade('org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.1-native-mt')
+    shade('org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.2-native-mt')
     shade('org.jetbrains.kotlin:kotlin-stdlib-jdk8')
 
     shadeApi('org.java-websocket:Java-WebSocket:1.5.2')
@@ -62,7 +62,7 @@ dependencies {
 
     /* Dependencies for cutting other mods' file sizes. */
     shadeApi('com.github.marcoacierno:pastebin-java-api:v0.2.1')
-    shadeApi('com.squareup.okhttp3:okhttp:4.9.1')
+    shadeApi('com.squareup.okhttp3:okhttp:4.9.2')
     shadeApi('org.kohsuke:github-api:1.133')
 
     /* Libraries used globally in all Minecraft versions that Requisite takes advantage of. */

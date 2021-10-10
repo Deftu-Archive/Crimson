@@ -19,7 +19,6 @@
 package xyz.qalcyo.requisite;
 
 import net.minecraftforge.fml.common.Mod;
-import org.lwjgl.input.Keyboard;
 import xyz.qalcyo.mango.Multithreading;
 import xyz.qalcyo.requisite.commands.CommandHelper;
 import xyz.qalcyo.requisite.core.RequisiteAPI;
@@ -29,11 +28,8 @@ import xyz.qalcyo.requisite.core.commands.CommandRegistry;
 import xyz.qalcyo.requisite.core.files.ConfigurationManager;
 import xyz.qalcyo.requisite.core.files.FileManager;
 import xyz.qalcyo.requisite.core.keybinds.KeyBindRegistry;
-import xyz.qalcyo.requisite.core.keybinds.KeyBinds;
 import xyz.qalcyo.requisite.core.networking.RequisiteClientSocket;
-import xyz.qalcyo.requisite.core.util.ChatColour;
 import xyz.qalcyo.requisite.cosmetics.CosmeticManager;
-import xyz.qalcyo.requisite.cosmetics.PlayerCosmeticHolder;
 import xyz.qalcyo.requisite.gui.components.factory.ComponentFactory;
 import xyz.qalcyo.requisite.gui.screens.RequisiteMenu;
 import xyz.qalcyo.requisite.integration.mods.ModIntegration;
@@ -44,7 +40,6 @@ import xyz.qalcyo.requisite.rendering.EnhancedFontRenderer;
 import xyz.qalcyo.requisite.util.*;
 
 import java.io.File;
-import java.util.Map;
 
 @Mod(
         name = RequisiteInfo.NAME,
@@ -117,14 +112,6 @@ public class Requisite implements RequisiteAPI {
             glHelper = new GlHelper();
             cosmeticManager.start();
         });
-
-        getKeyBindRegistry().register(KeyBinds.from("Debug", "Requisite", Keyboard.KEY_RCONTROL, () -> {
-            StringBuilder str = new StringBuilder();
-            for (Map.Entry<String, PlayerCosmeticHolder> entry : cosmeticManager.getPlayerData().entrySet()) {
-                str.append(entry.getKey()).append(" - ").append(entry.getValue().getOwned()).append(" | ").append(entry.getValue().getEnabled()).append("\n\n");
-            }
-            chatHelper.send(str.toString());
-        }));
 
         getMetadata().setConfigurationMenu(RequisiteMenu.class);
         return initialized = true;

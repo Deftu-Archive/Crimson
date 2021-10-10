@@ -18,6 +18,8 @@
 
 package xyz.qalcyo.requisite.core;
 
+import com.besaba.revonline.pastebinapi.impl.factory.PastebinFactory;
+import okhttp3.OkHttpClient;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import xyz.qalcyo.requisite.core.files.configs.CosmeticConfigurations;
@@ -34,6 +36,8 @@ class RequisiteDefaultImplementations {
     static final Logger LOGGER = LogManager.getLogger("Requisite");
     static final RequisiteJavaArguments JAVA_ARGUMENTS = new RequisiteJavaArguments();
     static final SimpleEventBus EVENT_BUS = new SimpleEventBus();
+    static final OkHttpClient HTTP_CLIENT = new OkHttpClient();
+    static final PastebinFactory PASTEBIN_FACTORY = new PastebinFactory();
 
     static final PrivacyConfigurations PRIVACY_CONFIGURATIONS = new PrivacyConfigurations();
     static final CosmeticConfigurations COSMETIC_CONFIGURATIONS = new CosmeticConfigurations();
