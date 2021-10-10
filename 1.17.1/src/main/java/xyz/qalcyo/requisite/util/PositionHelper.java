@@ -16,21 +16,18 @@
  * along with Requisite. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package xyz.qalcyo.requisite.gui.components.builders
+package xyz.qalcyo.requisite.util;
 
-import gg.essential.elementa.UIComponent
-import xyz.qalcyo.requisite.gui.components.ConfirmationMenu
-import xyz.qalcyo.requisite.gui.components.factory.IComponentFactory
+import xyz.qalcyo.requisite.core.util.IPositionHelper;
 
-/**
- * A builder which makes it easier to make ConfirmationMenu instances.
- */
-class ConfirmationMenuBuilder(
-    var accept: ConfirmationMenu.() -> Unit,
-    var decline: ConfirmationMenu.() -> Unit,
-    var text: String,
+/*public class PositionHelper implements IPositionHelper {
 
-    var backgroundOpacity: Int? = null
-) {
-    fun build(factory: IComponentFactory): UIComponent = factory.build(this)
-}
+    public ScreenPosition createDefaultPosition() {
+        return ScreenPosition.fromRaw(30, 30);
+    }
+
+    public ScreenPosition createPosition(float x, float y) {
+        return ScreenPosition.fromRaw(x, y);
+    }
+
+}*/

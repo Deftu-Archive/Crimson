@@ -16,7 +16,7 @@
  * along with Requisite. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package xyz.qalcyo.requisite.gui.components
+package xyz.qalcyo.requisite.core.gui.components
 
 import gg.essential.elementa.components.UIBlock
 import gg.essential.elementa.components.UIText

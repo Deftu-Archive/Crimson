@@ -16,26 +16,8 @@
  * along with Requisite. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package xyz.qalcyo.requisite.gui.components.builders
+package xyz.qalcyo.requisite.gui.factory
 
-import gg.essential.elementa.UIComponent
-import xyz.qalcyo.requisite.core.data.ColourRGB
-import xyz.qalcyo.requisite.gui.components.factory.IComponentFactory
+import xyz.qalcyo.requisite.core.gui.factory.IComponentFactory
 
-/**
- * A builder which makes it easier to make Clock instances.
- */
-class ClockBuilder(
-    var colour: ColourRGB,
-
-    var timeZone: String = "GMT",
-    var format: String = "mm:ss",
-
-    val prefix: String = "",
-    val suffix: String = "",
-
-    var textShadow: Boolean = false,
-    var textShadowColour: ColourRGB? = null
-) {
-    fun build(factory: IComponentFactory): UIComponent = factory.build(this)
-}
+class ComponentFactory : IComponentFactory

@@ -25,8 +25,8 @@ import gg.essential.elementa.constraints.SiblingConstraint
 import gg.essential.elementa.dsl.childOf
 import gg.essential.elementa.dsl.constrain
 import xyz.qalcyo.requisite.Requisite
-import xyz.qalcyo.requisite.gui.components.Button
-import xyz.qalcyo.requisite.gui.components.builders.ButtonBuilder
+import xyz.qalcyo.requisite.core.gui.components.Button
+import xyz.qalcyo.requisite.core.gui.components.builders.ButtonBuilder
 
 /**
  * A test menu.

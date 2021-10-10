@@ -23,7 +23,7 @@ import gg.essential.universal.UScreen
 import net.minecraft.client.gui.GuiMainMenu
 import xyz.qalcyo.requisite.Requisite
 import xyz.qalcyo.requisite.core.transformers.hooks.GuiMixinHook
-import xyz.qalcyo.requisite.gui.components.InteractableText
+import xyz.qalcyo.requisite.core.gui.components.InteractableText
 import xyz.qalcyo.requisite.gui.screens.CreditsMenu
 
 class GuiMainMenuHook(

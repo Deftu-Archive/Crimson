@@ -18,22 +18,24 @@
 
 package xyz.qalcyo.requisite;
 
-import net.minecraft.client.network.AbstractClientPlayerEntity;
-import xyz.qalcyo.mango.exceptions.UnfinishedApiException;
+import net.minecraft.client.gui.screen.Screen;
+import xyz.qalcyo.mango.Multithreading;
 import xyz.qalcyo.requisite.commands.CommandHelper;
 import xyz.qalcyo.requisite.core.IEventListener;
 import xyz.qalcyo.requisite.core.RequisiteAPI;
 import xyz.qalcyo.requisite.core.RequisiteEventManager;
 import xyz.qalcyo.requisite.core.commands.CommandRegistry;
-import xyz.qalcyo.requisite.core.cosmetics.CosmeticManager;
 import xyz.qalcyo.requisite.core.files.ConfigurationManager;
 import xyz.qalcyo.requisite.core.files.FileManager;
-import xyz.qalcyo.requisite.core.integration.hypixel.HypixelHelper;
+import xyz.qalcyo.requisite.core.integration.mods.IModConfigurationMenu;
+import xyz.qalcyo.requisite.core.keybinds.KeyBindRegistry;
 import xyz.qalcyo.requisite.core.networking.RequisiteClientSocket;
-import xyz.qalcyo.requisite.core.util.ChatColour;
-import xyz.qalcyo.requisite.core.util.IPositionHelper;
-import xyz.qalcyo.requisite.core.util.UniversalLogger;
-import xyz.qalcyo.requisite.integration.ModIntegration;
+import xyz.qalcyo.requisite.core.rendering.IEnhancedFontRenderer;
+import xyz.qalcyo.requisite.core.util.*;
+import xyz.qalcyo.requisite.core.util.messages.IMessageQueue;
+import xyz.qalcyo.requisite.core.gui.factory.IComponentFactory;
+import xyz.qalcyo.requisite.gui.factory.ComponentFactory;
+import xyz.qalcyo.requisite.integration.mods.ModIntegration;
 import xyz.qalcyo.requisite.networking.SocketHelper;
 import xyz.qalcyo.requisite.notifications.Notifications;
 import xyz.qalcyo.requisite.rendering.EnhancedFontRenderer;
@@ -43,34 +45,28 @@ import java.io.File;
 
 public class Requisite implements RequisiteAPI {
 
-    /* Constants. */
     private static final Requisite INSTANCE = new Requisite();
-    private static boolean initialized;
+    private static boolean initialized = false;
 
-    /* Services. */
     private FileManager fileManager;
     private ConfigurationManager configurationManager;
-    private CosmeticManager<AbstractClientPlayerEntity> cosmeticManager;
+    private Notifications notifications;
+    private RequisiteClientSocket requisiteSocket;
     private ModIntegration modIntegration;
     private CommandRegistry commandRegistry;
+    private KeyBindRegistry keyBindRegistry;
+    private ComponentFactory componentFactory;
     private RequisiteEventManager internalEventManager;
-    private RequisiteClientSocket requisiteSocket;
 
-    /* Utilities. */
     private EnhancedFontRenderer enhancedFontRenderer;
+    private GuiHelper guiHelper;
     private PlayerHelper playerHelper;
     private ChatHelper chatHelper;
-    private UniversalLogger universalLogger;
     private MouseHelper mouseHelper;
-    private Notifications notifications;
-    private HypixelHelper hypixelHelper;
     private RenderHelper renderHelper;
     private MessageQueue messageQueue;
     private ServerHelper serverHelper;
-
-    /* Version-dependant utilities. */
     private GlHelper glHelper;
-    private GuiHelper guiHelper;
 
     public boolean initialize(File gameDir) {
         if (initialized)
@@ -79,41 +75,27 @@ public class Requisite implements RequisiteAPI {
         /* Initialize services. */
         fileManager = new FileManager(this);
         configurationManager = new ConfigurationManager("config", fileManager.getRequisiteDirectory(fileManager.getQalcyoDirectory(fileManager.getConfigDirectory(gameDir))));
-        //cosmeticManager = new CosmeticManager<>(new CosmeticInitializer());
-        //cosmeticManager.initialize();
-        modIntegration = new ModIntegration(this);
-        commandRegistry = new CommandRegistry(this, new CommandHelper());
-        internalEventManager = new RequisiteEventManager(this);
-        requisiteSocket = new RequisiteClientSocket(this, new SocketHelper());
-        boolean socketConnected = requisiteSocket.awaitConnect();
+        notifications = new Notifications(this);
+        (requisiteSocket = new RequisiteClientSocket(this, new SocketHelper())).awaitConnect();
+        modIntegration = new ModIntegration();
+        commandRegistry = new CommandRegistry(new CommandHelper());
+        keyBindRegistry = new KeyBindRegistry(this);
+        componentFactory = new ComponentFactory();
+        internalEventManager = new RequisiteEventManager();
 
         /* Initialize utilities. */
-        enhancedFontRenderer = new EnhancedFontRenderer(this);
-        playerHelper = new PlayerHelper();
-        chatHelper = new ChatHelper();
-        universalLogger = new UniversalLogger(this);
-        mouseHelper = new MouseHelper();
-        notifications = new Notifications(this);
-        //positionHelper = new PositionHelper();
-        hypixelHelper = new HypixelHelper(this);
-        renderHelper = new RenderHelper();
-        messageQueue = new MessageQueue(this);
-        serverHelper = new ServerHelper();
-
-
-        if (!socketConnected) {
-            notifications.push("Error!", "Failed to connect to Requisite WebSocket. " + ChatColour.BOLD + "Click to try a reconnect.", notification -> {
-                boolean socketReconnected = requisiteSocket.awaitReconnect();
-                if (!socketReconnected) {
-                    notifications.push(notification.clone());
-                    notification.close();
-                }
-            });
-        }
-
-        /* Initialize version-dependant utilities. */
-        glHelper = new GlHelper();
-        guiHelper = new GuiHelper(this);
+        Multithreading.runAsync(() -> {
+            enhancedFontRenderer = new EnhancedFontRenderer();
+            guiHelper = new GuiHelper();
+            playerHelper = new PlayerHelper();
+            chatHelper = new ChatHelper();
+            mouseHelper = new MouseHelper();
+            //positionHelper = new PositionHelper();
+            renderHelper = new RenderHelper();
+            messageQueue = new MessageQueue(this);
+            serverHelper = new ServerHelper();
+            glHelper = new GlHelper();
+        });
 
         return initialized = true;
     }
@@ -126,8 +108,12 @@ public class Requisite implements RequisiteAPI {
         return configurationManager;
     }
 
-    public CosmeticManager<AbstractClientPlayerEntity> getCosmeticManager() {
-        return cosmeticManager;
+    public Notifications getNotifications() {
+        return notifications;
+    }
+
+    public RequisiteClientSocket getRequisiteSocket() {
+        return requisiteSocket;
     }
 
     public ModIntegration getModIntegration() {
@@ -138,20 +124,28 @@ public class Requisite implements RequisiteAPI {
         return commandRegistry;
     }
 
+    public KeyBindRegistry getKeyBindRegistry() {
+        return keyBindRegistry;
+    }
+
+    public ComponentFactory getComponentFactory() {
+        return componentFactory;
+    }
+
     public RequisiteEventManager getInternalEventManager() {
         return internalEventManager;
     }
 
     public IEventListener getInternalEventListener() {
-        throw new UnsupportedOperationException(name() + " 1.17.1 does not support the internal event listener.");
-    }
-
-    public RequisiteClientSocket getRequisiteSocket() {
-        return requisiteSocket;
+        throw new UnsupportedOperationException("Requisite 1.17.1 does not support the internal event listener.");
     }
 
     public void openMenu() {
 
+    }
+
+    public IModConfigurationMenu createMainMenu() {
+        return null;
     }
 
     public EnhancedFontRenderer getEnhancedFontRenderer() {
@@ -170,24 +164,12 @@ public class Requisite implements RequisiteAPI {
         return chatHelper;
     }
 
-    public UniversalLogger getUniversalLogger() {
-        return universalLogger;
-    }
-
     public MouseHelper getMouseHelper() {
         return mouseHelper;
     }
 
-    public Notifications getNotifications() {
-        return notifications;
-    }
-
     public IPositionHelper getPositionHelper() {
-        throw new UnfinishedApiException();
-    }
-
-    public HypixelHelper getHypixelHelper() {
-        return hypixelHelper;
+        return null;
     }
 
     public RenderHelper getRenderHelper() {

@@ -2,21 +2,27 @@ package xyz.qalcyo.requisite.util;
 
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.Screen;
+import xyz.qalcyo.requisite.Requisite;
 import xyz.qalcyo.requisite.core.RequisiteAPI;
 import xyz.qalcyo.requisite.core.events.TickEvent;
 import xyz.qalcyo.requisite.core.util.IGuiHelper;
 
 public class GuiHelper implements IGuiHelper<Screen> {
+
     private boolean awaiting = false;
     private Screen awaitingDisplay = null;
 
-    public GuiHelper(RequisiteAPI requisite) {
-        requisite.getEventBus().register(TickEvent.class, this::onClientTick);
+    public GuiHelper() {
+        Requisite.getInstance().getEventBus().register(TickEvent.class, this::onClientTick);
     }
 
     public void open(Screen screen) {
         awaitingDisplay = screen;
         awaiting = true;
+    }
+
+    public boolean isGuiPresent() {
+        return MinecraftClient.getInstance().currentScreen != null;
     }
 
     public boolean isAwaiting() {

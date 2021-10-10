@@ -30,7 +30,7 @@ import xyz.qalcyo.requisite.core.files.FileManager;
 import xyz.qalcyo.requisite.core.keybinds.KeyBindRegistry;
 import xyz.qalcyo.requisite.core.networking.RequisiteClientSocket;
 import xyz.qalcyo.requisite.cosmetics.CosmeticManager;
-import xyz.qalcyo.requisite.gui.components.factory.ComponentFactory;
+import xyz.qalcyo.requisite.gui.factory.ComponentFactory;
 import xyz.qalcyo.requisite.gui.screens.RequisiteMenu;
 import xyz.qalcyo.requisite.integration.mods.ModIntegration;
 import xyz.qalcyo.requisite.networking.SocketHelper;

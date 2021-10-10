@@ -16,28 +16,23 @@
  * along with Requisite. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package xyz.qalcyo.requisite.integration;
+package xyz.qalcyo.requisite.integration.mods;
 
-import xyz.qalcyo.requisite.core.RequisiteAPI;
 import xyz.qalcyo.requisite.core.integration.mods.IMod;
 import xyz.qalcyo.requisite.core.integration.mods.IModIntegration;
-import xyz.qalcyo.requisite.core.integration.mods.ModMetadata;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ModIntegration implements IModIntegration {
 
-    private final RequisiteAPI requisite;
     private final List<IMod> integratedMods = new ArrayList<>();
 
-    public ModIntegration(RequisiteAPI requisite) {
-        this.requisite = requisite;
+    public void openMenu() {
+
     }
 
     public void registerIntegratedMod(IMod mod) {
-        ModMetadata metadata = mod.getMetadata();
-        requisite.getLogger().info("Mod " + metadata.name + " v" + metadata.version + " was registered as an integrated @NAME@ mod.");
         integratedMods.add(mod);
     }
 

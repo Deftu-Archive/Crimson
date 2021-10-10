@@ -16,7 +16,7 @@
  * along with Requisite. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package xyz.qalcyo.requisite.gui.components
+package xyz.qalcyo.requisite.core.gui.components
 
 import gg.essential.elementa.components.*
 import gg.essential.elementa.constraints.CenterConstraint
@@ -25,7 +25,7 @@ import gg.essential.elementa.dsl.*
 import gg.essential.elementa.effects.OutlineEffect
 import gg.essential.elementa.utils.withAlpha
 import xyz.qalcyo.requisite.core.RequisitePalette
-import xyz.qalcyo.requisite.gui.components.builders.*
+import xyz.qalcyo.requisite.core.gui.components.builders.*
 
 /**
  * An Elementa UIContainer meant for users to choose between a Yes or No question, and

@@ -22,16 +22,15 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.text.LiteralText;
+import xyz.qalcyo.requisite.Requisite;
 import xyz.qalcyo.requisite.core.RequisiteAPI;
 import xyz.qalcyo.requisite.core.rendering.IEnhancedFontRenderer;
 
 public class EnhancedFontRenderer implements IEnhancedFontRenderer {
 
-    private final RequisiteAPI requisite;
     private final TextRenderer textRenderer;
 
-    public EnhancedFontRenderer(RequisiteAPI requisite) {
-        this.requisite = requisite;
+    public EnhancedFontRenderer() {
         this.textRenderer = MinecraftClient.getInstance().textRenderer;
     }
 
@@ -154,7 +153,7 @@ public class EnhancedFontRenderer implements IEnhancedFontRenderer {
 
     public void drawChromaText(MatrixStack matrices, String text, float x, float y, boolean shadow) {
         for (char c : text.toCharArray()) {
-            int colour = requisite.getColourHelper().getChroma(x, y).getRGB();
+            int colour = Requisite.getInstance().getColourHelper().getChroma(x, y).getRGB();
             String str = String.valueOf(c);
             drawText(matrices, str, x, y, colour, shadow);
             x += getWidth(c);

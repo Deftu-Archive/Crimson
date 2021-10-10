@@ -19,7 +19,6 @@
 package xyz.qalcyo.requisite.core;
 
 import com.besaba.revonline.pastebinapi.impl.factory.PastebinFactory;
-import com.google.gson.Gson;
 import okhttp3.OkHttpClient;
 import org.apache.logging.log4j.Logger;
 import xyz.qalcyo.mango.Strings;
@@ -40,7 +39,7 @@ import xyz.qalcyo.requisite.core.networking.RequisiteClientSocket;
 import xyz.qalcyo.requisite.core.notifications.INotifications;
 import xyz.qalcyo.requisite.core.rendering.IEnhancedFontRenderer;
 import xyz.qalcyo.json.util.JsonApiHelper;
-import xyz.qalcyo.requisite.gui.components.factory.IComponentFactory;
+import xyz.qalcyo.requisite.core.gui.factory.IComponentFactory;
 import xyz.qalcyo.simpleeventbus.SimpleEventBus;
 
 import java.io.File;

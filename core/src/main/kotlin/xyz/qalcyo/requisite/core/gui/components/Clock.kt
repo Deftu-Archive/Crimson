@@ -16,7 +16,7 @@
  * along with Requisite. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package xyz.qalcyo.requisite.gui.components;
+package xyz.qalcyo.requisite.core.gui.components;
 
 import gg.essential.elementa.UIComponent
 import gg.essential.elementa.components.UIText
@@ -25,7 +25,7 @@ import gg.essential.elementa.constraints.RelativeConstraint
 import gg.essential.elementa.dsl.*
 import gg.essential.universal.UMatrixStack
 import xyz.qalcyo.requisite.core.data.ColourRGB
-import xyz.qalcyo.requisite.gui.components.builders.ClockBuilder
+import xyz.qalcyo.requisite.core.gui.components.builders.ClockBuilder
 import java.time.OffsetDateTime
 import java.time.format.DateTimeFormatter
 import java.util.*

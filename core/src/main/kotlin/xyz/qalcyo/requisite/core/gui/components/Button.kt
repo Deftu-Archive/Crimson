@@ -16,7 +16,7 @@
  * along with Requisite. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package xyz.qalcyo.requisite.gui.components
+package xyz.qalcyo.requisite.core.gui.components
 
 import gg.essential.elementa.components.*
 import gg.essential.elementa.constraints.*
@@ -24,7 +24,7 @@ import gg.essential.elementa.constraints.animation.Animations
 import gg.essential.elementa.dsl.*
 import gg.essential.elementa.effects.OutlineEffect
 import xyz.qalcyo.requisite.core.*
-import xyz.qalcyo.requisite.gui.components.builders.*
+import xyz.qalcyo.requisite.core.gui.components.builders.*
 import java.awt.Color
 
 /**

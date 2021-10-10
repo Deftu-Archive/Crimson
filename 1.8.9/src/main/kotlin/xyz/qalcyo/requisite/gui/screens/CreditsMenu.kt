@@ -29,9 +29,9 @@ import xyz.qalcyo.json.util.JsonApiHelper
 import xyz.qalcyo.requisite.Requisite
 import xyz.qalcyo.requisite.core.RequisiteConstants
 import xyz.qalcyo.requisite.core.RequisitePalette
-import xyz.qalcyo.requisite.gui.components.Button
-import xyz.qalcyo.requisite.gui.components.InteractableText
-import xyz.qalcyo.requisite.gui.components.builders.ButtonBuilder
+import xyz.qalcyo.requisite.core.gui.components.Button
+import xyz.qalcyo.requisite.core.gui.components.InteractableText
+import xyz.qalcyo.requisite.core.gui.components.builders.ButtonBuilder
 import java.net.URI
 
 class CreditsMenu : WindowScreen(

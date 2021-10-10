@@ -16,28 +16,26 @@
  * along with Requisite. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package xyz.qalcyo.requisite.integration.mods;
+package xyz.qalcyo.requisite.core.gui.components.builders
 
-import xyz.qalcyo.requisite.core.RequisiteAPI;
-import xyz.qalcyo.requisite.core.integration.mods.IMod;
-import xyz.qalcyo.requisite.core.integration.mods.IModIntegration;
+import gg.essential.elementa.UIComponent
+import xyz.qalcyo.requisite.core.data.ColourRGB
+import xyz.qalcyo.requisite.core.gui.factory.IComponentFactory
 
-import java.util.ArrayList;
-import java.util.List;
+/**
+ * A builder which makes it easier to make Clock instances.
+ */
+class ClockBuilder(
+    var colour: ColourRGB,
 
-public class ModIntegration implements IModIntegration {
+    var timeZone: String = "GMT",
+    var format: String = "mm:ss",
 
-    private final List<IMod> integratedMods = new ArrayList<>();
+    val prefix: String = "",
+    val suffix: String = "",
 
-    public void openMenu() {
-    }
-
-    public void registerIntegratedMod(IMod mod) {
-        integratedMods.add(mod);
-    }
-
-    public List<IMod> getIntegratedMods() {
-        return integratedMods;
-    }
-
+    var textShadow: Boolean = false,
+    var textShadowColour: ColourRGB? = null
+) {
+    fun build(factory: IComponentFactory): UIComponent = factory.build(this)
 }
