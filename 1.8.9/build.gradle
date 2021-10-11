@@ -49,8 +49,16 @@ dependencies {
     annotationProcessor('org.spongepowered:mixin:0.7.11-SNAPSHOT')
 }
 
-/* Disable mixin refMap warnings. */
 mixin {
     disableRefMapWarning = true
     add sourceSets.main, 'mixins.requisite.refmap.json'
 }
+
+task moveResources {
+    doLast {
+        ant.move file: "${buildDir}/resources/main",
+                todir: "${buildDir}/classes/java"
+    }
+}
+
+classes.dependsOn(moveResources)
