@@ -20,4 +20,5 @@ package xyz.qalcyo.requisite.gui.factory
 
 import xyz.qalcyo.requisite.core.gui.factory.IComponentFactory
 
-class ComponentFactory : IComponentFactory
+class ComponentFactory : IComponentFactory {
+}

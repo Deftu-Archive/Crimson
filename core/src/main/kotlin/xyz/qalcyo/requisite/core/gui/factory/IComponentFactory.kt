@@ -18,6 +18,7 @@
 
 package xyz.qalcyo.requisite.core.gui.factory
 
+import gg.essential.elementa.UIComponent
 import xyz.qalcyo.requisite.core.gui.components.Button
 import xyz.qalcyo.requisite.core.gui.components.Clock
 import xyz.qalcyo.requisite.core.gui.components.ConfirmationMenu

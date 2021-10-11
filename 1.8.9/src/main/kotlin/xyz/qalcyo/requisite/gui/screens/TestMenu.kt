@@ -21,12 +21,8 @@ package xyz.qalcyo.requisite.gui.screens
 import gg.essential.elementa.ElementaVersion
 import gg.essential.elementa.WindowScreen
 import gg.essential.elementa.constraints.CenterConstraint
-import gg.essential.elementa.constraints.SiblingConstraint
-import gg.essential.elementa.dsl.childOf
-import gg.essential.elementa.dsl.constrain
+import gg.essential.elementa.dsl.*
 import xyz.qalcyo.requisite.Requisite
-import xyz.qalcyo.requisite.core.gui.components.Button
-import xyz.qalcyo.requisite.core.gui.components.builders.ButtonBuilder
 
 /**
  * A test menu.
@@ -37,24 +33,6 @@ class TestMenu : WindowScreen(
 ) {
 
     init {
-        val button = ButtonBuilder({
-            val toggle = toggle()
-            Requisite.getInstance().chatHelper.send("Toggled button to - $toggle")
-        }, "Test button").build(Requisite.getInstance().componentFactory).constrain {
-            x = CenterConstraint()
-            y = CenterConstraint()
-            width = Button.DEFAULT_WIDTH_PIXELS
-            height = Button.DEFAULT_HEIGHT_PIXELS
-        } childOf window
-
-        val reset = ButtonBuilder({
-            (button as Button).setToggled(true)
-        }, "Reset test button").build(Requisite.getInstance().componentFactory).constrain {
-            x = CenterConstraint()
-            y = SiblingConstraint()
-            width = Button.DEFAULT_WIDTH_PIXELS
-            height = Button.DEFAULT_HEIGHT_PIXELS
-        } childOf window
     }
 
 }

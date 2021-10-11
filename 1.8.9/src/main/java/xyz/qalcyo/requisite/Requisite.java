@@ -19,6 +19,7 @@
 package xyz.qalcyo.requisite;
 
 import net.minecraftforge.fml.common.Mod;
+import org.lwjgl.input.Keyboard;
 import xyz.qalcyo.mango.Multithreading;
 import xyz.qalcyo.requisite.commands.CommandHelper;
 import xyz.qalcyo.requisite.core.RequisiteAPI;
@@ -28,10 +29,12 @@ import xyz.qalcyo.requisite.core.commands.CommandRegistry;
 import xyz.qalcyo.requisite.core.files.ConfigurationManager;
 import xyz.qalcyo.requisite.core.files.FileManager;
 import xyz.qalcyo.requisite.core.keybinds.KeyBindRegistry;
+import xyz.qalcyo.requisite.core.keybinds.KeyBinds;
 import xyz.qalcyo.requisite.core.networking.RequisiteClientSocket;
 import xyz.qalcyo.requisite.cosmetics.CosmeticManager;
 import xyz.qalcyo.requisite.gui.factory.ComponentFactory;
 import xyz.qalcyo.requisite.gui.screens.RequisiteMenu;
+import xyz.qalcyo.requisite.gui.screens.TestMenu;
 import xyz.qalcyo.requisite.integration.mods.ModIntegration;
 import xyz.qalcyo.requisite.networking.SocketHelper;
 import xyz.qalcyo.requisite.networking.packets.cosmetics.CosmeticRetrievePacket;
@@ -112,6 +115,8 @@ public class Requisite implements RequisiteAPI {
             glHelper = new GlHelper();
             cosmeticManager.start();
         });
+
+        getKeyBindRegistry().register(KeyBinds.menu("Test", "Requisite", Keyboard.KEY_I, new TestMenu()));
 
         getMetadata().setConfigurationMenu(RequisiteMenu.class);
         return initialized = true;

@@ -18,6 +18,7 @@
 
 package xyz.qalcyo.requisite.util;
 
+import com.mojang.authlib.GameProfile;
 import net.minecraft.client.Minecraft;
 import xyz.qalcyo.requisite.core.util.IPlayerHelper;
 
@@ -27,6 +28,10 @@ public class PlayerHelper implements IPlayerHelper {
 
     public boolean isPlayerPresent() {
         return Minecraft.getMinecraft().thePlayer != null;
+    }
+
+    public GameProfile getGameProfile() {
+        return Minecraft.getMinecraft().getSession().getProfile();
     }
 
     public String getUsername() {

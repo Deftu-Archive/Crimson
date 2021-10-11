@@ -18,6 +18,8 @@
 
 package xyz.qalcyo.requisite.core.util;
 
+import com.mojang.authlib.GameProfile;
+
 import java.util.UUID;
 
 public interface IPlayerHelper {
@@ -25,6 +27,11 @@ public interface IPlayerHelper {
      * @return Whether the current player is present.
      */
     boolean isPlayerPresent();
+
+    /**
+     * @return The game profile of the current player.
+     */
+    GameProfile getGameProfile();
 
     /**
      * @return The display name of the current player.
