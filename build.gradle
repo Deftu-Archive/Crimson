@@ -39,9 +39,6 @@ allprojects {
 
         shade
         implementation.extendsFrom(shade)
-
-        shadeApi
-        api.extendsFrom(shadeApi)
     }
 
     repositories {
@@ -73,10 +70,9 @@ allprojects {
 
     shadowJar {
         archiveClassifier.set('')
-        configurations = [project.configurations.shade, project.configurations.shadeApi]
+        configurations = [project.configurations.shade]
         duplicatesStrategy = DuplicatesStrategy.EXCLUDE
 
-        relocate('com.besaba.revonline', project_shaded + 'besaba.revonline')
         relocate('okio', project_shaded + 'okio')
         relocate('okhttp3', project_shaded + 'okhttp3')
         relocate('org.java_websocket', project_shaded + 'websocket')
