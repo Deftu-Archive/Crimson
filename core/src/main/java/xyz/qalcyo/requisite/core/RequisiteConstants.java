@@ -25,6 +25,7 @@ public class RequisiteConstants {
 
     protected static RequisiteAPI INSTANCE;
 
+    public static final int SOCKET_VERSION = 1;
     public static final String META_URL = "https://raw.githubusercontent.com/Qalcyo/Requisite/rewrite/data/meta.json";
     public static final String CREDITS_URL = "https://raw.githubusercontent.com/Qalcyo/Requisite/rewrite/data/credits.json";
 
