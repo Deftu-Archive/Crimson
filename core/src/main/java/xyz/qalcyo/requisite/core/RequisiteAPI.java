@@ -363,11 +363,9 @@ public interface RequisiteAPI extends IMod {
      * @return Requisite's websocket URI.
      */
     default URI retrieveSocketUri() {
-        if (getJavaArguments().isSocketDebug())
-            return URI.create("ws://localhost:8080/");
-        if (getJavaArguments().getSocketUri() != null)
-            return URI.create(getJavaArguments().getSocketUri());
-        return URI.create(JsonApiHelper.getJsonObject(getJavaArguments().getMetaUrl()).getAsString("socket").replace("{version}", "v" + RequisiteConstants.SOCKET_VERSION));
+        String uri = getJavaArguments().getSocketUri() == null ? JsonApiHelper.getJsonObject(getJavaArguments().getMetaUrl()).getAsString("socket") : getJavaArguments().isSocketDebug() ? "ws://localhost:8080/" : getJavaArguments().getSocketUri();
+        uri = uri.replace("{version}", "v" + RequisiteConstants.SOCKET_VERSION);
+        return URI.create(uri);
     }
 
     /**
