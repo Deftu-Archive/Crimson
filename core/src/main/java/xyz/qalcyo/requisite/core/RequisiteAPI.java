@@ -355,8 +355,6 @@ public interface RequisiteAPI extends IMod {
      */
     IGlHelper getGlHelper();
 
-    /* Default. */
-
     /**
      * Fetches and provides Requisite's websocket URI.
      *
@@ -420,8 +418,10 @@ public interface RequisiteAPI extends IMod {
     static RequisiteAPI retrieveInstance() {
         try {
             RequisiteAPI cached = RequisiteConstants.getInstance();
-            if (cached == null)
+            if (cached == null) {
                 return RequisiteConstants.INSTANCE = (RequisiteAPI) Class.forName("xyz.qalcyo.requisite.Requisite").getDeclaredMethod("getInstance").invoke(null);
+            }
+
             return cached;
         } catch (Exception e) {
             e.printStackTrace();

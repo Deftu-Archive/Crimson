@@ -38,12 +38,12 @@ import java.util.List;
 public class CommandRegistry {
 
     private final RequisiteAPI requisite;
-    private final ICommandHelper commandHelper;
+    private final ICommandBridge commandHelper;
     private final List<ICommand> commands;
 
     private String[] cachedAutoCompletion;
 
-    public CommandRegistry(ICommandHelper commandHelper) {
+    public CommandRegistry(ICommandBridge commandHelper) {
         this.requisite = RequisiteAPI.retrieveInstance();
         this.commandHelper = commandHelper;
         this.commands = Lists.newArrayList();

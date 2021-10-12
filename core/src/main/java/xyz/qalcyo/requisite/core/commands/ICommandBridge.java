@@ -18,6 +18,6 @@
 
 package xyz.qalcyo.requisite.core.commands;
 
-public interface ICommandHelper {
+public interface ICommandBridge {
     boolean isInChat();
 }

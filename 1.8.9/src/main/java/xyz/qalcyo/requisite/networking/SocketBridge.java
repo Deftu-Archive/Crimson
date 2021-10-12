@@ -16,12 +16,30 @@
  * along with Requisite. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package xyz.qalcyo.requisite.core.networking;
+package xyz.qalcyo.requisite.networking;
+
+import net.minecraft.client.Minecraft;
+import xyz.qalcyo.requisite.Requisite;
+import xyz.qalcyo.requisite.util.ChatHelper;
+import xyz.qalcyo.requisite.core.networking.ISocketBridge;
 
 import java.util.UUID;
 
-public interface ISocketHelper {
-    UUID getUuid();
-    String getName();
-    void chat(String message);
+public class SocketBridge implements ISocketBridge {
+
+    public UUID getUuid() {
+        return Minecraft.getMinecraft().getSession().getProfile().getId();
+    }
+
+    public String getName() {
+        return Minecraft.getMinecraft().getSession().getUsername();
+    }
+
+    public void chat(String message) {
+        ChatHelper chatHelper = Requisite.getInstance().getChatHelper();
+        if (chatHelper != null) {
+            chatHelper.send(Requisite.getInstance().getChatPrefix("WebSocket"), message);
+        }
+    }
+
 }

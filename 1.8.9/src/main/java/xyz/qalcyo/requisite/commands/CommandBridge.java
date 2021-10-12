@@ -20,9 +20,9 @@ package xyz.qalcyo.requisite.commands;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiChat;
-import xyz.qalcyo.requisite.core.commands.ICommandHelper;
+import xyz.qalcyo.requisite.core.commands.ICommandBridge;
 
-public class CommandHelper implements ICommandHelper {
+public class CommandBridge implements ICommandBridge {
 
     public boolean isInChat() {
         return Minecraft.getMinecraft().currentScreen != null && Minecraft.getMinecraft().currentScreen instanceof GuiChat;

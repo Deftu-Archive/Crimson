@@ -43,14 +43,14 @@ public class RequisiteClientSocket extends WebSocketClient {
 
     private final RequisiteAPI requisite;
     private final Logger logger;
-    private final ISocketHelper helper;
+    private final ISocketBridge helper;
 
     private final Map<String, Class<? extends BasePacket>> packetRegistry;
 
     private UUID sessionId;
     private int failedConnectionCount;
 
-    public RequisiteClientSocket(RequisiteAPI requisite, ISocketHelper helper) {
+    public RequisiteClientSocket(RequisiteAPI requisite, ISocketBridge helper) {
         super(requisite.retrieveSocketUri(), new Draft_6455());
         this.requisite = requisite;
         this.logger = LogManager.getLogger("RequisiteClientSocket");
@@ -259,7 +259,7 @@ public class RequisiteClientSocket extends WebSocketClient {
         return logger;
     }
 
-    public ISocketHelper getHelper() {
+    public ISocketBridge getHelper() {
         return helper;
     }
 
