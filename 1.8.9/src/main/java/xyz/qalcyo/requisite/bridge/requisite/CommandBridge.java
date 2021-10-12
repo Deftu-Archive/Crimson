@@ -16,8 +16,19 @@
  * along with Requisite. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package xyz.qalcyo.requisite.core.commands;
+package xyz.qalcyo.requisite.bridge.requisite;
 
-public interface ICommandBridge {
-    boolean isInChat();
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiChat;
+import xyz.qalcyo.requisite.core.bridge.requisite.ICommandBridge;
+
+public class CommandBridge implements ICommandBridge {
+
+    public void initialize() {
+    }
+
+    public boolean isInChat() {
+        return Minecraft.getMinecraft().currentScreen != null && Minecraft.getMinecraft().currentScreen instanceof GuiChat;
+    }
+
 }

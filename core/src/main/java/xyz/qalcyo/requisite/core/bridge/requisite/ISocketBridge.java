@@ -16,30 +16,10 @@
  * along with Requisite. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package xyz.qalcyo.requisite.util;
+package xyz.qalcyo.requisite.core.bridge.requisite;
 
-import com.mojang.authlib.GameProfile;
-import net.minecraft.client.Minecraft;
-import xyz.qalcyo.requisite.core.util.IPlayerHelper;
+import xyz.qalcyo.requisite.core.bridge.IBridgeContainer;
 
-import java.util.UUID;
-
-public class PlayerHelper implements IPlayerHelper {
-
-    public boolean isPlayerPresent() {
-        return Minecraft.getMinecraft().thePlayer != null;
-    }
-
-    public GameProfile getGameProfile() {
-        return Minecraft.getMinecraft().getSession().getProfile();
-    }
-
-    public String getUsername() {
-        return Minecraft.getMinecraft().getSession().getUsername();
-    }
-
-    public UUID getUuid() {
-        return Minecraft.getMinecraft().getSession().getProfile().getId();
-    }
-
+public interface ISocketBridge extends IBridgeContainer {
+    void chat(String message);
 }

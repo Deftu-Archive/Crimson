@@ -29,6 +29,7 @@ import xyz.qalcyo.json.parser.JsonParser;
 import xyz.qalcyo.mango.Maps;
 import xyz.qalcyo.mango.Multithreading;
 import xyz.qalcyo.requisite.core.RequisiteAPI;
+import xyz.qalcyo.requisite.core.bridge.requisite.ISocketBridge;
 import xyz.qalcyo.requisite.core.networking.packets.GreetingPacket;
 import xyz.qalcyo.requisite.core.util.ChatColour;
 
@@ -43,18 +44,16 @@ public class RequisiteClientSocket extends WebSocketClient {
 
     private final RequisiteAPI requisite;
     private final Logger logger;
-    private final ISocketBridge helper;
 
     private final Map<String, Class<? extends BasePacket>> packetRegistry;
 
     private UUID sessionId;
     private int failedConnectionCount;
 
-    public RequisiteClientSocket(RequisiteAPI requisite, ISocketBridge helper) {
+    public RequisiteClientSocket(RequisiteAPI requisite) {
         super(requisite.retrieveSocketUri(), new Draft_6455());
         this.requisite = requisite;
         this.logger = LogManager.getLogger("RequisiteClientSocket");
-        this.helper = helper;
 
         this.packetRegistry = Maps.newHashMap();
 
@@ -169,7 +168,7 @@ public class RequisiteClientSocket extends WebSocketClient {
                             instance.receive(this, object, object.getAsObject("data"));
                         } catch (Exception e) {
                             e.printStackTrace();
-                            helper.chat(ChatColour.RED + "An unexpected error occurred while handling a Requisite packet.\n" + e);
+                            requisite.getBridge().getSocketBridge().chat(ChatColour.RED + "An unexpected error occurred while handling a Requisite packet.\n" + e);
                         }
                     }
                 }
@@ -184,7 +183,7 @@ public class RequisiteClientSocket extends WebSocketClient {
      */
     public void onError(Exception ex) {
         logger.error("An unexpected error has occurred.", ex);
-        helper.chat(Arrays.toString(ex.getStackTrace()));
+        requisite.getBridge().getSocketBridge().chat(Arrays.toString(ex.getStackTrace()));
     }
 
     /**
@@ -221,7 +220,7 @@ public class RequisiteClientSocket extends WebSocketClient {
             }
         } catch (Exception e) {
             e.printStackTrace();
-            helper.chat(ChatColour.RED + "An unexpected error occurred while handling a Requisite packet.\n" + e);
+            requisite.getBridge().getSocketBridge().chat(ChatColour.RED + "An unexpected error occurred while handling a Requisite packet.\n" + e);
         }
     }
 
@@ -257,10 +256,6 @@ public class RequisiteClientSocket extends WebSocketClient {
 
     public Logger getLogger() {
         return logger;
-    }
-
-    public ISocketBridge getHelper() {
-        return helper;
     }
 
     public UUID getSessionId() {

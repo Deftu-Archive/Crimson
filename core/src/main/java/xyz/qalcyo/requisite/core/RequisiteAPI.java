@@ -22,6 +22,7 @@ import com.besaba.revonline.pastebinapi.impl.factory.PastebinFactory;
 import okhttp3.OkHttpClient;
 import org.apache.logging.log4j.Logger;
 import xyz.qalcyo.mango.Strings;
+import xyz.qalcyo.requisite.core.bridge.IBridge;
 import xyz.qalcyo.requisite.core.files.ConfigurationManager;
 import xyz.qalcyo.requisite.core.files.configs.CosmeticConfigurations;
 import xyz.qalcyo.requisite.core.integration.mods.IMod;
@@ -142,6 +143,12 @@ public interface RequisiteAPI extends IMod {
      */
     IComponentFactory getComponentFactory();
     /**
+     * Provides an instance of Requisite's "bridge", providing access to both internal and game methods globally.
+     *
+     * @return Requisite's bridge.
+     */
+    IBridge getBridge();
+    /**
      * Provides an instance of Requisite's HTTP client.
      *
      * @return Requisite's HTTP client.
@@ -218,12 +225,6 @@ public interface RequisiteAPI extends IMod {
      * @return Requisite's GUI utility.
      */
     IGuiHelper<?> getGuiHelper();
-    /**
-     * Provides an instance of Requisite's player utility, giving you access to some of the player's data.
-     *
-     * @return Requisite's player utility.
-     */
-    IPlayerHelper getPlayerHelper();
     /**
      * Provides an instance of Requisite's chat utility, giving you easy access to the in-game chat.
      *

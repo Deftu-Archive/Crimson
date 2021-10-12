@@ -38,14 +38,12 @@ import java.util.List;
 public class CommandRegistry {
 
     private final RequisiteAPI requisite;
-    private final ICommandBridge commandHelper;
     private final List<ICommand> commands;
 
     private String[] cachedAutoCompletion;
 
-    public CommandRegistry(ICommandBridge commandHelper) {
+    public CommandRegistry() {
         this.requisite = RequisiteAPI.retrieveInstance();
-        this.commandHelper = commandHelper;
         this.commands = Lists.newArrayList();
 
         requisite.getEventBus().register(SendChatMessageEvent.class, this::onChatMessageSent);
@@ -109,9 +107,6 @@ public class CommandRegistry {
      *
      * 0 - Successful
      * 1 - Failed
-     *
-     * @param input
-     * @return
      */
     public int execute(String input) {
         input = input.trim();
@@ -161,7 +156,7 @@ public class CommandRegistry {
 
         input = input.substring(1);
 
-        if (commandHelper.isInChat()) {
+        if (requisite.getBridge().getCommandBridge().isInChat()) {
             List<String> options = retrieveTabCompletions(input);
             if (options != null && !options.isEmpty()) {
                 if (input.indexOf(' ') == -1) {

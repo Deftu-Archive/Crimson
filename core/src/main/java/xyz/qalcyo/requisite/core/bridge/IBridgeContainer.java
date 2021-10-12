@@ -16,30 +16,8 @@
  * along with Requisite. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package xyz.qalcyo.requisite.core.util;
+package xyz.qalcyo.requisite.core.bridge;
 
-import com.mojang.authlib.GameProfile;
-
-import java.util.UUID;
-
-public interface IPlayerHelper {
-    /**
-     * @return Whether the current player is present.
-     */
-    boolean isPlayerPresent();
-
-    /**
-     * @return The game profile of the current player.
-     */
-    GameProfile getGameProfile();
-
-    /**
-     * @return The display name of the current player.
-     */
-    String getUsername();
-
-    /**
-     * @return The UUID of the current player.
-     */
-    UUID getUuid();
+public interface IBridgeContainer {
+    void initialize();
 }

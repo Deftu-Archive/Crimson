@@ -21,7 +21,7 @@ package xyz.qalcyo.requisite;
 import net.minecraftforge.fml.common.Mod;
 import org.lwjgl.input.Keyboard;
 import xyz.qalcyo.mango.Multithreading;
-import xyz.qalcyo.requisite.commands.CommandBridge;
+import xyz.qalcyo.requisite.bridge.Bridge;
 import xyz.qalcyo.requisite.core.RequisiteAPI;
 import xyz.qalcyo.requisite.core.RequisiteEventManager;
 import xyz.qalcyo.requisite.core.RequisiteInfo;
@@ -36,7 +36,6 @@ import xyz.qalcyo.requisite.gui.factory.ComponentFactory;
 import xyz.qalcyo.requisite.gui.screens.RequisiteMenu;
 import xyz.qalcyo.requisite.gui.screens.TestMenu;
 import xyz.qalcyo.requisite.integration.mods.ModIntegration;
-import xyz.qalcyo.requisite.networking.SocketBridge;
 import xyz.qalcyo.requisite.networking.packets.cosmetics.CosmeticRetrievePacket;
 import xyz.qalcyo.requisite.notifications.Notifications;
 import xyz.qalcyo.requisite.rendering.EnhancedFontRenderer;
@@ -65,6 +64,7 @@ public class Requisite implements RequisiteAPI {
     private CommandRegistry commandRegistry;
     private KeyBindRegistry keyBindRegistry;
     private ComponentFactory componentFactory;
+    private Bridge bridge;
     private RequisiteEventManager internalEventManager;
     private RequisiteEventListener internalEventListener;
 
@@ -73,7 +73,6 @@ public class Requisite implements RequisiteAPI {
     /* Utilities. */
     private EnhancedFontRenderer enhancedFontRenderer;
     private GuiHelper guiHelper;
-    private PlayerHelper playerHelper;
     private ChatHelper chatHelper;
     private MouseHelper mouseHelper;
     private PositionHelper positionHelper;
@@ -90,12 +89,13 @@ public class Requisite implements RequisiteAPI {
         fileManager = new FileManager(this);
         configurationManager = new ConfigurationManager("config", fileManager.getRequisiteDirectory(fileManager.getQalcyoDirectory(fileManager.getConfigDirectory(gameDir))));
         notifications = new Notifications(this);
-        (requisiteSocket = new RequisiteClientSocket(this, new SocketBridge())).awaitConnect();
+        (requisiteSocket = new RequisiteClientSocket(this)).awaitConnect();
         requisiteSocket.register("COSMETIC_RETRIEVE", CosmeticRetrievePacket.class);
         modIntegration = new ModIntegration();
-        commandRegistry = new CommandRegistry(new CommandBridge());
+        commandRegistry = new CommandRegistry();
         keyBindRegistry = new KeyBindRegistry(this);
         componentFactory = new ComponentFactory();
+        (bridge = new Bridge()).initialize();
         internalEventManager = new RequisiteEventManager();
         internalEventListener = new RequisiteEventListener(this);
 
@@ -105,7 +105,6 @@ public class Requisite implements RequisiteAPI {
         Multithreading.runAsync(() -> {
             enhancedFontRenderer = new EnhancedFontRenderer();
             guiHelper = new GuiHelper();
-            playerHelper = new PlayerHelper();
             chatHelper = new ChatHelper();
             mouseHelper = new MouseHelper();
             positionHelper = new PositionHelper();
@@ -154,6 +153,10 @@ public class Requisite implements RequisiteAPI {
         return componentFactory;
     }
 
+    public Bridge getBridge() {
+        return bridge;
+    }
+
     public RequisiteEventManager getInternalEventManager() {
         return internalEventManager;
     }
@@ -180,10 +183,6 @@ public class Requisite implements RequisiteAPI {
 
     public GuiHelper getGuiHelper() {
         return guiHelper;
-    }
-
-    public PlayerHelper getPlayerHelper() {
-        return playerHelper;
     }
 
     public ChatHelper getChatHelper() {

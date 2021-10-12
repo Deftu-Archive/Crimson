@@ -16,12 +16,15 @@
  * along with Requisite. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package xyz.qalcyo.requisite.core.networking;
+package xyz.qalcyo.requisite.core.bridge.minecraft;
+
+import com.mojang.authlib.GameProfile;
+import xyz.qalcyo.requisite.core.bridge.IBridgeContainer;
 
 import java.util.UUID;
 
-public interface ISocketBridge {
-    UUID getUuid();
-    String getName();
-    void chat(String message);
+public interface IMinecraftBridge extends IBridgeContainer {
+    GameProfile getGameProfile();
+    UUID getPlayerUuid();
+    String getPlayerUsername();
 }
