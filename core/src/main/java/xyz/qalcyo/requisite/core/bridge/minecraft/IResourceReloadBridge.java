@@ -16,28 +16,8 @@
  * along with Requisite. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package xyz.qalcyo.requisite.core.gui.components.builders
+package xyz.qalcyo.requisite.core.bridge.minecraft;
 
-import gg.essential.elementa.UIComponent
-import xyz.qalcyo.mango.data.Colour
-import xyz.qalcyo.requisite.core.data.ColourRGB
-import xyz.qalcyo.requisite.core.gui.factory.IComponentFactory
-import java.util.*
-
-/**
- * A builder which makes it easier to make Clock instances.
- */
-class ClockBuilder(
-    var colour: ColourRGB = ColourRGB(Colour.WHITE),
-
-    var timeZone: String = Calendar.getInstance().timeZone.id,
-    var format: String = "mm:ss",
-
-    val prefix: String = "",
-    val suffix: String = "",
-
-    var textShadow: Boolean = false,
-    var textShadowColour: ColourRGB? = null
-) {
-    fun build(factory: IComponentFactory): UIComponent = factory.build(this)
+public interface IResourceReloadBridge {
+    void reloadResources();
 }

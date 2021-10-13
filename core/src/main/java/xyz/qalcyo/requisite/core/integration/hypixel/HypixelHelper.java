@@ -50,7 +50,7 @@ public class HypixelHelper {
     public boolean isOnHypixel() {
         String HYPIXEL_SERVER_BRAND = "Hypixel BungeeCord";
 
-        if (!requisite.getServerHelper().isSingleplayer() && requisite.getPlayerHelper().isPlayerPresent() && requisite.getServerHelper().getBrand() != null) {
+        if (!requisite.getServerHelper().isSingleplayer() && requisite.getBridge().getMinecraftBridge().isPlayerPresent() && requisite.getServerHelper().getBrand() != null) {
             Matcher matcher = SERVER_BRAND_PATTERN.matcher(requisite.getServerHelper().getBrand());
 
             if (matcher.find()) {

@@ -29,6 +29,8 @@ import xyz.qalcyo.requisite.core.integration.mods.IMod;
 import xyz.qalcyo.requisite.core.integration.mods.IModConfigurationMenu;
 import xyz.qalcyo.requisite.core.keybinds.KeyBindRegistry;
 import xyz.qalcyo.requisite.core.integration.mods.ModMetadata;
+import xyz.qalcyo.requisite.core.localization.ModLocalization;
+import xyz.qalcyo.requisite.core.localization.ModLocalizationFactory;
 import xyz.qalcyo.requisite.core.util.*;
 import xyz.qalcyo.requisite.core.util.messages.IMessageQueue;
 import xyz.qalcyo.requisite.core.commands.CommandRegistry;
@@ -148,6 +150,22 @@ public interface RequisiteAPI extends IMod {
      * @return Requisite's bridge.
      */
     IBridge getBridge();
+    /**
+     * Provides an instance of Requisite's mod localization factory. Requisite's
+     * localization API uses JSON and Minecraft's own language manager to fetch
+     * correct translations from mods' custom language file.
+     *
+     * @return Requisite's mod localization factory.
+     */
+    default ModLocalizationFactory getModLocalizationFactory() {
+        return RequisiteDefaultImplementations.MOD_LOCALIZATION_FACTORY;
+    }
+    /**
+     * Provides an instance of Requisite's own localization.
+     *
+     * @return Requisite's localization.
+     */
+    ModLocalization getRequisiteLocalization();
     /**
      * Provides an instance of Requisite's HTTP client.
      *

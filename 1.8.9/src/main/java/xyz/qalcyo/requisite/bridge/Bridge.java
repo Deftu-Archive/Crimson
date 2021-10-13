@@ -32,12 +32,10 @@ public class Bridge implements IBridge {
     private SocketBridge socketBridge;
     private MinecraftBridge minecraftBridge;
 
-    public void preInitialize() {
+    public void initialize() {
         commandBridge = new CommandBridge();
         socketBridge = new SocketBridge();
         minecraftBridge = new MinecraftBridge();
-
-        initialize();
     }
 
     public ICommandBridge getCommandBridge() {

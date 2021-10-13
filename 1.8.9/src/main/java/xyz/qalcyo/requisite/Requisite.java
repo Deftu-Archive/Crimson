@@ -30,6 +30,7 @@ import xyz.qalcyo.requisite.core.files.ConfigurationManager;
 import xyz.qalcyo.requisite.core.files.FileManager;
 import xyz.qalcyo.requisite.core.keybinds.KeyBindRegistry;
 import xyz.qalcyo.requisite.core.keybinds.KeyBinds;
+import xyz.qalcyo.requisite.core.localization.ModLocalization;
 import xyz.qalcyo.requisite.core.networking.RequisiteClientSocket;
 import xyz.qalcyo.requisite.cosmetics.CosmeticManager;
 import xyz.qalcyo.requisite.gui.factory.ComponentFactory;
@@ -65,6 +66,7 @@ public class Requisite implements RequisiteAPI {
     private KeyBindRegistry keyBindRegistry;
     private ComponentFactory componentFactory;
     private Bridge bridge;
+    private ModLocalization requisiteLocalization;
     private RequisiteEventManager internalEventManager;
     private RequisiteEventListener internalEventListener;
 
@@ -95,7 +97,8 @@ public class Requisite implements RequisiteAPI {
         commandRegistry = new CommandRegistry();
         keyBindRegistry = new KeyBindRegistry(this);
         componentFactory = new ComponentFactory();
-        (bridge = new Bridge()).initialize();
+        (bridge = new Bridge()).start();
+        requisiteLocalization = getModLocalizationFactory().createLocalization(name());
         internalEventManager = new RequisiteEventManager();
         internalEventListener = new RequisiteEventListener(this);
 
@@ -155,6 +158,10 @@ public class Requisite implements RequisiteAPI {
 
     public Bridge getBridge() {
         return bridge;
+    }
+
+    public ModLocalization getRequisiteLocalization() {
+        return requisiteLocalization;
     }
 
     public RequisiteEventManager getInternalEventManager() {

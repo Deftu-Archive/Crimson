@@ -24,6 +24,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import xyz.qalcyo.requisite.core.files.configs.CosmeticConfigurations;
 import xyz.qalcyo.requisite.core.integration.hypixel.HypixelHelper;
+import xyz.qalcyo.requisite.core.localization.ModLocalizationFactory;
 import xyz.qalcyo.requisite.core.util.*;
 import xyz.qalcyo.requisite.core.files.configs.PrivacyConfigurations;
 import xyz.qalcyo.simpleeventbus.SimpleEventBus;
@@ -36,6 +37,7 @@ class RequisiteDefaultImplementations {
     static final Logger LOGGER = LogManager.getLogger("Requisite");
     static final RequisiteJavaArguments JAVA_ARGUMENTS = new RequisiteJavaArguments();
     static final SimpleEventBus EVENT_BUS = new SimpleEventBus();
+    static final ModLocalizationFactory MOD_LOCALIZATION_FACTORY = new ModLocalizationFactory();
     static final OkHttpClient HTTP_CLIENT = new OkHttpClient();
     static final PastebinFactory PASTEBIN_FACTORY = new PastebinFactory();
 

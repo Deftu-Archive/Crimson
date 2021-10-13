@@ -73,7 +73,7 @@ class RequisiteMenu :
 
         val close = ButtonBuilder({
             restorePreviousScreen()
-        }, "Close").build(Requisite.getInstance().componentFactory).constrain {
+        }, Requisite.getInstance().requisiteLocalization.translate("ui", "close")).build(Requisite.getInstance().componentFactory).constrain {
             x = CenterConstraint()
             y = CenterConstraint()
             width = Button.DEFAULT_WIDTH_PIXELS
@@ -82,7 +82,7 @@ class RequisiteMenu :
 
         val cosmetics = ButtonBuilder({
             displayScreen(CosmeticMenu())
-        }, "Cosmetics").build(Requisite.getInstance().componentFactory).constrain {
+        }, Requisite.getInstance().requisiteLocalization.translate("ui", "cosmetics")).build(Requisite.getInstance().componentFactory).constrain {
             x = CenterConstraint()
             y = SiblingConstraint(2f, true)
             width = Button.DEFAULT_WIDTH_PIXELS
