@@ -46,7 +46,7 @@ public class CosmeticManager {
         MinecraftForge.EVENT_BUS.register(this);
         addLayer(new CosmeticRenderer(this));
         initialize();
-        check(Requisite.getInstance().getPlayerHelper().getUuid().toString());
+        check(Requisite.getInstance().getBridge().getMinecraftBridge().getPlayerUuid().toString());
     }
 
     public void initialize() {
@@ -86,7 +86,7 @@ public class CosmeticManager {
     @SubscribeEvent
     public void onEntityJoinedWorld(EntityJoinWorldEvent event) {
         if (checkCache.size() > 100) {
-            checkCache.clear();
+            clearCheckCache();
         }
 
         String uuid = event.entity.getUniqueID().toString();
@@ -124,7 +124,7 @@ public class CosmeticManager {
 
     public void clearCheckCache() {
         checkCache.clear();
-        check(Requisite.getInstance().getPlayerHelper().getUuid().toString());
+        check(Requisite.getInstance().getBridge().getMinecraftBridge().getPlayerUuid().toString());
     }
 
     public Map<String, PlayerCosmeticHolder> getPlayerData() {

@@ -23,15 +23,16 @@ import xyz.qalcyo.requisite.core.bridge.requisite.ICommandBridge;
 import xyz.qalcyo.requisite.core.bridge.requisite.ISocketBridge;
 
 public interface IBridge extends IBridgeContainer {
-    void preInitialize();
-    default void initialize() {
+    void initialize();
+    default void afterInitialize() {
         getCommandBridge().initialize();
         getSocketBridge().initialize();
         getMinecraftBridge().initialize();
-
-        afterInitialize();
     }
-    default void afterInitialize() {
+
+    default void start() {
+        initialize();
+        afterInitialize();
     }
 
     /* Requisite */

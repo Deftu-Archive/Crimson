@@ -27,4 +27,9 @@ public interface IMinecraftBridge extends IBridgeContainer {
     GameProfile getGameProfile();
     UUID getPlayerUuid();
     String getPlayerUsername();
+    boolean isPlayerPresent();
+
+    String getLanguageCode();
+
+    void registerReloadListener(IResourceReloadBridge reloadBridge);
 }

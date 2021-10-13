@@ -20,7 +20,11 @@ package xyz.qalcyo.requisite.bridge.minecraft;
 
 import com.mojang.authlib.GameProfile;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.resources.IReloadableResourceManager;
+import net.minecraft.client.resources.IResourceManager;
+import net.minecraft.client.resources.IResourceManagerReloadListener;
 import xyz.qalcyo.requisite.core.bridge.minecraft.IMinecraftBridge;
+import xyz.qalcyo.requisite.core.bridge.minecraft.IResourceReloadBridge;
 
 import java.util.UUID;
 
@@ -46,6 +50,24 @@ public class MinecraftBridge implements IMinecraftBridge {
 
     public String getPlayerUsername() {
         return playerUsername;
+    }
+
+    public boolean isPlayerPresent() {
+        return Minecraft.getMinecraft().thePlayer != null;
+    }
+
+    public String getLanguageCode() {
+        return Minecraft.getMinecraft().getLanguageManager().getCurrentLanguage().getLanguageCode();
+    }
+
+    public void registerReloadListener(IResourceReloadBridge reloadBridge) {
+        IResourceManager resourceManager = Minecraft.getMinecraft().getResourceManager();
+        if (resourceManager instanceof IReloadableResourceManager) {
+            IReloadableResourceManager reloadableResourceManager = (IReloadableResourceManager) resourceManager;
+            reloadableResourceManager.registerReloadListener(self -> {
+                reloadBridge.reloadResources();
+            });
+        }
     }
 
 }

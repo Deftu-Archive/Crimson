@@ -16,38 +16,14 @@
  * along with Requisite. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package xyz.qalcyo.requisite.core.settings;
+package xyz.qalcyo.requisite.core.localization;
 
-import xyz.qalcyo.requisite.core.data.IScreenPosition;
-import xyz.qalcyo.simpleconfig.settings.BaseSetting;
-
-public class PositionSetting extends BaseSetting<IScreenPosition> {
-
-    public PositionSetting(String name, IScreenPosition val) {
-        super(name, val);
+public class ModLocalizationFactory {
+    public ModLocalization createLocalization(String modName, String defaultLanguage) {
+        return new ModLocalization(modName, defaultLanguage);
     }
 
-    public float getX() {
-        return value.getX();
+    public ModLocalization createLocalization(String modName) {
+        return createLocalization(modName, "en_us");
     }
-
-    public PositionSetting updateX(float x) {
-        value.setX(x);
-        return this;
-    }
-
-    public float getY() {
-        return value.getY();
-    }
-
-    public PositionSetting updateY(float y) {
-        value.setY(y);
-        return this;
-    }
-
-    public PositionSetting update(float x, float y) {
-        value.setPosition(x, y);
-        return this;
-    }
-
 }

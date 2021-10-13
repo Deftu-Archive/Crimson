@@ -40,9 +40,14 @@ class CreditsMenu : WindowScreen(
 ) {
 
     init {
+        println(Requisite.getInstance().requisiteLocalization.currentLanguage)
+
         val creditsJson = JsonApiHelper.getJsonObject(RequisiteConstants.CREDITS_URL, false)
         val librariesArray = creditsJson.getAsArray("libraries")
         val codeAuthorsArray = creditsJson.getAsArray("code_authors")
+
+        librariesArray.removeIf { it.isString && it.asString.isEmpty() }
+        codeAuthorsArray.removeIf { it.isString && it.asString.isEmpty() }
 
         val scrollable = ScrollComponent().constrain {
             x = 0.pixels()
@@ -58,7 +63,7 @@ class CreditsMenu : WindowScreen(
             width = RelativeConstraint()
             height = ChildBasedSizeConstraint()
         } childOf scrollable
-        val librariesTitle = UIText("Libraries").constrain {
+        val librariesTitle = UIText(Requisite.getInstance().requisiteLocalization.translate("credits", "libraries", listOf(librariesArray.size().toString()))).constrain {
             x = CenterConstraint()
             y = 2.pixels()
         } childOf librariesContainer
@@ -70,7 +75,7 @@ class CreditsMenu : WindowScreen(
             width = RelativeConstraint()
             height = ChildBasedSizeConstraint()
         } childOf scrollable
-        val codeAuthorsTitle = UIText("Code authors").constrain {
+        val codeAuthorsTitle = UIText(Requisite.getInstance().requisiteLocalization.translate("credits", "code", listOf(codeAuthorsArray.size().toString()))).constrain {
             x = CenterConstraint()
             y = 2.pixels()
         } childOf codeAuthorsContainer

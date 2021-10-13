@@ -16,7 +16,7 @@
  * along with Requisite. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package xyz.qalcyo.requisite.kotlin.dsl
+package xyz.qalcyo.requisite.dsl
 
 import xyz.qalcyo.json.entities.JsonElement
 import xyz.qalcyo.json.util.JsonHelper
@@ -26,14 +26,14 @@ import java.awt.Color
 import java.util.*
 
 /* Object/Any */
+
 /**
- * Provides a "stringified" version of an object.
- *
  * @return A "stringified" version of the object.
  */
 fun Any.stringify(): String = Objects.toString(this)
 
 /* Numbers */
+
 /**
  * @return Whether the number is positive.
  */
@@ -60,6 +60,7 @@ fun Number.percentage(min: Int, max: Int): Int = (toInt() - min) / (max - min)
 fun Number.isBetween(min: Int, max: Int): Boolean = toInt() in (min + 1) until max
 
 /* Colours */
+
 /**
  * @return A ColourRGB instance which represents the Color's values.
  */
@@ -70,7 +71,6 @@ fun Color.toColourRGB(): ColourRGB = ColourRGB(red, green, blue, alpha)
  */
 fun Colour.toColourRGB(): ColourRGB = ColourRGB(red, green, blue, alpha)
 
-/* xyz.qalcyo.json.entities.JsonElement */
 /**
  * @return A prettified String of a JsonElement.
  */

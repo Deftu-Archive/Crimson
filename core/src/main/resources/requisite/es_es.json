@@ -1,0 +1,10 @@
+{
+    "credits": {
+        "libraries": "Bibliotecas ({})",
+        "code": "Codigos ({})"
+    },
+    "ui": {
+        "close": "Cerrar",
+        "cosmetics": "Cosmeticos"
+    }
+}

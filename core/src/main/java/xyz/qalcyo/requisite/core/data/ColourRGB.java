@@ -20,6 +20,7 @@ package xyz.qalcyo.requisite.core.data;
 
 import xyz.qalcyo.json.entities.JsonObject;
 import xyz.qalcyo.json.parser.JsonParser;
+import xyz.qalcyo.mango.data.Colour;
 
 import java.awt.*;
 
@@ -48,6 +49,10 @@ public class ColourRGB {
 
     public ColourRGB(Color color) {
         this(color.getRed(), color.getGreen(), color.getBlue(), color.getAlpha());
+    }
+
+    public ColourRGB(Colour colour) {
+        this(colour.getRed(), colour.getGreen(), colour.getBlue(), colour.getAlpha());
     }
 
     public ColourRGB(int rgba) {
