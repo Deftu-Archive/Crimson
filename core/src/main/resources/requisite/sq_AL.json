@@ -1,0 +1,10 @@
+{
+    "credits": {
+        "libraries": "Libraries ({})",
+        "code": "Code ({})"
+    },
+    "ui": {
+        "close": "Close",
+        "cosmetics": "Cosmetics"
+    }
+}
