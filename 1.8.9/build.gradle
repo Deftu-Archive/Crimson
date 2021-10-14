@@ -58,8 +58,7 @@ task moveResources {
     doLast {
         try {
             ant.move file: "${buildDir}/resources/main", todir: "${buildDir}/classes/java"
-        } catch (Exception e) {
-            e.printStackTrace()
+        } catch (Exception ignored) {
         }
     }
 }
