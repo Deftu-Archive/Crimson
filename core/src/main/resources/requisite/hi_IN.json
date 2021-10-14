@@ -1,10 +1,10 @@
 {
     "credits": {
-        "libraries": "Libraries ({})",
-        "code": "Code ({})"
+        "libraries": "लाईब्रेरी ({})",
+        "code": "कोड ({})"
     },
     "ui": {
-        "close": "Close",
-        "cosmetics": "Cosmetics"
+        "close": "बंद",
+        "cosmetics": "प्रसाधन सामग्री"
     }
 }
