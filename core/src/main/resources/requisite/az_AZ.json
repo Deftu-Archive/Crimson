@@ -1,10 +1,10 @@
 {
     "credits": {
-        "libraries": "Libraries ({})",
-        "code": "Code ({})"
+        "libraries": "Kitabxanalar ({})",
+        "code": "Kod ({})"
     },
     "ui": {
-        "close": "Close",
-        "cosmetics": "Cosmetics"
+        "close": "Yaxın",
+        "cosmetics": "Kosmetika"
     }
 }

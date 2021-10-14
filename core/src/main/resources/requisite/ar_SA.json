@@ -1,10 +1,10 @@
 {
     "credits": {
-        "libraries": "Libraries ({})",
-        "code": "Code ({})"
+        "libraries": "مكتبات ({})",
+        "code": "الشفرة ({})"
     },
     "ui": {
-        "close": "Close",
-        "cosmetics": "Cosmetics"
+        "close": "قريب",
+        "cosmetics": "مستحضرات التجميل"
     }
 }

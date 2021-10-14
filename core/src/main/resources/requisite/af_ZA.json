@@ -1,10 +1,10 @@
 {
     "credits": {
-        "libraries": "Libraries ({})",
-        "code": "Code ({})"
+        "libraries": "Biblioteke ({})",
+        "code": "Kode ({})"
     },
     "ui": {
-        "close": "Close",
-        "cosmetics": "Cosmetics"
+        "close": "Naby",
+        "cosmetics": "Skoonheidsmiddels"
     }
 }
