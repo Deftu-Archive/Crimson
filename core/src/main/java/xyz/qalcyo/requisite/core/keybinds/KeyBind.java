@@ -18,13 +18,20 @@
 
 package xyz.qalcyo.requisite.core.keybinds;
 
+import xyz.qalcyo.requisite.core.localization.ILocalizationReloadable;
+import xyz.qalcyo.requisite.core.localization.ModLocalization;
+
 /**
  * Main class for Requisite's {@link KeyBind} API handling.
  */
-public abstract class KeyBind {
+public abstract class KeyBind implements ILocalizationReloadable {
 
     private final String name, category;
     private int key;
+
+    private String translationParent;
+    private String translationKey;
+    private String translatedCategory;
 
     public KeyBind(String name, String category, int key) {
         this.name = name;
@@ -53,6 +60,27 @@ public abstract class KeyBind {
 
     public void setKey(int key) {
         this.key = key;
+    }
+
+    public String getTranslatedCategory() {
+        return translatedCategory;
+    }
+
+    public void setTranslatedCategory(ModLocalization localization, String parent, String key) {
+        this.translationParent = parent;
+        this.translationKey = key;
+
+        localization.registerReloadable(this);
+
+        this.translatedCategory = localization.translate(parent, key);
+    }
+
+    public void setTranslatedCategory(ModLocalization localization, String key) {
+        setTranslatedCategory(localization, null, key);
+    }
+
+    public void reloadLocalization(ModLocalization localization) {
+        setTranslatedCategory(localization, translationParent, translationKey);
     }
 
 }

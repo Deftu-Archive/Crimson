@@ -25,6 +25,7 @@ import xyz.qalcyo.mango.IO;
 import xyz.qalcyo.requisite.core.RequisiteAPI;
 import xyz.qalcyo.requisite.core.bridge.minecraft.IResourceReloadBridge;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ModLocalization implements IResourceReloadBridge {
@@ -33,6 +34,8 @@ public class ModLocalization implements IResourceReloadBridge {
 
     private MinecraftLanguage defaultLanguage;
     private JsonObject currentContent;
+
+    private List<ILocalizationReloadable> reloadables = new ArrayList<>();
 
     ModLocalization(String path, MinecraftLanguage defaultLanguage) {
         this.path = path;
@@ -82,6 +85,12 @@ public class ModLocalization implements IResourceReloadBridge {
         return translate(key, (String[]) null);
     }
 
+    public void registerReloadable(ILocalizationReloadable reloadable) {
+        if (!reloadables.contains(reloadable)) {
+            reloadables.add(reloadable);
+        }
+    }
+
     public String getPath() {
         return path;
     }
@@ -108,6 +117,10 @@ public class ModLocalization implements IResourceReloadBridge {
             JsonElement element = JsonParser.parse(IO.toString(RequisiteAPI.class.getClassLoader().getResourceAsStream(path + languageCode.getLanguageCode() + ".json")));
             if (element.isJsonObject()) {
                 currentContent = element.getAsJsonObject();
+
+                for (ILocalizationReloadable reloadable : reloadables) {
+                    reloadable.reloadLocalization(this);
+                }
             } else {
                 throw new UnsupportedOperationException("Requisite language files' content MUST be a JSON object.");
             }
