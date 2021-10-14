@@ -18,29 +18,24 @@
 
 package xyz.qalcyo.requisite.core.localization;
 
-import com.google.gson.JsonElement;
-import com.google.gson.JsonParser;
-import net.minecraft.launchwrapper.Launch;
+import xyz.qalcyo.json.entities.JsonElement;
 import xyz.qalcyo.json.entities.JsonObject;
-import xyz.qalcyo.json.util.GsonHelper;
+import xyz.qalcyo.json.parser.JsonParser;
+import xyz.qalcyo.mango.IO;
 import xyz.qalcyo.requisite.core.RequisiteAPI;
 import xyz.qalcyo.requisite.core.bridge.minecraft.IResourceReloadBridge;
 
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.util.List;
 
 public class ModLocalization implements IResourceReloadBridge {
 
-    private static final JsonParser JSON_PARSER = new JsonParser();
+    private final String path;
 
-    private final String modName;
-
-    private String defaultLanguage;
+    private MinecraftLanguage defaultLanguage;
     private JsonObject currentContent;
 
-    ModLocalization(String modName, String defaultLanguage) {
-        this.modName = modName;
+    ModLocalization(String path, MinecraftLanguage defaultLanguage) {
+        this.path = path;
         this.defaultLanguage = defaultLanguage;
 
         RequisiteAPI.retrieveInstance().getBridge().getMinecraftBridge().registerReloadListener(this);
@@ -87,15 +82,15 @@ public class ModLocalization implements IResourceReloadBridge {
         return translate(key, (String[]) null);
     }
 
-    public String getModName() {
-        return modName;
+    public String getPath() {
+        return path;
     }
 
-    public String getDefaultLanguage() {
+    public MinecraftLanguage getDefaultLanguage() {
         return defaultLanguage;
     }
 
-    public void setDefaultLanguage(String defaultLanguage) {
+    public void setDefaultLanguage(MinecraftLanguage defaultLanguage) {
         this.defaultLanguage = defaultLanguage;
     }
 
@@ -104,17 +99,17 @@ public class ModLocalization implements IResourceReloadBridge {
     }
 
     public void syncWithMinecraft() {
-        setCurrentLanguage(RequisiteAPI.retrieveInstance().getBridge().getMinecraftBridge().getLanguageCode());
+        setCurrentLanguage(RequisiteAPI.retrieveInstance().getBridge().getMinecraftBridge().getLanguageEnum());
     }
 
-    public void setCurrentLanguage(String languageCode) {
+    public void setCurrentLanguage(MinecraftLanguage languageCode) {
         try {
-            InputStream resource = Launch.classLoader.getResourceAsStream(modName + "/" + languageCode + ".json");
-            JsonElement element = JSON_PARSER.parse(new InputStreamReader(resource));
+            String path = this.path.endsWith("/") ? this.path :this.path + "/";
+            JsonElement element = JsonParser.parse(IO.toString(RequisiteAPI.class.getClassLoader().getResourceAsStream(path + languageCode.getLanguageCode() + ".json")));
             if (element.isJsonObject()) {
-                currentContent = GsonHelper.convert(element).getAsJsonObject();
-            } else if (!element.isJsonObject()) {
-                throw new UnsupportedOperationException("Language files MUST be a JSON object!");
+                currentContent = element.getAsJsonObject();
+            } else {
+                throw new UnsupportedOperationException("Requisite language files' content MUST be a JSON object.");
             }
         } catch (Exception e) {
             e.printStackTrace();

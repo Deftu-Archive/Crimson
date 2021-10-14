@@ -16,24 +16,31 @@
  * along with Requisite. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package xyz.qalcyo.requisite.core.bridge.minecraft;
+package xyz.qalcyo.requisite.core.localization;
 
-import com.mojang.authlib.GameProfile;
-import xyz.qalcyo.requisite.core.bridge.IBridgeContainer;
-import xyz.qalcyo.requisite.core.localization.MinecraftLanguage;
+public enum MinecraftLanguage {
 
-import java.util.UUID;
+    UNKNOWN("unknown"),
 
-public interface IMinecraftBridge extends IBridgeContainer {
-    GameProfile getGameProfile();
-    UUID getPlayerUuid();
-    String getPlayerUsername();
-    boolean isPlayerPresent();
+    AMERICAN_ENGLISH("en_US");
 
-    String getLanguageCode();
-    default MinecraftLanguage getLanguageEnum() {
-        return MinecraftLanguage.fromLanguageCode(getLanguageCode());
+    private final String languageCode;
+    MinecraftLanguage(String languageCode) {
+        this.languageCode = languageCode;
     }
 
-    void registerReloadListener(IResourceReloadBridge reloadBridge);
+    public String getLanguageCode() {
+        return languageCode;
+    }
+
+    public static MinecraftLanguage fromLanguageCode(String languageCode) {
+        for (MinecraftLanguage value : values()) {
+            if (value.getLanguageCode().equalsIgnoreCase(languageCode)) {
+                return value;
+            }
+        }
+
+        return MinecraftLanguage.UNKNOWN;
+    }
+
 }
