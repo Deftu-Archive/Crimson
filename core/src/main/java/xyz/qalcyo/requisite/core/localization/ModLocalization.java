@@ -40,7 +40,7 @@ public class ModLocalization implements IResourceReloadBridge {
 
         RequisiteAPI.retrieveInstance().getBridge().getMinecraftBridge().registerReloadListener(this);
 
-        syncWithMinecraft();
+        sync();
     }
 
     public String translate(String parent, String key, String... replacements) {
@@ -98,7 +98,7 @@ public class ModLocalization implements IResourceReloadBridge {
         return currentContent.copy();
     }
 
-    public void syncWithMinecraft() {
+    public void sync() {
         setCurrentLanguage(RequisiteAPI.retrieveInstance().getBridge().getMinecraftBridge().getLanguageEnum());
     }
 
@@ -118,7 +118,7 @@ public class ModLocalization implements IResourceReloadBridge {
     }
 
     public void reloadResources() {
-        syncWithMinecraft();
+        sync();
     }
 
 }

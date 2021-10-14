@@ -23,6 +23,10 @@ public class ModLocalizationFactory {
         return new ModLocalization(path, defaultLanguage);
     }
 
+    public ModLocalization createLocalization(String path, String defaultLanguage) {
+        return createLocalization(path, MinecraftLanguage.fromLanguageCode(defaultLanguage));
+    }
+
     public ModLocalization createLocalization(String path) {
         return createLocalization(path, MinecraftLanguage.AMERICAN_ENGLISH);
     }

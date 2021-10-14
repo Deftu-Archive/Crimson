@@ -22,7 +22,53 @@ public enum MinecraftLanguage {
 
     UNKNOWN("unknown"),
 
-    AMERICAN_ENGLISH("en_US");
+    AFRIKAANS("af_ZA"),
+    ARABIC("ar_SA"),
+    ASTURIAN("ast_ES"),
+    AZERBAIJANI("az_AZ"),
+    BASHKIR("ba_RU"),
+    BAVARIAN("bar"),
+    BELARUSIAN("be_BY"),
+    BULGARIAN("bg_BG"),
+    BRETON("br_FR"),
+    BRABANTIAN("brb"),
+    BOSNIAN("bs_BA"),
+    CATALAN("ca_ES"),
+    CZECH("cs_CZ"),
+    WELSH("cy_GB"),
+    DANISH("da_DK"),
+
+    AUSTRIAN_GERMAN("de_AT"),
+    SWISS_GERMAN("de_CH"),
+    GERMAN("de_DE"),
+
+    GREEK("el_GR"),
+
+    AUSTRALIAN_ENGLISH("en_AU"),
+    CANADIAN_ENGLISH("en_CA"),
+    BRITISH_ENGLISH("en_GB"),
+    NEW_ZEALAND_ENGLISH("en_NZ"),
+    PIRATE_ENGLISH("en_PT"),
+    UPSIDE_DOWN_ENGLISH("en_UD"),
+    AMERICAN_ENGLISH("en_US"),
+    ANGLISH("enp"),
+    SHAKESPEAREAN_ENGLISH("enws"),
+
+    ESPERANTO("eo_UY"),
+
+    ARGENTINIAN_SPANISH("es_AR"),
+    CHILEAN_SPANISH("es_CL"),
+    ECUADORIAN_SPANISH("es_EC"),
+    SPANISH("es_ES"),
+    MEXICAN_SPANISH("es_MX"),
+    URUGUAYAN_SPANISH("es_UY"),
+    VENEZUELAN_SPANISH("es_VE"),
+
+    ANDALUSIAN("esan"),
+    ESTONIAN("et_EE"),
+    BASQUE("eu_ES"),
+    PERSIAN("fa_IR"),
+    FINNISH("fi_FI");
 
     private final String languageCode;
     MinecraftLanguage(String languageCode) {
