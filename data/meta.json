@@ -1,4 +1,4 @@
 {
-    "version": "1.2",
+    "version": "2.0-beta1",
     "socket": "ws://socket.deftu.xyz:8080/{version}"
 }
