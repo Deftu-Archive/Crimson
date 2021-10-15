@@ -25,10 +25,13 @@ import xyz.qalcyo.mango.IO;
 import xyz.qalcyo.requisite.core.RequisiteAPI;
 import xyz.qalcyo.requisite.core.bridge.minecraft.IResourceReloadBridge;
 
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
 public class ModLocalization implements IResourceReloadBridge {
+
+    private int fails;
 
     private final String path;
 
@@ -113,18 +116,39 @@ public class ModLocalization implements IResourceReloadBridge {
 
     public void setCurrentLanguage(MinecraftLanguage languageCode) {
         try {
-            String path = this.path.endsWith("/") ? this.path :this.path + "/";
-            JsonElement element = JsonParser.parse(IO.toString(RequisiteAPI.class.getClassLoader().getResourceAsStream(path + languageCode.getLanguageCode() + ".json")));
+            String path = this.path;
+            path = path.startsWith("/") ? path : "/" + path;
+            path = path.endsWith("/") ? path : path + "/";
+            System.out.println(path);
+            InputStream resource = getClass().getClassLoader().getResourceAsStream(path + languageCode.getLanguageCode() + ".json");
+            if (resource == null && fails > 1) {
+                throw new IllegalStateException("Language file resource is null...");
+            }
+
+            JsonElement element = JsonParser.parse(IO.toString(resource));
             if (element.isJsonObject()) {
                 currentContent = element.getAsJsonObject();
 
                 for (ILocalizationReloadable reloadable : reloadables) {
                     reloadable.reloadLocalization(this);
                 }
+
+                resource.close();
             } else {
                 throw new UnsupportedOperationException("Requisite language files' content MUST be a JSON object.");
             }
         } catch (Exception e) {
+            if (e instanceof IllegalStateException) {
+                throw new RuntimeException(e);
+            }
+
+            fails++;
+
+            RequisiteAPI requisite = RequisiteAPI.retrieveInstance();
+            if (requisite != null && requisite.getLogger() != null) {
+                requisite.getLogger().info("Failed to load language file... (" + languageCode + " - " + languageCode.getLanguageCode() + ")");
+            }
+
             e.printStackTrace();
             setCurrentLanguage(defaultLanguage);
         }

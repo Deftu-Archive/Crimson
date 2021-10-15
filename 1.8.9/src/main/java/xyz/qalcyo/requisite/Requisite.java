@@ -26,6 +26,9 @@ import xyz.qalcyo.requisite.core.RequisiteAPI;
 import xyz.qalcyo.requisite.core.RequisiteEventManager;
 import xyz.qalcyo.requisite.core.RequisiteInfo;
 import xyz.qalcyo.requisite.core.commands.CommandRegistry;
+import xyz.qalcyo.requisite.core.events.requisite.InitializationEvent;
+import xyz.qalcyo.requisite.core.events.requisite.PostInitializationEvent;
+import xyz.qalcyo.requisite.core.events.requisite.PreInitializationEvent;
 import xyz.qalcyo.requisite.core.files.ConfigurationManager;
 import xyz.qalcyo.requisite.core.files.FileManager;
 import xyz.qalcyo.requisite.core.keybinds.KeyBindRegistry;
@@ -87,6 +90,8 @@ public class Requisite implements RequisiteAPI {
         if (initialized)
             return false;
 
+        getEventBus().call(new PreInitializationEvent(this));
+
         /* Initialize services. */
         fileManager = new FileManager(this);
         configurationManager = new ConfigurationManager("config", fileManager.getRequisiteDirectory(fileManager.getQalcyoDirectory(fileManager.getConfigDirectory(gameDir))));
@@ -118,9 +123,12 @@ public class Requisite implements RequisiteAPI {
             cosmeticManager.start();
         });
 
+        getEventBus().call(new InitializationEvent(this));
+
         getKeyBindRegistry().register(KeyBinds.menu("Test", "Requisite", Keyboard.KEY_I, new TestMenu()));
 
         getMetadata().setConfigurationMenu(RequisiteMenu.class);
+        getEventBus().call(new PostInitializationEvent(this));
         return initialized = true;
     }
 

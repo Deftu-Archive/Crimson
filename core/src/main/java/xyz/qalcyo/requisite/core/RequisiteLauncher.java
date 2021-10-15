@@ -24,7 +24,7 @@ import org.spongepowered.asm.launch.MixinBootstrap;
 import org.spongepowered.asm.mixin.Mixins;
 
 /**
- * Launches Requisite at game start using it's launchwrapper.
+ * Launches Requisite at game start using it's installer.
  */
 public class RequisiteLauncher {
 
@@ -34,13 +34,15 @@ public class RequisiteLauncher {
      * Initializes Requisite's Mixin configuration.
      */
     public static void initialize() {
-        if (initialized)
+        if (initialized) {
             return;
+        }
+
         initialized = true;
         Logger logger = LogManager.getLogger("Requisite (Launcher)");
         MixinBootstrap.init();
         Mixins.addConfiguration("mixins.requisite.json");
-        logger.info("Successfully added Requisite mixins config.");
+        logger.info("Successfully added Requisite Mixin config.");
     }
 
     /**

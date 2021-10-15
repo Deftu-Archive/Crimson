@@ -22,10 +22,11 @@ import com.mojang.authlib.GameProfile;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.IReloadableResourceManager;
 import net.minecraft.client.resources.IResourceManager;
-import net.minecraft.client.resources.IResourceManagerReloadListener;
+import net.minecraft.launchwrapper.Launch;
 import xyz.qalcyo.requisite.core.bridge.minecraft.IMinecraftBridge;
 import xyz.qalcyo.requisite.core.bridge.minecraft.IResourceReloadBridge;
 
+import java.io.InputStream;
 import java.util.UUID;
 
 public class MinecraftBridge implements IMinecraftBridge {
@@ -54,6 +55,10 @@ public class MinecraftBridge implements IMinecraftBridge {
 
     public boolean isPlayerPresent() {
         return Minecraft.getMinecraft().thePlayer != null;
+    }
+
+    public InputStream getResource(String name) {
+        return Launch.classLoader.getResourceAsStream(name);
     }
 
     public String getLanguageCode() {

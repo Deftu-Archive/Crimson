@@ -11,7 +11,7 @@ buildscript {
         }
     }
     dependencies {
-        classpath('com.github.Deftu:ForgeGradle:FG_2.1-SNAPSHOT:all')
+        classpath('com.github.Deftu:ForgeGradle:c00c291546:all')
         classpath('dev.isXander:MixinGradle:0.6-SNAPSHOT')
     }
 }
@@ -51,7 +51,18 @@ dependencies {
 
 mixin {
     disableRefMapWarning = true
-    add sourceSets.main, 'mixins.requisite.refmap.json'
+    add(sourceSets.main, 'mixins.requisite.refmap.json')
+}
+
+sourceSets {
+    main {
+        ext.refMap = "mixins.requisite.refmap.json"
+    }
+}
+
+reobfJar {
+    archivesBaseName = project_name
+    version = project_version
 }
 
 task moveResources {

@@ -16,27 +16,14 @@
  * along with Requisite. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package xyz.qalcyo.requisite.core.bridge.minecraft;
+package xyz.qalcyo.requisite.core.events.requisite;
 
-import com.mojang.authlib.GameProfile;
-import xyz.qalcyo.requisite.core.bridge.IBridgeContainer;
-import xyz.qalcyo.requisite.core.localization.MinecraftLanguage;
+import xyz.qalcyo.requisite.core.RequisiteAPI;
+import xyz.qalcyo.simpleeventbus.Event;
 
-import java.io.InputStream;
-import java.util.UUID;
-
-public interface IMinecraftBridge extends IBridgeContainer {
-    GameProfile getGameProfile();
-    UUID getPlayerUuid();
-    String getPlayerUsername();
-    boolean isPlayerPresent();
-
-    InputStream getResource(String name);
-
-    String getLanguageCode();
-    default MinecraftLanguage getLanguageEnum() {
-        return MinecraftLanguage.fromLanguageCode(getLanguageCode());
+public class PostInitializationEvent extends Event {
+    public final RequisiteAPI requisite;
+    public PostInitializationEvent(RequisiteAPI requisite) {
+        this.requisite = requisite;
     }
-
-    void registerReloadListener(IResourceReloadBridge reloadBridge);
 }
