@@ -18,8 +18,8 @@
 
 package xyz.qalcyo.requisite.core.events;
 
-import xyz.qalcyo.simpleeventbus.Cancellable;
-import xyz.qalcyo.simpleeventbus.Event;
+import xyz.qalcyo.eventbus.Cancellable;
+import xyz.qalcyo.eventbus.Event;
 
 @Cancellable
 public class ChatMessageReceivedEvent extends Event {

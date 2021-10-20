@@ -30,7 +30,7 @@ buildConfig {
 }
 
 dependencies {
-    shade api('xyz.qalcyo.eventbus:SimpleEventBus:3.1')
+    shade api('xyz.qalcyo.eventbus:QalcyoEventBus:4.0.1')
     shade api('xyz.qalcyo.simpleconfig:SimpleConfig:3.5')
     shade api('xyz.qalcyo.simpleconfig:SimpleConfig:3.5:settings')
     shade api('xyz.qalcyo.json:JSON+:2.12')

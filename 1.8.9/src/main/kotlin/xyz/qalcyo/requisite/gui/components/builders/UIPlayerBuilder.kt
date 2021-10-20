@@ -16,14 +16,14 @@
  * along with Requisite. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package xyz.qalcyo.requisite.core.events.requisite;
+package xyz.qalcyo.requisite.gui.components.builders
 
-import xyz.qalcyo.requisite.core.RequisiteAPI;
-import xyz.qalcyo.simpleeventbus.Event;
+import net.minecraft.client.entity.EntityPlayerSP
+import xyz.qalcyo.requisite.gui.factory.ComponentFactory
 
-public class PostInitializationEvent extends Event {
-    public final RequisiteAPI requisite;
-    public PostInitializationEvent(RequisiteAPI requisite) {
-        this.requisite = requisite;
-    }
+class UIPlayerBuilder(
+    var entity: EntityPlayerSP,
+    var rotatable: Boolean = false
+) {
+    fun build(factory: ComponentFactory) = factory.build(this)
 }

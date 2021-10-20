@@ -16,14 +16,14 @@
  * along with Requisite. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package xyz.qalcyo.requisite.core.events.requisite;
+package xyz.qalcyo.requisite.core.events.initialization;
 
-import xyz.qalcyo.requisite.core.RequisiteAPI;
-import xyz.qalcyo.simpleeventbus.Event;
+import com.mojang.authlib.GameProfile;
 
-public class InitializationEvent extends Event {
-    public final RequisiteAPI requisite;
-    public InitializationEvent(RequisiteAPI requisite) {
-        this.requisite = requisite;
+import java.io.File;
+
+public class PreInitializationEvent extends GameStartEvent {
+    public PreInitializationEvent(GameProfile gameProfile, File launchDirectory) {
+        super(gameProfile, launchDirectory);
     }
 }

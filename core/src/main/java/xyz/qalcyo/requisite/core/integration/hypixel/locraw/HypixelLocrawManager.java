@@ -86,7 +86,7 @@ public class HypixelLocrawManager {
 
     private void forceUpdate(HypixelLocraw locraw) {
         this.locraw = locraw;
-        requisite.getEventBus().call(new LocrawReceivedEvent(locraw));
+        requisite.getEventBus().post(new LocrawReceivedEvent(locraw));
         allowCancel = false;
     }
 

@@ -21,7 +21,7 @@ package xyz.qalcyo.requisite.core;
 import xyz.qalcyo.requisite.core.events.*;
 import xyz.qalcyo.mango.collections.Pair;
 import xyz.qalcyo.mango.collections.impl.ImmutablePair;
-import xyz.qalcyo.simpleeventbus.Event;
+import xyz.qalcyo.eventbus.Event;
 
 /**
  * Adds access to event handling easily.
@@ -38,21 +38,21 @@ public final class RequisiteEventManager {
      * Handles HUD rendering.
      */
     public void handleHudRender(float partialTicks) {
-        requisite.getEventBus().call(new RenderHudEvent(partialTicks));
+        requisite.getEventBus().post(new RenderHudEvent(partialTicks));
     }
 
     /**
      * Handles client ticks.
      */
     public void handleTick() {
-        requisite.getEventBus().call(new TickEvent());
+        requisite.getEventBus().post(new TickEvent());
     }
 
     /**
      * Handles render ticks.
      */
     public void handleRenderTick(float partialTicks) {
-        requisite.getEventBus().call(new RenderTickEvent(partialTicks));
+        requisite.getEventBus().post(new RenderTickEvent(partialTicks));
     }
 
     /**
@@ -60,7 +60,7 @@ public final class RequisiteEventManager {
      */
     public Pair<String, Boolean> handleChatMessageSent(String message) {
         SendChatMessageEvent event = new SendChatMessageEvent(message);
-        requisite.getEventBus().call(event);
+        requisite.getEventBus().post(event);
         return new ImmutablePair<>(event.message, event.isCancelled());
     }
 
@@ -82,7 +82,7 @@ public final class RequisiteEventManager {
      * Handles world loading.
      */
     public void handleWorldLoad() {
-        requisite.getEventBus().call(new WorldLoadEvent());
+        requisite.getEventBus().post(new WorldLoadEvent());
     }
 
     /**
@@ -92,7 +92,7 @@ public final class RequisiteEventManager {
      * @return Whether the event is cancellable and is cancelled or not.
      */
     private boolean parseCancellable(Event event) {
-        requisite.getEventBus().call(event);
+        requisite.getEventBus().post(event);
         return event.isCancellable() && event.isCancelled();
     }
 

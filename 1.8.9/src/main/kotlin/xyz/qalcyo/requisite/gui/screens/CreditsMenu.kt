@@ -26,6 +26,7 @@ import gg.essential.elementa.dsl.*
 import gg.essential.universal.UDesktop
 import xyz.qalcyo.json.entities.JsonArray
 import xyz.qalcyo.json.util.JsonApiHelper
+import xyz.qalcyo.mango.Objects
 import xyz.qalcyo.requisite.Requisite
 import xyz.qalcyo.requisite.core.RequisiteConstants
 import xyz.qalcyo.requisite.core.RequisitePalette
@@ -33,6 +34,8 @@ import xyz.qalcyo.requisite.core.gui.components.Button
 import xyz.qalcyo.requisite.core.gui.components.InteractableText
 import xyz.qalcyo.requisite.core.gui.components.builders.ButtonBuilder
 import java.net.URI
+import java.util.*
+import kotlin.Comparator
 
 class CreditsMenu : WindowScreen(
     ElementaVersion.V1,
@@ -40,8 +43,6 @@ class CreditsMenu : WindowScreen(
 ) {
 
     init {
-        println(Requisite.getInstance().requisiteLocalization.currentLanguage)
-
         val creditsJson = JsonApiHelper.getJsonObject(RequisiteConstants.CREDITS_URL, false)
         val librariesArray = creditsJson.getAsArray("libraries")
         val codeAuthorsArray = creditsJson.getAsArray("code_authors")
@@ -110,7 +111,11 @@ class CreditsMenu : WindowScreen(
                         x = CenterConstraint()
                         y = SiblingConstraint(2f)
                     } childOf container
+                } else {
+                    array.remove(element)
                 }
+            } else {
+                array.remove(element)
             }
         }
     }

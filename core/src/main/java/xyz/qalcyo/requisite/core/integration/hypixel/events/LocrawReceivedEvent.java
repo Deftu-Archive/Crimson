@@ -19,7 +19,7 @@
 package xyz.qalcyo.requisite.core.integration.hypixel.events;
 
 import xyz.qalcyo.requisite.core.integration.hypixel.locraw.HypixelLocraw;
-import xyz.qalcyo.simpleeventbus.Event;
+import xyz.qalcyo.eventbus.Event;
 
 public class LocrawReceivedEvent extends Event {
     public final HypixelLocraw locraw;

@@ -19,6 +19,9 @@
 package xyz.qalcyo.requisite.gui.factory
 
 import xyz.qalcyo.requisite.core.gui.factory.IComponentFactory
+import xyz.qalcyo.requisite.gui.components.UIPlayer
+import xyz.qalcyo.requisite.gui.components.builders.UIPlayerBuilder
 
 class ComponentFactory : IComponentFactory {
+    fun build(builder: UIPlayerBuilder) = UIPlayer(builder)
 }

@@ -21,8 +21,11 @@ package xyz.qalcyo.requisite.core;
 import com.besaba.revonline.pastebinapi.impl.factory.PastebinFactory;
 import okhttp3.OkHttpClient;
 import org.apache.logging.log4j.Logger;
+import xyz.qalcyo.eventbus.QalcyoEventBus;
+import xyz.qalcyo.eventbus.SubscribeEvent;
 import xyz.qalcyo.mango.Strings;
 import xyz.qalcyo.requisite.core.bridge.IBridge;
+import xyz.qalcyo.requisite.core.events.initialization.InitializationEvent;
 import xyz.qalcyo.requisite.core.files.ConfigurationManager;
 import xyz.qalcyo.requisite.core.files.configs.CosmeticConfigurations;
 import xyz.qalcyo.requisite.core.integration.mods.IMod;
@@ -43,9 +46,7 @@ import xyz.qalcyo.requisite.core.notifications.INotifications;
 import xyz.qalcyo.requisite.core.rendering.IEnhancedFontRenderer;
 import xyz.qalcyo.json.util.JsonApiHelper;
 import xyz.qalcyo.requisite.core.gui.factory.IComponentFactory;
-import xyz.qalcyo.simpleeventbus.SimpleEventBus;
 
-import java.io.File;
 import java.net.URI;
 
 public interface RequisiteAPI extends IMod {
@@ -53,22 +54,20 @@ public interface RequisiteAPI extends IMod {
     /**
      * Initializes all of Requisite's core features for the version requested.
      *
-     * @param gameDir The game directory of this version.
-     * @return Whether initialization was completed successfully or not.
+     * @param event The game initialization event.
      */
-    boolean initialize(File gameDir);
+    void initialize(InitializationEvent event);
     /**
      * Initializes Requisite, then completes it's own actions.
      *
-     * @param gameDir The game directory of this version.
-     * @return Whether initialization was completed successfully or not.
+     * @param event The game initialization event.
      */
-    default boolean finish(File gameDir) {
-        boolean initial = initialize(gameDir);
+    @SubscribeEvent
+    default void finish(InitializationEvent event) {
+        initialize(event);
         getConfigurationManager().addConfigurable(getPrivacyConfigurations());
         getConfigurationManager().addConfigurable(getCosmeticConfigurations());
         getModIntegration().registerIntegratedMod(this);
-        return initial;
     }
 
     /**
@@ -88,11 +87,11 @@ public interface RequisiteAPI extends IMod {
         return RequisiteDefaultImplementations.JAVA_ARGUMENTS;
     }
     /**
-     * Provides an instance of Requisite's {@link SimpleEventBus}.
+     * Provides an instance of Requisite's {@link QalcyoEventBus}.
      *
      * @return Requisite's event bus.
      */
-    default SimpleEventBus getEventBus() {
+    default QalcyoEventBus getEventBus() {
         return RequisiteDefaultImplementations.EVENT_BUS;
     }
 

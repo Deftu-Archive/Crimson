@@ -22,7 +22,9 @@ import gg.essential.elementa.ElementaVersion
 import gg.essential.elementa.WindowScreen
 import gg.essential.elementa.constraints.CenterConstraint
 import gg.essential.elementa.dsl.*
+import net.minecraft.client.Minecraft
 import xyz.qalcyo.requisite.Requisite
+import xyz.qalcyo.requisite.gui.components.builders.UIPlayerBuilder
 
 /**
  * A test menu.
@@ -33,6 +35,10 @@ class TestMenu : WindowScreen(
 ) {
 
     init {
+        val player = UIPlayerBuilder(Minecraft.getMinecraft().thePlayer, true).build(Requisite.getInstance().componentFactory).constrain {
+            x = CenterConstraint()
+            y = CenterConstraint()
+        } childOf window
     }
 
 }

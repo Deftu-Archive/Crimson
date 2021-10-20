@@ -16,9 +16,6 @@
  * along with Requisite. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package xyz.qalcyo.requisite.core.events;
+package xyz.qalcyo.requisite.gui.components
 
-import xyz.qalcyo.eventbus.Event;
-
-public class WorldLoadEvent extends Event {
-}
+class UIEmulatedPlayer

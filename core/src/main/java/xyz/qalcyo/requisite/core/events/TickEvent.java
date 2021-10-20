@@ -18,6 +18,7 @@
 
 package xyz.qalcyo.requisite.core.events;
 
-import xyz.qalcyo.simpleeventbus.Event;
+import xyz.qalcyo.eventbus.Event;
 
-public class TickEvent extends Event {}
+public class TickEvent extends Event {
+}

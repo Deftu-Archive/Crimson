@@ -27,7 +27,7 @@ import org.spongepowered.asm.mixin.injection.ModifyVariable;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import xyz.qalcyo.requisite.Requisite;
 import xyz.qalcyo.requisite.core.events.FontRendererEvent;
-import xyz.qalcyo.simpleeventbus.SimpleEventBus;
+import xyz.qalcyo.eventbus.QalcyoEventBus;
 
 @Mixin({FontRenderer.class})
 public class FontRendererMixin {
@@ -39,9 +39,12 @@ public class FontRendererMixin {
 
     @Inject(method = "renderString", at = @At("HEAD"))
     private void onStringRendered(String text, float x, float y, int colour, boolean dropShadow, CallbackInfoReturnable<Integer> cir) {
-        SimpleEventBus requisiteEventBus = Requisite.getInstance().getEventBus();
-        if (requisiteEventBus != null) {
-            requisiteEventBus.call(drawStringEvent = new FontRendererEvent.RenderStringEvent(text, x, y, colour, dropShadow));
+        Requisite requisite = Requisite.getInstance();
+        if (requisite != null) {
+            QalcyoEventBus requisiteEventBus = requisite.getEventBus();
+            if (requisiteEventBus != null) {
+                requisiteEventBus.post(drawStringEvent = new FontRendererEvent.RenderStringEvent(text, x, y, colour, dropShadow));
+            }
         }
     }
 
@@ -72,9 +75,12 @@ public class FontRendererMixin {
 
     @Inject(method = "getStringWidth", at = @At("HEAD"))
     private void onStringWidthGotten(String text, CallbackInfoReturnable<Integer> cir) {
-        SimpleEventBus requisiteEventBus = Requisite.getInstance().getEventBus();
-        if (requisiteEventBus != null) {
-            requisiteEventBus.call(widthGottenEvent = new FontRendererEvent.WidthGottenEvent(text));
+        Requisite requisite = Requisite.getInstance();
+        if (requisite != null) {
+            QalcyoEventBus requisiteEventBus = requisite.getEventBus();
+            if (requisiteEventBus != null) {
+                requisiteEventBus.post(widthGottenEvent = new FontRendererEvent.WidthGottenEvent(text));
+            }
         }
     }
 

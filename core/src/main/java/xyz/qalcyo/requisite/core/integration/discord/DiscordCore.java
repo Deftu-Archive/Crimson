@@ -20,6 +20,8 @@ package xyz.qalcyo.requisite.core.integration.discord;
 
 import de.jcm.discordgamesdk.Core;
 import de.jcm.discordgamesdk.CreateParams;
+import de.jcm.discordgamesdk.DiscordEventAdapter;
+import xyz.qalcyo.eventbus.QalcyoEventBus;
 
 public class DiscordCore {
 
@@ -35,7 +37,7 @@ public class DiscordCore {
         initialize();
     }
 
-    public void initialize() {
+    private void initialize() {
         if (initialized)
             return;
 
@@ -66,7 +68,7 @@ public class DiscordCore {
                 }
 
                 Thread.currentThread().interrupt();
-            }, "Requisite Discord Integration Callbacks Thread").start();
+            }, "Discord Integration Callbacks Thread").start();
         } catch (Exception e) {
             e.printStackTrace();
             running = false;

@@ -59,6 +59,7 @@ public class ModLocalization implements IResourceReloadBridge {
         }
 
         String translation = parent == null ? currentContent.getAsString(key) : currentContent.getAsObject(parent).getAsString(key);
+        System.out.println(currentContent);
         if (translation == null) {
             return "Translation not found.";
         }
@@ -119,8 +120,7 @@ public class ModLocalization implements IResourceReloadBridge {
             String path = this.path;
             path = path.startsWith("/") ? path : "/" + path;
             path = path.endsWith("/") ? path : path + "/";
-            System.out.println(path);
-            InputStream resource = getClass().getClassLoader().getResourceAsStream(path + languageCode.getLanguageCode() + ".json");
+            InputStream resource = getClass().getResourceAsStream(path + languageCode.getLanguageCode() + ".json");
             if (resource == null && fails > 1) {
                 throw new IllegalStateException("Language file resource is null...");
             }

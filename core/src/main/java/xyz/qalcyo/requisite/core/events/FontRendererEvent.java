@@ -18,7 +18,7 @@
 
 package xyz.qalcyo.requisite.core.events;
 
-import xyz.qalcyo.simpleeventbus.Event;
+import xyz.qalcyo.eventbus.Event;
 
 public class FontRendererEvent extends Event {
     public String string;

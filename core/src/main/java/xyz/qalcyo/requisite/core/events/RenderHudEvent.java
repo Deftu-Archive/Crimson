@@ -18,7 +18,7 @@
 
 package xyz.qalcyo.requisite.core.events;
 
-import xyz.qalcyo.simpleeventbus.Event;
+import xyz.qalcyo.eventbus.Event;
 
 public class RenderHudEvent extends Event {
     public final float partialTicks;

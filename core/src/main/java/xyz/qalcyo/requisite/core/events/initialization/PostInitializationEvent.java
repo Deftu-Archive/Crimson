@@ -16,9 +16,14 @@
  * along with Requisite. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package xyz.qalcyo.requisite.core.events;
+package xyz.qalcyo.requisite.core.events.initialization;
 
-import xyz.qalcyo.eventbus.Event;
+import com.mojang.authlib.GameProfile;
 
-public class WorldLoadEvent extends Event {
+import java.io.File;
+
+public class PostInitializationEvent extends GameStartEvent {
+    public PostInitializationEvent(GameProfile gameProfile, File launchDirectory) {
+        super(gameProfile, launchDirectory);
+    }
 }
