@@ -17,7 +17,7 @@ repositories {
 }
 
 dependencies {
-    implementation('xyz.deftu.requisite:Requisite-MCVERSION:VERSION')
-    shade('xyz.deftu.requisite:RequisiteLaunchwrapper:VERSION')
+    implementation('xyz.qalcyo.requisite:Requisite:VERSION')
+    shade('xyz.qalcyo.requisite:RequisiteInstaller:VERSION')
 }
 ```

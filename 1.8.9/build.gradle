@@ -54,6 +54,10 @@ mixin {
     add(sourceSets.main, 'mixins.requisite.refmap.json')
 }
 
+shadowJar {
+    relocate('gg.essential', project_shaded + 'essential')
+}
+
 sourceSets {
     main {
         ext.refMap = "mixins.requisite.refmap.json"
