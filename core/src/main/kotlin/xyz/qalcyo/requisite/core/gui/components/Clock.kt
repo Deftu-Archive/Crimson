@@ -23,7 +23,6 @@ import gg.essential.elementa.components.UIText
 import gg.essential.elementa.constraints.CenterConstraint
 import gg.essential.elementa.constraints.RelativeConstraint
 import gg.essential.elementa.dsl.*
-import gg.essential.universal.UMatrixStack
 import xyz.qalcyo.requisite.core.data.ColourRGB
 import xyz.qalcyo.requisite.core.gui.components.builders.ClockBuilder
 import java.time.OffsetDateTime
@@ -50,10 +49,10 @@ class Clock(
         text.setColor(builder.colour.asColor())
     }
 
-    override fun draw(matrixStack: UMatrixStack) {
-        beforeDrawCompat(matrixStack)
+    override fun draw() {
+        beforeDraw()
         text.setText("${builder.prefix}${getCurrentTime()}${builder.suffix}")
-        super.draw(matrixStack)
+        super.draw()
     }
 
     private fun getCurrentTime(): String {

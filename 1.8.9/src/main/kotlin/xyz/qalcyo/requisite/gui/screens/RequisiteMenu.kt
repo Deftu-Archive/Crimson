@@ -18,7 +18,6 @@
 
 package xyz.qalcyo.requisite.gui.screens
 
-import gg.essential.elementa.ElementaVersion
 import gg.essential.elementa.WindowScreen
 import gg.essential.elementa.components.UIContainer
 import gg.essential.elementa.constraints.CenterConstraint
@@ -26,11 +25,11 @@ import gg.essential.elementa.constraints.ChildBasedSizeConstraint
 import gg.essential.elementa.constraints.SiblingConstraint
 import gg.essential.elementa.dsl.*
 import xyz.qalcyo.requisite.Requisite
-import xyz.qalcyo.requisite.core.integration.mods.IMod
-import xyz.qalcyo.requisite.core.integration.mods.IModConfigurationMenu
 import xyz.qalcyo.requisite.core.gui.components.Button
 import xyz.qalcyo.requisite.core.gui.components.InteractableText
 import xyz.qalcyo.requisite.core.gui.components.builders.ButtonBuilder
+import xyz.qalcyo.requisite.core.integration.mods.IMod
+import xyz.qalcyo.requisite.core.integration.mods.IModConfigurationMenu
 
 /**
  * The Requisite menu GUI, which allows the user to easily access Requisite (and mods that are integrated into it) settings.
@@ -38,7 +37,6 @@ import xyz.qalcyo.requisite.core.gui.components.builders.ButtonBuilder
 class RequisiteMenu :
     IModConfigurationMenu,
     WindowScreen(
-        version = ElementaVersion.V1,
         restoreCurrentGuiOnClose = true
     ) {
 

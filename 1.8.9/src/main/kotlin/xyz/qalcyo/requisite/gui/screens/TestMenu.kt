@@ -18,7 +18,6 @@
 
 package xyz.qalcyo.requisite.gui.screens
 
-import gg.essential.elementa.ElementaVersion
 import gg.essential.elementa.WindowScreen
 import gg.essential.elementa.constraints.CenterConstraint
 import gg.essential.elementa.dsl.*
@@ -30,9 +29,7 @@ import xyz.qalcyo.requisite.gui.components.builders.UIPlayerBuilder
  * A test menu.
  * Will this be removed? Who knows.
  */
-class TestMenu : WindowScreen(
-    ElementaVersion.V1
-) {
+class TestMenu : WindowScreen() {
 
     init {
         val player = UIPlayerBuilder(Minecraft.getMinecraft().thePlayer, true).build(Requisite.getInstance().componentFactory).constrain {

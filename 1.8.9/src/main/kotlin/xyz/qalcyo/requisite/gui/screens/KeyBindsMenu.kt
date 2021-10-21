@@ -18,11 +18,9 @@
 
 package xyz.qalcyo.requisite.gui.screens
 
-import gg.essential.elementa.ElementaVersion
 import gg.essential.elementa.WindowScreen
 
 class KeyBindsMenu : WindowScreen(
-    ElementaVersion.V1,
     restoreCurrentGuiOnClose = true
 ) {
 

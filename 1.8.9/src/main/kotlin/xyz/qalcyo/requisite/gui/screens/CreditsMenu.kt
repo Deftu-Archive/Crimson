@@ -18,7 +18,6 @@
 
 package xyz.qalcyo.requisite.gui.screens
 
-import gg.essential.elementa.ElementaVersion
 import gg.essential.elementa.WindowScreen
 import gg.essential.elementa.components.*
 import gg.essential.elementa.constraints.*
@@ -26,7 +25,6 @@ import gg.essential.elementa.dsl.*
 import gg.essential.universal.UDesktop
 import xyz.qalcyo.json.entities.JsonArray
 import xyz.qalcyo.json.util.JsonApiHelper
-import xyz.qalcyo.mango.Objects
 import xyz.qalcyo.requisite.Requisite
 import xyz.qalcyo.requisite.core.RequisiteConstants
 import xyz.qalcyo.requisite.core.RequisitePalette
@@ -35,10 +33,8 @@ import xyz.qalcyo.requisite.core.gui.components.InteractableText
 import xyz.qalcyo.requisite.core.gui.components.builders.ButtonBuilder
 import java.net.URI
 import java.util.*
-import kotlin.Comparator
 
 class CreditsMenu : WindowScreen(
-    ElementaVersion.V1,
     restoreCurrentGuiOnClose = true
 ) {
 

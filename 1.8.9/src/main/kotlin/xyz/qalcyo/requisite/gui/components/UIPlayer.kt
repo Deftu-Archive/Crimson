@@ -20,7 +20,6 @@ package xyz.qalcyo.requisite.gui.components
 
 import gg.essential.elementa.UIComponent
 import gg.essential.elementa.dsl.*
-import gg.essential.universal.UMatrixStack
 import net.minecraft.client.gui.inventory.GuiInventory
 import xyz.qalcyo.requisite.gui.components.builders.UIPlayerBuilder
 
@@ -45,8 +44,8 @@ open class UIPlayer(
         }
     }
 
-    final override fun draw(matrixStack: UMatrixStack) {
-        beforeDrawCompat(matrixStack)
+    final override fun draw() {
+        beforeDraw()
 
         GuiInventory.drawEntityOnScreen(
             getLeft().toInt(),
@@ -57,7 +56,7 @@ open class UIPlayer(
             builder.entity
         )
 
-        super.draw(matrixStack)
+        super.draw()
     }
 
 }
