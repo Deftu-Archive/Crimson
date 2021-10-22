@@ -36,30 +36,32 @@ public class ModLocalization implements IResourceReloadBridge {
     private final String path;
 
     private MinecraftLanguage defaultLanguage;
-    private JsonObject currentContent;
 
-    private List<ILocalizationReloadable> reloadables = new ArrayList<>();
+    private ModLocale locale;
+    private DefaultModLocale defaultLocale;
 
-    ModLocalization(String path, MinecraftLanguage defaultLanguage) {
+    private final List<ILocalizationReloadable> reloadables = new ArrayList<>();
+
+    ModLocalization(String path, MinecraftLanguage defaultLanguage, DefaultModLocale defaultLocale) {
         this.path = path;
         this.defaultLanguage = defaultLanguage;
+        this.defaultLocale = defaultLocale;
 
         RequisiteAPI.retrieveInstance().getBridge().getMinecraftBridge().registerReloadListener(this);
 
         sync();
     }
 
-    public String translate(String parent, String key, String... replacements) {
-        if (currentContent == null) {
+    public String translate(String category, String key, String... replacements) {
+        if (locale == null) {
             return "Translations unavailable.";
         }
 
-        if (parent != null && !currentContent.hasKey(parent)) {
+        if (category != null && !locale.hasCategory(category)) {
             return "Translation not found.";
         }
 
-        String translation = parent == null ? currentContent.getAsString(key) : currentContent.getAsObject(parent).getAsString(key);
-        System.out.println(currentContent);
+        String translation = category == null ? locale.get(key) : locale.get(category, key);
         if (translation == null) {
             return "Translation not found.";
         }
@@ -107,8 +109,17 @@ public class ModLocalization implements IResourceReloadBridge {
         this.defaultLanguage = defaultLanguage;
     }
 
-    public JsonObject getCurrentLanguage() {
-        return currentContent.copy();
+    public boolean hasDefaultLocale() {
+        return defaultLocale != null;
+    }
+
+    public ModLocalization setDefaultLocale(DefaultModLocale defaultLocale) {
+        this.defaultLocale = defaultLocale;
+        return this;
+    }
+
+    public ModLocale getLocale() {
+        return locale;
     }
 
     public void sync() {
@@ -121,13 +132,16 @@ public class ModLocalization implements IResourceReloadBridge {
             path = path.startsWith("/") ? path : "/" + path;
             path = path.endsWith("/") ? path : path + "/";
             InputStream resource = getClass().getResourceAsStream(path + languageCode.getLanguageCode() + ".json");
-            if (resource == null && fails > 1) {
-                throw new IllegalStateException("Language file resource is null...");
+            if (resource == null) {
+                if (hasDefaultLocale()) {
+                    locale = defaultLocale.build();
+                    return;
+                }
             }
 
             JsonElement element = JsonParser.parse(IO.toString(resource));
             if (element.isJsonObject()) {
-                currentContent = element.getAsJsonObject();
+                locale = new ModLocale(element.getAsJsonObject());
 
                 for (ILocalizationReloadable reloadable : reloadables) {
                     reloadable.reloadLocalization(this);
@@ -138,10 +152,6 @@ public class ModLocalization implements IResourceReloadBridge {
                 throw new UnsupportedOperationException("Requisite language files' content MUST be a JSON object.");
             }
         } catch (Exception e) {
-            if (e instanceof IllegalStateException) {
-                throw new RuntimeException(e);
-            }
-
             fails++;
 
             RequisiteAPI requisite = RequisiteAPI.retrieveInstance();

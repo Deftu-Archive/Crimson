@@ -29,6 +29,7 @@ import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import xyz.qalcyo.eventbus.SubscriberDepth;
 import xyz.qalcyo.requisite.Requisite;
 import xyz.qalcyo.requisite.core.events.initialization.InitializationEvent;
 import xyz.qalcyo.requisite.core.events.initialization.PostInitializationEvent;
@@ -47,7 +48,7 @@ public class MinecraftMixin {
 
     @Inject(method = "startGame", at = @At("HEAD"))
     private void onGameStarted_pre(CallbackInfo ci) {
-        Requisite.getInstance().getEventBus().register(InitializationEvent.class, Requisite.getInstance()::finish);
+        Requisite.getInstance().getEventBus().register(Requisite.getInstance(), SubscriberDepth.SUPER);
         gameProfile = session.getProfile();
         Requisite.getInstance().getEventBus().post(new PreInitializationEvent(gameProfile, mcDataDir));
     }

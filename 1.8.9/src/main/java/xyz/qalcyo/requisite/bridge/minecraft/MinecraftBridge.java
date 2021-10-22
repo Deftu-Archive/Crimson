@@ -69,9 +69,7 @@ public class MinecraftBridge implements IMinecraftBridge {
         IResourceManager resourceManager = Minecraft.getMinecraft().getResourceManager();
         if (resourceManager instanceof IReloadableResourceManager) {
             IReloadableResourceManager reloadableResourceManager = (IReloadableResourceManager) resourceManager;
-            reloadableResourceManager.registerReloadListener(self -> {
-                reloadBridge.reloadResources();
-            });
+            reloadableResourceManager.registerReloadListener(new MinecraftReloadListener(reloadBridge));
         }
     }
 

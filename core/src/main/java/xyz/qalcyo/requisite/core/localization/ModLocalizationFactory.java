@@ -19,15 +19,23 @@
 package xyz.qalcyo.requisite.core.localization;
 
 public class ModLocalizationFactory {
-    public ModLocalization createLocalization(String path, MinecraftLanguage defaultLanguage) {
-        return new ModLocalization(path, defaultLanguage);
+    public ModLocalization createLocalization(String path, MinecraftLanguage defaultLanguage, DefaultModLocale defaultLocale) {
+        return new ModLocalization(path, defaultLanguage, defaultLocale);
+    }
+
+    public ModLocalization createLocalization(String path, DefaultModLocale defaultLocale) {
+        return createLocalization(path, MinecraftLanguage.AMERICAN_ENGLISH, defaultLocale);
     }
 
     public ModLocalization createLocalization(String path, String defaultLanguage) {
-        return createLocalization(path, MinecraftLanguage.fromLanguageCode(defaultLanguage));
+        return createLocalization(path, MinecraftLanguage.fromLanguageCode(defaultLanguage), null);
+    }
+
+    public ModLocalization createLocalization(String path, String defaultLanguage, DefaultModLocale defaultLocale) {
+        return createLocalization(path, MinecraftLanguage.fromLanguageCode(defaultLanguage), defaultLocale);
     }
 
     public ModLocalization createLocalization(String path) {
-        return createLocalization(path, MinecraftLanguage.AMERICAN_ENGLISH);
+        return createLocalization(path, MinecraftLanguage.AMERICAN_ENGLISH, null);
     }
 }

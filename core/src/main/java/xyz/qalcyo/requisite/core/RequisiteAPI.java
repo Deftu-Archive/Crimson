@@ -32,6 +32,7 @@ import xyz.qalcyo.requisite.core.integration.mods.IMod;
 import xyz.qalcyo.requisite.core.integration.mods.IModConfigurationMenu;
 import xyz.qalcyo.requisite.core.keybinds.KeyBindRegistry;
 import xyz.qalcyo.requisite.core.integration.mods.ModMetadata;
+import xyz.qalcyo.requisite.core.localization.DefaultModLocale;
 import xyz.qalcyo.requisite.core.localization.ModLocalization;
 import xyz.qalcyo.requisite.core.localization.ModLocalizationFactory;
 import xyz.qalcyo.requisite.core.util.*;
@@ -382,6 +383,21 @@ public interface RequisiteAPI extends IMod {
         String uri = getJavaArguments().getSocketUri() == null ? JsonApiHelper.getJsonObject(getJavaArguments().getMetaUrl()).getAsString("socket") : getJavaArguments().isSocketDebug() ? "ws://localhost:8080/" : getJavaArguments().getSocketUri();
         uri = uri.replace("{version}", "v" + RequisiteConstants.SOCKET_VERSION);
         return URI.create(uri);
+    }
+
+    /**
+     * @return Requisite localization class instance.
+     */
+    default ModLocalization initializeLocalization() {
+        return getModLocalizationFactory().createLocalization(
+                name(),
+                new DefaultModLocale()
+                        .add("credits", "libraries", "Libraries ({})")
+                        .add("credits", "code", "Code ({})")
+
+                        .add("ui", "close", "Close")
+                        .add("ui", "cosmetics", "Cosmetics")
+        );
     }
 
     /**

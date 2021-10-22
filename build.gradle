@@ -20,6 +20,7 @@ plugins {
     id "com.github.johnrengelman.shadow" version "6.1.0"
     id "com.github.gmazzo.buildconfig" version "3.0.1"
     id "org.jetbrains.kotlin.jvm" version "1.5.30"
+    id "maven-publish"
     id "java"
 }
 
@@ -29,6 +30,7 @@ allprojects {
     apply plugin: "com.github.johnrengelman.shadow"
     apply plugin: "com.github.gmazzo.buildconfig"
     apply plugin: "org.jetbrains.kotlin.jvm"
+    apply plugin: "maven-publish"
     apply plugin: "java"
 
     group = project_group
@@ -96,6 +98,22 @@ allprojects {
         exclude('**/*.kotlin_builtins')
     }
 
+    publishing {
+        publications {
+            mavenJava(MavenPublication) {
+                artifactId = "${project_name}-${project.name}"
+
+                artifact(shadowJar) {
+                    builtBy shadowJar
+                }
+
+                pom {
+                    name = "${project_name}-${project.name}"
+                }
+            }
+        }
+    }
+
     jar.finalizedBy(shadowJar)
 }
 
@@ -104,5 +122,11 @@ configure(subprojects.findAll { it.name != "core" }) {
     shadowJar {
         archiveBaseName.set(project_name)
         archiveVersion.set(project_version)
+    }
+}
+
+configure(subprojects.findAll { it.name != "Requisite" }) {
+    jar {
+        archiveName("${project_name}-${project.name}")
     }
 }

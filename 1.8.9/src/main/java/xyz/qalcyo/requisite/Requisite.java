@@ -98,7 +98,8 @@ public class Requisite implements RequisiteAPI {
         keyBindRegistry = new KeyBindRegistry(this);
         componentFactory = new ComponentFactory();
         (bridge = new Bridge()).start();
-        requisiteLocalization = getModLocalizationFactory().createLocalization(name());
+        requisiteLocalization = initializeLocalization();
+        System.out.println(requisiteLocalization.getLocale().getContent());
         internalEventManager = new RequisiteEventManager();
         internalEventListener = new RequisiteEventListener(this);
 

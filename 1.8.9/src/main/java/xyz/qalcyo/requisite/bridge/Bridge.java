@@ -38,15 +38,15 @@ public class Bridge implements IBridge {
         minecraftBridge = new MinecraftBridge();
     }
 
-    public ICommandBridge getCommandBridge() {
+    public CommandBridge getCommandBridge() {
         return commandBridge;
     }
 
-    public ISocketBridge getSocketBridge() {
+    public SocketBridge getSocketBridge() {
         return socketBridge;
     }
 
-    public IMinecraftBridge getMinecraftBridge() {
+    public MinecraftBridge getMinecraftBridge() {
         return minecraftBridge;
     }
 

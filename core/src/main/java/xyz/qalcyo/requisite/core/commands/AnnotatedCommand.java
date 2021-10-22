@@ -53,6 +53,7 @@ class AnnotatedCommand implements ICommand {
     public void execute(List<String> args) throws CommandException {
         try {
             for (Method processor : processors) {
+                processor.setAccessible(true);
                 if (processor.getParameterCount() > 0 && processor.getParameterTypes()[0].isAssignableFrom(List.class)) {
                     processor.invoke(instance, args);
                 } else {
@@ -62,6 +63,7 @@ class AnnotatedCommand implements ICommand {
 
             if (args.isEmpty()) {
                 for (Method defaultExecutor : defaultExecutors) {
+                    defaultExecutor.setAccessible(true);
                     if (defaultExecutor.getParameterCount() > 0 && defaultExecutor.getParameterTypes()[0].isAssignableFrom(List.class)) {
                         defaultExecutor.invoke(instance, args);
                     } else {
@@ -73,6 +75,7 @@ class AnnotatedCommand implements ICommand {
                     Method method = argument.first();
                     Command.Argument arg = argument.second();
 
+                    method.setAccessible(true);
                     if (args.size() >= arg.index()) {
                         String name = args.get(arg.index());
                         List<String> argAliases = Arrays.asList(arg.aliases());
