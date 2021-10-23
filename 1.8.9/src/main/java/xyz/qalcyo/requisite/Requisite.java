@@ -34,6 +34,7 @@ import xyz.qalcyo.requisite.core.keybinds.KeyBindRegistry;
 import xyz.qalcyo.requisite.core.keybinds.KeyBinds;
 import xyz.qalcyo.requisite.core.localization.ModLocalization;
 import xyz.qalcyo.requisite.core.networking.RequisiteClientSocket;
+import xyz.qalcyo.requisite.core.util.ISupportHelper;
 import xyz.qalcyo.requisite.cosmetics.CosmeticManager;
 import xyz.qalcyo.requisite.gui.factory.ComponentFactory;
 import xyz.qalcyo.requisite.gui.screens.RequisiteMenu;
@@ -76,6 +77,7 @@ public class Requisite implements RequisiteAPI {
     private EnhancedFontRenderer enhancedFontRenderer;
     private GuiHelper guiHelper;
     private ChatHelper chatHelper;
+    private SupportHelper supportHelper;
     private MouseHelper mouseHelper;
     private PositionHelper positionHelper;
     private RenderHelper renderHelper;
@@ -99,7 +101,6 @@ public class Requisite implements RequisiteAPI {
         componentFactory = new ComponentFactory();
         (bridge = new Bridge()).start();
         requisiteLocalization = initializeLocalization();
-        System.out.println(requisiteLocalization.getLocale().getContent());
         internalEventManager = new RequisiteEventManager();
         internalEventListener = new RequisiteEventListener(this);
 
@@ -110,6 +111,7 @@ public class Requisite implements RequisiteAPI {
             enhancedFontRenderer = new EnhancedFontRenderer();
             guiHelper = new GuiHelper();
             chatHelper = new ChatHelper();
+            supportHelper = new SupportHelper();
             mouseHelper = new MouseHelper();
             positionHelper = new PositionHelper();
             renderHelper = new RenderHelper();
@@ -195,6 +197,10 @@ public class Requisite implements RequisiteAPI {
 
     public ChatHelper getChatHelper() {
         return chatHelper;
+    }
+
+    public SupportHelper getSupportHelper() {
+        return supportHelper;
     }
 
     public MouseHelper getMouseHelper() {

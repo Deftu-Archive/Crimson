@@ -34,6 +34,7 @@ import xyz.qalcyo.requisite.core.events.SendChatMessageEvent;
 import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 public class CommandRegistry {
 
@@ -165,7 +166,7 @@ public class CommandRegistry {
                     }
                 } else {
                     for (int i = 0; i < options.size(); i++) {
-                        options.set(i, ChatColour.RED + "/" + options.get(i) + ChatColour.RESET);
+                        options.set(i, ChatColour.GRAY + options.get(i) + ChatColour.RESET);
                     }
                 }
 
@@ -195,7 +196,7 @@ public class CommandRegistry {
             }
             return list;
         } else {
-            return null;
+            return commands.stream().filter(self -> self.data().getName().equalsIgnoreCase(first)).findFirst().map(self -> self.data().getTabCompletions()).orElse(null);
         }
     }
 

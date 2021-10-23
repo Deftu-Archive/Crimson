@@ -33,9 +33,14 @@ public class RequisiteCommand {
         this.requisite = requisite;
     }
 
-    @Command.Process
-    public void execute() {
+    @Command.Default
+    private void execute() {
         requisite.openMenu();
+    }
+
+    @Command.Argument(name = "gameinfo")
+    private void gameInfo() {
+        requisite.getSupportHelper().copyGameInfo();
     }
 
 }

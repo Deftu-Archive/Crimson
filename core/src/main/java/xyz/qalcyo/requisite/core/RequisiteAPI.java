@@ -250,6 +250,12 @@ public interface RequisiteAPI extends IMod {
      */
     IChatHelper getChatHelper();
     /**
+     * Provides an instance of Requisite's support utility. This allows mods to access support features easily.
+     *
+     * @return Requisite's support utility.
+     */
+    ISupportHelper getSupportHelper();
+    /**
      * Provides an instance of Requisite's colour utility, adding more colour to your mod.
      *
      * @return Requisite's colour utility.
