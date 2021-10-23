@@ -23,18 +23,22 @@ import xyz.qalcyo.requisite.bridge.requisite.CommandBridge;
 import xyz.qalcyo.requisite.core.bridge.IBridge;
 import xyz.qalcyo.requisite.core.bridge.minecraft.IMinecraftBridge;
 import xyz.qalcyo.requisite.core.bridge.requisite.ICommandBridge;
+import xyz.qalcyo.requisite.core.bridge.requisite.IRenderingBridge;
 import xyz.qalcyo.requisite.core.bridge.requisite.ISocketBridge;
 import xyz.qalcyo.requisite.bridge.requisite.SocketBridge;
+import xyz.qalcyo.requisite.core.bridge.requisite.RenderingBridge;
 
 public class Bridge implements IBridge {
 
     private CommandBridge commandBridge;
     private SocketBridge socketBridge;
+    private RenderingBridge renderingBridge;
     private MinecraftBridge minecraftBridge;
 
     public void initialize() {
         commandBridge = new CommandBridge();
         socketBridge = new SocketBridge();
+        renderingBridge = new RenderingBridge();
         minecraftBridge = new MinecraftBridge();
     }
 
@@ -44,6 +48,10 @@ public class Bridge implements IBridge {
 
     public SocketBridge getSocketBridge() {
         return socketBridge;
+    }
+
+    public IRenderingBridge getRenderingBridge() {
+        return renderingBridge;
     }
 
     public MinecraftBridge getMinecraftBridge() {

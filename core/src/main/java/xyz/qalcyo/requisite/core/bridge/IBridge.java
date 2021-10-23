@@ -20,6 +20,7 @@ package xyz.qalcyo.requisite.core.bridge;
 
 import xyz.qalcyo.requisite.core.bridge.minecraft.IMinecraftBridge;
 import xyz.qalcyo.requisite.core.bridge.requisite.ICommandBridge;
+import xyz.qalcyo.requisite.core.bridge.requisite.IRenderingBridge;
 import xyz.qalcyo.requisite.core.bridge.requisite.ISocketBridge;
 
 public interface IBridge extends IBridgeContainer {
@@ -38,6 +39,7 @@ public interface IBridge extends IBridgeContainer {
     /* Requisite */
     ICommandBridge getCommandBridge();
     ISocketBridge getSocketBridge();
+    IRenderingBridge getRenderingBridge();
 
     /* Minecraft */
     IMinecraftBridge getMinecraftBridge();
