@@ -35,7 +35,7 @@ public class RequisiteCommand {
 
     @Command.Default
     private void execute() {
-        requisite.openMenu();
+        requisite.openRequisiteMenu();
     }
 
     @Command.Argument(name = "gameinfo")

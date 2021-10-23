@@ -62,30 +62,4 @@ public class KeyBinds {
         return from(name, category, key, () -> RequisiteAPI.retrieveInstance().getGuiHelper().forceOpen(menu));
     }
 
-    /**
-     * Updates the translated category name of a keybind.
-     *
-     * @param keyBind The keybind to update.
-     * @param localization The localization to get from.
-     * @param parent The parent of the key.
-     * @param key The key of the translation.
-     * @return The original keybind.
-     */
-    public static KeyBind updateTranslatedCategory(KeyBind keyBind, ModLocalization localization, String parent, String key) {
-        keyBind.setTranslatedCategory(localization, parent, key);
-        return keyBind;
-    }
-
-    /**
-     * Updates the translated category name of a keybind.
-     *
-     * @param keyBind The keybind to update.
-     * @param localization The localization to get from.
-     * @param key The key of the translation.
-     * @return The original keybind.
-     */
-    public static KeyBind updateTranslatedCategory(KeyBind keyBind, ModLocalization localization, String key) {
-        return updateTranslatedCategory(keyBind, localization, null, key);
-    }
-
 }

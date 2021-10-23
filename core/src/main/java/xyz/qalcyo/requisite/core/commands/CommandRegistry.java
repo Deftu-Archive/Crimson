@@ -18,6 +18,8 @@
 
 package xyz.qalcyo.requisite.core.commands;
 
+import xyz.qalcyo.eventbus.EventPriority;
+import xyz.qalcyo.eventbus.SubscribeEvent;
 import xyz.qalcyo.mango.Lists;
 import xyz.qalcyo.mango.Objects;
 import xyz.qalcyo.mango.collections.Pair;
@@ -34,7 +36,6 @@ import xyz.qalcyo.requisite.core.events.SendChatMessageEvent;
 import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
 
 public class CommandRegistry {
 
@@ -47,7 +48,7 @@ public class CommandRegistry {
         this.requisite = RequisiteAPI.retrieveInstance();
         this.commands = Lists.newArrayList();
 
-        requisite.getEventBus().register(SendChatMessageEvent.class, this::onChatMessageSent);
+        requisite.getEventBus().register(this);
 
         register(new RequisiteCommand(requisite));
         register(new RequisiteTestCommand(requisite));
@@ -208,6 +209,7 @@ public class CommandRegistry {
         return cachedAutoCompletion;
     }
 
+    @SubscribeEvent(priority = EventPriority.HIGH)
     private void onChatMessageSent(SendChatMessageEvent event) {
         if (execute(event.message) == -1) {
             event.cancel();

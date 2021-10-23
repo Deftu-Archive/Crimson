@@ -37,6 +37,7 @@ import xyz.qalcyo.requisite.core.networking.RequisiteClientSocket;
 import xyz.qalcyo.requisite.core.util.ISupportHelper;
 import xyz.qalcyo.requisite.cosmetics.CosmeticManager;
 import xyz.qalcyo.requisite.gui.factory.ComponentFactory;
+import xyz.qalcyo.requisite.gui.screens.CreditsMenu;
 import xyz.qalcyo.requisite.gui.screens.RequisiteMenu;
 import xyz.qalcyo.requisite.gui.screens.TestMenu;
 import xyz.qalcyo.requisite.integration.mods.ModIntegration;
@@ -179,12 +180,12 @@ public class Requisite implements RequisiteAPI {
         return cosmeticManager;
     }
 
-    public void openMenu() {
-        guiHelper.open(createMainMenu());
+    public void openRequisiteMenu() {
+        guiHelper.open(new RequisiteMenu());
     }
 
-    public RequisiteMenu createMainMenu() {
-        return new RequisiteMenu();
+    public void openCreditsMenu() {
+        guiHelper.open(new CreditsMenu());
     }
 
     public EnhancedFontRenderer getEnhancedFontRenderer() {

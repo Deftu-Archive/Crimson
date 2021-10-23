@@ -16,16 +16,24 @@
  * along with Requisite. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package xyz.qalcyo.requisite.gui.screens
+package xyz.qalcyo.requisite.core.gui.main
 
-import gg.essential.elementa.WindowScreen
+import gg.essential.elementa.components.UIContainer
+import gg.essential.elementa.constraints.RelativeConstraint
+import gg.essential.elementa.dsl.constrain
+import xyz.qalcyo.requisite.core.RequisiteAPI
+import java.awt.image.BufferedImage
+import javax.imageio.ImageIO
 
-class KeyBindsMenu : WindowScreen(
-    restoreCurrentGuiOnClose = true
-) {
+abstract class RequisiteMenuPage(
+    val title: String,
+    val icon: BufferedImage
+) : UIContainer() {
+    abstract fun initialize()
 
-    init {
-
+    fun reset() {
+        clearChildren()
     }
-
 }
+
+fun imageFromString(path: String) = ImageIO.read(RequisiteAPI::class.java.getResourceAsStream(path))

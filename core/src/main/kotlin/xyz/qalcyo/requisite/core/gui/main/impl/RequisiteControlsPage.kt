@@ -16,18 +16,19 @@
  * along with Requisite. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package xyz.qalcyo.requisite.gui.screens
+package xyz.qalcyo.requisite.core.gui.main.impl
 
-import gg.essential.elementa.WindowScreen
+import gg.essential.elementa.components.UIText
+import gg.essential.elementa.constraints.CenterConstraint
+import gg.essential.elementa.dsl.*
+import xyz.qalcyo.requisite.core.gui.main.RequisiteMenuPage
+import xyz.qalcyo.requisite.core.gui.main.*
 
-/**
- * Cosmetic studio for handling Requisite cosmetics.
- */
-class CosmeticMenu : WindowScreen(
-    restoreCurrentGuiOnClose = true
-) {
-
-    init {
+class RequisiteControlsPage : RequisiteMenuPage("Controls", imageFromString("/gui/controls.png")) {
+    override fun initialize() {
+        val text = UIText("Test").constrain {
+            x = CenterConstraint()
+            y = CenterConstraint()
+        } childOf this
     }
-
 }

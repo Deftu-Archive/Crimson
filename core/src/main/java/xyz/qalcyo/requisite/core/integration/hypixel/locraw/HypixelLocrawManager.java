@@ -18,6 +18,8 @@
 
 package xyz.qalcyo.requisite.core.integration.hypixel.locraw;
 
+import xyz.qalcyo.eventbus.EventPriority;
+import xyz.qalcyo.eventbus.SubscribeEvent;
 import xyz.qalcyo.json.entities.JsonElement;
 import xyz.qalcyo.json.entities.JsonObject;
 import xyz.qalcyo.json.parser.JsonParser;
@@ -42,8 +44,7 @@ public class HypixelLocrawManager {
     public HypixelLocrawManager(HypixelHelper hypixelManager) {
         this.requisite = RequisiteAPI.retrieveInstance();
         this.hypixelManager = hypixelManager;
-        requisite.getEventBus().register(WorldLoadEvent.class, this::onWorldLoad);
-        requisite.getEventBus().register(ChatMessageReceivedEvent.class, this::onChatMessageReceived);
+        requisite.getEventBus().register(this);
     }
 
     protected void onWorldLoad(WorldLoadEvent event) {
@@ -55,7 +56,8 @@ public class HypixelLocrawManager {
         }
     }
 
-    protected void onChatMessageReceived(ChatMessageReceivedEvent event) {
+    @SubscribeEvent(priority = EventPriority.HIGH)
+    private void onChatMessageReceived(ChatMessageReceivedEvent event) {
         String stripped = requisite.getStringHelper().removeFormattingCodes(event.message);
         if (JsonHelper.isValidJson(stripped)) {
             JsonElement parsed = JsonParser.parse(stripped);

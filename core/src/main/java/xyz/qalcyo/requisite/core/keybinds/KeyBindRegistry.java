@@ -18,9 +18,13 @@
 
 package xyz.qalcyo.requisite.core.keybinds;
 
+import org.lwjgl.input.Keyboard;
+import xyz.qalcyo.eventbus.EventPriority;
+import xyz.qalcyo.eventbus.SubscribeEvent;
 import xyz.qalcyo.mango.Lists;
 import xyz.qalcyo.requisite.core.RequisiteAPI;
 import xyz.qalcyo.requisite.core.events.KeyInputEvent;
+import xyz.qalcyo.requisite.core.events.RenderTickEvent;
 
 import java.util.List;
 
@@ -40,7 +44,7 @@ public class KeyBindRegistry {
         requisite.getConfigurationManager().addConfigurable(this.configurations = new KeyBindConfigurations());
         this.keyBinds = Lists.newArrayList();
 
-        requisite.getEventBus().register(KeyInputEvent.class, this::onKeyInput);
+        requisite.getEventBus().register(this);
     }
 
     /**
@@ -78,6 +82,7 @@ public class KeyBindRegistry {
      *
      * @param event The event called on key input.
      */
+    @SubscribeEvent(priority = EventPriority.LOW)
     private void onKeyInput(KeyInputEvent event) {
         if (!requisite.getGuiHelper().isGuiPresent()) {
             for (KeyBind keyBind : keyBinds) {

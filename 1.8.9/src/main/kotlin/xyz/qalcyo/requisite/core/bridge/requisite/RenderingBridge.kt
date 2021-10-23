@@ -5,10 +5,12 @@ import net.minecraft.client.renderer.vertex.DefaultVertexFormats
 import xyz.qalcyo.requisite.core.util.VertexFormats
 
 class RenderingBridge : IRenderingBridge {
+
     val tessellator by lazy { Tessellator.getInstance() }
     val renderer by lazy { tessellator.worldRenderer }
 
-    override fun initialize() {}
+    override fun initialize() {
+    }
 
     override fun draw() = tessellator.draw()
 

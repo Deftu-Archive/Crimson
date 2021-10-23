@@ -54,6 +54,11 @@ class Button(
     } childOf content
 
     init {
+        constrain {
+            width = DEFAULT_WIDTH_PIXELS
+            height = DEFAULT_HEIGHT_PIXELS
+        }
+
         if (!builder.toggled) animateTextColour(DISABLED_COLOUR)
         onMouseEnter {
             border.animate {

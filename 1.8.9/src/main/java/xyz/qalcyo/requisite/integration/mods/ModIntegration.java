@@ -18,7 +18,6 @@
 
 package xyz.qalcyo.requisite.integration.mods;
 
-import xyz.qalcyo.requisite.core.RequisiteAPI;
 import xyz.qalcyo.requisite.core.integration.mods.IMod;
 import xyz.qalcyo.requisite.core.integration.mods.IModIntegration;
 

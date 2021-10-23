@@ -21,6 +21,7 @@ package xyz.qalcyo.requisite.core;
 import com.besaba.revonline.pastebinapi.impl.factory.PastebinFactory;
 import okhttp3.OkHttpClient;
 import org.apache.logging.log4j.Logger;
+import xyz.qalcyo.eventbus.EventPriority;
 import xyz.qalcyo.eventbus.QalcyoEventBus;
 import xyz.qalcyo.eventbus.SubscribeEvent;
 import xyz.qalcyo.mango.Strings;
@@ -63,7 +64,7 @@ public interface RequisiteAPI extends IMod {
      *
      * @param event The game initialization event.
      */
-    @SubscribeEvent
+    @SubscribeEvent(priority = EventPriority.HIGHEST)
     default void finish(InitializationEvent event) {
         initialize(event);
         getConfigurationManager().addConfigurable(getPrivacyConfigurations());
@@ -215,13 +216,11 @@ public interface RequisiteAPI extends IMod {
     /**
      * Opens Requisite's main menu, providing access to most Requisite configurations and services.
      */
-    void openMenu();
+    void openRequisiteMenu();
     /**
-     * Creates an instance of Requisite's main menu.
-     *
-     * @return Requisite's main menu.
+     * Opens Requisite's credits menu, providing access to all of Requisite's contributors and libraries.
      */
-    IModConfigurationMenu createMainMenu();
+    void openCreditsMenu();
 
     /**
      * Provides an instance of Requisite's mod utility.
