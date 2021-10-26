@@ -18,6 +18,7 @@
 
 package xyz.qalcyo.requisite.core.integration.hypixel.locraw;
 
+import org.apache.logging.log4j.Logger;
 import xyz.qalcyo.eventbus.EventPriority;
 import xyz.qalcyo.eventbus.SubscribeEvent;
 import xyz.qalcyo.json.entities.JsonElement;
@@ -38,6 +39,8 @@ public class HypixelLocrawManager {
 
     private final RequisiteAPI requisite;
     private final HypixelHelper hypixelHelper;
+    private final Logger logger;
+
     private int tickTicker = 0;
 
     private HypixelLocraw locraw;
@@ -49,6 +52,7 @@ public class HypixelLocrawManager {
     public HypixelLocrawManager(HypixelHelper hypixelHelper) {
         this.requisite = RequisiteAPI.retrieveInstance();
         this.hypixelHelper = hypixelHelper;
+        this.logger = requisite.getUniversalLogger().create();
         requisite.getEventBus().register(this);
     }
 
@@ -107,7 +111,7 @@ public class HypixelLocrawManager {
         if (!allowCancel) {
             allowCancel = true;
             Multithreading.schedule(() -> {
-                requisite.getUniversalLogger().info("Sending locraw command to Hypixel.");
+                logger.debug("Sending locraw command to Hypixel.");
                 requisite.getMessageQueue().queue("/locraw");
             }, interval, TimeUnit.MILLISECONDS);
         }
@@ -115,8 +119,6 @@ public class HypixelLocrawManager {
 
     private void forceUpdate(HypixelLocraw locraw) {
         this.locraw = locraw;
-        System.out.println("iosadusdjok;jl gkjsdrohngppnkdfnpkgdhip.rtebyhk;lerijptg");
-        System.out.println(locraw.toString());
         requisite.getEventBus().post(new LocrawReceivedEvent(locraw));
         allowCancel = false;
     }
