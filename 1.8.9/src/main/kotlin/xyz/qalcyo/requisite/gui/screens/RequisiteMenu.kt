@@ -122,12 +122,6 @@ class RequisiteMenu : WindowScreen(
         page.unhide(true)
         page.reset()
         page.initialize()
-
-        window.onKeyType { typedChar, keyCode ->
-            for (keyTypedListener in page.keyTypedListeners) {
-                keyTypedListener.invoke(page, typedChar, keyCode)
-            }
-        }
     }
 
     override fun setWorldAndResolution(mc: Minecraft?, width: Int, height: Int) {
