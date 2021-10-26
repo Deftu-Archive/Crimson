@@ -62,16 +62,16 @@ class Button(
         }
 
         if (!builder.toggled) {
-            animateTextColour(DISABLED_COLOUR)
-            animateBorder(Color.RED)
+            animateTextColour(DISABLED_TEXT_COLOUR)
+            animateBorder(DISABLED_BORDER_COLOUR)
         }
 
         onMouseEnter {
             hovering = true
-            animateBorder(RequisitePalette.getMain().asColor())
+            animateBorder(if (!builder.toggled) RequisitePalette.getMain().asColor().darker() else RequisitePalette.getMain().asColor())
         }.onMouseLeave {
             hovering = false
-            animateBorder(Color(0, 0, 0, 0))
+            animateBorder(if (!builder.toggled) DISABLED_BORDER_COLOUR else Color(0, 0, 0, 0))
         }.onMouseClick {
             if (builder.toggled) {
                 builder.action.invoke(this@Button)
@@ -82,8 +82,8 @@ class Button(
     fun setText(input: String) = text.setText(input)
     fun setTextColour(colour: Color, animate: Boolean = true) = if (animate) animateTextColour(colour) else text.setColor(colour)
     fun setToggled(toggled: Boolean) {
-        animateTextColour(if (toggled) Color.WHITE else DISABLED_COLOUR)
-        animateBorder(if (toggled) Color.RED else if (hovering) RequisitePalette.getMain().asColor() else Color(0, 0, 0, 0))
+        animateTextColour(if (toggled) Color.WHITE else DISABLED_TEXT_COLOUR)
+        animateBorder(if (!toggled) DISABLED_BORDER_COLOUR else if (hovering) RequisitePalette.getMain().asColor() else Color(0, 0, 0, 0))
         builder.toggled = toggled
     }
 
@@ -107,7 +107,8 @@ class Button(
         val DEFAULT_WIDTH_SMALL = 100
         val DEFAULT_WIDTH_SMALL_PIXELS = DEFAULT_WIDTH_SMALL.pixels()
 
-        val DISABLED_COLOUR = Color(100, 100, 100)
+        val DISABLED_TEXT_COLOUR = Color(100, 100, 100)
+        val DISABLED_BORDER_COLOUR = Color.RED.darker()
     }
 
 }

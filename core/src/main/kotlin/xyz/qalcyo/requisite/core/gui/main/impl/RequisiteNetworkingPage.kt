@@ -21,6 +21,7 @@ package xyz.qalcyo.requisite.core.gui.main.impl
 import gg.essential.elementa.constraints.CenterConstraint
 import gg.essential.elementa.dsl.*
 import xyz.qalcyo.requisite.core.RequisiteAPI
+import xyz.qalcyo.requisite.core.gui.components.Button
 import xyz.qalcyo.requisite.core.gui.components.builders.ButtonBuilder
 import xyz.qalcyo.requisite.core.gui.main.RequisiteMenuPage
 import xyz.qalcyo.requisite.core.gui.main.*
@@ -29,9 +30,13 @@ class RequisiteNetworkingPage : RequisiteMenuPage("Networking", imageFromString(
     override fun initialize() {
         val requisite = RequisiteAPI.retrieveInstance()
         val canRefresh = requisite.requisiteSocket.isRefreshAvailable
-        val refreshButton = ButtonBuilder({ requisite.requisiteSocket.refresh() }, "Refresh", canRefresh).build(requisite.componentFactory).constrain {
+        val refreshButton: Button = (ButtonBuilder({
+            requisite.requisiteSocket.refresh()
+            setToggled(requisite.requisiteSocket.isRefreshAvailable)
+        }, "Refresh").build(requisite.componentFactory).constrain {
             x = CenterConstraint()
             y = CenterConstraint()
-        } childOf this
+        } childOf this) as Button
+        refreshButton.setToggled(canRefresh)
     }
 }

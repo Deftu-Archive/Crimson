@@ -18,6 +18,7 @@
 
 package xyz.qalcyo.requisite.core.gui.main.impl
 
+import gg.essential.elementa.constraints.CenterConstraint
 import gg.essential.elementa.dsl.*
 import xyz.qalcyo.requisite.core.RequisiteAPI
 import xyz.qalcyo.requisite.core.gui.components.InteractableText
@@ -26,12 +27,12 @@ import xyz.qalcyo.requisite.core.gui.main.*
 
 class RequisiteMainPage : RequisiteMenuPage("Requisite", imageFromString("/gui/home.png")) {
     override fun initialize() {
-        println("Main: ${getBottom()}")
-        println("Main ${getRight()}")
         val requisite = RequisiteAPI.retrieveInstance()
-        val creditsText = InteractableText(requisite.name() + " v" + requisite.version(), true, InteractableText.Alignment.RIGHT, { requisite.openCreditsMenu() }).constrain {
-            x = 2.pixels()
-            y = 2.pixels()
-        } childOf this
+        val creditsText = InteractableText("Credits", true, InteractableText.Alignment.CENTER, {
+            requisite.openCreditsMenu()
+        }).constrain {
+            x = CenterConstraint()
+            y = CenterConstraint()
+        }.setTextScale(2.pixels()) childOf this
     }
 }

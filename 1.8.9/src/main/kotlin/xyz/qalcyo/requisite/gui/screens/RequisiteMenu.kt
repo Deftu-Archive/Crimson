@@ -48,8 +48,7 @@ class RequisiteMenu : WindowScreen(
         RequisiteNetworkingPage()
     )
     private var page = pages[0]
-    private val text = UIText(page.title)
-
+    private val title = UIText(page.title)
     private val content = UIContainer()
 
     init {
@@ -74,28 +73,69 @@ class RequisiteMenu : WindowScreen(
             height = RelativeConstraint()
         } childOf window
 
-        content.constrain {
+        val titleContainer = UIContainer().constrain {
             x = SiblingConstraint()
             width = RelativeConstraint()
-            height = RelativeConstraint()
+            height = ChildBasedSizeConstraint() * 2
         } childOf window
+
+        title.constrain {
+            x = CenterConstraint()
+            y = CenterConstraint()
+        }.setTextScale(2.pixels()) childOf titleContainer
+
+        val titleDivider = UIBlock(Color.BLACK).constrain {
+            x = pageListDivider.getRight().pixels()
+            y = titleContainer.getBottom().pixels()
+            width = RelativeConstraint()
+            height = 2.pixels()
+        } childOf window
+
+        content childOf window
+        content.constrain {
+            x = pageListDivider.getRight().pixels()
+            y = titleDivider.getBottom().pixels()
+            width = RelativeConstraint()
+            height = RelativeConstraint()
+        }
+
+        for (page in pages) {
+            page.constrain {
+                width = RelativeConstraint()
+                height = RelativeConstraint()
+            } childOf content
+        }
+    }
+
+    override fun afterInitialization() {
+        page.initialize()
     }
 
     private fun initializePage(page: RequisiteMenuPage) {
         this@RequisiteMenu.page = page
-        println(page)
+        title.setText(page.title)
 
-        content.clearChildren()
-        page.constrain {
-            width = RelativeConstraint()
-            height = RelativeConstraint()
-        } childOf content
+        for (page in pages) {
+            page.hide(true)
+        }
+
+        page.unhide(true)
+        page.reset()
+        page.initialize()
+
+        window.onKeyType { typedChar, keyCode ->
+            for (keyTypedListener in page.keyTypedListeners) {
+                keyTypedListener.invoke(page, typedChar, keyCode)
+            }
+        }
     }
 
     override fun setWorldAndResolution(mc: Minecraft?, width: Int, height: Int) {
         newGuiScale = GuiScale.scaleForScreenSize().ordinal
         super.setWorldAndResolution(mc, width, height)
     }
+
+    override fun doesGuiPauseGame(): Boolean = false
 
     override fun open() = Requisite.getInstance().guiHelper.open(this)
     override fun getMod(): IMod = Requisite.getInstance()

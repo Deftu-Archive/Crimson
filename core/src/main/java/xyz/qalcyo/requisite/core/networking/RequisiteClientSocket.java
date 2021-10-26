@@ -98,11 +98,16 @@ public class RequisiteClientSocket extends WebSocketClient {
      * Refreshes the user's connection to Requisite's websocket.
      */
     public void refresh() {
-        if (lastRefresh < 300000)
+        if (System.currentTimeMillis() - lastRefresh < 300000) {
+            logger.error(String.format("Last websocket refresh was less than 5 minutes ago, not permitting., (%s)", lastRefresh));
             return;
+        }
+
         lastRefresh = System.currentTimeMillis();
+        requisite.getNotifications().push("Requisite WebSocket", ChatColour.RED + "Refreshing connection...");
         close(WebSocketClose.NORMAL);
-        awaitReconnect();
+        boolean status = awaitReconnect();
+        requisite.getNotifications().push("Requisite WebSocket", status ? ChatColour.GREEN + "Successfully refreshed connection." : ChatColour.RED + "Failed to refresh connection.");
     }
 
     /**
@@ -113,6 +118,8 @@ public class RequisiteClientSocket extends WebSocketClient {
     public void onOpen(ServerHandshake handshake) {
         logger.info(String.format("Opened connection with Requisite's server websocket. (code=%s | message=%s)", handshake.getHttpStatus(), handshake.getHttpStatusMessage()));
         send(new GreetingPacket());
+
+        lastRefresh = System.currentTimeMillis();
     }
 
     /**
@@ -284,7 +291,7 @@ public class RequisiteClientSocket extends WebSocketClient {
     }
 
     public boolean isRefreshAvailable() {
-        return lastRefresh > 300000;
+        return System.currentTimeMillis() - lastRefresh > 300000;
     }
 
 }

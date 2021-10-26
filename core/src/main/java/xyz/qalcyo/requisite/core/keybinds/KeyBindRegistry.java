@@ -78,6 +78,15 @@ public class KeyBindRegistry {
     }
 
     /**
+     * Saves a {@link KeyBind} to it's configuration file.
+     *
+     * @param keyBind The {@link KeyBind} to save.
+     */
+    public void save(KeyBind keyBind) {
+        configurations.save(keyBind);
+    }
+
+    /**
      * Parses key input to Requisite's KeyBind API.
      *
      * @param event The event called on key input.
@@ -91,6 +100,10 @@ public class KeyBindRegistry {
                 }
             }
         }
+    }
+
+    public List<KeyBind> getKeyBinds() {
+        return keyBinds;
     }
 
 }

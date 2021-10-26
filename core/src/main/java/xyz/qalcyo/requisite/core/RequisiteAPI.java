@@ -378,6 +378,12 @@ public interface RequisiteAPI extends IMod {
      * @return Requisite's OpenGL utility.
      */
     IGlHelper getGlHelper();
+    /**
+     * Provides an instance of Requisite's keyboard utility.
+     *
+     * @return Requisite's keyboard utility.
+     */
+    IKeyboardHelper getKeyboardHelper();
 
     /**
      * Fetches and provides Requisite's websocket URI.

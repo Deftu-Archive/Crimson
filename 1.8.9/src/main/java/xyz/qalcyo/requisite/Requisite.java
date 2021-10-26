@@ -34,6 +34,7 @@ import xyz.qalcyo.requisite.core.keybinds.KeyBindRegistry;
 import xyz.qalcyo.requisite.core.keybinds.KeyBinds;
 import xyz.qalcyo.requisite.core.localization.ModLocalization;
 import xyz.qalcyo.requisite.core.networking.RequisiteClientSocket;
+import xyz.qalcyo.requisite.core.util.IKeyboardHelper;
 import xyz.qalcyo.requisite.core.util.ISupportHelper;
 import xyz.qalcyo.requisite.cosmetics.CosmeticManager;
 import xyz.qalcyo.requisite.gui.factory.ComponentFactory;
@@ -85,6 +86,7 @@ public class Requisite implements RequisiteAPI {
     private MessageQueue messageQueue;
     private ServerHelper serverHelper;
     private GlHelper glHelper;
+    private KeyboardHelper keyboardHelper;
 
     public void initialize(InitializationEvent event) {
         if (initialized)
@@ -119,6 +121,7 @@ public class Requisite implements RequisiteAPI {
             messageQueue = new MessageQueue(this);
             serverHelper = new ServerHelper();
             glHelper = new GlHelper();
+            keyboardHelper = new KeyboardHelper();
             cosmeticManager.start();
         });
 
@@ -226,6 +229,10 @@ public class Requisite implements RequisiteAPI {
 
     public GlHelper getGlHelper() {
         return glHelper;
+    }
+
+    public KeyboardHelper getKeyboardHelper() {
+        return keyboardHelper;
     }
 
     public static Requisite getInstance() {
