@@ -50,6 +50,8 @@ public class RequisiteClientSocket extends WebSocketClient {
     private UUID sessionId;
     private int failedConnectionCount;
 
+    private long lastRefresh;
+
     public RequisiteClientSocket(RequisiteAPI requisite) {
         super(requisite.retrieveSocketUri(), new Draft_6455());
         this.requisite = requisite;
@@ -90,6 +92,17 @@ public class RequisiteClientSocket extends WebSocketClient {
             e.printStackTrace();
             return false;
         }
+    }
+
+    /**
+     * Refreshes the user's connection to Requisite's websocket.
+     */
+    public void refresh() {
+        if (lastRefresh < 300000)
+            return;
+        lastRefresh = System.currentTimeMillis();
+        close(WebSocketClose.NORMAL);
+        awaitReconnect();
     }
 
     /**
@@ -264,6 +277,14 @@ public class RequisiteClientSocket extends WebSocketClient {
 
     public int getFailedConnectionCount() {
         return failedConnectionCount;
+    }
+
+    public long getLastRefresh() {
+        return lastRefresh;
+    }
+
+    public boolean isRefreshAvailable() {
+        return lastRefresh > 300000;
     }
 
 }

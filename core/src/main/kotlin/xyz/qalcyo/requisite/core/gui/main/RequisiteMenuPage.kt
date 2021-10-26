@@ -19,8 +19,6 @@
 package xyz.qalcyo.requisite.core.gui.main
 
 import gg.essential.elementa.components.UIContainer
-import gg.essential.elementa.constraints.RelativeConstraint
-import gg.essential.elementa.dsl.constrain
 import xyz.qalcyo.requisite.core.RequisiteAPI
 import java.awt.image.BufferedImage
 import javax.imageio.ImageIO

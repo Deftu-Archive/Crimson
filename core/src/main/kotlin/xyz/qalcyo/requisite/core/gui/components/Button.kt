@@ -53,21 +53,25 @@ class Button(
         y = CenterConstraint()
     } childOf content
 
+    private var hovering = false
+
     init {
         constrain {
             width = DEFAULT_WIDTH_PIXELS
             height = DEFAULT_HEIGHT_PIXELS
         }
 
-        if (!builder.toggled) animateTextColour(DISABLED_COLOUR)
+        if (!builder.toggled) {
+            animateTextColour(DISABLED_COLOUR)
+            animateBorder(Color.RED)
+        }
+
         onMouseEnter {
-            border.animate {
-                (border.effects[0] as OutlineEffect)::color.animate(Animations.OUT_EXP, 1f, RequisitePalette.getMain().asColor())
-            }
+            hovering = true
+            animateBorder(RequisitePalette.getMain().asColor())
         }.onMouseLeave {
-            border.animate {
-                (border.effects[0] as OutlineEffect)::color.animate(Animations.OUT_EXP, 1f, Color(0, 0, 0, 0))
-            }
+            hovering = false
+            animateBorder(Color(0, 0, 0, 0))
         }.onMouseClick {
             if (builder.toggled) {
                 builder.action.invoke(this@Button)
@@ -77,7 +81,12 @@ class Button(
 
     fun setText(input: String) = text.setText(input)
     fun setTextColour(colour: Color, animate: Boolean = true) = if (animate) animateTextColour(colour) else text.setColor(colour)
-    fun setToggled(toggled: Boolean) = animateTextColour(if (toggled) Color.WHITE else DISABLED_COLOUR).also { builder.toggled = toggled }
+    fun setToggled(toggled: Boolean) {
+        animateTextColour(if (toggled) Color.WHITE else DISABLED_COLOUR)
+        animateBorder(if (toggled) Color.RED else if (hovering) RequisitePalette.getMain().asColor() else Color(0, 0, 0, 0))
+        builder.toggled = toggled
+    }
+
     fun toggle(): Boolean {
         setToggled(!builder.toggled)
         return builder.toggled
@@ -85,6 +94,9 @@ class Button(
 
     @JvmOverloads fun animateTextColour(colour: Color, time: Float = 1f) = animateTextColour(ConstantColorConstraint(colour), time)
     @JvmOverloads fun animateTextColour(colour: ColorConstraint, time: Float = 1f) = text.animate { setColorAnimation(Animations.OUT_EXP, time, colour) }
+    @JvmOverloads fun animateBorder(colour: Color, time: Float = 1f) = border.animate {
+        (border.effects[0] as OutlineEffect)::color.animate(Animations.OUT_EXP, time, colour)
+    }
 
     companion object {
         val DEFAULT_WIDTH = 200

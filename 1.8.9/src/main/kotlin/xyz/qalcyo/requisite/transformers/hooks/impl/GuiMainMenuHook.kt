@@ -33,7 +33,7 @@ class GuiMainMenuHook(
 ) {
     init {
         val brandingText = InteractableText("${Requisite.getInstance().name()} v${Requisite.getInstance().version()}", true, InteractableText.Alignment.RIGHT, {
-            UScreen.displayScreen(CreditsMenu())
+            Requisite.getInstance().openRequisiteMenu()
         }).constrain {
             x = 2.pixels(true)
             y = 11.pixels(true)

@@ -27,6 +27,7 @@ import xyz.qalcyo.json.util.JsonHelper;
 import xyz.qalcyo.mango.Multithreading;
 import xyz.qalcyo.requisite.core.RequisiteAPI;
 import xyz.qalcyo.requisite.core.events.ChatMessageReceivedEvent;
+import xyz.qalcyo.requisite.core.events.TickEvent;
 import xyz.qalcyo.requisite.core.events.WorldLoadEvent;
 import xyz.qalcyo.requisite.core.integration.hypixel.HypixelHelper;
 import xyz.qalcyo.requisite.core.integration.hypixel.events.LocrawReceivedEvent;
@@ -36,45 +37,68 @@ import java.util.concurrent.TimeUnit;
 public class HypixelLocrawManager {
 
     private final RequisiteAPI requisite;
-    private final HypixelHelper hypixelManager;
+    private final HypixelHelper hypixelHelper;
+    private int tickTicker = 0;
 
     private HypixelLocraw locraw;
+    private boolean checked;
     private boolean allowCancel;
 
-    public HypixelLocrawManager(HypixelHelper hypixelManager) {
+    private int limboLoop;
+
+    public HypixelLocrawManager(HypixelHelper hypixelHelper) {
         this.requisite = RequisiteAPI.retrieveInstance();
-        this.hypixelManager = hypixelManager;
+        this.hypixelHelper = hypixelHelper;
         requisite.getEventBus().register(this);
     }
 
-    protected void onWorldLoad(WorldLoadEvent event) {
-        locraw = null;
-        allowCancel = false;
-
-        if (hypixelManager.isOnHypixel()) {
+    @SubscribeEvent
+    private void onClientTick(TickEvent event) {
+        tickTicker++;
+        if (tickTicker % 20 == 0 && hypixelHelper.isOnHypixel() && !checked) {
             enqueueUpdate(1000);
+            checked = true;
         }
+    }
+
+    @SubscribeEvent
+    private void onWorldLoad(WorldLoadEvent event) {
+        locraw = null;
+        checked = false;
+        allowCancel = false;
     }
 
     @SubscribeEvent(priority = EventPriority.HIGH)
     private void onChatMessageReceived(ChatMessageReceivedEvent event) {
-        String stripped = requisite.getStringHelper().removeFormattingCodes(event.message);
-        if (JsonHelper.isValidJson(stripped)) {
-            JsonElement parsed = JsonParser.parse(stripped);
-            if (parsed.isJsonObject()) {
-                JsonObject object = parsed.getAsJsonObject();
-                if (object.hasKey("server") && object.getAsString("server").contains("limbo")) {
-                    forceUpdate(HypixelLocraw.LIMBO);
+        if (allowCancel) {
+            String stripped = requisite.getStringHelper().removeFormattingCodes(event.message);
+            if (JsonHelper.isValidJson(stripped)) {
+                JsonElement parsed = JsonParser.parse(stripped);
+                if (parsed.isJsonObject()) {
+                    JsonObject object = parsed.getAsJsonObject();
+                    if (object.hasKey("server") && object.getAsString("server").contains("limbo")) {
+                        if (limboLoop > 3) {
+                            forceUpdate(HypixelLocraw.LIMBO);
+                            event.cancel();
+                            return;
+                        }
+
+                        allowCancel = false;
+                        checked = false;
+                        limboLoop++;
+
+                        event.cancel();
+                        return;
+                    }
+
+                    forceUpdate(new HypixelLocraw(
+                            object.get("server"),
+                            object.get("mode"),
+                            object.get("map"),
+                            object.get("gametype")
+                    ));
                     event.cancel();
                 }
-
-                forceUpdate(new HypixelLocraw(
-                        object.get("server"),
-                        object.get("mode"),
-                        object.get("map"),
-                        object.get("gametype")
-                ));
-                event.cancel();
             }
         }
     }
@@ -82,12 +106,17 @@ public class HypixelLocrawManager {
     public void enqueueUpdate(int interval) {
         if (!allowCancel) {
             allowCancel = true;
-            Multithreading.schedule(() -> requisite.getMessageQueue().queue("/locraw"), interval, TimeUnit.MILLISECONDS);
+            Multithreading.schedule(() -> {
+                requisite.getUniversalLogger().info("Sending locraw command to Hypixel.");
+                requisite.getMessageQueue().queue("/locraw");
+            }, interval, TimeUnit.MILLISECONDS);
         }
     }
 
     private void forceUpdate(HypixelLocraw locraw) {
         this.locraw = locraw;
+        System.out.println("iosadusdjok;jl gkjsdrohngppnkdfnpkgdhip.rtebyhk;lerijptg");
+        System.out.println(locraw.toString());
         requisite.getEventBus().post(new LocrawReceivedEvent(locraw));
         allowCancel = false;
     }

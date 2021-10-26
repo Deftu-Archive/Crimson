@@ -70,4 +70,9 @@ public class RequisiteTestCommand {
         requisite.getChatHelper().send("Your session ID is: " + ChatColour.BOLD + requisite.getRequisiteSocket().getSessionId());
     }
 
+    @Command.Argument(name = "5")
+    public void five() {
+        requisite.getChatHelper().send("Locraw: " + ChatColour.BOLD + requisite.getHypixelHelper().getLocrawManager().getLocraw().toString());
+    }
+
 }
