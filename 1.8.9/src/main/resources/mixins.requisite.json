@@ -11,6 +11,7 @@
     "entity.AbstractClientPlayerMixin",
 
     "gui.GuiChatMixin",
+    "gui.GuiControlsMixin",
     "gui.GuiMainMenuMixin",
     "gui.GuiScreenMixin",
 

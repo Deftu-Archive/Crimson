@@ -16,22 +16,12 @@
  * along with Requisite. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package xyz.qalcyo.requisite.core.gui.main
+package xyz.qalcyo.requisite.core.configs;
 
-import gg.essential.elementa.components.UIContainer
-import xyz.qalcyo.requisite.core.RequisiteAPI
-import java.awt.image.BufferedImage
-import javax.imageio.ImageIO
+import xyz.qalcyo.simpleconfig.Configuration;
+import xyz.qalcyo.simpleconfig.Subconfiguration;
 
-abstract class RequisiteMenuPage(
-    val title: String,
-    val icon: BufferedImage
-) : UIContainer() {
-    abstract fun initialize()
-
-    fun reset() {
-        clearChildren()
-    }
+public interface IConfigChild extends IConfigObject {
+    String getName();
+    void initialize(Configuration configuration, Subconfiguration self);
 }
-
-fun imageFromString(path: String) = ImageIO.read(RequisiteAPI::class.java.getResourceAsStream(path))

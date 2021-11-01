@@ -16,15 +16,21 @@
  * along with Requisite. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package xyz.qalcyo.requisite.core.files;
+package xyz.qalcyo.requisite.core.configs;
 
 import xyz.qalcyo.simpleconfig.Configuration;
-import xyz.qalcyo.simpleconfig.Subconfiguration;
 
-public interface IConfigurable {
-    default void initialize(Configuration configuration) {
+import java.util.List;
+
+public interface IConfigObject {
+    Configuration getConfiguration();
+    List<IConfigChild> getChildren();
+    default void addChild(IConfigChild child) {
+        Configuration configuration = getConfiguration();
+        String name = child.getName();
+        if (!configuration.hasKey(name))
+            configuration.createSubconfiguration(name).save();
+        child.initialize(configuration, configuration.getSubconfiguration(name));
+        getChildren().add(child);
     }
-    void save(ConfigurationManager configurationManager);
-    void load(ConfigurationManager configurationManager);
-    Subconfiguration configuration();
 }

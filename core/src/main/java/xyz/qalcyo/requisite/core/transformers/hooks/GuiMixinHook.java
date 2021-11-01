@@ -30,7 +30,7 @@ public abstract class GuiMixinHook<T> extends MixinHook<T> {
     }
 
     public GuiMixinHook(T instance) {
-        this(instance, new Window(144));
+        this(instance, new Window(244));
     }
 
     public void initialize() {

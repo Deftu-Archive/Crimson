@@ -16,9 +16,11 @@
  * along with Requisite. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package xyz.qalcyo.requisite.core.commands;
+package xyz.qalcyo.requisite.core.commands.annotations;
 
 import xyz.qalcyo.mango.collections.Pair;
+import xyz.qalcyo.requisite.core.commands.CommandData;
+import xyz.qalcyo.requisite.core.commands.ICommand;
 import xyz.qalcyo.requisite.core.commands.annotations.Command;
 import xyz.qalcyo.requisite.core.commands.exceptions.CommandException;
 
@@ -26,7 +28,7 @@ import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.List;
 
-class AnnotatedCommand implements ICommand {
+public class AnnotatedCommand implements ICommand {
 
     private final Object instance;
 

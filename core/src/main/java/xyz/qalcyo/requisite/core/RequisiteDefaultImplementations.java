@@ -23,11 +23,9 @@ import okhttp3.OkHttpClient;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import xyz.qalcyo.eventbus.QalcyoEventBus;
-import xyz.qalcyo.requisite.core.files.configs.CosmeticConfigurations;
 import xyz.qalcyo.requisite.core.integration.hypixel.HypixelHelper;
 import xyz.qalcyo.requisite.core.localization.ModLocalizationFactory;
 import xyz.qalcyo.requisite.core.util.*;
-import xyz.qalcyo.requisite.core.files.configs.PrivacyConfigurations;
 
 /**
  * Holds default implmenetations of Requisite classes.
@@ -40,9 +38,6 @@ class RequisiteDefaultImplementations {
     static final ModLocalizationFactory MOD_LOCALIZATION_FACTORY = new ModLocalizationFactory();
     static final OkHttpClient HTTP_CLIENT = new OkHttpClient();
     static final PastebinFactory PASTEBIN_FACTORY = new PastebinFactory();
-
-    static final PrivacyConfigurations PRIVACY_CONFIGURATIONS = new PrivacyConfigurations();
-    static final CosmeticConfigurations COSMETIC_CONFIGURATIONS = new CosmeticConfigurations();
 
     static final ModHelper MOD_HELPER = new ModHelper();
     static final ColourHelper COLOUR_HELPER = new ColourHelper();

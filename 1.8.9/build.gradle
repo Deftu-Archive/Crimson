@@ -43,7 +43,7 @@ dependencies {
         exclude module: 'UniversalCraft'
     }
 
-    shade('gg.essential:elementa-1.8.9-forge:383')
+    shade('gg.essential:elementa-1.8.9-forge:391')
 
     shade('org.spongepowered:mixin:0.7.11-SNAPSHOT')
     annotationProcessor('org.spongepowered:mixin:0.7.11-SNAPSHOT')

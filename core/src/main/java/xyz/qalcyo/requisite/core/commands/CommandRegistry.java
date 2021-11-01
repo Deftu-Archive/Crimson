@@ -25,6 +25,7 @@ import xyz.qalcyo.mango.Objects;
 import xyz.qalcyo.mango.collections.Pair;
 import xyz.qalcyo.mango.collections.impl.ImmutablePair;
 import xyz.qalcyo.requisite.core.RequisiteAPI;
+import xyz.qalcyo.requisite.core.commands.annotations.AnnotatedCommand;
 import xyz.qalcyo.requisite.core.commands.annotations.Command;
 import xyz.qalcyo.requisite.core.commands.exceptions.CommandException;
 import xyz.qalcyo.requisite.core.commands.exceptions.IncorrectUsageException;

@@ -16,52 +16,31 @@
  * along with Requisite. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package xyz.qalcyo.requisite.core.files;
+package xyz.qalcyo.requisite.core.configs.impl;
 
+import xyz.qalcyo.requisite.core.configs.IConfigChild;
+import xyz.qalcyo.requisite.core.configs.IConfigObject;
 import xyz.qalcyo.simpleconfig.Configuration;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ConfigurationManager extends Thread {
+public class RequisiteConfig implements IConfigObject {
 
     private final Configuration configuration;
-    private final List<IConfigurable> configurables;
+    private final List<IConfigChild> children = new ArrayList<>();
 
-    public ConfigurationManager(String name, File path) {
-        this.configuration = new Configuration(name, path);
-        this.configurables = new ArrayList<>();
-    }
-
-    public void update() {
-        for (IConfigurable configurable : configurables) {
-            configurable.initialize(configuration);
-            configurable.load(this);
-            configurable.save(this);
-        }
-    }
-
-    public void save() {
-        configuration.save();
-    }
-
-    public ConfigurationManager addConfigurable(IConfigurable configurable) {
-        this.configurables.add(configurable);
-        configurable.initialize(configuration);
-        configurable.load(this);
-        configurable.save(this);
-        configuration.save();
-
-        return this;
+    public RequisiteConfig(String name, File directory) {
+        this.configuration = new Configuration(name, directory);
     }
 
     public Configuration getConfiguration() {
         return configuration;
     }
 
-    public List<IConfigurable> getConfigurables() {
-        return configurables;
+    public List<IConfigChild> getChildren() {
+        return children;
     }
 
 }

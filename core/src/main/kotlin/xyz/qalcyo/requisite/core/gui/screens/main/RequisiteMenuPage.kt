@@ -16,23 +16,26 @@
  * along with Requisite. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package xyz.qalcyo.requisite.core.gui.main.impl
+package xyz.qalcyo.requisite.core.gui.screens.main
 
-import gg.essential.elementa.constraints.CenterConstraint
-import gg.essential.elementa.dsl.*
+import gg.essential.elementa.components.UIContainer
 import xyz.qalcyo.requisite.core.RequisiteAPI
-import xyz.qalcyo.requisite.core.gui.components.InteractableText
-import xyz.qalcyo.requisite.core.gui.main.RequisiteMenuPage
-import xyz.qalcyo.requisite.core.gui.main.*
+import java.awt.image.BufferedImage
+import javax.imageio.ImageIO
 
-class RequisiteMainPage : RequisiteMenuPage("Requisite", imageFromString("/gui/home.png")) {
-    override fun initialize() {
-        val requisite = RequisiteAPI.retrieveInstance()
-        val creditsText = InteractableText("Credits", true, InteractableText.Alignment.CENTER, {
-            requisite.openCreditsMenu()
-        }).constrain {
-            x = CenterConstraint()
-            y = CenterConstraint()
-        }.setTextScale(2.pixels()) childOf this
+abstract class RequisiteMenuPage(
+    val title: String,
+    val icon: BufferedImage
+) : UIContainer() {
+    abstract fun initialize()
+
+    fun reset() {
+        clearChildren()
+    }
+
+    open fun keyTyped(typedChar: Char, keyCode: Int): Boolean {
+        return false
     }
 }
+
+fun imageFromString(path: String) = ImageIO.read(RequisiteAPI::class.java.getResourceAsStream(path))

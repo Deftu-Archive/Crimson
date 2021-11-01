@@ -26,11 +26,9 @@ import xyz.qalcyo.eventbus.QalcyoEventBus;
 import xyz.qalcyo.eventbus.SubscribeEvent;
 import xyz.qalcyo.mango.Strings;
 import xyz.qalcyo.requisite.core.bridge.IBridge;
+import xyz.qalcyo.requisite.core.configs.ConfigManager;
 import xyz.qalcyo.requisite.core.events.initialization.InitializationEvent;
-import xyz.qalcyo.requisite.core.files.ConfigurationManager;
-import xyz.qalcyo.requisite.core.files.configs.CosmeticConfigurations;
 import xyz.qalcyo.requisite.core.integration.mods.IMod;
-import xyz.qalcyo.requisite.core.integration.mods.IModConfigurationMenu;
 import xyz.qalcyo.requisite.core.keybinds.KeyBindRegistry;
 import xyz.qalcyo.requisite.core.integration.mods.ModMetadata;
 import xyz.qalcyo.requisite.core.localization.DefaultModLocale;
@@ -40,7 +38,6 @@ import xyz.qalcyo.requisite.core.util.*;
 import xyz.qalcyo.requisite.core.util.messages.IMessageQueue;
 import xyz.qalcyo.requisite.core.commands.CommandRegistry;
 import xyz.qalcyo.requisite.core.files.FileManager;
-import xyz.qalcyo.requisite.core.files.configs.PrivacyConfigurations;
 import xyz.qalcyo.requisite.core.integration.hypixel.HypixelHelper;
 import xyz.qalcyo.requisite.core.integration.mods.IModIntegration;
 import xyz.qalcyo.requisite.core.networking.RequisiteClientSocket;
@@ -67,8 +64,6 @@ public interface RequisiteAPI extends IMod {
     @SubscribeEvent(priority = EventPriority.HIGHEST)
     default void finish(InitializationEvent event) {
         initialize(event);
-        getConfigurationManager().addConfigurable(getPrivacyConfigurations());
-        getConfigurationManager().addConfigurable(getCosmeticConfigurations());
         getModIntegration().registerIntegratedMod(this);
     }
 
@@ -104,11 +99,11 @@ public interface RequisiteAPI extends IMod {
      */
     FileManager getFileManager();
     /**
-     * Provides an instance of Requisite's internal configuration manager.
+     * Provides an isntance of Requisite's own configuration manager.
      *
-     * @return Requisite's internal configuration manager.
+     * @return Requisite configuration manager.
      */
-    ConfigurationManager getConfigurationManager();
+    ConfigManager getConfigManager();
     /**
      * Provides an instance of Requisite's notifications service.
      *
@@ -197,30 +192,25 @@ public interface RequisiteAPI extends IMod {
     IEventListener getInternalEventListener();
 
     /**
-     * Provides an instance of Requisite's privacy configurations.
+     * Opens Requisite's main menu, providing access to most Requisite configurations and services.
      *
-     * @return Requisite's privacy configurations.
+     * @param pageIndex The index of the page to be opened initially.
      */
-    default PrivacyConfigurations getPrivacyConfigurations() {
-        return RequisiteDefaultImplementations.PRIVACY_CONFIGURATIONS;
-    }
-    /**
-     * Provides an instance of Requisite's cosmetic configurations.
-     *
-     * @return Requisite's cosmetic configurations.
-     */
-    default CosmeticConfigurations getCosmeticConfigurations() {
-        return RequisiteDefaultImplementations.COSMETIC_CONFIGURATIONS;
-    }
-
+    void openRequisiteMenu(int pageIndex);
     /**
      * Opens Requisite's main menu, providing access to most Requisite configurations and services.
      */
-    void openRequisiteMenu();
+    default void openRequisiteMenu() {
+        openRequisiteMenu(0);
+    }
     /**
      * Opens Requisite's credits menu, providing access to all of Requisite's contributors and libraries.
      */
     void openCreditsMenu();
+    /**
+     * Opens Requisite's changelog menu.
+     */
+    void openChangelogMenu();
 
     /**
      * Provides an instance of Requisite's mod utility.
@@ -416,7 +406,7 @@ public interface RequisiteAPI extends IMod {
      * @return Requisite's prefix for chat messages.
      */
     default String getChatPrefix(String suffix) {
-        return ChatColour.GRAY + "[" + getJavaArguments().getChatPrefixColour() + name() + (Strings.isNullOrEmpty(suffix) ? "" : " " + suffix) + ChatColour.GRAY + "]";
+        return ChatColour.GRAY + ChatColour.BOLD.toString() + "[" + getJavaArguments().getChatPrefixColour() + name() + (Strings.isNullOrEmpty(suffix) ? "" : " " + suffix) + ChatColour.RESET + ChatColour.GRAY + ChatColour.BOLD + "]";
     }
 
     /**

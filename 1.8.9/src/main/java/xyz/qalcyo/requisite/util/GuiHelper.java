@@ -21,7 +21,6 @@ package xyz.qalcyo.requisite.util;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiScreen;
 import xyz.qalcyo.requisite.Requisite;
-import xyz.qalcyo.requisite.core.RequisiteAPI;
 import xyz.qalcyo.requisite.core.events.TickEvent;
 import xyz.qalcyo.requisite.core.util.IGuiHelper;
 

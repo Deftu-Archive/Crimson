@@ -37,6 +37,7 @@ public class RequisiteEventListener implements IEventListener {
         this.requisite = requisite;
         MinecraftForge.EVENT_BUS.register(this);
     }
+    
 
     @SubscribeEvent
     public void onClientChatReceived(ClientChatReceivedEvent event) {

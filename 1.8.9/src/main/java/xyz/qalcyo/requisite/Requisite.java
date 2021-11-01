@@ -26,21 +26,19 @@ import xyz.qalcyo.requisite.core.RequisiteAPI;
 import xyz.qalcyo.requisite.core.RequisiteEventManager;
 import xyz.qalcyo.requisite.core.RequisiteInfo;
 import xyz.qalcyo.requisite.core.commands.CommandRegistry;
+import xyz.qalcyo.requisite.core.configs.ConfigManager;
 import xyz.qalcyo.requisite.core.events.initialization.InitializationEvent;
-import xyz.qalcyo.requisite.core.events.initialization.PostInitializationEvent;
-import xyz.qalcyo.requisite.core.files.ConfigurationManager;
 import xyz.qalcyo.requisite.core.files.FileManager;
 import xyz.qalcyo.requisite.core.keybinds.KeyBindRegistry;
 import xyz.qalcyo.requisite.core.keybinds.KeyBinds;
 import xyz.qalcyo.requisite.core.localization.ModLocalization;
 import xyz.qalcyo.requisite.core.networking.RequisiteClientSocket;
-import xyz.qalcyo.requisite.core.util.IKeyboardHelper;
-import xyz.qalcyo.requisite.core.util.ISupportHelper;
 import xyz.qalcyo.requisite.cosmetics.CosmeticManager;
 import xyz.qalcyo.requisite.gui.factory.ComponentFactory;
+import xyz.qalcyo.requisite.gui.screens.ChangelogMenu;
 import xyz.qalcyo.requisite.gui.screens.CreditsMenu;
-import xyz.qalcyo.requisite.gui.screens.RequisiteMenu;
 import xyz.qalcyo.requisite.gui.screens.TestMenu;
+import xyz.qalcyo.requisite.gui.screens.main.RequisiteMenu;
 import xyz.qalcyo.requisite.integration.mods.ModIntegration;
 import xyz.qalcyo.requisite.networking.packets.cosmetics.CosmeticRetrievePacket;
 import xyz.qalcyo.requisite.notifications.Notifications;
@@ -61,7 +59,7 @@ public class Requisite implements RequisiteAPI {
 
     /* Services. */
     private FileManager fileManager;
-    private ConfigurationManager configurationManager;
+    private ConfigManager configManager;
     private Notifications notifications;
     private RequisiteClientSocket requisiteSocket;
     private ModIntegration modIntegration;
@@ -94,7 +92,7 @@ public class Requisite implements RequisiteAPI {
 
         /* Initialize services. */
         fileManager = new FileManager(this);
-        configurationManager = new ConfigurationManager("config", fileManager.getRequisiteDirectory(fileManager.getQalcyoDirectory(fileManager.getConfigDirectory(event.launchDirectory))));
+        configManager = new ConfigManager(fileManager.getRequisiteDirectory(fileManager.getQalcyoDirectory(fileManager.getConfigDirectory(event.launchDirectory))));
         notifications = new Notifications(this);
         (requisiteSocket = new RequisiteClientSocket(this)).awaitConnect();
         requisiteSocket.register("COSMETIC_RETRIEVE", CosmeticRetrievePacket.class);
@@ -125,6 +123,7 @@ public class Requisite implements RequisiteAPI {
             cosmeticManager.start();
         });
 
+        getKeyBindRegistry().register(KeyBinds.from("Open menu", "Requisite", Keyboard.KEY_HOME, () -> guiHelper.open(new RequisiteMenu())));
         getKeyBindRegistry().register(KeyBinds.from("Test", "Requisite", Keyboard.KEY_I, () -> guiHelper.open(new TestMenu())));
 
         getMetadata().setConfigurationMenu(RequisiteMenu.class);
@@ -135,8 +134,8 @@ public class Requisite implements RequisiteAPI {
         return fileManager;
     }
 
-    public ConfigurationManager getConfigurationManager() {
-        return configurationManager;
+    public ConfigManager getConfigManager() {
+        return configManager;
     }
 
     public Notifications getNotifications() {
@@ -183,12 +182,16 @@ public class Requisite implements RequisiteAPI {
         return cosmeticManager;
     }
 
-    public void openRequisiteMenu() {
-        guiHelper.open(new RequisiteMenu());
+    public void openRequisiteMenu(int pageIndex) {
+        guiHelper.open(new RequisiteMenu(pageIndex));
     }
 
     public void openCreditsMenu() {
         guiHelper.open(new CreditsMenu());
+    }
+
+    public void openChangelogMenu() {
+        guiHelper.open(new ChangelogMenu());
     }
 
     public EnhancedFontRenderer getEnhancedFontRenderer() {

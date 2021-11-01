@@ -16,22 +16,22 @@
  * along with Requisite. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package xyz.qalcyo.requisite.core.gui.main.impl
+package xyz.qalcyo.requisite.core.gui.screens.main.impl
 
+import gg.essential.elementa.components.UIBlock
 import gg.essential.elementa.components.UIContainer
 import gg.essential.elementa.components.UIText
-import gg.essential.elementa.components.Window
-import gg.essential.elementa.components.inspector.Inspector
 import gg.essential.elementa.constraints.CenterConstraint
 import gg.essential.elementa.constraints.ChildBasedSizeConstraint
 import gg.essential.elementa.constraints.RelativeConstraint
 import gg.essential.elementa.constraints.SiblingConstraint
 import gg.essential.elementa.dsl.*
 import xyz.qalcyo.requisite.core.RequisiteAPI
+import xyz.qalcyo.requisite.core.RequisitePalette
 import xyz.qalcyo.requisite.core.gui.components.Button
 import xyz.qalcyo.requisite.core.gui.components.builders.ButtonBuilder
-import xyz.qalcyo.requisite.core.gui.main.RequisiteMenuPage
-import xyz.qalcyo.requisite.core.gui.main.*
+import xyz.qalcyo.requisite.core.gui.screens.main.RequisiteMenuPage
+import xyz.qalcyo.requisite.core.gui.screens.main.*
 import xyz.qalcyo.requisite.core.keybinds.KeyBind
 import java.awt.Color
 
@@ -45,10 +45,14 @@ class RequisiteControlsPage : RequisiteMenuPage("Controls", imageFromString("/gu
         val categories = mutableMapOf<String, Category>()
 
         for (keyBind in requisite.keyBindRegistry.keyBinds) {
-            categories.putIfAbsent(keyBind.category, Category(UIText(keyBind.category)))
+            val existed = categories.containsKey(keyBind.name)
+            categories.putIfAbsent(keyBind.category, Category(categories.keys.indexOf(keyBind.category), UIText(keyBind.category)))
+
             val category = categories[keyBind.category]!!
             val categoryContainer = category.container
-            categoryContainer childOf this
+            if (!existed) {
+                categoryContainer childOf this
+            }
 
             val keyBindContainer = UIContainer().constrain {
                 x = CenterConstraint()
@@ -62,39 +66,53 @@ class RequisiteControlsPage : RequisiteMenuPage("Controls", imageFromString("/gu
                 y = CenterConstraint()
             } childOf keyBindContainer
 
-            button = (ButtonBuilder({
+            val keyBindDivider = UIBlock(Color.BLACK).constrain {
+                x = SiblingConstraint(2f)
+                y = CenterConstraint()
+                width = 7.pixels()
+                height = 2.pixels()
+            } childOf keyBindContainer
+
+            val keyBindButton = (ButtonBuilder({
                 selected = keyBind
-                animateBorder(Color.GREEN)
-            }, requisite.keyboardHelper.getKeyName(keyBind.key)).build(requisite.componentFactory).constrain {
-                x = 2.pixels(true)
+                button = this
+                animateBorder(RequisitePalette.getSuccess().asColor())
+            }, if (keyBind.key == -1) "None" else requisite.keyboardHelper.getKeyName(keyBind.key)).build(requisite.componentFactory).constrain {
+                x = SiblingConstraint(2f)
                 y = CenterConstraint()
                 width = Button.DEFAULT_WIDTH_SMALL_PIXELS
+            }.onMouseLeave {
+                val btn = this as Button
+                if (selection && button == btn) {
+                    btn.animateBorder(RequisitePalette.getSuccess().asColor())
+                }
             } childOf keyBindContainer) as Button
         }
+    }
 
-        onKeyType { typedChar, keyCode ->
-            if (selection && !requisite.keyboardHelper.isEscapeKey(keyCode)) {
-                selected!!.key = if (keyCode == 0) typedChar.code else keyCode
-                RequisiteAPI.retrieveInstance().keyBindRegistry.save(selected)
-                button!!.animateBorder(Color(0, 0, 0, 0))
-                button!!.setText(requisite.keyboardHelper.getKeyName(keyCode))
-            }
+    override fun keyTyped(typedChar: Char, keyCode: Int): Boolean {
+        val requisite = RequisiteAPI.retrieveInstance()
+        if (selection) {
+            selected!!.key = if (requisite.keyboardHelper.isEscapeKey(keyCode)) -1 else if (keyCode == 0) typedChar.code else keyCode
+            RequisiteAPI.retrieveInstance().keyBindRegistry.save(selected)
+            button!!.animateBorder(Color(0, 0, 0, 0))
+            button!!.setText(if (requisite.keyboardHelper.isEscapeKey(keyCode)) "None" else requisite.keyboardHelper.getKeyName(keyCode))
+            button = null
+            selected = null
+            return true
         }
 
-        try {
-            val inspector = Inspector(Window.of(this)) childOf Window.of(this)
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
+        return false
     }
 }
 
 private class Category(
+    index: Int,
     title: UIText
 ) {
     var container = UIContainer().constrain {
         x = CenterConstraint()
-        y = SiblingConstraint(1f)
+        y = (if (index == 0) 2 else 0).pixels() + SiblingConstraint(1f)
         width = RelativeConstraint()
         height = ChildBasedSizeConstraint(1f)
     }

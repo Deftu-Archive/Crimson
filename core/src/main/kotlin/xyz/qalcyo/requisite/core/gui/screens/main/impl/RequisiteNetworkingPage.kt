@@ -16,15 +16,15 @@
  * along with Requisite. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package xyz.qalcyo.requisite.core.gui.main.impl
+package xyz.qalcyo.requisite.core.gui.screens.main.impl
 
 import gg.essential.elementa.constraints.CenterConstraint
 import gg.essential.elementa.dsl.*
 import xyz.qalcyo.requisite.core.RequisiteAPI
 import xyz.qalcyo.requisite.core.gui.components.Button
 import xyz.qalcyo.requisite.core.gui.components.builders.ButtonBuilder
-import xyz.qalcyo.requisite.core.gui.main.RequisiteMenuPage
-import xyz.qalcyo.requisite.core.gui.main.*
+import xyz.qalcyo.requisite.core.gui.screens.main.RequisiteMenuPage
+import xyz.qalcyo.requisite.core.gui.screens.main.*
 
 class RequisiteNetworkingPage : RequisiteMenuPage("Networking", imageFromString("/gui/connections.png")) {
     override fun initialize() {

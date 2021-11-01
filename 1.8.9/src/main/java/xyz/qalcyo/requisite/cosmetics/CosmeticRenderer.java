@@ -18,11 +18,13 @@
 
 package xyz.qalcyo.requisite.cosmetics;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.client.renderer.entity.layers.LayerRenderer;
 import xyz.qalcyo.requisite.Requisite;
 
 import java.util.List;
+import java.util.Objects;
 
 public class CosmeticRenderer implements LayerRenderer<AbstractClientPlayer> {
 
@@ -33,15 +35,15 @@ public class CosmeticRenderer implements LayerRenderer<AbstractClientPlayer> {
     }
 
     public void doRenderLayer(AbstractClientPlayer player, float limbSwing, float limbSwingAmount, float partialTicks, float tickAge, float netHeadYaw, float netHeadPitch, float scale) {
-        if (Requisite.getInstance().getCosmeticConfigurations().areCosmeticsEnabled()) {
-            String uuid = player.getUniqueID().toString();
-            if (cosmeticManager.getPlayerData().containsKey(uuid)) {
-                PlayerCosmeticHolder cosmeticHolder = cosmeticManager.getPlayerData().get(uuid);
-                if (cosmeticHolder != null && cosmeticHolder.getEnabled() != null && !cosmeticHolder.getEnabled().isEmpty()) {
-                    List<BaseCosmetic> enabled = cosmeticHolder.getEnabled();
-                    for (BaseCosmetic cosmetic : enabled) {
-                        cosmetic.render(player, limbSwing, limbSwingAmount, partialTicks, tickAge, netHeadYaw, netHeadPitch, scale);
-                    }
+        String uuid = player.getUniqueID().toString();
+        if (!Requisite.getInstance().getConfigManager().getCosmetic().isShowOwnCosmetics() && Objects.equals(uuid, Minecraft.getMinecraft().getSession().getProfile().getId().toString()))
+            return;
+        if (cosmeticManager.getPlayerData().containsKey(uuid)) {
+            PlayerCosmeticHolder cosmeticHolder = cosmeticManager.getPlayerData().get(uuid);
+            if (cosmeticHolder != null && cosmeticHolder.getEnabled() != null && !cosmeticHolder.getEnabled().isEmpty()) {
+                List<BaseCosmetic> enabled = cosmeticHolder.getEnabled();
+                for (BaseCosmetic cosmetic : enabled) {
+                    cosmetic.render(player, limbSwing, limbSwingAmount, partialTicks, tickAge, netHeadYaw, netHeadPitch, scale);
                 }
             }
         }
