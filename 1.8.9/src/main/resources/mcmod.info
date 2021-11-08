@@ -4,7 +4,7 @@
         "name": "Requisite",
         "description": "Minecraft modding library by Qalcyo.",
         "version": "${version}",
-        "mcversion": "${mcversion},",
+        "mcversion": "1.8.9",
         "url": "https://github.com/Qalcyo/Requisite",
         "authorList": [
             "Qalcyo"
