@@ -49,6 +49,15 @@ dependencies {
     annotationProcessor('org.spongepowered:mixin:0.7.11-SNAPSHOT')
 }
 
+processResources {
+    inputs.property "version", project.version
+
+    filesMatching("mcmod.info") {
+        expand "version": project.version
+    }
+    rename '(.+_at.cfg)', 'META-INF/$1'
+}
+
 mixin {
     disableRefMapWarning = true
     add(sourceSets.main, 'mixins.requisite.refmap.json')
