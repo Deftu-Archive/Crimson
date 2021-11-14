@@ -40,6 +40,10 @@ public class HypixelLocraw {
     @JsonSerializeExcluded
     private final GameType gameType;
 
+    public boolean isEmpty() {
+        return serverId == null && gameMode == null && mapName == null && rawGameType == null && gameType == null;
+    }
+
     public JsonObject toJson() {
         return JsonSerializer.create(this);
     }

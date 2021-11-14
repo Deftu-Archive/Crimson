@@ -18,25 +18,14 @@
 
 package xyz.qalcyo.requisite.core.bridge.minecraft;
 
-import com.mojang.authlib.GameProfile;
 import xyz.qalcyo.requisite.core.bridge.IBridgeContainer;
-import xyz.qalcyo.requisite.core.localization.MinecraftLanguage;
 
-import java.io.InputStream;
+import java.util.List;
 import java.util.UUID;
 
 public interface IMinecraftBridge extends IBridgeContainer {
-    GameProfile getGameProfile();
     UUID getPlayerUuid();
-    String getPlayerUsername();
     boolean isPlayerPresent();
 
-    InputStream getResource(String name);
-
-    String getLanguageCode();
-    default MinecraftLanguage getLanguageEnum() {
-        return MinecraftLanguage.fromLanguageCode(getLanguageCode());
-    }
-
-    void registerReloadListener(IResourceReloadBridge reloadBridge);
+    List<String> getRequisiteModList();
 }

@@ -16,23 +16,16 @@
  * along with Requisite. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package xyz.qalcyo.requisite.core.gui.screens.main
+package xyz.qalcyo.requisite.util;
 
-import gg.essential.elementa.components.UIContainer
-import xyz.qalcyo.requisite.core.RequisiteAPI
-import java.awt.image.BufferedImage
-import javax.imageio.ImageIO
+import xyz.qalcyo.requisite.core.util.IResourceHelper;
 
-abstract class RequisiteMenuPage(
-    val title: String
-) : UIContainer() {
-    abstract fun initialize()
+import java.io.InputStream;
 
-    fun reset() {
-        clearChildren()
+public class ResourceHelper implements IResourceHelper {
+
+    public InputStream getResourceAsStream(String filename) {
+        return getClass().getResourceAsStream(filename);
     }
 
-    open fun keyTyped(typedChar: Char, keyCode: Int): Boolean {
-        return false
-    }
 }

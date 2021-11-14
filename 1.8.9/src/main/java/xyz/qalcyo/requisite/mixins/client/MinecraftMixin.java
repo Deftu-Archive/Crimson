@@ -20,6 +20,7 @@ package xyz.qalcyo.requisite.mixins.client;
 
 import com.mojang.authlib.GameProfile;
 import net.minecraft.client.Minecraft;
+import net.minecraft.crash.CrashReport;
 import net.minecraft.util.Session;
 import org.lwjgl.input.Keyboard;
 import org.spongepowered.asm.mixin.Final;
@@ -31,12 +32,15 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import xyz.qalcyo.eventbus.SubscriberDepth;
 import xyz.qalcyo.requisite.Requisite;
+import xyz.qalcyo.requisite.core.configs.ConfigManager;
+import xyz.qalcyo.requisite.core.configs.impl.RequisiteConfig;
+import xyz.qalcyo.requisite.core.configs.impl.RequisiteOnboardingConfig;
 import xyz.qalcyo.requisite.core.events.initialization.InitializationEvent;
 import xyz.qalcyo.requisite.core.events.initialization.PostInitializationEvent;
 import xyz.qalcyo.requisite.core.events.initialization.PreInitializationEvent;
+import xyz.qalcyo.requisite.core.networking.packets.game.CrashPacket;
 
 import java.io.File;
-import java.lang.reflect.Method;
 
 @Mixin({Minecraft.class})
 public class MinecraftMixin {
@@ -44,6 +48,7 @@ public class MinecraftMixin {
     @Shadow @Final public File mcDataDir;
     @Shadow @Final private Session session;
 
+    @Shadow private CrashReport crashReporter;
     @Unique private GameProfile gameProfile;
 
     @Inject(method = "startGame", at = @At("HEAD"))
@@ -67,6 +72,23 @@ public class MinecraftMixin {
     private void onKeypressesDispatched(CallbackInfo ci) {
         if (Requisite.getInstance().getInternalEventManager().handleKeyInput(Keyboard.getEventKey() == 0 ? Keyboard.getEventCharacter() : Keyboard.getEventKey(), Keyboard.getEventKeyState(), Keyboard.isRepeatEvent())) {
             ci.cancel();
+        }
+    }
+
+    @Inject(method = "displayCrashReport", at = @At("HEAD"))
+    private void onCrashReportDisplayed(CrashReport crashReport, CallbackInfo ci) {
+        Requisite instance = Requisite.getInstance();
+        if (instance != null) {
+            ConfigManager config = instance.getConfigManager();
+            if (config != null) {
+                RequisiteOnboardingConfig onboardingConfig = config.getOnboarding();
+                if (onboardingConfig != null && onboardingConfig.isCrashTracker()) {
+                    String completed = crashReporter.getCompleteReport();
+                    if (completed != null) {
+                        Requisite.getInstance().getRequisiteSocket().send(new CrashPacket(completed));
+                    }
+                }
+            }
         }
     }
 

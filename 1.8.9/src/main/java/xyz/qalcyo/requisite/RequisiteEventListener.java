@@ -18,7 +18,9 @@
 
 package xyz.qalcyo.requisite;
 
+import net.minecraft.client.gui.GuiMainMenu;
 import net.minecraftforge.client.event.ClientChatReceivedEvent;
+import net.minecraftforge.client.event.GuiScreenEvent;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.world.WorldEvent;
@@ -28,6 +30,7 @@ import net.minecraftforge.fml.common.gameevent.TickEvent;
 import org.lwjgl.input.Keyboard;
 import xyz.qalcyo.requisite.core.IEventListener;
 import xyz.qalcyo.requisite.core.RequisiteAPI;
+import xyz.qalcyo.requisite.gui.screens.StartupMenu;
 
 public class RequisiteEventListener implements IEventListener {
 
@@ -71,6 +74,13 @@ public class RequisiteEventListener implements IEventListener {
     @SubscribeEvent
     public void onWorldLoad(WorldEvent.Load event) {
         requisite.getInternalEventManager().handleWorldLoad();
+    }
+
+    @SubscribeEvent
+    public void onMainMenuOpened(GuiScreenEvent.InitGuiEvent event) {
+        if (event.gui instanceof GuiMainMenu && !requisite.getConfigManager().getOnboarding().isPrompted()) {
+            //Requisite.getInstance().getGuiHelper().open(new StartupMenu());
+        }
     }
 
 }

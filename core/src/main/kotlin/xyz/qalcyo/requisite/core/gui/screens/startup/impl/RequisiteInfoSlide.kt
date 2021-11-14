@@ -16,23 +16,14 @@
  * along with Requisite. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package xyz.qalcyo.requisite.core.gui.screens.main
+package xyz.qalcyo.requisite.core.gui.screens.startup.impl
 
-import gg.essential.elementa.components.UIContainer
+import gg.essential.elementa.dsl.*
 import xyz.qalcyo.requisite.core.RequisiteAPI
-import java.awt.image.BufferedImage
-import javax.imageio.ImageIO
+import xyz.qalcyo.requisite.core.gui.screens.startup.RequisiteStartupSlide
 
-abstract class RequisiteMenuPage(
-    val title: String
-) : UIContainer() {
-    abstract fun initialize()
-
-    fun reset() {
-        clearChildren()
-    }
-
-    open fun keyTyped(typedChar: Char, keyCode: Int): Boolean {
-        return false
+class RequisiteInfoSlide  : RequisiteStartupSlide() {
+    override fun initialize() {
+        println(RequisiteAPI.retrieveInstance().bridge.minecraftBridge.requisiteModList)
     }
 }

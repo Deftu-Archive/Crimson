@@ -31,7 +31,7 @@ public class RequisiteJavaArguments {
 
     private final boolean socketDebug = retrieveSocketDebug();
     private final String socketUri = System.getProperty("requisite.socket.uri", null);
-    private final String metaUrl = System.getProperty("requisite.meta.url", "https://raw.githubusercontent.com/Qalcyo/Requisite/rewrite/data/meta.json");
+    private final String metaUrl = System.getProperty("requisite.meta.url", "https://raw.githubusercontent.com/Qalcyo/DataStorage/master/requisite/meta.json");
 
     private final ChatColour chatPrefixColour = retrieveChatPrefixColour();
 

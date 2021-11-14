@@ -18,6 +18,7 @@
 
 package xyz.qalcyo.requisite;
 
+import net.minecraft.launchwrapper.Launch;
 import net.minecraftforge.fml.common.Mod;
 import org.lwjgl.input.Keyboard;
 import xyz.qalcyo.mango.Multithreading;
@@ -31,7 +32,6 @@ import xyz.qalcyo.requisite.core.events.initialization.InitializationEvent;
 import xyz.qalcyo.requisite.core.files.FileManager;
 import xyz.qalcyo.requisite.core.keybinds.KeyBindRegistry;
 import xyz.qalcyo.requisite.core.keybinds.KeyBinds;
-import xyz.qalcyo.requisite.core.localization.ModLocalization;
 import xyz.qalcyo.requisite.core.networking.RequisiteClientSocket;
 import xyz.qalcyo.requisite.cosmetics.CosmeticManager;
 import xyz.qalcyo.requisite.gui.factory.ComponentFactory;
@@ -45,6 +45,9 @@ import xyz.qalcyo.requisite.notifications.Notifications;
 import xyz.qalcyo.requisite.rendering.EnhancedFontRenderer;
 import xyz.qalcyo.requisite.util.*;
 
+/**
+ * The main class for Requisite's storage and initialization process.
+ */
 @Mod(
         name = RequisiteInfo.NAME,
         version = RequisiteInfo.VER,
@@ -67,7 +70,6 @@ public class Requisite implements RequisiteAPI {
     private KeyBindRegistry keyBindRegistry;
     private ComponentFactory componentFactory;
     private Bridge bridge;
-    private ModLocalization requisiteLocalization;
     private RequisiteEventManager internalEventManager;
     private RequisiteEventListener internalEventListener;
 
@@ -84,6 +86,7 @@ public class Requisite implements RequisiteAPI {
     private MessageQueue messageQueue;
     private ServerHelper serverHelper;
     private GlHelper glHelper;
+    private ResourceHelper resourceHelper;
     private KeyboardHelper keyboardHelper;
 
     public void initialize(InitializationEvent event) {
@@ -92,16 +95,17 @@ public class Requisite implements RequisiteAPI {
 
         /* Initialize services. */
         fileManager = new FileManager(this);
-        configManager = new ConfigManager(fileManager.getRequisiteDirectory(fileManager.getQalcyoDirectory(fileManager.getConfigDirectory(event.launchDirectory))));
+        configManager = new ConfigManager(fileManager.getRequisiteConfigDirectory(fileManager.getRequisiteDirectory(fileManager.getQalcyoDirectory(Launch.minecraftHome))));
         notifications = new Notifications(this);
-        (requisiteSocket = new RequisiteClientSocket(this)).awaitConnect();
+        requisiteSocket = new RequisiteClientSocket(this);
+        if (configManager.getOnboarding().isTos())
+            requisiteSocket.awaitConnect();
         requisiteSocket.register("COSMETIC_RETRIEVE", CosmeticRetrievePacket.class);
         modIntegration = new ModIntegration();
         commandRegistry = new CommandRegistry();
         keyBindRegistry = new KeyBindRegistry(this);
         componentFactory = new ComponentFactory();
         (bridge = new Bridge()).start();
-        requisiteLocalization = initializeLocalization();
         internalEventManager = new RequisiteEventManager();
         internalEventListener = new RequisiteEventListener(this);
 
@@ -119,12 +123,12 @@ public class Requisite implements RequisiteAPI {
             messageQueue = new MessageQueue(this);
             serverHelper = new ServerHelper();
             glHelper = new GlHelper();
+            resourceHelper = new ResourceHelper();
             keyboardHelper = new KeyboardHelper();
             cosmeticManager.start();
         });
 
         getKeyBindRegistry().register(KeyBinds.from("Open menu", "Requisite", Keyboard.KEY_HOME, () -> guiHelper.open(new RequisiteMenu())));
-        getKeyBindRegistry().register(KeyBinds.from("Test", "Requisite", Keyboard.KEY_I, () -> guiHelper.open(new TestMenu())));
 
         getMetadata().setConfigurationMenu(RequisiteMenu.class);
         initialized = true;
@@ -164,10 +168,6 @@ public class Requisite implements RequisiteAPI {
 
     public Bridge getBridge() {
         return bridge;
-    }
-
-    public ModLocalization getRequisiteLocalization() {
-        return requisiteLocalization;
     }
 
     public RequisiteEventManager getInternalEventManager() {
@@ -234,10 +234,17 @@ public class Requisite implements RequisiteAPI {
         return glHelper;
     }
 
+    public ResourceHelper getResourceHelper() {
+        return resourceHelper;
+    }
+
     public KeyboardHelper getKeyboardHelper() {
         return keyboardHelper;
     }
 
+    /**
+     * @return An instance of {@link Requisite}.
+     */
     public static Requisite getInstance() {
         return INSTANCE;
     }

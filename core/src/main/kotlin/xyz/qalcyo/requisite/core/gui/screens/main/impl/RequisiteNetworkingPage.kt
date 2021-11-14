@@ -24,9 +24,8 @@ import xyz.qalcyo.requisite.core.RequisiteAPI
 import xyz.qalcyo.requisite.core.gui.components.Button
 import xyz.qalcyo.requisite.core.gui.components.builders.ButtonBuilder
 import xyz.qalcyo.requisite.core.gui.screens.main.RequisiteMenuPage
-import xyz.qalcyo.requisite.core.gui.screens.main.*
 
-class RequisiteNetworkingPage : RequisiteMenuPage("Networking", imageFromString("/gui/connections.png")) {
+class RequisiteNetworkingPage : RequisiteMenuPage("Networking") {
     override fun initialize() {
         val requisite = RequisiteAPI.retrieveInstance()
         val canRefresh = requisite.requisiteSocket.isRefreshAvailable

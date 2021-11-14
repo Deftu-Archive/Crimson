@@ -20,6 +20,7 @@ package xyz.qalcyo.requisite.core.keybinds;
 
 /**
  * Main class for Requisite's {@link KeyBind} API handling.
+ * @see KeyBinds
  */
 public abstract class KeyBind {
 

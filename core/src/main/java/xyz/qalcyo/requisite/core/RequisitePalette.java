@@ -25,10 +25,9 @@ import xyz.qalcyo.requisite.core.data.ColourRGB;
  */
 public class RequisitePalette {
 
-    private static final ColourRGB main = new ColourRGB(40, 157, 140);
-
-    private static final ColourRGB componentContent = new ColourRGB(28, 28, 28, 189);
-
+    private static final ColourRGB primary = new ColourRGB(40, 157, 140);
+    private static final ColourRGB secondary = new ColourRGB(28, 28, 28);
+    private static final ColourRGB tertiary = new ColourRGB(44, 45, 50);
 
     private static final ColourRGB success = new ColourRGB(43, 181, 66);
     private static final ColourRGB fail = new ColourRGB(181, 43, 43);
@@ -36,19 +35,28 @@ public class RequisitePalette {
     /**
      * Provides a ColourRGB instance of Qalcyo's theme colour.
      *
-     * @return Qalcyo's theme colour
+     * @return Qalcyo's primary colour
      */
-    public static ColourRGB getMain() {
-        return main;
+    public static ColourRGB getPrimary() {
+        return primary;
     }
 
     /**
      * Provides a ColourRGB instance of Qalcyo's background colour.
      *
-     * @return Qalcyo's background colour
+     * @return Qalcyo's secondary colour
      */
-    public static ColourRGB getComponentContent() {
-        return componentContent;
+    public static ColourRGB getSecondary() {
+        return secondary;
+    }
+
+    /**
+     * Provides a ColourRGB instance of Qalcyo's tertiary colour.
+     *
+     * @return Qalcyo's tertiary colour.
+     */
+    public static ColourRGB getTertiary() {
+        return tertiary;
     }
 
     /**

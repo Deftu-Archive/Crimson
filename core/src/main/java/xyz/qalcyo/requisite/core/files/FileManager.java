@@ -30,16 +30,16 @@ public class FileManager {
         this.requisite = requisite;
     }
 
-    public File getConfigDirectory(File gameDirectory) {
-       return checkExistence(new File(gameDirectory, "config"));
-    }
-
-    public File getQalcyoDirectory(File configDirectory) {
-        return checkExistence(new File(configDirectory, "Qalcyo"));
+    public File getQalcyoDirectory(File launchDirectory) {
+        return checkExistence(new File(launchDirectory, "Qalcyo"));
     }
 
     public File getRequisiteDirectory(File qalcyoDirectory) {
         return checkExistence(new File(qalcyoDirectory, requisite.name()));
+    }
+
+    public File getRequisiteConfigDirectory(File requisiteDirectory) {
+        return checkExistence(new File(requisiteDirectory, "config"));
     }
 
     private File checkExistence(File directory) {

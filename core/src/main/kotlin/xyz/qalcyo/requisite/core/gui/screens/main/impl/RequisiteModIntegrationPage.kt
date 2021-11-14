@@ -16,23 +16,12 @@
  * along with Requisite. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package xyz.qalcyo.requisite.core.gui.screens.main
+package xyz.qalcyo.requisite.core.gui.screens.main.impl
 
-import gg.essential.elementa.components.UIContainer
-import xyz.qalcyo.requisite.core.RequisiteAPI
-import java.awt.image.BufferedImage
-import javax.imageio.ImageIO
+import xyz.qalcyo.requisite.core.gui.screens.main.RequisiteMenuPage
 
-abstract class RequisiteMenuPage(
-    val title: String
-) : UIContainer() {
-    abstract fun initialize()
+class RequisiteModIntegrationPage : RequisiteMenuPage("Mod Integration") {
+    override fun initialize() {
 
-    fun reset() {
-        clearChildren()
-    }
-
-    open fun keyTyped(typedChar: Char, keyCode: Int): Boolean {
-        return false
     }
 }

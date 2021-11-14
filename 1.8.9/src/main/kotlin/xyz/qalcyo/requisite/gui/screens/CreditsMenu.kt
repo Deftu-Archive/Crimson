@@ -18,6 +18,7 @@
 
 package xyz.qalcyo.requisite.gui.screens
 
+import gg.essential.elementa.ElementaVersion
 import gg.essential.elementa.WindowScreen
 import gg.essential.elementa.components.*
 import gg.essential.elementa.constraints.*
@@ -32,9 +33,9 @@ import xyz.qalcyo.requisite.core.gui.components.Button
 import xyz.qalcyo.requisite.core.gui.components.InteractableText
 import xyz.qalcyo.requisite.core.gui.components.builders.ButtonBuilder
 import java.net.URI
-import java.util.*
 
 class CreditsMenu : WindowScreen(
+    ElementaVersion.V1,
     restoreCurrentGuiOnClose = true
 ) {
 
@@ -60,7 +61,7 @@ class CreditsMenu : WindowScreen(
             width = RelativeConstraint()
             height = ChildBasedSizeConstraint()
         } childOf scrollable
-        val librariesTitle = UIText(Requisite.getInstance().requisiteLocalization.translate("credits", "libraries", listOf(librariesArray.size().toString()))).constrain {
+        val librariesTitle = UIText("Libraries (${librariesArray.size()})").constrain {
             x = CenterConstraint()
             y = 2.pixels()
         } childOf librariesContainer
@@ -72,14 +73,14 @@ class CreditsMenu : WindowScreen(
             width = RelativeConstraint()
             height = ChildBasedSizeConstraint()
         } childOf scrollable
-        val codeAuthorsTitle = UIText(Requisite.getInstance().requisiteLocalization.translate("credits", "code", listOf(codeAuthorsArray.size().toString()))).constrain {
+        val codeAuthorsTitle = UIText("Code (${codeAuthorsArray.size()})").constrain {
             x = CenterConstraint()
             y = 2.pixels()
         } childOf codeAuthorsContainer
         codeAuthorsTitle.setTextScale(2.pixels())
         appendUsingSchema(codeAuthorsContainer, codeAuthorsArray)
 
-        val divider = UIBlock(RequisitePalette.getComponentContent().asColor()).constrain {
+        val divider = UIBlock(RequisitePalette.getSecondary().asColor()).constrain {
             x = 0.pixels()
             y = 50.pixels(true)
             width = RelativeConstraint()

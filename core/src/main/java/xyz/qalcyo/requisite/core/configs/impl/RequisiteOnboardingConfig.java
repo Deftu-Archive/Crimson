@@ -34,6 +34,8 @@ public class RequisiteOnboardingConfig implements IConfigObject {
     private boolean prompted;
     private boolean tos;
 
+    private boolean crashTracker;
+
     public RequisiteOnboardingConfig(String name, File directory) {
         this.configuration = new Configuration(name, directory);
 
@@ -43,6 +45,9 @@ public class RequisiteOnboardingConfig implements IConfigObject {
         if (!configuration.hasKey("tos"))
             configuration.add("tos", false).save();
         this.tos = configuration.getAsBoolean("tos");
+        if (!configuration.hasKey("track_crashes"))
+            configuration.add("track_crashes", false);
+        this.crashTracker = configuration.getAsBoolean("track_crashes");
     }
 
     public Configuration getConfiguration() {
@@ -69,6 +74,15 @@ public class RequisiteOnboardingConfig implements IConfigObject {
     public void setTos(boolean tos) {
         this.tos = tos;
         configuration.add("tos", tos).save();
+    }
+
+    public boolean isCrashTracker() {
+        return crashTracker;
+    }
+
+    public void setCrashTracker(boolean crashTracker) {
+        this.crashTracker = crashTracker;
+        configuration.add("track_crashes", crashTracker).save();
     }
 
 }

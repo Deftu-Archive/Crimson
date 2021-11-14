@@ -35,7 +35,7 @@ class ConfirmationMenu(
     private val builder: ConfirmationMenuBuilder
 ) : UIContainer() {
     init {
-        var contentColor = RequisitePalette.getComponentContent().asColor()
+        var contentColor = RequisitePalette.getSecondary().asColor()
         if (builder.backgroundOpacity != null)
             contentColor = contentColor.withAlpha(builder.backgroundOpacity!!)
         val content = UIBlock(contentColor).constrain {
@@ -43,7 +43,7 @@ class ConfirmationMenu(
             y = CenterConstraint()
             width = RelativeConstraint()
             height = RelativeConstraint()
-        } childOf this effect OutlineEffect(RequisitePalette.getMain().asColor(), 1f)
+        } childOf this effect OutlineEffect(RequisitePalette.getPrimary().asColor(), 1f)
 
         val declineButton = Button({
             builder.decline.invoke(this@ConfirmationMenu)

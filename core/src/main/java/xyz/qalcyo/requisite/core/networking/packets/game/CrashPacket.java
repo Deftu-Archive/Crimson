@@ -16,23 +16,30 @@
  * along with Requisite. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package xyz.qalcyo.requisite.core.gui.screens.main
+package xyz.qalcyo.requisite.core.networking.packets.game;
 
-import gg.essential.elementa.components.UIContainer
-import xyz.qalcyo.requisite.core.RequisiteAPI
-import java.awt.image.BufferedImage
-import javax.imageio.ImageIO
+import xyz.qalcyo.json.entities.JsonObject;
+import xyz.qalcyo.requisite.core.networking.BasePacket;
+import xyz.qalcyo.requisite.core.networking.RequisiteClientSocket;
 
-abstract class RequisiteMenuPage(
-    val title: String
-) : UIContainer() {
-    abstract fun initialize()
+public class CrashPacket extends BasePacket {
 
-    fun reset() {
-        clearChildren()
+    private final String report;
+
+    public CrashPacket(String report) {
+        super("CRASH");
+        this.report = report;
     }
 
-    open fun keyTyped(typedChar: Char, keyCode: Int): Boolean {
-        return false
+    public CrashPacket() {
+        this(null);
     }
+
+    public void send(RequisiteClientSocket socket, JsonObject data) {
+        data.add("report", report);
+    }
+
+    public void receive(RequisiteClientSocket socket, JsonObject packet, JsonObject data) {
+    }
+
 }

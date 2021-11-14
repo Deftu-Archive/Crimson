@@ -31,9 +31,6 @@ import xyz.qalcyo.requisite.core.events.initialization.InitializationEvent;
 import xyz.qalcyo.requisite.core.integration.mods.IMod;
 import xyz.qalcyo.requisite.core.keybinds.KeyBindRegistry;
 import xyz.qalcyo.requisite.core.integration.mods.ModMetadata;
-import xyz.qalcyo.requisite.core.localization.DefaultModLocale;
-import xyz.qalcyo.requisite.core.localization.ModLocalization;
-import xyz.qalcyo.requisite.core.localization.ModLocalizationFactory;
 import xyz.qalcyo.requisite.core.util.*;
 import xyz.qalcyo.requisite.core.util.messages.IMessageQueue;
 import xyz.qalcyo.requisite.core.commands.CommandRegistry;
@@ -48,6 +45,9 @@ import xyz.qalcyo.requisite.core.gui.factory.IComponentFactory;
 
 import java.net.URI;
 
+/**
+ * The global parent to the Requisite class of the version you use.
+ */
 public interface RequisiteAPI extends IMod {
 
     /**
@@ -146,22 +146,6 @@ public interface RequisiteAPI extends IMod {
      * @return Requisite's bridge.
      */
     IBridge getBridge();
-    /**
-     * Provides an instance of Requisite's mod localization factory. Requisite's
-     * localization API uses JSON and Minecraft's own language manager to fetch
-     * correct translations from mods' custom language file.
-     *
-     * @return Requisite's mod localization factory.
-     */
-    default ModLocalizationFactory getModLocalizationFactory() {
-        return RequisiteDefaultImplementations.MOD_LOCALIZATION_FACTORY;
-    }
-    /**
-     * Provides an instance of Requisite's own localization.
-     *
-     * @return Requisite's localization.
-     */
-    ModLocalization getRequisiteLocalization();
     /**
      * Provides an instance of Requisite's HTTP client.
      *
@@ -369,6 +353,12 @@ public interface RequisiteAPI extends IMod {
      */
     IGlHelper getGlHelper();
     /**
+     * Provides an instance of Requisite's resource utility.
+     *
+     * @return Requisite's resource utility.
+     */
+    IResourceHelper getResourceHelper();
+    /**
      * Provides an instance of Requisite's keyboard utility.
      *
      * @return Requisite's keyboard utility.
@@ -382,23 +372,8 @@ public interface RequisiteAPI extends IMod {
      */
     default URI retrieveSocketUri() {
         String uri = getJavaArguments().getSocketUri() == null ? JsonApiHelper.getJsonObject(getJavaArguments().getMetaUrl()).getAsString("socket") : getJavaArguments().isSocketDebug() ? "ws://localhost:8080/" : getJavaArguments().getSocketUri();
-        uri = uri.replace("{version}", "v" + RequisiteConstants.SOCKET_VERSION);
+        uri = uri.replace("{}", "v" + RequisiteConstants.SOCKET_VERSION);
         return URI.create(uri);
-    }
-
-    /**
-     * @return Requisite localization class instance.
-     */
-    default ModLocalization initializeLocalization() {
-        return getModLocalizationFactory().createLocalization(
-                name(),
-                new DefaultModLocale()
-                        .add("credits", "libraries", "Libraries ({})")
-                        .add("credits", "code", "Code ({})")
-
-                        .add("ui", "close", "Close")
-                        .add("ui", "cosmetics", "Cosmetics")
-        );
     }
 
     /**

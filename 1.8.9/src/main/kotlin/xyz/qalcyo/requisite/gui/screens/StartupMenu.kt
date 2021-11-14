@@ -16,61 +16,42 @@
  * along with Requisite. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package xyz.qalcyo.requisite.gui.screens.main
+package xyz.qalcyo.requisite.gui.screens
 
 import gg.essential.elementa.ElementaVersion
-import gg.essential.elementa.components.*
+import gg.essential.elementa.components.UIBlock
+import gg.essential.elementa.components.UIContainer
+import gg.essential.elementa.components.Window
 import gg.essential.universal.GuiScale
 import gg.essential.universal.UKeyboard
 import gg.essential.universal.UMatrixStack
 import gg.essential.universal.UScreen
 import net.minecraft.client.Minecraft
-import xyz.qalcyo.requisite.Requisite
-import xyz.qalcyo.requisite.core.RequisiteAPI
-import xyz.qalcyo.requisite.core.gui.screens.main.IRequisiteMenu
-import xyz.qalcyo.requisite.core.gui.screens.main.RequisiteMenuFooter
-import xyz.qalcyo.requisite.core.gui.screens.main.RequisiteMenuHeader
-import xyz.qalcyo.requisite.core.gui.screens.main.RequisiteMenuPage
-import xyz.qalcyo.requisite.core.gui.screens.main.impl.RequisiteControlsPage
-import xyz.qalcyo.requisite.core.gui.screens.main.impl.RequisiteNetworkingPage
-import xyz.qalcyo.requisite.core.integration.mods.IMod
-import xyz.qalcyo.requisite.core.integration.mods.IModConfigurationMenu
-import java.awt.image.BufferedImage
-import javax.imageio.ImageIO
+import xyz.qalcyo.requisite.core.gui.screens.startup.IRequisiteStartupMenu
+import xyz.qalcyo.requisite.core.gui.screens.startup.RequisiteStartupSlide
+import xyz.qalcyo.requisite.core.gui.screens.startup.impl.RequisiteInfoSlide
 
-class RequisiteMenu(
-    pageIndex: Int = 0
-) : UScreen(
+class StartupMenu : UScreen(
     restoreCurrentGuiOnClose = true,
     newGuiScale = GuiScale.scaleForScreenSize().ordinal
-), IRequisiteMenu, IModConfigurationMenu {
+), IRequisiteStartupMenu {
 
-    override val window: Window = Window(ElementaVersion.V1)
-    override var initialized: Boolean = false
+    override val window = Window(ElementaVersion.V1)
 
-    override val pages: Array<RequisiteMenuPage> = arrayOf(
-        RequisiteControlsPage(),
-        RequisiteNetworkingPage()
+    override val slides: Array<RequisiteStartupSlide> = arrayOf(
+        RequisiteInfoSlide()
     )
+    override var slide: RequisiteStartupSlide = slides[0]
+    override val content = UIContainer()
 
-    override var page: RequisiteMenuPage = pages[pageIndex]
+    override lateinit var slideBox: UIBlock
+    override val slideBoxes: MutableList<UIBlock> = mutableListOf()
 
-    override val header: RequisiteMenuHeader = RequisiteMenuHeader(this, image("/gui/global/arrow_back.png"), image("/gui/global/close.png"))
-    override val content: UIContainer = UIContainer()
-    override val footer: RequisiteMenuFooter = RequisiteMenuFooter(this, image("/gui/global/arrow_left.png"), image("/gui/global/arrow_right.png"))
-
-    init {
-        window.onKeyType { typedChar, keyCode ->
-            super.onKeyPressed(keyCode, typedChar, UKeyboard.getModifiers())
-        }
+    override fun finish() {
+        restorePreviousScreen()
     }
 
-    /* Menu implementation. */
-
-    override fun openPreviousScreen() = restorePreviousScreen()
-    override fun closeScreen() = displayScreen(null)
-
-    /* Screen implementation. */
+    /* Screen logic. */
 
     override fun initScreen(width: Int, height: Int) {
         window.onWindowResize()
@@ -105,18 +86,9 @@ class RequisiteMenu(
     }
 
     override fun onKeyPressed(keyCode: Int, typedChar: Char, modifiers: UKeyboard.Modifiers?) {
-        if (!page.keyTyped(typedChar, keyCode)) {
-            window.keyType(typedChar, keyCode)
-        }
+        window.keyType(typedChar, keyCode)
     }
 
     override fun doesGuiPauseGame(): Boolean = false
-
-    override fun open() = Requisite.getInstance().guiHelper.open(this)
-    override fun getMod(): IMod = Requisite.getInstance()
-
-    /* Utilities. */
-
-    fun image(name: String): BufferedImage = ImageIO.read(RequisiteAPI::class.java.getResourceAsStream(name))
 
 }

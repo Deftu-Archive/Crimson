@@ -31,11 +31,10 @@ import xyz.qalcyo.requisite.core.RequisitePalette
 import xyz.qalcyo.requisite.core.gui.components.Button
 import xyz.qalcyo.requisite.core.gui.components.builders.ButtonBuilder
 import xyz.qalcyo.requisite.core.gui.screens.main.RequisiteMenuPage
-import xyz.qalcyo.requisite.core.gui.screens.main.*
 import xyz.qalcyo.requisite.core.keybinds.KeyBind
 import java.awt.Color
 
-class RequisiteControlsPage : RequisiteMenuPage("Controls", imageFromString("/gui/controls.png")) {
+class RequisiteControlsPage : RequisiteMenuPage("Controls") {
     private var selected: KeyBind? = null
     private val selection
         get() = selected != null
@@ -46,7 +45,7 @@ class RequisiteControlsPage : RequisiteMenuPage("Controls", imageFromString("/gu
 
         for (keyBind in requisite.keyBindRegistry.keyBinds) {
             val existed = categories.containsKey(keyBind.name)
-            categories.putIfAbsent(keyBind.category, Category(categories.keys.indexOf(keyBind.category), UIText(keyBind.category)))
+            categories.putIfAbsent(keyBind.category, Category(existed, UIText(keyBind.category)))
 
             val category = categories[keyBind.category]!!
             val categoryContainer = category.container
@@ -107,12 +106,12 @@ class RequisiteControlsPage : RequisiteMenuPage("Controls", imageFromString("/gu
 }
 
 private class Category(
-    index: Int,
+    preExistence: Boolean,
     title: UIText
 ) {
     var container = UIContainer().constrain {
         x = CenterConstraint()
-        y = (if (index == 0) 2 else 0).pixels() + SiblingConstraint(1f)
+        y = (if (!preExistence) 5 else 0).pixels() + SiblingConstraint(1f)
         width = RelativeConstraint()
         height = ChildBasedSizeConstraint(1f)
     }

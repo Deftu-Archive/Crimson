@@ -28,20 +28,23 @@ import okhttp3.OkHttpClient
 import okhttp3.Request
 import xyz.qalcyo.requisite.Requisite
 import xyz.qalcyo.requisite.core.RequisiteConstants
-import xyz.qalcyo.requisite.core.gui.components.builders.ButtonBuilder
 
 class ChangelogMenu : WindowScreen(
-    ElementaVersion.V1
+    ElementaVersion.V1,
+    restoreCurrentGuiOnClose = true
 ) {
     init {
         val httpClient = OkHttpClient()
-        val markdown = MarkdownComponent(
-            httpClient.newCall(Request.Builder()
-                .url(String.format(RequisiteConstants.CHANGELOG_URL_UNFORMATTED, Requisite.getInstance().version()))
-                .get()
-                .build()).execute()
-                .body!!.string()
-        ).constrain {
+        val text = httpClient.newCall(Request.Builder()
+            .url(String.format(RequisiteConstants.CHANGELOG_URL_UNFORMATTED, Requisite.getInstance().version()))
+            .get()
+            .build()).execute()
+            .body!!.string()
+        if (text == "404: Not Found") {
+            Requisite.getInstance().notifications.push("Requisite", "Changelogs are unavailable.")
+        }
+
+        val markdown = MarkdownComponent(text).constrain {
             x = CenterConstraint()
             y = 2.pixels()
             width = RelativeConstraint()

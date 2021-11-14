@@ -18,19 +18,18 @@
 
 package xyz.qalcyo.requisite.core.keybinds;
 
-import xyz.qalcyo.requisite.core.RequisiteAPI;
-import xyz.qalcyo.requisite.core.localization.ModLocalization;
+import java.util.function.Consumer;
 
 /**
- * Class that provides easy access to instances of the
- * {@link KeyBind} class.
+ * Class that provides easy access to instances of the {@link KeyBind} class.
+ * @see KeyBind
  */
 public class KeyBinds {
 
     /**
      * Creates and returns a {@link KeyBind} instance from the parameters given.
      *
-     * @return a {@link KeyBind} instance.
+     * @return A {@link KeyBind} instance.
      */
     public static KeyBind from(String name, String category, int key, Runnable press, Runnable release) {
         return new KeyBind(name, category, key) {
@@ -47,7 +46,7 @@ public class KeyBinds {
     /**
      * Creates and returns a {@link KeyBind} instance from the parameters given.
      *
-     * @return a {@link KeyBind} instance.
+     * @return A {@link KeyBind} instance.
      */
     public static KeyBind from(String name, String category, int key, Runnable press) {
         return from(name, category, key, press, () -> {});
@@ -56,10 +55,14 @@ public class KeyBinds {
     /**
      * Creates and returns a {@link KeyBind} instance from the parameters given.
      *
-     * @return a {@link KeyBind} instance.
+     * @return A {@link KeyBind} instance.
      */
-    public static <T> KeyBind menu(String name, String category, int key, T menu) {
-        return from(name, category, key, () -> RequisiteAPI.retrieveInstance().getGuiHelper().forceOpen(menu));
+    public static KeyBind from(String name, String category, int key, Consumer<KeyBindState> executor) {
+        return new KeyBind(name, category, key) {
+            public void handle(KeyBindState state) {
+                executor.accept(state);
+            }
+        };
     }
 
 }

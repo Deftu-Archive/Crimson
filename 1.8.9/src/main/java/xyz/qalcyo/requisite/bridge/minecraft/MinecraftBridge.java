@@ -23,54 +23,76 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.IReloadableResourceManager;
 import net.minecraft.client.resources.IResourceManager;
 import net.minecraft.launchwrapper.Launch;
+import net.minecraftforge.fml.common.Loader;
+import net.minecraftforge.fml.common.ModContainer;
+import net.minecraftforge.fml.relauncher.CoreModManager;
+import xyz.qalcyo.mango.Strings;
 import xyz.qalcyo.requisite.core.bridge.minecraft.IMinecraftBridge;
-import xyz.qalcyo.requisite.core.bridge.minecraft.IResourceReloadBridge;
 
+import java.io.File;
 import java.io.InputStream;
+import java.net.URI;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
+import java.util.jar.Attributes;
+import java.util.jar.JarFile;
 
 public class MinecraftBridge implements IMinecraftBridge {
 
-    private GameProfile gameProfile;
     private UUID playerUuid;
-    private String playerUsername;
 
     public void initialize() {
-        gameProfile = Minecraft.getMinecraft().getSession().getProfile();
-        playerUuid = gameProfile.getId();
-        playerUsername = gameProfile.getName();
-    }
-
-    public GameProfile getGameProfile() {
-        return gameProfile;
+        playerUuid = Minecraft.getMinecraft().getSession().getProfile().getId();
     }
 
     public UUID getPlayerUuid() {
         return playerUuid;
     }
 
-    public String getPlayerUsername() {
-        return playerUsername;
-    }
-
     public boolean isPlayerPresent() {
         return Minecraft.getMinecraft().thePlayer != null;
     }
 
-    public InputStream getResource(String name) {
-        return Launch.classLoader.getResourceAsStream(name);
-    }
+    public List<String> getRequisiteModList() {
+        List<String> value = new ArrayList<>();
 
-    public String getLanguageCode() {
-        return Minecraft.getMinecraft().getLanguageManager().getCurrentLanguage().getLanguageCode();
-    }
+        for (URL source : Launch.classLoader.getSources()) {
+            if (source != null) {
+                try {
+                    URI uri = source.toURI();
+                    if (uri.getScheme().contains("file")) {
+                        File file = new File(uri);
 
-    public void registerReloadListener(IResourceReloadBridge reloadBridge) {
-        IResourceManager resourceManager = Minecraft.getMinecraft().getResourceManager();
-        if (resourceManager instanceof IReloadableResourceManager) {
-            IReloadableResourceManager reloadableResourceManager = (IReloadableResourceManager) resourceManager;
-            reloadableResourceManager.registerReloadListener(new MinecraftReloadListener(reloadBridge));
+                        String tweaker = null;
+                        try {
+                            JarFile jar = new JarFile(file);
+                            if (jar.getManifest() != null) {
+                                Attributes attributes = jar.getManifest().getMainAttributes();
+                                tweaker = attributes.getValue("TweakClass");
+                            }
+                        } catch (Exception ignored) {
+                        }
+
+                        if (tweaker != null) {
+                            tweaker = tweaker.toLowerCase();
+                            if (tweaker.contains("requisite") && tweaker.contains("installer")) {
+                                for (ModContainer container : Loader.instance().getModList()) {
+                                    if (container != null && container.getName() != null && Strings.containsIgnoreCase(file.getName(), container.getName())) {
+                                        value.add(container.getName());
+                                    }
+                                }
+                            }
+                        }
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
         }
+
+        return value;
     }
 
 }

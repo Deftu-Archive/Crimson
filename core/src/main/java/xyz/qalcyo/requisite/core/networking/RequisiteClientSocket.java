@@ -31,6 +31,7 @@ import xyz.qalcyo.mango.Multithreading;
 import xyz.qalcyo.requisite.core.RequisiteAPI;
 import xyz.qalcyo.requisite.core.bridge.requisite.ISocketBridge;
 import xyz.qalcyo.requisite.core.networking.packets.GreetingPacket;
+import xyz.qalcyo.requisite.core.networking.packets.user.UserCountPacket;
 import xyz.qalcyo.requisite.core.util.ChatColour;
 
 import java.nio.ByteBuffer;
@@ -48,6 +49,8 @@ public class RequisiteClientSocket extends WebSocketClient {
     private final Map<String, Class<? extends BasePacket>> packetRegistry;
 
     private UUID sessionId;
+    private long userCount;
+
     private int failedConnectionCount;
 
     private long lastRefresh;
@@ -118,6 +121,7 @@ public class RequisiteClientSocket extends WebSocketClient {
     public void onOpen(ServerHandshake handshake) {
         logger.info(String.format("Opened connection with Requisite's server websocket. (code=%s | message=%s)", handshake.getHttpStatus(), handshake.getHttpStatusMessage()));
         send(new GreetingPacket());
+        send(new UserCountPacket());
 
         lastRefresh = System.currentTimeMillis();
     }
@@ -249,6 +253,7 @@ public class RequisiteClientSocket extends WebSocketClient {
      */
     private void initialize() {
         register("GREETING", GreetingPacket.class);
+        register("USER_COUNT", UserCountPacket.class);
     }
 
     /**
@@ -270,6 +275,15 @@ public class RequisiteClientSocket extends WebSocketClient {
         this.sessionId = sessionId;
     }
 
+    /**
+     * Updates the Requisite user count stored locally.
+     *
+     * @param userCount The new user count.
+     */
+    public void updateUserCount(long userCount) {
+        this.userCount = userCount;
+    }
+
     public RequisiteAPI getRequisite() {
         return requisite;
     }
@@ -280,6 +294,10 @@ public class RequisiteClientSocket extends WebSocketClient {
 
     public UUID getSessionId() {
         return sessionId;
+    }
+
+    public long getUserCount() {
+        return userCount;
     }
 
     public int getFailedConnectionCount() {

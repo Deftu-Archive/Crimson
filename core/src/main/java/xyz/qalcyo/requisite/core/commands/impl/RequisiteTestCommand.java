@@ -36,6 +36,11 @@ public class RequisiteTestCommand {
         this.requisite = requisite;
     }
 
+    @Command.Default
+    public void execute() {
+        requisite.getChatHelper().send("Invalid argument.");
+    }
+
     @Command.Argument(name = "1")
     public void one() {
         requisite.getNotifications().push(
@@ -73,6 +78,11 @@ public class RequisiteTestCommand {
     @Command.Argument(name = "5")
     public void five() {
         requisite.getChatHelper().send("Locraw: " + ChatColour.BOLD + requisite.getHypixelHelper().getLocrawManager().getLocraw().toString());
+    }
+
+    @Command.Argument(name = "6")
+    public void six() {
+        requisite.getLogger().info(requisite.getBridge().getMinecraftBridge().getRequisiteModList());
     }
 
 }

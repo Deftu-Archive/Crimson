@@ -33,12 +33,12 @@ public class GuiChatMixin {
 
     @Unique private String[] concatenatedResponse;
 
-    @Inject(method = "sendAutocompleteRequest", at = @At(value = "INVOKE", target = "Lnet/minecraftforge/client/ClientCommandHandler;autoComplete(Ljava/lang/String;Ljava/lang/String;)V", shift = At.Shift.AFTER))
+    @Inject(method = "sendAutocompleteRequest", at = @At(value = "INVOKE", target = "Lnet/minecraftforge/client/ClientCommandHandler;autoComplete(Ljava/lang/String;Ljava/lang/String;)V", remap = false, shift = At.Shift.AFTER))
     private void onAutoCompleteRequestSent(String p_146405_1_, String p_146405_2_, CallbackInfo ci) {
         Requisite.getInstance().getCommandRegistry().processAutoCompletion(p_146405_1_);
     }
 
-    @Inject(method = "onAutocompleteResponse", at = @At(value = "INVOKE", target = "Ljava/util/List;clear()V"))
+    @Inject(method = "onAutocompleteResponse", at = @At(value = "INVOKE", target = "Ljava/util/List;clear()V", remap = false))
     public void onAutoCompleteResponse_complete(String[] p_146406_1_, CallbackInfo ci) {
         String[] complete = Requisite.getInstance().getCommandRegistry().getCachedAutoCompletion();
         if (complete != null) {
@@ -48,7 +48,7 @@ public class GuiChatMixin {
         }
     }
 
-    @ModifyVariable(method = "onAutocompleteResponse", at = @At(value = "INVOKE", target = "Ljava/util/List;clear()V"))
+    @ModifyVariable(method = "onAutocompleteResponse", at = @At(value = "INVOKE", target = "Ljava/util/List;clear()V", remap = false))
     public String[] modifyResponse(String[] original) {
         return concatenatedResponse;
     }

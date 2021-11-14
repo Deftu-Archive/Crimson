@@ -42,7 +42,7 @@ class Button(
         width = RelativeConstraint()
         height = RelativeConstraint()
     } childOf this effect OutlineEffect(Color(0, 0, 0, 0), 1f)
-    private val content = UIBlock(RequisitePalette.getComponentContent().asColor()).constrain {
+    private val content = UIBlock(RequisitePalette.getSecondary().asColor()).constrain {
         x = CenterConstraint()
         y = CenterConstraint()
         width = RelativeConstraint()
@@ -68,7 +68,7 @@ class Button(
 
         onMouseEnter {
             hovering = true
-            animateBorder(if (!builder.toggled) RequisitePalette.getMain().asColor().darker() else RequisitePalette.getMain().asColor())
+            animateBorder(if (!builder.toggled) RequisitePalette.getPrimary().asColor().darker() else RequisitePalette.getPrimary().asColor())
         }.onMouseLeave {
             hovering = false
             animateBorder(if (!builder.toggled) DISABLED_BORDER_COLOUR else Color(0, 0, 0, 0))
@@ -83,7 +83,7 @@ class Button(
     fun setTextColour(colour: Color, animate: Boolean = true) = if (animate) animateTextColour(colour) else text.setColor(colour)
     fun setToggled(toggled: Boolean) {
         animateTextColour(if (toggled) Color.WHITE else DISABLED_TEXT_COLOUR)
-        animateBorder(if (!toggled) DISABLED_BORDER_COLOUR else if (hovering) RequisitePalette.getMain().asColor() else Color(0, 0, 0, 0))
+        animateBorder(if (!toggled) DISABLED_BORDER_COLOUR else if (hovering) RequisitePalette.getPrimary().asColor() else Color(0, 0, 0, 0))
         builder.toggled = toggled
     }
 

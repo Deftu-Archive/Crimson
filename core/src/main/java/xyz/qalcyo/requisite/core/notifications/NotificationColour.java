@@ -26,7 +26,7 @@ public class NotificationColour {
     /* Constants. */
     private static final ColourRGB defaultBackground = new ColourRGB(0, 0, 0, 200);
 
-    public static final NotificationColour DEFAULT = new NotificationColour(defaultBackground, RequisitePalette.getMain());
+    public static final NotificationColour DEFAULT = new NotificationColour(defaultBackground, RequisitePalette.getPrimary());
     public static final NotificationColour ALTERNATIVE = new NotificationColour(defaultBackground, new ColourRGB(255, 175, 0, 200));
 
     /* Data. */
