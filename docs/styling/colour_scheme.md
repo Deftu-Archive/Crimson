@@ -3,5 +3,8 @@ Requisite holds true to it's developers and owning company. Both it and all libr
 
 # Colours
 - Persian Green - #289D8C
-- Eerie Black - #202020
+![Persian Green preview](../assets/styling/persian_green.png)
+- Eerie Black (light mode) - #202020
+![Eerie Black preview](../assets/styling/eerie_black.png)
 - Silver (light mode) - #C6C6C6
+![Silver preview](../assets/styling/silver.png)
