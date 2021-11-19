@@ -37,7 +37,6 @@ import xyz.qalcyo.requisite.cosmetics.CosmeticManager;
 import xyz.qalcyo.requisite.gui.factory.ComponentFactory;
 import xyz.qalcyo.requisite.gui.screens.ChangelogMenu;
 import xyz.qalcyo.requisite.gui.screens.CreditsMenu;
-import xyz.qalcyo.requisite.gui.screens.TestMenu;
 import xyz.qalcyo.requisite.gui.screens.main.RequisiteMenu;
 import xyz.qalcyo.requisite.integration.mods.ModIntegration;
 import xyz.qalcyo.requisite.networking.packets.cosmetics.CosmeticRetrievePacket;
