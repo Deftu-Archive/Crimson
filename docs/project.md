@@ -13,4 +13,4 @@ dependencies {
     shade('xyz.qalcyo.crimson:CrimsonInstaller:VERSION')
 }
 ```
-If you don't know where to find the latest version of Crimson, it should be visible in the [official documentation on our site.](https://docs.qalcyo.xyz/requisite/)
+If you don't know where to find the latest version of Crimson, it should be visible in the [official documentation on our site.](https://docs.qalcyo.xyz/crimson/)

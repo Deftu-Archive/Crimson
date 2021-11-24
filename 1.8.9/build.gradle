@@ -87,6 +87,10 @@ sourceSets {
     }
 }
 
+shadowJar {
+    relocate('gg.essential.elementa', project_shaded + 'elementa')
+}
+
 reobfJar {
     archivesBaseName = project_name
     version = project_version
