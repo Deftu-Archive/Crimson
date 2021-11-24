@@ -8,5 +8,38 @@ Making your mod available with all other mods using Crimson is extremely simple.
 
 For this to work effectively, your mod class must implement the `IMod` class. To learn more about what this class, [refer to this section of this page.](#providing-important-information)
 
+For all of this to be used in conjunction with Forge, it would look like this:
+```java
+package com.example;
+
+@Mod(
+        name = "Example",
+        version = "1.0",
+        modid = "example"
+)
+public class ExampleMod implements IMod {
+    
+    @Mod.EventHandler
+    public void onInitialization(FMLInitializationEvent event) {
+        /* Perform your mod's logic. */
+    }
+
+    public ModMetadata getMetadata() {
+        return ModMetadata.from("Example", "1.0")
+                .setCommand("/example");
+    }
+    
+}
+```
+
+```gradle
+jar {
+    manifest.attributes(
+        'TweakClass': 'xyz.qalcyo.crimson.installer.CrimsonInstaller',
+        'ModClass': 'com.example.ExampleMod'
+    )
+}
+```
+
 # Providing Important Information
 Inside of Crimson's mod list is a small page for every mod installed that has registered itself as a Crimson mod using the [method shown here.](#implementing-Crimson-integration-api) As shown in the section mentioned, your mod needs to implement the `IMod` interface. This interface's only purpose is to give Crimson important info of your mod, such as it's name, version, main command, etc. It's vital to provide this information for a better user experience.

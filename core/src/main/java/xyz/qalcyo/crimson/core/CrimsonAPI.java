@@ -418,7 +418,7 @@ public interface CrimsonAPI extends IMod {
      */
     default ModMetadata getMetadata() {
         return ModMetadata.from(name(), version())
-                .setCommand("/Crimson");
+                .setCommand("/crimson");
     }
 
     /**
