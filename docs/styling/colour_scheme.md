@@ -1,5 +1,5 @@
 # Qalcyo Colour Scheme
-Requisite holds true to it's developers and owning company. Both it and all libraries similar to it use Qalcyo's main colour scheme. [If you'd like to use the colour scheme, click here](#colours)
+Crimson holds true to it's developers and owning company. Both it and all libraries similar to it use Qalcyo's main colour scheme. [If you'd like to use the colour scheme, click here](#colours)
 
 # Colours
 - Persian Green - #289D8C\

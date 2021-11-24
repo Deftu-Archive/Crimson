@@ -1,9 +1,9 @@
 {
-  "package": "xyz.qalcyo.requisite.mixins",
+  "package": "xyz.qalcyo.crimson.mixins",
   "minVersion": "0.7",
   "compatibilityLevel": "JAVA_8",
   "verbose": true,
-  "refmap": "mixins.requisite.refmap.json",
+  "refmap": "mixins.crimson.refmap.json",
   "target":  "@env(CLIENT)",
   "mixins": [
     "client.MinecraftMixin",

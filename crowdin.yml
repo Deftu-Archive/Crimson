@@ -1,6 +1,0 @@
-commit_message: New translations for %language%.
-append_commit_message: false
-files:
-  - source: core/src/main/resources/requisite/en_us.json
-    translation: /core/src/main/resources/requisite/%locale_with_underscore%.json
-    update_option: update_as_unapproved

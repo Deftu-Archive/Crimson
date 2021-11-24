@@ -1,19 +1,19 @@
 /*
- * Requisite - Minecraft library mod
- *  Copyright (C) 2021 Qalcyo
+ * Crimson - The ultimate Minecraft library mod
+ * Copyright (C) 2021 Qalcyo
  *
- * Requisite is free software: you can redistribute it and/or modify
+ * Crimson is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
  * the Free Software Foundation, either version 2.1 of the License, or
  * (at your option) any later version.
  *
- * Requisite is distributed in the hope that it will be useful,
+ * Crimson is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public License
- * along with Requisite. If not, see <https://www.gnu.org/licenses/>.
+ * along with Crimson. If not, see <https://www.gnu.org/licenses/>.
  */
 
 apply plugin: 'java'
@@ -21,8 +21,8 @@ apply plugin: 'java'
 sourceCompatibility = targetCompatibility = JavaVersion.VERSION_1_8
 
 buildConfig {
-    className('RequisiteInfo')
-    packageName('xyz.qalcyo.requisite.core')
+    className('CrimsonInfo')
+    packageName('xyz.qalcyo.crimson.core')
 
     buildConfigField('String', 'NAME', "\"${project_name}\"")
     buildConfigField('String', 'VER', "\"${project_version}\"")
@@ -76,6 +76,8 @@ dependencies {
 }
 
 shadowJar {
+    relocate('gg.essential.elementa', project_shaded + 'elementa')
+
     relocate('okio', project_shaded + 'okio')
     relocate('okhttp3', project_shaded + 'okhttp3')
     relocate('org.java_websocket', project_shaded + 'websocket')

@@ -1,4 +1,3 @@
-# Requisite Integration
-- [Discord](./integration/discord.md)
+# Crimson Integration
 - [Hypixel](./integration/hypixel.md)
 - [Mods](./integration/mods.md)

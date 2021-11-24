@@ -1,0 +1,88 @@
+/*
+ * Crimson - The ultimate Minecraft library mod
+ * Copyright (C) 2021 Qalcyo
+ *
+ * Crimson is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 2.1 of the License, or
+ * (at your option) any later version.
+ *
+ * Crimson is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with Crimson. If not, see <https://www.gnu.org/licenses/>.
+ */
+
+package xyz.qalcyo.crimson.core.configs.impl;
+
+import xyz.qalcyo.crimson.core.configs.IConfigChild;
+import xyz.qalcyo.crimson.core.configs.IConfigObject;
+import xyz.qalcyo.simpleconfig.Configuration;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
+
+public class CrimsonOnboardingConfig implements IConfigObject {
+
+    private final Configuration configuration;
+    private final List<IConfigChild> children = new ArrayList<>();
+
+    private boolean prompted;
+    private boolean tos;
+
+    private boolean crashTracker;
+
+    public CrimsonOnboardingConfig(String name, File directory) {
+        this.configuration = new Configuration(name, directory);
+
+        if (!configuration.hasKey("prompted"))
+            configuration.add("prompted", false).save();
+        prompted = configuration.getAsBoolean("prompted");
+        if (!configuration.hasKey("tos"))
+            configuration.add("tos", false).save();
+        this.tos = configuration.getAsBoolean("tos");
+        if (!configuration.hasKey("track_crashes"))
+            configuration.add("track_crashes", false);
+        this.crashTracker = configuration.getAsBoolean("track_crashes");
+    }
+
+    public Configuration getConfiguration() {
+        return configuration;
+    }
+
+    public List<IConfigChild> getChildren() {
+        return children;
+    }
+
+    public boolean isPrompted() {
+        return prompted;
+    }
+
+    public void setPrompted(boolean prompted) {
+        this.prompted = prompted;
+        configuration.add("prompted", prompted).save();
+    }
+
+    public boolean isTos() {
+        return tos;
+    }
+
+    public void setTos(boolean tos) {
+        this.tos = tos;
+        configuration.add("tos", tos).save();
+    }
+
+    public boolean isCrashTracker() {
+        return crashTracker;
+    }
+
+    public void setCrashTracker(boolean crashTracker) {
+        this.crashTracker = crashTracker;
+        configuration.add("track_crashes", crashTracker).save();
+    }
+
+}

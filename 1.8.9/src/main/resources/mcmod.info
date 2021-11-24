@@ -1,11 +1,11 @@
 [
     {
-        "modid": "requisite",
-        "name": "Requisite",
+        "modid": "crimson",
+        "name": "Crimson",
         "description": "Minecraft modding library by Qalcyo.",
         "version": "${version}",
         "mcversion": "1.8.9",
-        "url": "https://github.com/Qalcyo/Requisite",
+        "url": "https://github.com/Qalcyo/Crimson",
         "authorList": [
             "Qalcyo"
         ],
