@@ -30,6 +30,7 @@ import net.minecraftforge.fml.common.gameevent.TickEvent;
 import org.lwjgl.input.Keyboard;
 import xyz.qalcyo.crimson.core.CrimsonAPI;
 import xyz.qalcyo.crimson.core.IEventListener;
+import xyz.qalcyo.crimson.gui.screens.StartupMenu;
 
 public class InternalEventListener implements IEventListener {
 
@@ -78,7 +79,7 @@ public class InternalEventListener implements IEventListener {
     @SubscribeEvent
     public void onMainMenuOpened(GuiScreenEvent.InitGuiEvent event) {
         if (event.gui instanceof GuiMainMenu && !crimson.getConfigManager().getOnboarding().isPrompted()) {
-            //Crimson.getInstance().getGuiHelper().open(new StartupMenu());
+            Crimson.getInstance().getGuiHelper().open(new StartupMenu());
         }
     }
 

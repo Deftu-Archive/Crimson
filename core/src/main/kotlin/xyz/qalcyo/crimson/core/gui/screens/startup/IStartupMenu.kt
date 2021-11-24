@@ -32,7 +32,7 @@ import xyz.qalcyo.crimson.core.gui.components.Button
 import xyz.qalcyo.crimson.core.gui.components.builders.ButtonBuilder
 import java.awt.Color
 
-interface ICrimsonStartupMenu {
+interface IStartupMenu {
     
     val window: Window
     
@@ -74,7 +74,7 @@ interface ICrimsonStartupMenu {
                 initializeSlideBox(this as UIBlock)
             } childOf slideBoxesContainer
             slideBoxes.add(slideBox as UIBlock)
-            if (slide == this@ICrimsonStartupMenu.slide) {
+            if (slide == this@IStartupMenu.slide) {
                 initializeSlideBox(slideBox)
             }
         }
@@ -101,12 +101,10 @@ interface ICrimsonStartupMenu {
         }
 
         initializeSlide(slide)
-
-        val inspector = Inspector(window) childOf window
     }
     
     fun initializeSlide(slide: CrimsonStartupSlide) {
-        this@ICrimsonStartupMenu.slide = slide
+        this@IStartupMenu.slide = slide
         for (slide in slides) {
             slide.hide(true)
         }
@@ -117,7 +115,7 @@ interface ICrimsonStartupMenu {
     }
 
     fun initializeSlideBox(box: UIBlock) {
-        this@ICrimsonStartupMenu.slideBox = box
+        this@IStartupMenu.slideBox = box
         for (slideBox in slideBoxes) {
             slideBox.animate {
                 setColorAnimation(Animations.OUT_EXP, 1f, ConstantColorConstraint(Color.WHITE))

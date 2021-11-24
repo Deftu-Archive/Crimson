@@ -27,14 +27,14 @@ import gg.essential.universal.UKeyboard
 import gg.essential.universal.UMatrixStack
 import gg.essential.universal.UScreen
 import net.minecraft.client.Minecraft
-import xyz.qalcyo.crimson.core.gui.screens.startup.ICrimsonStartupMenu
+import xyz.qalcyo.crimson.core.gui.screens.startup.IStartupMenu
 import xyz.qalcyo.crimson.core.gui.screens.startup.CrimsonStartupSlide
 import xyz.qalcyo.crimson.core.gui.screens.startup.impl.CrimsonInfoSlide
 
 class StartupMenu : UScreen(
     restoreCurrentGuiOnClose = true,
     newGuiScale = GuiScale.scaleForScreenSize().ordinal
-), ICrimsonStartupMenu {
+), IStartupMenu {
 
     override val window = Window(ElementaVersion.V1)
 

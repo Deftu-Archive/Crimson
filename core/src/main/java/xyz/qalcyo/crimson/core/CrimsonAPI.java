@@ -25,6 +25,7 @@ import xyz.qalcyo.crimson.core.networking.CrimsonClientSocket;
 import xyz.qalcyo.eventbus.EventPriority;
 import xyz.qalcyo.eventbus.QalcyoEventBus;
 import xyz.qalcyo.eventbus.SubscribeEvent;
+import xyz.qalcyo.json.entities.JsonObject;
 import xyz.qalcyo.mango.Strings;
 import xyz.qalcyo.crimson.core.bridge.IBridge;
 import xyz.qalcyo.crimson.core.configs.ConfigManager;
@@ -372,7 +373,18 @@ public interface CrimsonAPI extends IMod {
      * @return Crimson's websocket URI.
      */
     default URI retrieveSocketUri() {
-        String uri = getJavaArguments().getSocketUri() == null ? JsonApiHelper.getJsonObject(getJavaArguments().getMetaUrl()).getAsString("socket") : getJavaArguments().isSocketDebug() ? "ws://localhost:8080/" : getJavaArguments().getSocketUri();
+        String uri = getJavaArguments().getSocketUri();
+        if (uri == null) {
+            try {
+                JsonObject object =JsonApiHelper.getJsonObject(getJavaArguments().getMetaUrl());
+                if (object != null) {
+                    uri = object.getAsString("socket");
+                } else {
+                    uri = "ws://localhost:8080";
+                }
+            } catch (Exception ignored) {
+            }
+        }
         uri = uri.replace("{}", "v" + CrimsonConstants.SOCKET_VERSION);
         return URI.create(uri);
     }
