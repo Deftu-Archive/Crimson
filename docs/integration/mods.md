@@ -12,6 +12,9 @@ For all of this to be used in conjunction with Forge, it would look like this:
 ```java
 package com.example;
 
+import net.minecraftforge.fml.common.Mod;
+import xyz.qalcyo.crimson.core.integration.mods.IMod;
+
 @Mod(
         name = "Example",
         version = "1.0",
