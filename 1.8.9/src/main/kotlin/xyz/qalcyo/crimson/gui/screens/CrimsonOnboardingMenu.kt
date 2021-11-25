@@ -27,21 +27,21 @@ import gg.essential.universal.UKeyboard
 import gg.essential.universal.UMatrixStack
 import gg.essential.universal.UScreen
 import net.minecraft.client.Minecraft
-import xyz.qalcyo.crimson.core.gui.screens.startup.IStartupMenu
-import xyz.qalcyo.crimson.core.gui.screens.startup.CrimsonStartupSlide
+import xyz.qalcyo.crimson.core.gui.screens.startup.ICrimsonOnboardingMenu
+import xyz.qalcyo.crimson.core.gui.screens.startup.CrimsonOnboardingSlideBase
 import xyz.qalcyo.crimson.core.gui.screens.startup.impl.CrimsonInfoSlide
 
-class StartupMenu : UScreen(
+class CrimsonOnboardingMenu : UScreen(
     restoreCurrentGuiOnClose = true,
     newGuiScale = GuiScale.scaleForScreenSize().ordinal
-), IStartupMenu {
+), ICrimsonOnboardingMenu {
 
     override val window = Window(ElementaVersion.V1)
 
-    override val slides: Array<CrimsonStartupSlide> = arrayOf(
+    override val slides: Array<CrimsonOnboardingSlideBase> = arrayOf(
         CrimsonInfoSlide()
     )
-    override var slide: CrimsonStartupSlide = slides[0]
+    override var slide: CrimsonOnboardingSlideBase = slides[0]
     override val content = UIContainer()
 
     override lateinit var slideBox: UIBlock

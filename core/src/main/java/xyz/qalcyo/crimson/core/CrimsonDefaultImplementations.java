@@ -22,6 +22,7 @@ import com.besaba.revonline.pastebinapi.impl.factory.PastebinFactory;
 import okhttp3.OkHttpClient;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import xyz.qalcyo.crimson.core.compatibility.CrimsonTransmission;
 import xyz.qalcyo.eventbus.QalcyoEventBus;
 import xyz.qalcyo.crimson.core.integration.hypixel.HypixelHelper;
 import xyz.qalcyo.crimson.core.util.*;
@@ -33,6 +34,7 @@ class CrimsonDefaultImplementations {
 
     static final Logger LOGGER = LogManager.getLogger("Crimson");
     static final CrimsonJavaArguments JAVA_ARGUMENTS = new CrimsonJavaArguments();
+    static final CrimsonTransmission TRANSMISSION = new CrimsonTransmission();
     static final QalcyoEventBus EVENT_BUS = new QalcyoEventBus();
     static final OkHttpClient HTTP_CLIENT = new OkHttpClient();
     static final PastebinFactory PASTEBIN_FACTORY = new PastebinFactory();

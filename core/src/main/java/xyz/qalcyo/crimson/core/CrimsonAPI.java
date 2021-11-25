@@ -21,6 +21,7 @@ package xyz.qalcyo.crimson.core;
 import com.besaba.revonline.pastebinapi.impl.factory.PastebinFactory;
 import okhttp3.OkHttpClient;
 import org.apache.logging.log4j.Logger;
+import xyz.qalcyo.crimson.core.compatibility.CrimsonTransmission;
 import xyz.qalcyo.crimson.core.networking.CrimsonClientSocket;
 import xyz.qalcyo.eventbus.EventPriority;
 import xyz.qalcyo.eventbus.QalcyoEventBus;
@@ -84,6 +85,14 @@ public interface CrimsonAPI extends IMod {
      */
     default CrimsonJavaArguments getJavaArguments() {
         return CrimsonDefaultImplementations.JAVA_ARGUMENTS;
+    }
+    /**
+     * Provides an instance of Crimson's inter-transmission API.
+     *
+     * @return Crimson's inter-transmission API.
+     */
+    default CrimsonTransmission getTransmission() {
+        return CrimsonDefaultImplementations.TRANSMISSION;
     }
     /**
      * Provides an instance of Crimson's {@link QalcyoEventBus}.

@@ -20,7 +20,7 @@ package xyz.qalcyo.crimson.core.gui.screens.startup
 
 import gg.essential.elementa.components.UIContainer
 
-abstract class CrimsonStartupSlide : UIContainer() {
+abstract class CrimsonOnboardingSlideBase : UIContainer() {
     abstract fun initialize()
     fun reset() {
         clearChildren()

@@ -19,9 +19,9 @@
 package xyz.qalcyo.crimson.core.gui.screens.startup.impl
 
 import xyz.qalcyo.crimson.core.CrimsonAPI
-import xyz.qalcyo.crimson.core.gui.screens.startup.CrimsonStartupSlide
+import xyz.qalcyo.crimson.core.gui.screens.startup.CrimsonOnboardingSlideBase
 
-class CrimsonInfoSlide  : CrimsonStartupSlide() {
+class CrimsonInfoSlide  : CrimsonOnboardingSlideBase() {
     override fun initialize() {
         println(CrimsonAPI.retrieveInstance().bridge.minecraftBridge.crimsonModList)
     }
