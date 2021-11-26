@@ -34,7 +34,7 @@ class Button(
     private val builder: ButtonBuilder
 ) : UIContainer() {
 
-    constructor(action: Button.() -> Unit, text: String, toggled: Boolean = true) : this(ButtonBuilder(action, text, toggled))
+    constructor(action: Button.() -> Unit, text: String, toggled: Boolean = true, disableBorderAnimations: Boolean = false) : this(ButtonBuilder(action, text, toggled, disableBorderAnimations))
 
     private val border = UIBlock(Color(0, 0, 0, 0)).constrain {
         x = CenterConstraint()
@@ -68,10 +68,12 @@ class Button(
 
         onMouseEnter {
             hovering = true
-            animateBorder(if (!builder.toggled) CrimsonPalette.getPrimary().asColor().darker() else CrimsonPalette.getPrimary().asColor())
+            if (!builder.disableBorderAnimations)
+                animateBorder(if (!builder.toggled) CrimsonPalette.getPrimary().asColor().darker() else CrimsonPalette.getPrimary().asColor())
         }.onMouseLeave {
             hovering = false
-            animateBorder(if (!builder.toggled) DISABLED_BORDER_COLOUR else Color(0, 0, 0, 0))
+            if (!builder.disableBorderAnimations)
+                animateBorder(if (!builder.toggled) DISABLED_BORDER_COLOUR else Color(0, 0, 0, 0))
         }.onMouseClick {
             if (builder.toggled) {
                 builder.action.invoke(this@Button)
@@ -81,6 +83,7 @@ class Button(
 
     fun setText(input: String) = text.setText(input)
     fun setTextColour(colour: Color, animate: Boolean = true) = if (animate) animateTextColour(colour) else text.setColor(colour)
+    fun setBorderColour(colour: Color, animate: Boolean = false) = if (animate) animateBorder(colour) else (border.effects[0] as OutlineEffect)::color.set(colour)
     fun setToggled(toggled: Boolean) {
         animateTextColour(if (toggled) Color.WHITE else DISABLED_TEXT_COLOUR)
         animateBorder(if (!toggled) DISABLED_BORDER_COLOUR else if (hovering) CrimsonPalette.getPrimary().asColor() else Color(0, 0, 0, 0))

@@ -59,6 +59,11 @@ public class SupportHelper implements ISupportHelper {
 
         builder.append("\n");
 
+        builder.append("-- ").append(Crimson.getInstance().name()).append(" --").append("\n");
+        builder.append("\"Loaded From\" Mod List: ").append(Crimson.getInstance().getBridge().getMinecraftBridge().getCrimsonModList());
+
+        builder.append("\n");
+
         builder.append("-- Mod Loader --").append("\n");
         builder.append("Loader Brand: ").append("Forge").append("\n");
         builder.append("Mods Loaded: ").append(Loader.instance().getActiveModList().size()).append("\n");

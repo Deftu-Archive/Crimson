@@ -134,6 +134,15 @@ public class Crimson implements CrimsonAPI {
         initialized = true;
     }
 
+    public void onOnboardingAccepted() {
+        crimsonSocket.awaitConnect();
+        guiHelper.open(null);
+    }
+
+    public void onOnboardingDenied() {
+        guiHelper.open(null);
+    }
+
     public FileManager getFileManager() {
         return fileManager;
     }

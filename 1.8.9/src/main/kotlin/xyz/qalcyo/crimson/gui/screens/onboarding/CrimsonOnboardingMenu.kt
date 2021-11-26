@@ -16,10 +16,9 @@
  * along with Crimson. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package xyz.qalcyo.crimson.gui.screens
+package xyz.qalcyo.crimson.gui.screens.onboarding
 
 import gg.essential.elementa.ElementaVersion
-import gg.essential.elementa.components.UIBlock
 import gg.essential.elementa.components.UIContainer
 import gg.essential.elementa.components.Window
 import gg.essential.universal.GuiScale
@@ -27,9 +26,9 @@ import gg.essential.universal.UKeyboard
 import gg.essential.universal.UMatrixStack
 import gg.essential.universal.UScreen
 import net.minecraft.client.Minecraft
-import xyz.qalcyo.crimson.core.gui.screens.startup.ICrimsonOnboardingMenu
-import xyz.qalcyo.crimson.core.gui.screens.startup.CrimsonOnboardingSlideBase
-import xyz.qalcyo.crimson.core.gui.screens.startup.impl.CrimsonInfoSlide
+import xyz.qalcyo.crimson.core.gui.screens.onboarding.ICrimsonOnboardingMenu
+import xyz.qalcyo.crimson.core.gui.screens.onboarding.CrimsonOnboardingSlideBase
+import xyz.qalcyo.crimson.core.gui.screens.onboarding.SlideBox
 
 class CrimsonOnboardingMenu : UScreen(
     restoreCurrentGuiOnClose = true,
@@ -37,15 +36,13 @@ class CrimsonOnboardingMenu : UScreen(
 ), ICrimsonOnboardingMenu {
 
     override val window = Window(ElementaVersion.V1)
+    override var initialized: Boolean = false
 
-    override val slides: Array<CrimsonOnboardingSlideBase> = arrayOf(
-        CrimsonInfoSlide()
-    )
-    override var slide: CrimsonOnboardingSlideBase = slides[0]
+    override var slide: CrimsonOnboardingSlideBase = CrimsonOnboardingSlideBase.slides[0]
     override val content = UIContainer()
 
-    override lateinit var slideBox: UIBlock
-    override val slideBoxes: MutableList<UIBlock> = mutableListOf()
+    override lateinit var slideBox: SlideBox
+    override val slideBoxes: MutableList<SlideBox> = mutableListOf()
 
     /* Screen logic. */
 

@@ -36,7 +36,7 @@ abstract class CrimsonMenuPage(
     }
 
     companion object {
-        val pages: Array<CrimsonMenuPage> = arrayOf(
+        val pages = arrayOf(
             CrimsonControlsPage(),
             CrimsonNetworkingPage()
         )

@@ -16,24 +16,32 @@
  * along with Crimson. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package xyz.qalcyo.crimson.core.gui.screens.startup
+package xyz.qalcyo.crimson.core.gui.screens.onboarding
 
-import gg.essential.elementa.components.UIBlock
 import gg.essential.elementa.components.UIContainer
-import gg.essential.elementa.components.Window
+import gg.essential.elementa.constraints.XConstraint
+import gg.essential.elementa.constraints.animation.Animations
+import gg.essential.elementa.dsl.*
+import xyz.qalcyo.crimson.core.gui.screens.onboarding.impl.CrimsonWelcomeSlide
+import xyz.qalcyo.crimson.core.gui.screens.onboarding.impl.CrimsonTermsSlide
 
-interface ICrimsonOnboardingMenu {
-    
-    val window: Window
-    
-    val slides: Array<CrimsonOnboardingSlideBase>
-    var slide: CrimsonOnboardingSlideBase
-    val content: UIContainer
+abstract class CrimsonOnboardingSlideBase : UIContainer() {
 
-    var slideBox: UIBlock
-    val slideBoxes: MutableList<UIBlock>
-    
-    fun initialize() {
+    abstract fun initialize()
+
+    fun reset() {
+        constrain {
+            x = 0.pixels()
+            y = 0.pixels()
+        }
+
+        clearChildren()
     }
-    
+
+    companion object {
+        val slides = arrayOf(
+            CrimsonWelcomeSlide(),
+            CrimsonTermsSlide()
+        )
+    }
 }

@@ -37,6 +37,7 @@ import java.util.jar.JarFile;
 public class MinecraftBridge implements IMinecraftBridge {
 
     private UUID playerUuid;
+    private List<String> cachedCrimsonModList = new ArrayList<>();
 
     public void initialize() {
         playerUuid = Minecraft.getMinecraft().getSession().getProfile().getId();
@@ -52,6 +53,11 @@ public class MinecraftBridge implements IMinecraftBridge {
 
     public List<String> getCrimsonModList() {
         List<String> value = new ArrayList<>();
+
+        if (!cachedCrimsonModList.isEmpty()) {
+            value.addAll(cachedCrimsonModList);
+            return value;
+        }
 
         for (URL source : Launch.classLoader.getSources()) {
             if (source != null) {
@@ -87,6 +93,7 @@ public class MinecraftBridge implements IMinecraftBridge {
             }
         }
 
+        cachedCrimsonModList.addAll(value);
         return value;
     }
 

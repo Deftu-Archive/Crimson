@@ -28,7 +28,8 @@ import xyz.qalcyo.crimson.core.gui.factory.IComponentFactory
 class ButtonBuilder(
     var action: Button.() -> Unit,
     var text: String,
-    var toggled: Boolean = true
+    var toggled: Boolean = true,
+    var disableBorderAnimations: Boolean = false
 ) {
     fun build(factory: IComponentFactory): UIComponent = factory.build(this)
 }

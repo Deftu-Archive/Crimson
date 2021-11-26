@@ -73,6 +73,15 @@ public interface CrimsonAPI extends IMod {
     }
 
     /**
+     * Called when the Crimson onboarding prompt is accepted.
+     */
+    void onOnboardingAccepted();
+    /**
+     * Called when the Crimson onboarding prompt is denied.
+     */
+    void onOnboardingDenied();
+
+    /**
      * Provides an instance of Crimson's Log4J logger.
      *
      * @return Crimson's logger.

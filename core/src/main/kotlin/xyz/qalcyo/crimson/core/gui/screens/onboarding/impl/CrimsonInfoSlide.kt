@@ -16,13 +16,8 @@
  * along with Crimson. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package xyz.qalcyo.crimson.core.gui.screens.startup.impl
+package xyz.qalcyo.crimson.core.gui.screens.onboarding.impl
 
-import xyz.qalcyo.crimson.core.CrimsonAPI
-import xyz.qalcyo.crimson.core.gui.screens.startup.CrimsonOnboardingSlideBase
+class CrimsonInfoSlide {
 
-class CrimsonInfoSlide  : CrimsonOnboardingSlideBase() {
-    override fun initialize() {
-        println(CrimsonAPI.retrieveInstance().bridge.minecraftBridge.crimsonModList)
-    }
 }
