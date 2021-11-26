@@ -22,6 +22,7 @@ import gg.essential.elementa.dsl.*
 import net.minecraft.client.gui.GuiControls
 import xyz.qalcyo.crimson.Crimson
 import xyz.qalcyo.crimson.core.gui.components.builders.ButtonBuilder
+import xyz.qalcyo.crimson.core.gui.screens.main.impl.CrimsonControlsPage
 import xyz.qalcyo.crimson.core.transformers.hooks.GuiMixinHook
 
 class GuiControlsHook(
@@ -32,8 +33,8 @@ class GuiControlsHook(
     init {
         if (Crimson.getInstance().configManager.menu.isKeyBindsButton) {
             val keyBindsButton = ButtonBuilder({
-                Crimson.getInstance().openCrimsonMenu(1)
-            }, "R").build(Crimson.getInstance().componentFactory).constrain {
+                Crimson.getInstance().openCrimsonMenu(CrimsonControlsPage::class.java)
+            }, Crimson.getInstance().name().substring(0, 1)).build(Crimson.getInstance().componentFactory).constrain {
                 x = 10.pixels()
                 y = 6.pixels(true)
                 width = 20.pixels()

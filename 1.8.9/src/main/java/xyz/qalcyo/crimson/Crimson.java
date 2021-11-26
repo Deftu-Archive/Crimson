@@ -23,6 +23,7 @@ import net.minecraftforge.fml.common.Mod;
 import org.lwjgl.input.Keyboard;
 import xyz.qalcyo.crimson.core.CrimsonInfo;
 import xyz.qalcyo.crimson.core.InternalEventManager;
+import xyz.qalcyo.crimson.core.gui.screens.main.CrimsonMenuPage;
 import xyz.qalcyo.crimson.core.networking.CrimsonClientSocket;
 import xyz.qalcyo.mango.Multithreading;
 import xyz.qalcyo.crimson.bridge.Bridge;
@@ -127,7 +128,7 @@ public class Crimson implements CrimsonAPI {
             cosmeticManager.start();
         });
 
-        getKeyBindRegistry().register(KeyBinds.from("Open menu", "Crimson", Keyboard.KEY_HOME, () -> guiHelper.open(new CrimsonMenu())));
+        getKeyBindRegistry().register(KeyBinds.from("Open menu", "Crimson", Keyboard.KEY_HOME, (Runnable) this::openCrimsonMenu));
 
         getMetadata().setConfigurationMenu(CrimsonMenu.class);
         initialized = true;
@@ -179,6 +180,10 @@ public class Crimson implements CrimsonAPI {
 
     public CosmeticManager getCosmeticManager() {
         return cosmeticManager;
+    }
+
+    public void openCrimsonMenu(Class<? extends CrimsonMenuPage> pageClass) {
+        guiHelper.open(new CrimsonMenu(pageClass));
     }
 
     public void openCrimsonMenu(int pageIndex) {

@@ -22,6 +22,8 @@ import com.besaba.revonline.pastebinapi.impl.factory.PastebinFactory;
 import okhttp3.OkHttpClient;
 import org.apache.logging.log4j.Logger;
 import xyz.qalcyo.crimson.core.compatibility.CrimsonTransmission;
+import xyz.qalcyo.crimson.core.gui.screens.main.CrimsonMenuPage;
+import xyz.qalcyo.crimson.core.gui.screens.main.impl.CrimsonControlsPage;
 import xyz.qalcyo.crimson.core.networking.CrimsonClientSocket;
 import xyz.qalcyo.eventbus.EventPriority;
 import xyz.qalcyo.eventbus.QalcyoEventBus;
@@ -186,6 +188,7 @@ public interface CrimsonAPI extends IMod {
      */
     IEventListener getInternalEventListener();
 
+    void openCrimsonMenu(Class<? extends CrimsonMenuPage> pageClass);
     /**
      * Opens Crimson's main menu, providing access to most Crimson configurations and services.
      *
@@ -196,7 +199,7 @@ public interface CrimsonAPI extends IMod {
      * Opens Crimson's main menu, providing access to most Crimson configurations and services.
      */
     default void openCrimsonMenu() {
-        openCrimsonMenu(0);
+        openCrimsonMenu(CrimsonControlsPage.class);
     }
     /**
      * Opens Crimson's credits menu, providing access to all of Crimson's contributors and libraries.

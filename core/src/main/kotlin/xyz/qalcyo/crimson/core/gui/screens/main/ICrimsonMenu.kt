@@ -32,8 +32,6 @@ interface ICrimsonMenu {
     val window: Window
     var initialized: Boolean
 
-    val pages: Array<CrimsonMenuPage>
-
     var page: CrimsonMenuPage
 
     val header: CrimsonMenuHeader
@@ -83,7 +81,7 @@ interface ICrimsonMenu {
             height = FillConstraint()
         }
 
-        for (page in pages) {
+        for (page in CrimsonMenuPage.pages) {
             page.constrain {
                 width = RelativeConstraint()
                 height = RelativeConstraint()
@@ -97,13 +95,13 @@ interface ICrimsonMenu {
     fun initializePage(page: CrimsonMenuPage) {
         header.setTitle(page.title)
 
-        footer.setPageNumber(pages.indexOf(page) + 1, pages.size)
+        footer.setPageNumber(CrimsonMenuPage.pages.indexOf(page) + 1, CrimsonMenuPage.pages.size)
         footer.previousPage = if (initialized) this@ICrimsonMenu.page else null
-        footer.nextPage = if (pages.indexOf(page) == pages.size - 1) null else pages[pages.indexOf(page) + 1]
+        footer.nextPage = if (CrimsonMenuPage.pages.indexOf(page) == CrimsonMenuPage.pages.size - 1) null else CrimsonMenuPage.pages[CrimsonMenuPage.pages.indexOf(page) + 1]
 
         this@ICrimsonMenu.page = page
 
-        for (page in pages)
+        for (page in CrimsonMenuPage.pages)
             page.hide(true)
 
         page.unhide(true)

@@ -45,15 +45,12 @@ class CrimsonMenu(
     newGuiScale = GuiScale.scaleForScreenSize().ordinal
 ), ICrimsonMenu, IModConfigurationMenu {
 
+    constructor(pageClass: Class<out CrimsonMenuPage>) : this(CrimsonMenuPage.getPageIndex(pageClass))
+
     override val window: Window = Window(ElementaVersion.V1)
     override var initialized: Boolean = false
 
-    override val pages: Array<CrimsonMenuPage> = arrayOf(
-        CrimsonControlsPage(),
-        CrimsonNetworkingPage()
-    )
-
-    override var page: CrimsonMenuPage = pages[pageIndex]
+    override var page: CrimsonMenuPage = CrimsonMenuPage.pages[pageIndex]
 
     override val header: CrimsonMenuHeader = CrimsonMenuHeader(this, image("/gui/global/arrow_back.png"), image("/gui/global/close.png"))
     override val content: UIContainer = UIContainer()
@@ -117,6 +114,6 @@ class CrimsonMenu(
 
     /* Utilities. */
 
-    fun image(name: String): BufferedImage = ImageIO.read(CrimsonAPI::class.java.getResourceAsStream(name))
+    private fun image(name: String): BufferedImage = ImageIO.read(CrimsonAPI::class.java.getResourceAsStream(name))
 
 }

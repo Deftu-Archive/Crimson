@@ -47,10 +47,6 @@ class CrimsonOnboardingMenu : UScreen(
     override lateinit var slideBox: UIBlock
     override val slideBoxes: MutableList<UIBlock> = mutableListOf()
 
-    override fun finish() {
-        restorePreviousScreen()
-    }
-
     /* Screen logic. */
 
     override fun initScreen(width: Int, height: Int) {

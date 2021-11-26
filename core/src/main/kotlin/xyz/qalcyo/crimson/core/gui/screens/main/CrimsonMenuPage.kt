@@ -19,6 +19,8 @@
 package xyz.qalcyo.crimson.core.gui.screens.main
 
 import gg.essential.elementa.components.UIContainer
+import xyz.qalcyo.crimson.core.gui.screens.main.impl.CrimsonControlsPage
+import xyz.qalcyo.crimson.core.gui.screens.main.impl.CrimsonNetworkingPage
 
 abstract class CrimsonMenuPage(
     val title: String
@@ -31,5 +33,24 @@ abstract class CrimsonMenuPage(
 
     open fun keyTyped(typedChar: Char, keyCode: Int): Boolean {
         return false
+    }
+
+    companion object {
+        val pages: Array<CrimsonMenuPage> = arrayOf(
+            CrimsonControlsPage(),
+            CrimsonNetworkingPage()
+        )
+
+        fun getPageIndex(pageClass: Class<out CrimsonMenuPage>): Int {
+            var index = 0
+            for (page in pages) {
+                if (page.javaClass == pageClass) {
+                    index = pages.indexOf(page)
+                }
+            }
+
+            return index
+        }
+
     }
 }

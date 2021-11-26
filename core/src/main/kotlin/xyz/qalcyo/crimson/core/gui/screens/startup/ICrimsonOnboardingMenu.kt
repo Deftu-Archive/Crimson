@@ -21,15 +21,6 @@ package xyz.qalcyo.crimson.core.gui.screens.startup
 import gg.essential.elementa.components.UIBlock
 import gg.essential.elementa.components.UIContainer
 import gg.essential.elementa.components.Window
-import gg.essential.elementa.constraints.*
-import gg.essential.elementa.constraints.animation.Animations
-import gg.essential.elementa.dsl.*
-import gg.essential.elementa.utils.withAlpha
-import xyz.qalcyo.crimson.core.CrimsonAPI
-import xyz.qalcyo.crimson.core.CrimsonPalette
-import xyz.qalcyo.crimson.core.gui.components.Button
-import xyz.qalcyo.crimson.core.gui.components.builders.ButtonBuilder
-import java.awt.Color
 
 interface ICrimsonOnboardingMenu {
     
