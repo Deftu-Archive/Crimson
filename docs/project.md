@@ -9,8 +9,8 @@ repositories {
 }
 
 dependencies {
-    implementation('xyz.qalcyo.crimson:Crimson:VERSION')
-    shade('xyz.qalcyo.crimson:CrimsonInstaller:VERSION')
+    implementation('xyz.qalcyo.crimson:Crimson-MINECRAFT_VERSION:VERSION')
+    shade('xyz.qalcyo.crimson:CrimsonInstaller-MINECRAFT_VERSION:VERSION')
 }
 ```
 If you don't know where to find the latest version of Crimson, it should be visible in the [official documentation on our site.](https://docs.qalcyo.xyz/crimson/)
